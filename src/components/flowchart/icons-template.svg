@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="-10 -10 20 20" fill="none" stroke="white" stroke-width="0.15mm" stroke-linecap="round" stroke-linejoin="round">
+
+  <linearGradient id="ark_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-ark-1, #817f00)" />
+    <stop offset="1" stop-color="var(--color-ark-2, #e7e300)" />
+  </linearGradient>
+  <linearGradient id="cel_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-cel-1, #064694)" />
+    <stop offset="1" stop-color="var(--color-cel-2, #07deff)" />
+  </linearGradient>
+  <linearGradient id="aki_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-aki-1, #4f2910)" />
+    <stop offset="1" stop-color="var(--color-aki-2, #c5651f)" />
+  </linearGradient>
+  <linearGradient id="his_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-his-1, #850505)" />
+    <stop offset="1" stop-color="var(--color-his-2, #e70909)" />
+  </linearGradient>
+  <linearGradient id="len_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-ark-1, #242424)" />
+    <stop offset="1" stop-color="var(--color-ark-2, #606060)" />
+  </linearGradient>
+  <linearGradient id="akira_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-cel-1, #664c73)" />
+    <stop offset="1" stop-color="var(--color-cel-2, #be59f0)" />
+  </linearGradient>
+  <linearGradient id="nana_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-aki-1, #1f3a65)" />
+    <stop offset="1" stop-color="var(--color-aki-2, #3564af)" />
+  </linearGradient>
+  <linearGradient id="his_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-cel-1, #664c73)" />
+    <stop offset="1" stop-color="var(--color-cel-2, #ba5ce9)" />
+  </linearGradient>
+  <linearGradient id="koha_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-koha-1, #990099)" />
+    <stop offset="1" stop-color="var(--color-koha-2, #ff00ff)" />
+  </linearGradient>
+  <linearGradient id="flag_grad" x1="0" x2="1" y1="1" y2="0">
+    <stop offset="0" stop-color="var(--color-flag-1, green)" />
+    <stop offset="1" stop-color="var(--color-flag-2, lime)" />
+  </linearGradient>
+  <defs>
+    <path id="regard_+" d="m1.75,-1.75l0,1.75m-0.875,-0.875l1.75,0" stroke="var(--regard-plus-color, #00ff00)" fill="none"/>
+    <path id="regard_-" d="m1.75,-1.65m-0.875,0.5l1.75,0" stroke="var(--regard-minus-color, #ff0000)" fill="none"/>
+    
+    <g id="regard_+1">
+      <path d="m0,0l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2"/>
+      <use href="#regard_+"/>
+    </g>
+    
+    <g id="regard_+2">
+      <path d="m0,0l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-5,-2.2a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2"/>
+      <use href="#regard_+"/>
+    </g>
+    
+    <g id="regard_+3">
+      <path d="m0,0l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-5,-2.2a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-5,-2.2a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2"/>
+      <use href="#regard_+"/>
+    </g>
+    
+    <g id="regard_-1">
+      <path d="m0,0l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-2.5,0.5l0.6,-0.5l-1.3,-1l0.7,-1.2"/>
+      <use href="#regard_-"/>
+    </g>
+    
+    <g id="regard_-4">
+      <path d="m0,0l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-2.5,0.5l0.6,-0.5l-1.3,-1l0.7,-1.2
+               m-2.5,0a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-2.29,-0.3l-0.91,-0.7l0.7,-1.2
+               m-2.5,0a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-2.29,-0.3l-0.91,-0.7l0.7,-1.2
+               m-2.5,0a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
+               m-2.29,-0.3l-0.91,-0.7l0.7,-1.2"/>
+      <use href="#regard_-"/>
+  </g>
+  <polygon id="flag-icon" points="0,-3.14 3,-1 1.85,2.53 -1.85,2.53 -3,-1" fill="url(#flag_grad)" />
+  <g id="sel-icon">
+    <polygon points="0,-3 3,0 0,3 -3,0" fill="lime"/>
+    <text font-family="sans-serif" font-size="4" stroke="none" fill="white" alignment-baseline="central" text-anchor="middle">
+      ?
+    </text>
+  </g>
+  <g id="cond-icon">
+    <polygon points="0,-3 3,0 0,3 -3,0" fill="lime"/>
+    <path d="m 2.5,1.5 l-2.5,2.5 -2.5,-2.5" stroke-width="0.525mm"/>
+    <path d="m 2.5,1.5 l-2.5,2.5 -2.5,-2.5 m 2.5,2.5 l 0,-2" stroke="lime"/>
+  </g>
+  </defs>
+
+  <use href="#regard_+1" transform="translate(-6.8,-4.4)" fill="url(#ark_grad)"/>
+  <use href="#regard_+1" transform="translate(   0,-4.4)" fill="url(#cel_grad)"/>
+  <use href="#regard_+1" transform="translate( 6.8,-4.4)" fill="url(#aki_grad)"/>
+  <use href="#regard_+1" transform="translate(-6.8, 1.5)" fill="url(#his_grad)"/>
+  <use href="#regard_+1" transform="translate(   0, 1.5)" fill="url(#koha_grad)"/>
+  <use href="#regard_+1" transform="translate( 6.8, 1.5)" fill="url(#len_grad)"/>
+  <use href="#regard_+1" transform="translate(-6.8, 7.4)" fill="url(#akira_grad)"/>
+  <use href="#regard_+1" transform="translate(   0, 7.4)" fill="url(#nana_grad)"/>
+  <g transform="translate(6.6,5.4)">
+    <use href="#flag-icon"/>
+    <text y="1.6" font-family="sans-serif" font-size="4" stroke="none" fill="white" text-anchor="middle">
+      M
+    </text>
+  </g>
+  <!-- <use href="#cond-icon" transform="translate(-6.6,-6.5)"/> -->
+</svg>
