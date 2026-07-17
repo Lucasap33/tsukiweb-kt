@@ -13,7 +13,6 @@ const remotePaths: string[] = [
 	'^/static/[^/]+/images_thumb',
 	//'^/static/[^/]+/scenes',
 	'^/static/[^/]+/wave',
-	'^/static/[^/]+/wave_pd',
 ]
 const proxyRules: Record<string, any> = {}
 remotePaths.forEach((path) => {

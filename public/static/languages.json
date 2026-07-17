@@ -1,0 +1,16 @@
+{
+  "jp": {
+    "locale": "ja-JP",
+    "display-name": "🇯🇵 日本語",
+    "dir": "./jp",
+    "last-update": "2026-04-17"
+  },
+  "en-mm": {
+    "locale": "en-US",
+    "display-name": "🇬🇧 English",
+    "authors": "mirror moon",
+    "dir": "./en",
+    "fallback": "jp",
+    "last-update": "2026-04-17"
+  }
+}

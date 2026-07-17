@@ -51,10 +51,8 @@ export function audioTrackPath(track: string,
   return audioPath(strings.audio["tracks"][source], track)
 }
 
-export function audioSePath(se: string, pd: boolean = false) {
-  const parent_dir = pd ? strings.audio["waves-pd"]
-                        : strings.audio["waves"]
-  return audioPath(parent_dir, se)
+export function audioSePath(se: string) {
+  return audioPath(strings.audio["waves"], se)
 }
 
 /**

@@ -1,5 +1,4 @@
 import { NumVarName } from "@tsukiweb-common/script/types"
-import { endings } from "../features/endings/utils/endings"
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { CharId } from "app/utils/types";
 

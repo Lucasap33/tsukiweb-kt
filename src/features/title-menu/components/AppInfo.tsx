@@ -6,7 +6,7 @@ import { Button, MessageContainer, Modal } from "@tsukiweb-common/ui-core"
 import { bb } from "@tsukiweb-common/utils/Bbcode"
 import { audio } from "engine/audio"
 import { usePWA } from "@tsukiweb-common/hooks"
-import { strings } from "translation/lang";
+import { useStrings } from "translation/lang";
 import { APP_INFO, APP_VERSION } from "app/utils/constants";
 import { SCREEN } from "app/utils/display";
 
@@ -36,6 +36,7 @@ type ModalInfoProps = {
 	setShow: Dispatch<boolean>
 }
 const ModalInfo = ({show, setShow}: ModalInfoProps) => {
+	const strings = useStrings()
 	const { canInstallPWA, installPWA } = usePWA()
 	
 	const copyCurrentUrl = () => {
@@ -89,12 +90,6 @@ const ModalInfo = ({show, setShow}: ModalInfoProps) => {
 						<div>
 							{bb(strings.title.about.feedback
 								.replace('%0', `[url='${APP_INFO.FEEDBACK_URL}']`)
-								.replace('%1', "[/url]"))}
-						</div>
-
-						<div className="more">
-							{bb(strings.title.about.remake
-								.replace('%0', `[url='${APP_INFO.REMAKE_URL}']`)
 								.replace('%1', "[/url]"))}
 						</div>
 					</div>

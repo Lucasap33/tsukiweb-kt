@@ -40,7 +40,7 @@ const AnimatedRoutes = () => {
 		setShowDisclaimer(false)
 	}, [])
 
-	const isExtra = [SCREEN.GALLERY, SCREEN.ENDINGS, SCREEN.SCENES, SCREEN.PLUS_DISC].some(path =>
+	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES].some(path =>
 		pathname.startsWith(path)
 	)
 	const keyPresence = isExtra ? "extra" : pathname
@@ -64,9 +64,6 @@ const AnimatedRoutes = () => {
 
 					<Route path={SCREEN.GALLERY}>
 						<ExtraLayout><GalleryScreen /></ExtraLayout>
-					</Route>
-					<Route path={SCREEN.ENDINGS}>
-						<ExtraLayout>WIP</ExtraLayout>
 					</Route>
 					<Route path={`${SCREEN.SCENES}/:sceneId`}>
 						<ExtraLayout><SceneReplayScreen /></ExtraLayout>

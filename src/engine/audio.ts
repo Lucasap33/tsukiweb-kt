@@ -6,8 +6,8 @@ import { asyncDelay } from "@tsukiweb-common/utils/timer"
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { splitFirst } from "@tsukiweb-common/utils/utils"
 import { createCommands } from "@tsukiweb-common/audio/utils"
-import { waitLanguageLoad } from "translation/langSelection"
 import { displayMode, SCREEN } from "app/utils/display";
+import { waitLanguageLoad } from "translation/lang";
 
 function getUrl(id: string): string {
   if (id.startsWith('"') && id.endsWith('"'))
@@ -18,11 +18,7 @@ function getUrl(id: string): string {
   }
   else if (id.includes('/')) {
     const [rootDir, subPath] = splitFirst(id, '/')
-    if (rootDir == 'pd')
-      return audioSePath(subPath!, true)
-    else {
-      return id
-    }
+    return id
   }
   return audioSePath(id)
 }

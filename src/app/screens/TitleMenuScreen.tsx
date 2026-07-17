@@ -1,5 +1,4 @@
 import gameLogo from "@assets/images/game-logo.webp"
-import moon from "@assets/images/moon.webp"
 import '@features/title-menu/styles/title-menu.scss'
 import * as m from "motion/react-m"
 import { MdOutlineVolumeOff, MdOutlineVolumeUp } from 'react-icons/md'
@@ -10,19 +9,17 @@ import { TitleMenuButton } from '@tsukiweb-common/ui-core'
 import classNames from "classnames"
 import { audio } from "engine/audio"
 import { useRef } from "react"
-import { useEclipseUnlocked } from "features/endings/hooks/useEclipseUnlocked";
 import { continueGame, newGame, savesManager } from "engine/savestates";
 import { settings } from "engine/settings";
 import AppInfo from "features/title-menu/components/AppInfo";
 import TranslationSwitch from "features/title-menu/components/TranslationSwitch";
-import { strings } from "translation/lang";
+import { strings, useStrings } from "translation/lang";
 import { SCREEN } from "app/utils/display";
-import { useLanguageRefresh, useScreenAutoNavigate } from "app/hooks";
+import { useScreenAutoNavigate } from "app/hooks";
 
 
 const TitleMenuScreen = () => {
 	useScreenAutoNavigate(SCREEN.TITLE)
-	useLanguageRefresh()
 
 	return (
 		<m.div
@@ -31,13 +28,6 @@ const TitleMenuScreen = () => {
 			animate={{opacity: 1}}
 			exit={{opacity: 0}}>
 			<div className="logo">
-				<m.img
-					src={moon} alt="Full moon"
-					draggable={false}
-					className="moon"
-					initial={{ opacity: 0.8, transform: "translateY(-42%) scale(0.94)" }}
-					animate={{ opacity: 0.5, transform: "translateY(-50%) scale(1)" }}
-					transition={{ duration: 0.8, ease: "easeOut" }} />
 				<m.img
 					src={gameLogo} alt="Game's logo in Japanese, subtitled in English"
 					draggable={false}
@@ -58,8 +48,8 @@ export default TitleMenuScreen
 
 
 const TitleMenu = () => {
+	const strings = useStrings()
 	const [, navigate] = useLocation()
-	const { eclipseUnlocked } = useEclipseUnlocked()
 	const canResume = useRef(savesManager.savesCount > 0 || history.pagesLength > 0)
 
 	return (
@@ -83,8 +73,7 @@ const TitleMenu = () => {
 					{strings.title.config}
 				</TitleMenuButton>
 
-				<TitleMenuButton audio={audio} onClick={() => navigate(SCREEN.GALLERY)} nav-auto={1}
-					attention={eclipseUnlocked}>
+				<TitleMenuButton audio={audio} onClick={() => navigate(SCREEN.GALLERY)} nav-auto={1}>
 					{strings.title.extra}
 				</TitleMenuButton>
 			</div>
@@ -93,6 +82,7 @@ const TitleMenu = () => {
 }
 
 const TopActions = () => {
+	const strings = useStrings()
 	const [conf] = useObserved(settings.volume, 'master')
 
 	return (

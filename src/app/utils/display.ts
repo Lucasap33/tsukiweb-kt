@@ -4,9 +4,7 @@ export enum SCREEN {
   CONFIG = "/config",
   LOAD = "/load",
   GALLERY = "/gallery",
-  ENDINGS = "/endings",
   SCENES = "/scenes",
-  PLUS_DISC = "/plus-disc",
 }
 
 export const displayMode: {

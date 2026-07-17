@@ -10,9 +10,9 @@ import { GalleryTotal } from 'features/gallery/components/GalleryComponents'
 import { useNavBackRef, useQueryParam } from '@tsukiweb-common/hooks'
 import { settings } from 'engine/settings';
 import cg from 'features/gallery/utils/gallery';
-import { strings } from 'translation/lang';
+import { strings, useStrings } from 'translation/lang';
 import { SCREEN } from 'app/utils/display';
-import { useLanguageRefresh, useScreenAutoNavigate } from 'app/hooks';
+import { useScreenAutoNavigate } from 'app/hooks';
 import { GALLERY_IMAGES } from 'features/gallery/utils/gallery-data';
 
 const container: Variants = {
@@ -42,8 +42,8 @@ const galleryTabs = new Set(Object.values(GALLERY_IMAGES).map(img=>img.group))
 
 const GalleryScreen = () => {
 	useScreenAutoNavigate(SCREEN.GALLERY)
-	useLanguageRefresh()
-	const [selectedTab, setSelectedTab] = useQueryParam<CharId>("tab", "ark")
+	const strings = useStrings()
+	const [selectedTab, setSelectedTab] = useQueryParam<CharId>("tab", "ren")
 
 	const tabImages: string[] = useMemo(() => {
 		const imagesTmp = cg.getByGroup(selectedTab)

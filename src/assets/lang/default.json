@@ -22,11 +22,10 @@
     "config": "Config",
     "extra": "Extra",
     "about": {
-      "port": "Web port of the 2000 VN [i]Tsukihime[/i] by Type-Moon.",
+      "port": "Web port of the 2001 VN [i]Tsukihime[/i] by Type-Moon.",
       "project": "The project is available on %0GitHub%1. Add a star if you like it! Contributions are welcome.",
       "feedback": "Send your feedback or report a bug %0here%1.",
-      "data": "No data collected, everything is stored in your browser. Manage your data %0here%1.",
-      "remake": "Consider buying the remake %0Tsukihime - A piece of blue glass moon%1."
+      "data": "No data collected, everything is stored in your browser. Manage your data %0here%1."
     },
     "install": "Install",
     "share": "Share",
@@ -34,9 +33,7 @@
   },
   "extra": {
     "gallery": "Gallery",
-    "endings": "Endings",
-    "scenes": "Flowchart",
-    "eclipse": "Eclipse"
+    "scenes": "Flowchart"
   },
   "config": {
     "on": "ON",
@@ -116,12 +113,6 @@
       "config": "Open config panel",
       "_hold": "[i](Hold)"
     }
-  },
-  "endings": {
-    "normal": "Normal",
-    "good": "Good",
-    "true": "True",
-    "osiete": "Osiete"
   },
   "saves": {
     "title-load": "Load",
@@ -211,8 +202,7 @@
       "everafter": ["./jp/CD_everafter/track%"],
       "tsukibako": ["./jp/CD_tsukibako/track%"]
     },
-    "waves": ["./jp/wave/%"],
-    "waves-pd": ["./jp/wave_pd/%"]
+    "waves": ["./jp/wave/%"]
   },
   "choices": [],
 
