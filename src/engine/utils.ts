@@ -2,8 +2,8 @@ import { LabelName, SceneName } from "../app/utils/types";
 import { APP_VERSION, SCENE_ATTRS } from "../app/utils/constants";
 import { strings, waitLanguageLoad } from "../translation/lang"
 import { credits, scenesDir } from "translation/assets";
-import { ASSETS_PATH } from "@tsukiweb-common/constants";
-import { ThumbnailsGraphics } from "@tsukiweb-common/graphics/types";
+import { ASSETS_PATH } from "@tsukiweb/common/constants";
+import { ThumbnailsGraphics } from "@tsukiweb/common/graphics/types";
 
 
 //#endregion ###################################################################

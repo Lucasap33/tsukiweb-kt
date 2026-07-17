@@ -1,10 +1,10 @@
 import { SaveState, savesManager } from "../../../engine/savestates"
 import { MdDeleteOutline, MdOutlineFileDownload } from "react-icons/md"
-import { GraphicsGroup } from "@tsukiweb-common/graphics"
+import { GraphicsGroup } from "@tsukiweb/common/graphics"
 import { useStrings } from "translation/lang"
 import classNames from "classnames"
-import { jsonMerge } from "@tsukiweb-common/utils/utils"
-import { Button } from "@tsukiweb-common/ui-core"
+import { jsonMerge } from "@tsukiweb/common/utils/utils"
+import { Button } from "@tsukiweb/common/ui-core"
 import { ProgressPanel } from "features/game/components/shared/ProgressPanel";
 import { getSceneTitle, isScene } from "engine/utils";
 import { SceneName } from "app/utils/types";

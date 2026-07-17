@@ -3,10 +3,10 @@ import { PropsWithChildren, useEffect } from "react"
 import "../styles/extra.scss"
 import { useStrings } from "translation/lang"
 import { useLocation } from "wouter"
-import { PageTitle, TitleMenuButton } from "@tsukiweb-common/ui-core"
+import { PageTitle, TitleMenuButton } from "@tsukiweb/common/ui-core"
 import { audio } from "engine/audio"
 import { SCREEN, displayMode } from "app/utils/display";
-import { useDefaultNavBack } from "@tsukiweb-common/hooks"
+import { useDefaultNavBack } from "@tsukiweb/common/hooks"
 import Ornament from "@assets/images/ornament.webp"
 
 const ExtraLayout = ({ children }: PropsWithChildren) => {

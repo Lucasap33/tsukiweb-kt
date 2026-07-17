@@ -1,11 +1,11 @@
-import { ScriptPlayerBase } from "@tsukiweb-common/script/ScriptPlayer"
+import { ScriptPlayerBase } from "@tsukiweb/common/script/ScriptPlayer"
 import { CharId, LabelName } from "app/utils/types";
 import { creditsScript, fetchBlockLines, isScene, nextLabel } from "engine/utils";
 import { settings } from "engine/settings";
 import { getGameVariable, setGameVariable } from "engine/variables";
-import { CommandRecord, NumVarName, VarName, VarType } from "@tsukiweb-common/script/types";
+import { CommandRecord, NumVarName, VarName, VarType } from "@tsukiweb/common/script/types";
 import { History } from "./history";
-import { extractInstructions } from "@tsukiweb-common/script/utils";
+import { extractInstructions } from "@tsukiweb/common/script/utils";
 
 //#endregion ###################################################################
 //#region                             TYPES

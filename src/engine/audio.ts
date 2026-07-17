@@ -1,11 +1,11 @@
 import { audioSePath, audioTrackPath } from "../translation/assets"
 import { settings } from "./settings"
-import { observe } from "@tsukiweb-common/utils/Observer"
-import { GameAudioManager } from "@tsukiweb-common/audio/AudioManager"
-import { asyncDelay } from "@tsukiweb-common/utils/timer"
+import { observe } from "@tsukiweb/common/utils/Observer"
+import { GameAudioManager } from "@tsukiweb/common/audio/AudioManager"
+import { asyncDelay } from "@tsukiweb/common/utils/timer"
 import { ScriptPlayer } from "engine/ScriptPlayer"
-import { splitFirst } from "@tsukiweb-common/utils/utils"
-import { createCommands } from "@tsukiweb-common/audio/utils"
+import { splitFirst } from "@tsukiweb/common/utils/utils"
+import { createCommands } from "@tsukiweb/common/audio/utils"
 import { displayMode, SCREEN } from "app/utils/display";
 import { waitLanguageLoad } from "translation/lang";
 

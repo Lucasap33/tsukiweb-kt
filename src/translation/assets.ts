@@ -1,9 +1,9 @@
-import { splitFirst } from "@tsukiweb-common/utils/utils"
+import { splitFirst } from "@tsukiweb/common/utils/utils"
 import { settings } from "../engine/settings"
 import {TrackSourceId, strings} from "./lang"
-import { ResolutionId, TextImage } from "@tsukiweb-common/translation/lang"
-import { closeBB } from "@tsukiweb-common/utils/Bbcode"
-import { assetPath, imageFormat } from "@tsukiweb-common/utils/images"
+import { ResolutionId, TextImage } from "@tsukiweb/common/translation/lang"
+import { closeBB } from "@tsukiweb/common/utils/Bbcode"
+import { assetPath, imageFormat } from "@tsukiweb/common/utils/images"
 
 //##############################################################################
 //#                                  PRIVATE                                   #

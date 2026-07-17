@@ -1,9 +1,9 @@
 import classNames from "classnames"
-import { GraphicsGroup } from "@tsukiweb-common/graphics"
+import { GraphicsGroup } from "@tsukiweb/common/graphics"
 import SaveSummary from "./SaveSummary"
-import { jsonMerge } from "@tsukiweb-common/utils/utils"
+import { jsonMerge } from "@tsukiweb/common/utils/utils"
 import { ComponentProps } from "react"
-import { bb } from "@tsukiweb-common/utils/Bbcode"
+import { bb } from "@tsukiweb/common/utils/Bbcode"
 import { QUICK_SAVE_ID, SaveState } from "engine/savestates";
 import { getLocale } from "translation/lang";
 

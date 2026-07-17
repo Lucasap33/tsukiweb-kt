@@ -2,10 +2,10 @@ import gameLogo from "@assets/images/game-logo.webp"
 import '@features/title-menu/styles/title-menu.scss'
 import * as m from "motion/react-m"
 import { MdOutlineVolumeOff, MdOutlineVolumeUp } from 'react-icons/md'
-import { useObserved } from '@tsukiweb-common/utils/Observer'
+import { useObserved } from '@tsukiweb/common/utils/Observer'
 import { useLocation } from "wouter"
 import { history } from 'engine/history'
-import { TitleMenuButton } from '@tsukiweb-common/ui-core'
+import { TitleMenuButton } from '@tsukiweb/common/ui-core'
 import classNames from "classnames"
 import { audio } from "engine/audio"
 import { useRef } from "react"

@@ -1,9 +1,9 @@
 import { history, PageEntry, SceneEntry } from './history';
 import { ScriptPlayer } from "engine/ScriptPlayer";
-import { JSONDiff, PartialJSON } from "@tsukiweb-common/types";
-import { noBb } from "@tsukiweb-common/utils/Bbcode";
-import { SavesManager as SavesManagerBase, SaveState as SSBase } from "@tsukiweb-common/script/saves"
-import { Graphics } from "@tsukiweb-common/graphics";
+import { JSONDiff, PartialJSON } from "@tsukiweb/common/types";
+import { noBb } from "@tsukiweb/common/utils/Bbcode";
+import { SavesManager as SavesManagerBase, SaveState as SSBase } from "@tsukiweb/common/script/saves"
+import { Graphics } from "@tsukiweb/common/graphics";
 import { settings, viewedScene } from './settings';
 import { APP_VERSION, SAVE_EXT } from 'app/utils/constants';
 import { SCREEN, displayMode } from 'app/utils/display';
