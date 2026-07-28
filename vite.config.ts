@@ -11,7 +11,7 @@ const remotePaths: string[] = [
 	'^/static/[^/]+/CD_tsukibako',
 	'^/static/[^/]+/images',
 	'^/static/[^/]+/images_thumb',
-	//'^/static/[^/]+/scenes',
+	'^/static/[^/]+/scenes',
 	'^/static/[^/]+/wave',
 ]
 const proxyRules: Record<string, any> = {}
@@ -23,7 +23,7 @@ remotePaths.forEach((path) => {
 })
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
 	plugins: [
 		react(),
 	],
@@ -34,6 +34,6 @@ export default defineConfig({
 		chunkSizeWarningLimit: 1000,
 	},
 	server: {
-		proxy: proxyRules
+		proxy: mode === 'proxy' ? proxyRules : {}
 	}
-})
+}))

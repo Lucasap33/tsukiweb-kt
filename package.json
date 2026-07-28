@@ -3,8 +3,12 @@
 	"version": "0.7.1",
 	"private": true,
 	"type": "module",
+	"engines": {
+		"node": ">=22.18"
+	},
 	"scripts": {
 		"start": "vite",
+		"proxy": "vite --mode proxy",
 		"common:check": "tsc -p tsukiweb-common/tsconfig.json",
 		"common:update": "git submodule update --remote --merge tsukiweb-common && npm install",
 		"build": "npm run common:check && tsc && vite build"
