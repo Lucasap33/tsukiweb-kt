@@ -1,10 +1,11 @@
 
 /**
- * Make changes to the raw script of Tsukihime, before the conversion.
+ * Make changes to the raw script of Kagetsu Tohya, before the conversion.
  * @param {string} text complete script text
  * @returns {string|null} the changed script, or null if no change was made
  */
-function th_raw_fixes(text) {
+function kt_raw_fixes(text) {
+    text = text.replace(/` How did you get here?@\v*` This is an error…\\/, "") // text removed afterwards anyway
     return null;
 }
 
@@ -33,7 +34,7 @@ const eroskip_pages = {
 }
 
 export {
-    th_raw_fixes,
+    kt_raw_fixes,
     block_fixes,
     eroskip_pages,
 }

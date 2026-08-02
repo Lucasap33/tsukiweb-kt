@@ -9,7 +9,7 @@ import { CharId } from "app/utils/types";
 export function getGameVariable(script: ScriptPlayer, name: NumVarName): number {
 	switch (name) {
 		default:
-			if (/^%flg[1-9A-Z]$/.test(name)) {
+			if (/^%flg\w+$/.test(name)) {
 			  	// flags
 				return script.flags.has(name.substring(4)) ? 1 : 0
 			} else if (/^\w+_point$/.test(name)) {
@@ -27,7 +27,7 @@ export function getGameVariable(script: ScriptPlayer, name: NumVarName): number 
 
 export function setGameVariable(script: ScriptPlayer, name: NumVarName,
                                 value: number) {
-  if (/^%flg[1-9A-Z]$/.test(name)) {
+  if (/^%flg\w+$/.test(name)) {
     if (value > 0)
       script.flags.add(name.substring(4))
     else
