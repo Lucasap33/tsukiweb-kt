@@ -1,7 +1,8 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-import { extractSar } from '@tsukiweb/common/tools/extract-sar/extractor.ts'
+import { extractNsa } from '@tsukiweb/common/tools/extract-nsa/extractor.ts'
+import { extractNscript } from '@tsukiweb/common/tools/extract-dat/extractor.ts'
 import { processImages as applySpriteTransparency } from '@tsukiweb/common/tools/transform-sprites/processor.ts'
 import { processImages as convertImages } from '@tsukiweb/common/tools/convert-images/processor.ts'
 import { mergeVertical } from '@tsukiweb/common/tools/convert-images/editor.ts'
@@ -26,8 +27,10 @@ import {
   ensureEmptyDirInside,
   isMediaFile,
   listFilesRecursive,
+  pathExists,
 } from '@tsukiweb/common/tools/utils/fs-utils.ts'
 import { resolveExecutable, runCommand, withWorkingDirectory } from '@tsukiweb/common/tools/utils/process-utils.ts'
+import { logger } from '@tsukiweb/common/tools/utils/logger.ts'
 import {
   check,
   combine,
@@ -44,31 +47,34 @@ interface StepContext {
   paths: Paths
 }
 
-const ARC_SAR_DIRS = [
+const ARC_DIRS = [
   'wave',
   'image/bg',
   'image/event',
   'image/tachi',
 ]
 
-async function arcSarDirsCheck(paths: Paths): Promise<Check> {
+const arcDir = (paths: Paths) => path.join(paths.workspace, path.basename(paths.arcArchive))
+const nonEmptyDirCheck = (directory: string) => nonEmptyDirectoryCheck(directory, displayPath(directory))
+const fileCheck = (file: string) => fileExistsCheck(file, displayPath(file))
+
+async function arcDirsCheck(paths: Paths): Promise<Check> {
   return combine(await Promise.all(
-    ARC_SAR_DIRS.map(dir => nonEmptyDirectoryCheck(path.join(paths.arcSar, dir), `_workspace/arc_sar/${dir}`))
+    ARC_DIRS.map(dir => nonEmptyDirCheck(path.join(arcDir(paths), dir)))
   ))
 }
 
-async function inputImageDirChecks(paths: Paths): Promise<CheckDetail[]> {
-  return Promise.all([
-    nonEmptyDirectoryCheck(path.join(paths.input, 'tachi'), '_workspace/input/tachi'),
-    nonEmptyDirectoryCheck(path.join(paths.input, 'bg'), '_workspace/input/bg'),
-    nonEmptyDirectoryCheck(path.join(paths.input, 'event'), '_workspace/input/event'),
-  ])
+async function imageDirChecks(paths: Paths): Promise<CheckDetail[]> {
+  return Promise.all(['tachi', 'bg', 'event'].map(dir => nonEmptyDirCheck(path.join(paths.img, dir))))
 }
 
-async function extractedAssetsAndInputImagesCheck(paths: Paths): Promise<Check> {
-  const extractedAssets = await arcSarDirsCheck(paths)
-  const inputImages = await inputImageDirChecks(paths)
-  return combine([...extractedAssets.details, ...inputImages])
+async function extractedAssetsAndImagesCheck(paths: Paths): Promise<Check> {
+  const extractedAssets = await arcDirsCheck(paths)
+  const images = await imageDirChecks(paths)
+  return combine([
+    ...extractedAssets.details,
+    ...images,
+  ])
 }
 
 async function scriptsOutputCheck(paths: Paths): Promise<Check> {
@@ -76,18 +82,18 @@ async function scriptsOutputCheck(paths: Paths): Promise<Check> {
 
   for (const lang of SCRIPT_LANGS) {
     const scenesDir = path.join(paths.staticJp, '..', lang, 'scenes')
-    checks.push(await nonEmptyDirectoryCheck(scenesDir, displayPath(scenesDir)))
+    checks.push(await nonEmptyDirCheck(scenesDir))
   }
 
   return combine(checks)
 }
 
-async function prepareInputFolder(paths: Paths): Promise<void> {
-  const source = path.join(paths.arcSar, 'image', 'tachi')
-  const tachiOutput = path.join(paths.input, 'tachi')
+async function prepareImgFolder(paths: Paths): Promise<void> {
+  const source = path.join(arcDir(paths), 'image', 'tachi')
+  const tachiOutput = path.join(paths.img, 'tachi')
 
   if (path.resolve(source) === path.resolve(tachiOutput)) {
-    throw new Error('Refusing to write transparent tachi over the ARC_SAR source folder.')
+    throw new Error('Refusing to write transparent tachi over the archive source folder.')
   }
 
   const sourceFilesBefore = await listFilesRecursive(source)
@@ -96,20 +102,24 @@ async function prepareInputFolder(paths: Paths): Promise<void> {
 
   const sourceFilesAfter = await listFilesRecursive(source)
   if (sourceFilesAfter.length !== sourceFilesBefore.length) {
-    throw new Error('ARC_SAR tachi source changed while generating transparent sprites.')
+    throw new Error('Archive tachi source changed while generating transparent sprites.')
   }
 
-  await copyDirectory(path.join(paths.arcSar, 'image', 'bg'), path.join(paths.input, 'bg'), paths.workspace)
-  await copyDirectory(path.join(paths.arcSar, 'image', 'event'), path.join(paths.input, 'event'), paths.workspace)
+  await copyDirectory(path.join(arcDir(paths), 'image', 'bg'), path.join(paths.img, 'bg'), paths.workspace)
+  await copyDirectory(path.join(arcDir(paths), 'image', 'event'), path.join(paths.img, 'event'), paths.workspace)
 }
 
 async function extractAssetsAndPrepareImages(paths: Paths): Promise<void> {
-  await extractSar(paths.arcSarArchive, paths.arcSar, ARC_SAR_DIRS)
-  await prepareInputFolder(paths)
+  await extractNsa(paths.arcArchive, arcDir(paths), ARC_DIRS)
+  const nscript = path.join(paths.tools, 'nscript.dat')
+  if (await pathExists(nscript)) {
+    await extractNscript(nscript, path.join(paths.staticJp, 'fullscript_jp.txt'))
+  }
+  await prepareImgFolder(paths)
 }
 
 async function runScripts(paths: Paths): Promise<void> {
-  await withWorkingDirectory(paths.convertScriptsTool, async () => {
+  await withWorkingDirectory(path.join(paths.tools, 'helpers', 'convert-scripts'), async () => {
     runLogicScripts()
     await runSceneScripts()
   })
@@ -117,54 +127,49 @@ async function runScripts(paths: Paths): Promise<void> {
 
 async function runWaifu2x(context: StepContext): Promise<void> {
   const executable = await resolveExecutable(context.config.WAIFU2X_CAFFE, context.paths.tools)
+  const total = (await listFilesRecursive(context.paths.img)).length
+  const updateProgress = async () => {
+    const processed = (await listFilesRecursive(context.paths.imgX2)).length
+    logger.progress(`Upscaling images: ${Math.min(processed, total)}/${total}`)
+  }
   const args = [
-    '-i', context.paths.input,
-    '-o', context.paths.inputX2,
+    '-i', context.paths.img,
+    '-o', context.paths.imgX2,
     ...WAIFU2X_ARGS,
   ]
 
-  await runCommand(executable.command, args, { cwd: executable.cwd })
+  await updateProgress()
+  const timer = setInterval(() => void updateProgress(), 1000)
+  try {
+    await runCommand(executable.command, args, { cwd: executable.cwd, stdout: 'ignore' })
+  } finally {
+    clearInterval(timer)
+  }
+  await updateProgress()
+  logger.done()
 }
 
 async function runImageConversion(paths: Paths): Promise<void> {
   const thumb = thumbConfig(paths)
   const x2 = x2Config(paths)
 
-  await mergeVertical(
-    path.join(thumb.inputDir, 'event', 'cel_e06a.jpg'),
-    path.join(thumb.inputDir, 'event', 'cel_e06b.jpg'),
-    path.join(thumb.inputDir, 'event', 'cel_e06.jpg'),
-  )
-  await mergeVertical(
-    path.join(thumb.inputDir, 'event', 'koha_h06a.jpg'),
-    path.join(thumb.inputDir, 'event', 'koha_h06b.jpg'),
-    path.join(thumb.inputDir, 'event', 'koha_h06.jpg'),
-  )
   await convertImages(thumb.inputDir, thumb.outputDir, thumb.options)
-
-  await mergeVertical(
-    path.join(x2.inputDir, 'event', 'cel_e06a.png'),
-    path.join(x2.inputDir, 'event', 'cel_e06b.png'),
-    path.join(x2.inputDir, 'event', 'cel_e06.png'),
-  )
-  await mergeVertical(
-    path.join(x2.inputDir, 'event', 'koha_h06a.png'),
-    path.join(x2.inputDir, 'event', 'koha_h06b.png'),
-    path.join(x2.inputDir, 'event', 'koha_h06.png'),
-  )
   await convertImages(x2.inputDir, x2.outputDir, x2.options)
+  logger.done()
 }
 
 async function runSpritesheets(paths: Paths): Promise<void> {
-  const sceneAttrs = JSON.parse(await fs.readFile(paths.sceneAttrs, 'utf8'))?.scenes ?? {}
-  const scenes = Object.entries(sceneAttrs).filter(
-    (entry): entry is [string, Scene] => {
-      const [, sceneData] = entry as [string, any]
-      return Object.hasOwn(sceneData, 'col') && sceneData?.graph && !sceneData?.osiete
-    }
-  )
+  const sceneAttrs = JSON.parse(await fs.readFile(paths.sceneAttrs, 'utf8'))
+  const flowchart = JSON.parse(await fs.readFile(path.join(paths.sceneAssets, 'flowchart.json'), 'utf8'))
+  const scenes = Object.keys(flowchart.scenes ?? {})
+    .filter(name => sceneAttrs['scene-graphs']?.[name])
+    .map(name => [name, { graph: sceneAttrs['scene-graphs'][name] }] as [string, Scene])
 
-  await buildSpritesheets(scenes, paths.imagesThumb, paths.flowchartSpritesheets, paths.sceneAssets)
+  if (!scenes.length) {
+    throw new Error('No flowchart scenes with graphics found; spritesheet metadata was not changed.')
+  }
+
+  await buildSpritesheets(scenes, paths.img, paths.flowchartSpritesheets, paths.sceneAssets)
 }
 
 async function convertAudioTree(
@@ -209,7 +214,7 @@ function cdTrackOutputName(relativePath: string): string {
 
 async function runWaveConversion(context: StepContext): Promise<void> {
   const ffmpeg = await resolveExecutable(context.config.FFMPEG, context.paths.tools)
-  await convertAudioTree(ffmpeg, path.join(context.paths.arcSar, 'wave'), context.paths.wave)
+  await convertAudioTree(ffmpeg, path.join(arcDir(context.paths), 'wave'), context.paths.wave)
 }
 
 async function runCdConversion(context: StepContext): Promise<void> {
@@ -236,11 +241,11 @@ export function createSteps(context: StepContext): OrchestratorStep[] {
   return [
     {
       id: 1,
-      title: 'Extract arc.sar assets and prepare images',
+      title: 'Extract arc.nsa/nscript.dat and prepare images',
       canRun: async () => combine([
-        await fileExistsCheck(paths.arcSarArchive, displayPath(paths.arcSarArchive)),
+        await fileCheck(paths.arcArchive),
       ]),
-      isDone: async () => extractedAssetsAndInputImagesCheck(paths),
+      isDone: async () => extractedAssetsAndImagesCheck(paths),
       run: async () => extractAssetsAndPrepareImages(paths),
     },
     {
@@ -255,10 +260,10 @@ export function createSteps(context: StepContext): OrchestratorStep[] {
       title: 'Upscale images with waifu2x',
       canRun: async () => combine([
         await executableCheck(config.WAIFU2X_CAFFE, paths.tools),
-        ...(await inputImageDirChecks(paths)),
+        ...(await imageDirChecks(paths)),
       ]),
       isDone: async () => combine([
-        await nonEmptyDirectoryCheck(paths.inputX2, '_workspace/input_x2'),
+        await nonEmptyDirCheck(paths.imgX2),
       ]),
       run: async () => runWaifu2x(context),
     },
@@ -266,35 +271,35 @@ export function createSteps(context: StepContext): OrchestratorStep[] {
       id: 4,
       title: 'Convert images',
       canRun: async () => combine([
-        await nonEmptyDirectoryCheck(paths.input, '_workspace/input'),
-        await nonEmptyDirectoryCheck(paths.inputX2, '_workspace/input_x2'),
+        await nonEmptyDirCheck(paths.img),
+        await nonEmptyDirCheck(paths.imgX2),
       ]),
       isDone: async () => combine([
-        await nonEmptyDirectoryCheck(paths.images, displayPath(paths.images)),
-        await nonEmptyDirectoryCheck(paths.imagesThumb, displayPath(paths.imagesThumb)),
+        await nonEmptyDirCheck(paths.images),
+        await nonEmptyDirCheck(paths.imagesThumb),
       ]),
       run: async () => runImageConversion(paths),
     },
-    {
-      id: 5,
-      title: 'Create flowchart spritesheets',
-      canRun: async () => combine([
-        await nonEmptyDirectoryCheck(paths.imagesThumb, displayPath(paths.imagesThumb)),
-      ]),
-      isDone: async () => combine([
-        await nonEmptyDirectoryCheck(paths.flowchartSpritesheets, displayPath(paths.flowchartSpritesheets)),
-      ]),
-      run: async () => runSpritesheets(paths),
-    },
+    // {
+    //   id: 5,
+    //   title: 'Create spritesheets',
+    //   canRun: async () => combine([
+    //     await nonEmptyDirCheck(paths.img),
+    //   ]),
+    //   isDone: async () => combine([
+    //     await nonEmptyDirCheck(paths.flowchartSpritesheets),
+    //   ]),
+    //   run: async () => runSpritesheets(paths),
+    // },
     {
       id: 6,
-      title: 'Convert audio wave files',
+      title: 'Convert wave files',
       canRun: async () => combine([
         await executableCheck(config.FFMPEG, paths.tools),
-        await nonEmptyDirectoryCheck(path.join(paths.arcSar, 'wave'), '_workspace/arc_sar/wave'),
+        await nonEmptyDirCheck(path.join(arcDir(paths), 'wave')),
       ]),
       isDone: async () => combine([
-        await nonEmptyDirectoryCheck(paths.wave, displayPath(paths.wave)),
+        await nonEmptyDirCheck(paths.wave),
       ]),
       run: async () => runWaveConversion(context),
     },
@@ -305,7 +310,7 @@ export function createSteps(context: StepContext): OrchestratorStep[] {
         const executable = await executableCheck(config.FFMPEG, paths.tools)
         const cdChecks = await Promise.all(
           Object.values(paths.cds).map(async dirs =>
-            nonEmptyDirectoryCheck(dirs.input, displayPath(dirs.input))
+            nonEmptyDirCheck(dirs.input)
           )
         )
 

@@ -3,7 +3,6 @@ import fs from 'fs/promises'
 import { fileURLToPath, pathToFileURL } from 'url'
 
 export interface ToolConfig {
-  ARC_SAR: string
   WAIFU2X_CAFFE: string
   FFMPEG: string
   PUBLIC: string
@@ -15,15 +14,12 @@ export interface CdPaths {
 }
 
 export interface Paths {
-  repo: string
   tools: string
   publicAssets: string
   workspace: string
-  arcSarArchive: string
-  arcSar: string
-  input: string
-  inputX2: string
-  convertScriptsTool: string
+  arcArchive: string
+  img: string
+  imgX2: string
   sceneAttrs: string
   sceneAssets: string
   staticJp: string
@@ -40,7 +36,6 @@ export const REPO_DIR = path.resolve(TOOLS_DIR, '..')
 export const CONFIG_PATH = path.join(TOOLS_DIR, 'my-config.ts')
 
 const DEFAULT_CONFIG: ToolConfig = {
-  ARC_SAR: './arc.sar',
   WAIFU2X_CAFFE: 'waifu2x-caffe-cui.exe',
   FFMPEG: 'ffmpeg.exe',
   PUBLIC: '../public',
@@ -53,14 +48,7 @@ type PartialToolConfig = Partial<ToolConfig>
 
 export const SCRIPT_LANGS = [
   'jp',
-  'en-mm',
-  'es-tohnokun',
-  'it-riffour',
-  'pt-matsuri',
-  'ko-wolhui',
-  'ru-ciel',
-  'zh-tw-yueji_yeren_hanhua_zu',
-  'zh-yueji_yeren_hanhua_zu',
+  'en',
 ] as const
 
 export const WAIFU2X_ARGS = [
@@ -73,6 +61,8 @@ export const WAIFU2X_ARGS = [
 ] as const
 
 export const FFMPEG_AUDIO_ARGS = [
+  '-hide_banner',
+  '-loglevel', 'error',
   '-c:a', 'libopus',
   '-b:a', '96k',
   '-vbr', 'on',
@@ -83,11 +73,11 @@ export const FFMPEG_AUDIO_ARGS = [
   '-f', 'webm',
 ] as const
 
-type ImageConversionPaths = Pick<Paths, 'input' | 'inputX2' | 'images' | 'imagesThumb'>
+type ImageConversionPaths = Pick<Paths, 'img' | 'imgX2' | 'images' | 'imagesThumb'>
 
 export function thumbConfig(paths: ImageConversionPaths) {
   return {
-    inputDir: paths.input,
+    inputDir: paths.img,
     outputDir: paths.imagesThumb,
     options: {
       resize: {
@@ -96,9 +86,9 @@ export function thumbConfig(paths: ImageConversionPaths) {
       } as const,
       avif: {
         quality: 60,
-        alphaQuality: 50,
-        effort: 8,
+        effort: 4,
         chromaSubsampling: '4:4:4',
+        tune: 'iq'
       } as const,
     },
   }
@@ -106,14 +96,14 @@ export function thumbConfig(paths: ImageConversionPaths) {
 
 export function x2Config(paths: ImageConversionPaths) {
   return {
-    inputDir: paths.inputX2,
+    inputDir: paths.imgX2,
     outputDir: paths.images,
     options: {
       avif: {
         quality: 60,
-        alphaQuality: 70,
-        effort: 8,
+        effort: 4,
         chromaSubsampling: '4:4:4',
+        tune: 'iq'
       } as const,
     },
   }
@@ -152,32 +142,29 @@ export function resolveToolPath(value: string): string {
 export function buildPaths(config: ToolConfig): Paths {
   const publicAssets = resolveToolPath(config.PUBLIC)
   const workspace = path.join(TOOLS_DIR, '_workspace')
-  const arcSar = path.join(workspace, 'arc_sar')
-  const cds = Object.fromEntries(CD_NAMES.map(name => [
-    name,
-    {
-      input: path.join(TOOLS_DIR, name),
-      output: path.join(publicAssets, 'static', 'jp', name),
-    },
-  ])) as Record<CdName, CdPaths>
 
   return {
-    repo: REPO_DIR,
     tools: TOOLS_DIR,
     publicAssets,
     workspace,
-    arcSarArchive: resolveToolPath(config.ARC_SAR),
-    arcSar,
-    input: path.join(workspace, 'input'),
-    inputX2: path.join(workspace, 'input_x2'),
-    convertScriptsTool: path.join(TOOLS_DIR, 'helpers', 'convert-scripts'),
+    arcArchive: path.join(TOOLS_DIR, 'arc.nsa'),
+    img: path.join(workspace, 'img'),
+    imgX2: path.join(workspace, 'img_x2'),
     sceneAttrs: path.join(REPO_DIR, 'src', 'assets', 'game', 'scene_attrs.json'),
     sceneAssets: path.join(REPO_DIR, 'src', 'assets', 'game'),
+
+    //output
     staticJp: path.join(publicAssets, 'static', 'jp'),
     images: path.join(publicAssets, 'static', 'jp', 'images'),
     imagesThumb: path.join(publicAssets, 'static', 'jp', 'images_thumb'),
     flowchartSpritesheets: path.join(publicAssets, 'res', 'flowchart-spritesheets'),
     wave: path.join(publicAssets, 'static', 'jp', 'wave'),
-    cds,
+    cds: Object.fromEntries(CD_NAMES.map(name => [
+      name,
+      {
+        input: path.join(TOOLS_DIR, name),
+        output: path.join(publicAssets, 'static', 'jp', name),
+      },
+    ])) as Record<CdName, CdPaths>,
   }
 }
