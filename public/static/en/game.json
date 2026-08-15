@@ -1,466 +1,294 @@
 {
   "scripts-dir": "./scenes",
   "choices": {
-    "f20": [
-      "1. There's only a few minutes until homeroom. I have to head there right away.",
-      "2. …… I'm curious, so I'll go take a look."
-    ],
-    "f21": [
-      "1. Go out into the hallway to think about it.",
-      "2. Go eat in the cafeteria.",
-      "3. Eat lunch in class."
-    ],
-    "f22": [
-      "1. Eat lunch in class.",
-      "2. Go eat in the cafeteria.",
-      "3. Go out into the hallway to think about it."
-    ],
-    "f31": [
-      "1. Get a hold of myself and head back to the mansion.",
-      "2. Stay in school for a little longer."
-    ],
-    "f201": [
-      "1. About my little sister Akiha.",
-      "2. About the cheerful girl.",
-      "3. About the girl by the window."
-    ],
-    "f42": [
-      "1. Go to the sitting room and talk with Akiha.",
-      "2. Stay in my own room.",
-      "3. Go watch TV in Kohaku-san's room."
-    ],
-    "f46": [
-      "1. Go check it out.",
-      "2. Go to sleep."
-    ],
-    "f183": [
-      "1. …… Return to the mansion.",
-      "2. …… Still wait."
-    ],
-    "f184": [
-      "1. …… Still wait.",
-      "2. …… Return to the mansion."
-    ],
-    "f185": [
-      "1. …… Still wait.",
-      "2. …… Return to the mansion."
-    ],
-    "f189": [
-      "1. Rush to the same alley as last night.",
-      "2. …… Wait here in the park.",
-      "3. Go to Arcueid's room."
-    ],
-    "f284": [
-      "1. Kohaku-san is in the way.",
-      "2. It's like Kohaku-san says."
-    ],
-    "f365": [
-      "1. East wing, first floor.",
-      "2. West wing, first floor.",
-      "3. East wing, second floor.",
-      "4. West wing, second floor."
-    ],
-    "f370": [
-      "1. Take off my glasses and get ready to kill.",
-      "2. First, I have to get us away from Akiha's room."
-    ],
-    "f194": [
-      "1. Even if it's useless, I'll look for Arcueid.",
-      "2. Accept it and go back to the mansion.",
-      "3. If this is how things are, I'll search for Roa myself."
-    ],
-    "f292": [
-      "1. No, I have to turn Kohaku-san away.",
-      "2. …… I'll just have her leave the food in here."
-    ],
-    "f295": [
-      "1. …… I can't let her see me like this.",
-      "2. …… But still, I want to hear her voice."
-    ],
-    "f297": [
-      "1. Escape forward.",
-      "2. Escape backwards."
-    ],
-    "f299": [
-      "1. …… Take off my glasses.",
-      "2. …… Don't take off my glasses."
-    ],
-    "f302": [
-      "1. I like Senpai's natural look.",
-      "2. Senpai isn't Senpai without her glasses!"
-    ],
-    "f375": [
-      "1. Pursue him right now.",
-      "2. Take a breath, calm down, and then pursue him."
-    ],
-    "f378": [
-      "1. …… Stop.",
-      "2. …… I won't let his words trick me."
-    ],
-    "f380": [
-      "1. …… Chase after Akiha.",
-      "2. …… I can't do it."
-    ],
-    "f381": [
-      "1. …… Keep my promise.",
-      "2. …… I can't do that."
-    ],
-    "f383": [
-      "1. …… Give Akiha back this life.",
-      "2. …… I can't do that."
-    ],
-    "f52": [
-      "1. I will keep my promise.",
-      "2. I will never forget Arcueid."
-    ],
-    "f307": [
-      "1. Obey Arcueid.",
-      "2. Don't obey Arcueid."
-    ],
-    "f405": [
-      "1. Unlock the door.",
-      "2. …… Why did I lock the door in the first place?"
-    ],
-    "f411": [
-      "1. Call out Akiha's name.",
-      "2. Call out Kohaku's name."
-    ],
-    "f416": [
-      "1. Go see Kohaku-san.",
-      "2. Investigate Makihisa's room."
-    ],
-    "f419": [
-      "1. …… Go look outside.",
-      "2. Just go back to my room."
-    ],
-    "f425": [
-      "1. [line=4]Kill her now.",
-      "2. [line=4]Pull back for now."
-    ],
-    "f427": [
-      "1. …… Kill her before she notices me.",
-      "2. …… Wait until she walks by and attack her from behind."
-    ],
-    "f51": [
-      "1. Greet Akiha.",
-      "2. Greet Kohaku-san.",
-      "3. Greet both of them."
-    ],
-    "f57": [
-      "1. In the classroom.",
-      "2. Go to the cafeteria.",
-      "3. Go to the tea ceremony room."
-    ],
-    "f65": [
-      "1. This is just a bad dream.",
-      "2. This is, without a doubt, reality wrought by my own hands."
-    ],
-    "f204": [
-      "1. Greet Akiha.",
-      "2. Greet Kohaku-san.",
-      "3. Greet both of them."
-    ],
-    "f205": [
-      "1. Greet Akiha.",
-      "2. Greet Kohaku-san.",
-      "3. Greet both of them."
-    ],
-    "f206": [
-      "1. Ask about Yumizuka Satsuki.",
-      "2. …… Just sit silently."
-    ],
-    "f210": [
-      "1. Ciel-senpai is right.",
-      "2. …… No, I really don't feel well."
-    ],
-    "f212": [
-      "1. Go see Hisui.",
-      "2. Go help Kohaku-san.",
-      "3. Stay in my room."
-    ],
-    "f211": [
-      "1. Go and look.",
-      "2. Don't go and look."
-    ],
-    "f69": [
-      "1. Talk about Akiha.",
-      "2. Talk about Kohaku-san.",
-      "3. Talk about the mansion."
-    ],
-    "f75": [
-      "1. …… I'll cooperate.",
-      "2. No, I won't cooperate.",
-      "3. Escape somehow."
-    ],
-    "f80": [
-      "1. I should be escaping after all.",
-      "2. …… Still, I can't leave her alone."
-    ],
-    "f81": [
-      "1. …… Fine, but just for a little bit.",
-      "2. …… No. I have a bad feeling about it."
-    ],
-    "f84": [
-      "1. I think I'll go back to the mansion.",
-      "2. I think I'll go back to the hotel."
-    ],
-    "f88": [
-      "1. [line=3]I should go check out what's happening outside.",
-      "2. I'll stay inside the room for now and keep watch."
-    ],
-    "f235": [
-      "1. Go search for Yumizuka.",
-      "2. Search around the school.",
-      "3. Search around the city."
-    ],
-    "f240": [
-      "1. Go look for Yumizuka.",
-      "2. I can't do something that dangerous."
-    ],
-    "f242half": [
-      "1. I like her.",
-      "2. I hate her.",
-      "3. I can't answer."
-    ],
-    "f94": [
-      "1. I'd like to refuse, but[line=3]",
-      "2. No, there's no way I could take on a monster like that."
-    ],
-    "f97": [
-      "1. Dash towards Nrvnqsr.",
-      "2. …… No, it's still too early."
-    ],
-    "f98": [
-      "1. I'd like to refuse, but[line=3]",
-      "2. No, there's no way I could take on a monster like that."
-    ],
-    "f99": [
-      "1. Dash towards Nrvnqsr.",
-      "2. …… It's still too early."
-    ],
-    "f101": [
-      "1. I'll bear with it for now and wait for my chance.",
-      "2. I have to destroy the main body."
-    ],
-    "f305": [
-      "1. No, I really don't feel like it.",
-      "2. Of course I agree."
-    ],
-    "f306": [
-      "1. No, I really don't feel like it.",
-      "2. Of course I agree."
-    ],
-    "f303": [
-      "1. Ask her why she transferred to this school.",
-      "2. …… I should introduce Arihiko.",
-      "3. Was she pretending to be naive until just now?"
-    ],
-    "f317": [
-      "1. Go and help Kohaku-san.",
-      "2. Go and help Hisui."
-    ],
-    "f108": [
-      "1. I can't explain the circumstances, so I'll at least apologize.",
-      "2. I can't explain the circumstances, so I'll somehow lie about it.",
-      "3. No, I should tell the truth."
-    ],
-    "f112": [
-      "1. …… Go into the city and look for her.",
-      "2. Space out in the classroom.",
-      "3. Just return to the mansion and rest."
-    ],
-    "f116a": [
-      "1. It might be Arcueid.",
-      "2. It might be Ciel-Senpai.",
-      "3. It might be Akiha.",
-      "4. It might be Hisui.",
-      "5. It might be Kohaku-san."
-    ],
-    "f200": [
-      "1. I will apologize.",
-      "2. Try to deceive her.",
-      "3. Tell the truth."
-    ],
-    "f222": [
-      "1. …… No, that had to have been someone else.",
-      "2. Ask about last night."
-    ],
-    "f225": [
-      "1. Alright, I'll eat.",
-      "2. Alright, I won't eat."
-    ],
-    "f230": [
-      "1. No. I refuse to do something so embarrassing.",
-      "2. I don't care. I'll nod."
-    ],
-    "f325": [
-      "1. Ask her why she transferred to this school.",
-      "2. …… I should introduce Arihiko.",
-      "3. Was she pretending to be naive until just now?"
-    ],
-    "f329": [
-      "1. Go home alone.",
-      "2. Go to Akiha's classroom."
-    ],
-    "f334": [
-      "1. Go to the sitting room.",
-      "2. Go to the detached building.",
-      "3. Stay here until dinnertime."
-    ],
-    "f338": [
-      "1. Go to the detached building.",
-      "2. Just go to sleep."
-    ],
-    "f386": [
-      "1. Go see Hisui.",
-      "2. Go help Kohaku-san.",
-      "3. Go to Akiha's room."
-    ],
-    "f129": [
-      "1. I'll go into the hallway and talk to her.",
-      "2. No, it probably doesn't concern me so I'll just watch from here.",
-      "3. An opening! I'll surprise her from behind!"
-    ],
-    "f135": [
-      "1. Search for Arcueid aimlessly.",
-      "2. Return to the mansion."
-    ],
-    "f244": [
-      "1. Yeah, I'll go with Arihiko to the cafeteria.",
-      "2. No, even if she hates me, I'll go see Senpai."
-    ],
-    "f249": [
-      "1. Go back to the mansion.",
-      "2. Go to the tea ceremony room.",
-      "3. Go out into the city."
-    ],
-    "f256": [
-      "1. I can't leave Arcueid alone.",
-      "2. Senpai is dear to me."
-    ],
-    "f343": [
-      "1. Calm down a little, then head to the sitting room.",
-      "2. I'm fine, so I'll head to the sitting room.",
-      "3. I should get a little more rest."
-    ],
-    "f347": [
-      "1. Akiha's current uniform suits her better.",
-      "2. Our school's uniform would suit her better."
-    ],
-    "f350": [
-      "1. Go and help Hisui.",
-      "2. Go and help Kohaku-san."
-    ],
-    "f391": [
-      "1. Talk with her about it.",
-      "2. Don't talk with her about it."
-    ],
-    "f394": [
-      "1. Go to my old man's room.",
-      "2. Stay in my room."
-    ],
-    "f395": [
-      "1. Go to the nighttime city.",
-      "2. Don't sleep and wait until morning."
-    ],
-    "f143": [
-      "1. I should smooth things over with a cheerful greeting.",
-      "2. I won't do something stupid, so just greet her normally.",
-      "3. No, no. All I can do now is apologize."
-    ],
-    "f149": [
-      "1. Go to the courtyard now.",
-      "2. Pray she doesn't do anything until classes are over.",
-      "3. I don't care. I'll ignore her."
-    ],
-    "f153": [
-      "1. Still, I'll tell Hisui the truth.",
-      "2. No, I can't let anyone know."
-    ],
-    "f260": [
-      "1. No, let's go to the sitting room.",
-      "2. More than that, I should go to school."
-    ],
-    "f267": [
-      "1. Say it bluntly.",
-      "2. Say it calmly."
-    ],
-    "f353": [
-      "1. Still, I can at least say good morning to Akiha.",
-      "2. …… I can't. Let's go back to my room."
-    ],
-    "f354": [
-      "1. Go to Akiha's classroom.",
-      "2. No, I don't need to go and see her."
-    ],
-    "f355": [
-      "1. Go to Akiha's classroom.",
-      "2. No, I don't need to go and see her."
-    ],
-    "f358": [
-      "1. Talk to Ciel about last night.",
-      "2. …… That would just be a waste of my time."
-    ],
-    "f399": [
-      "1. Get Kohaku-san to make something.",
-      "2. Ask Hisui to make something."
-    ],
-    "f402": [
-      "1. …… Just this isn't enough at all.",
-      "2. …… I can move again, so I should just thank her."
-    ],
-    "f159": [
-      "1. …… Do as Akiha says.",
-      "2. No, I have to push myself to see Arcueid."
-    ],
-    "f361": [
-      "1. …… Go and determine my own fate.",
-      "2. No, I'll stay in the mansion."
-    ],
-    "f162": [
-      "1. …… It can't be helped. I'll go with Arcueid.",
-      "2. …… It can be helped. I should go to school."
-    ],
-    "f163": [
-      "1. Well, it's because you're selfish, right?",
-      "2. Well, it's because you hate me, right?",
-      "3. Well, it's because you're a vampire, right?"
-    ],
-    "f168": [
-      "1. Go for the usual, take her to the movie theater.",
-      "2. She'll probably like somewhere such as a back alley, right?",
-      "3. …… I don't really know, so let's go to the park for now."
-    ],
-    "f172": [
-      "1. Alright, I'll tell her about last night.",
-      "2. Then, let's hear the details about Arcueid's \"enemy\".",
-      "3. Well, I have to question her about her hobbies, history, and her three sizes!"
-    ],
-    "f178": [
-      "1. Go to Arcueid's apartment.",
-      "2. Look in the commercial district.",
-      "3. …… The school, perhaps?"
-    ],
-    "f180": [
-      "1. I can't do something she doesn't want.",
-      "2. I just… want her, that's all."
-    ],
-    "f273": [
-      "1. Wait here.",
-      "2. Go to the classroom.",
-      "3. Go behind the school."
-    ],
-    "f277": [
-      "1. Space out here in the classroom.",
-      "2. …… Go eat some lunch."
-    ],
-    "f279": [
-      "1. I guess so.",
-      "2. …… No, it does matter."
-    ],
-    "f362": [
-      "1. …… I have to live.",
-      "2. …… I can't do it."
+    "s2": [
+      "1. Go to school.",
+      "2. Stay at the mansion."
+    ],
+    "s3": [
+      "1. To Arcueid's apartment.",
+      "2. To Ciel-senpai's apartment.",
+      "3. Straight to school.",
+      "4. Maybe I'll invade the Inui house?"
+    ],
+    "s4": [
+      "1. Peacefully go to school.",
+      "2. Chat with Arcueid a little more."
+    ],
+    "s5": [
+      "1. … I mustn't be swayed.",
+      "2. … No, I want to be swayed."
+    ],
+    "s11": [
+      "1. Go to school with Akiha.",
+      "2. Go to school alone."
+    ],
+    "s15": [
+      "1. I'll stop by the Tea Ceremony Club room.",
+      "2. I'll go straight to class.",
+      "3. Maybe I'll drop by the courtyard?"
+    ],
+    "s22": [
+      "1. Eat at the cafeteria!",
+      "2. Steal some from Senpai in the tea room!",
+      "3. Eat peacefully in the courtyard!"
+    ],
+    "s260": [
+      "1. Eat at the cafeteria!",
+      "2. Steal some from Senpai in the tea room!",
+      "3. Eat peacefully in the courtyard!"
+    ],
+    "s29": [
+      "1. I'll eat lunch with Akiha.",
+      "2. I'll eat lunch alone."
+    ],
+    "s39": [
+      "1. I'll skip class.",
+      "2. No, I must attend class diligently."
+    ],
+    "s42": [
+      "1. Drop by the tea room.",
+      "2. Stay in the classroom.",
+      "3. Go straight home."
+    ],
+    "s43": [
+      "1. Drop by the tea room.",
+      "2. Stay in the classroom.",
+      "3. Go straight home.",
+      "4. Go out into the street."
+    ],
+    "s51": [
+      "1. Go home with Akiha.",
+      "2. Go home alone."
+    ],
+    "s53": [
+      "1. Stay in my room.",
+      "2. Go visit Akiha's room.",
+      "3. Chat with Hisui.",
+      "4. Go visit Kohaku-san's room."
+    ],
+    "s56": [
+      "1. … Forget it… I'll end up dying if I act hastily.",
+      "2. … Just a little won't hurt, will it?"
+    ],
+    "s68": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting."
+    ],
+    "s69": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting.",
+      "4. Extermination of the cat demon in the detached building."
+    ],
+    "s70": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting.",
+      "4. Taking a stroll on the night streets."
+    ],
+    "s245": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting.",
+      "4. … Eh? Another dream?"
+    ],
+    "s71": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting.",
+      "4. Extermination of the cat demon in the detached building.",
+      "5. Taking a stroll on the night streets."
+    ],
+    "s246": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting.",
+      "4. Taking a stroll on the night streets.",
+      "5. … Eh? Another dream?"
+    ],
+    "s247": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting.",
+      "4. Extermination of the cat demon in the detached building.",
+      "5. … Eh? Another dream?"
+    ],
+    "s248": [
+      "1. The murder cases that have been happening.",
+      "2. The hallucinations of the end of the world.",
+      "3. Something that I'm forgetting.",
+      "4. Extermination of the cat demon in the detached building.",
+      "5. Taking a stroll on the night streets.",
+      "6. … Eh? Another dream?"
+    ],
+    "s250": [
+      "1. It must be Arcueid.",
+      "2. It could be Ciel-senpai.",
+      "3. Akiha is a possibility.",
+      "4. Could be Hisui.",
+      "5. Maybe Kohaku-san.",
+      "6. … For some reason that child pops up in my head.",
+      "7. How about both Kohaku-san and Hisui?"
+    ],
+    "s400": [
+      "1. It's just another day.",
+      "2. No, it's the day of the cultural festival!"
+    ],
+    "s401": [
+      "1. It's just another day.",
+      "2. No, it's the day of the cultural festival!",
+      "3. Was it… the athletic festival?"
+    ],
+    "s402": [
+      "1. It's just another day.",
+      "2. Was it… the athletic festival?"
+    ],
+    "s223": [
+      "1. Runaway Tea House 'Low Kick.'",
+      "2. Costume Rental and Photography 'Marble Phantasm.'",
+      "3. Mysterious Movie Theater 'Planetarium.'"
+    ],
+    "s227": [
+      "1. Fourth floor, first year class.",
+      "2. Third floor, second year class.",
+      "3. Second floor, third year class."
+    ],
+    "s231": [
+      "1. I must help the class!",
+      "2. Anyway, I'll stroll for now."
+    ],
+    "s91": [
+      "1. It would be nice to rest in my room.",
+      "2. I'll go to the Nanaya's Forest.",
+      "3. I'll go to Akiha's room.",
+      "4. Maybe I'll help Hisui.",
+      "5. I'll visit Kohaku-san.",
+      "6. I'll go sunbathing in the courtyard.",
+      "7. I'll go sunbathing by the detached building.",
+      "8. I'm tired of the mansion. I'm going out!"
+    ],
+    "s96": [
+      "1. Take the chance!",
+      "2. Will this chance be big enough[line=4]!?"
+    ],
+    "s505": [
+      "1. Attack from the shadow of the falling tree……!",
+      "2. Will this chance be big enough[line=4]!?"
+    ],
+    "s507": [
+      "1. …… The neck……!",
+      "2. Will this chance be big enough[line=4]!?"
+    ],
+    "s98": [
+      "1. Akiha's nap has to end!",
+      "2. …… No, wait… disturbing a nap is not good."
+    ],
+    "s307": [
+      "1. …… I gaze at the blood on my finger.",
+      "2. …… I shake my head uneasily."
+    ],
+    "s113": [
+      "1. Sleep in my room.",
+      "2. Visit Akiha's room.",
+      "3. Find Hisui.",
+      "4. Help Kohaku-san.",
+      "5. Go to the detached building.",
+      "6. What's in Makihisa's room?"
+    ],
+    "s118": [
+      "1. Go for it!",
+      "2. Maybe I'd rather not…?"
+    ],
+    "s140": [
+      "1. I'll go out to eat!",
+      "2. Dinner at the mansion is more than enough."
+    ],
+    "s145": [
+      "1. The Indian restaurant Messian.",
+      "2. The Mobile Chinese Restaurant Mark II.",
+      "3. Barbecue at Dai Teito in the neighbouring town."
+    ],
+    "s194": [
+      "1. Arcueid's place.",
+      "2. Ciel-senpai's place.",
+      "3. … the back alley."
+    ],
+    "s197": [
+      "1. …… Go home quietly.",
+      "2. …… Check around the bed!",
+      "3. …… What about the inside of the closet?"
+    ],
+    "s202": [
+      "1. I want to hear about the cat.",
+      "2. I want to ask about the recent incidents.",
+      "3. I want to ask about yesterday."
+    ],
+    "s206": [
+      "1. I want to hear about the cat.",
+      "2. I want to ask about yesterday."
+    ],
+    "s209": [
+      "1. …… Go home quietly.",
+      "2. …… Excuse myself.",
+      "3. …… Check out Senpai's closet!"
+    ],
+    "s214": [
+      "1. It's about the killer.",
+      "2. It's about school.",
+      "3. It's about yesterday."
+    ],
+    "s218": [
+      "1. It's about school.",
+      "2. It's about yesterday."
+    ],
+    "s155": [
+      "1. Go to Arcueid's place.",
+      "2. Wait in the tea house.",
+      "3. Go to the park.",
+      "4. Visit Arihiko's place.",
+      "5. Go to Ciel-senpai's place."
+    ],
+    "s156": [
+      "1. Go to Arcueid's place.",
+      "2. Wait in the tea house.",
+      "3. Go to the park.",
+      "4. Visit Arihiko's place.",
+      "5. Go to the Jinan Hospital.",
+      "6. Go to Ciel-senpai's place."
+    ],
+    "s158": [
+      "1. Eeeht! Come what may!",
+      "2. No, I need to calm down and go back!"
+    ],
+    "s161": [
+      "1. Part ways with Akira-chan.",
+      "2. Have lunch with Akira-chan."
+    ],
+    "s174": [
+      "1. Right, I must study for the tests!",
+      "2. All right, I'll postpone the studying until tomorrow!"
+    ],
+    "s176": [
+      "1. …… Run away without Senpai……",
+      "2. …… If one swallows poison, then one must finish it."
+    ],
+    "s180": [
+      "1. I'll return to the mansion.",
+      "2. No, I'll linger in the streets a bit."
+    ],
+    "s183": [
+      "1. To the main road.",
+      "2. To the intersection."
+    ],
+    "s184": [
+      "1. To the main road.",
+      "2. To the intersection."
+    ],
+    "s185": [
+      "1. To the main road.",
+      "2. To the intersection."
     ]
   },
   "images": {

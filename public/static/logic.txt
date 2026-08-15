@@ -1,0 +1,1257 @@
+*quiz
+rnd %msgno,3
+if (%msgno==0) goto *quiz1
+if (%msgno==1) goto *quiz2
+if (%msgno==2) goto *quiz3
+*f500
+if (%flgZ>=1 && %flg2<1) goto *f519
+if (%flg7>=1) goto *f405
+if (%flg5>=1 && %ren_point>=5) goto *f404
+if (%flg1>=1 && %ren_point>=3) goto *f403
+if (%flgM>=1) goto *f2
+goto *f1
+*f405
+goto *s405
+*s405_end
+goto *f2
+*f404
+goto *s404
+*s404_end
+inc %flgD
+goto *f2
+*f403
+goto *s403
+*s403_end
+inc %flgB
+goto *f2
+*f519
+goto *s519
+*s519_end
+inc %flg2
+goto *endofplay
+*f2
+goto *s2
+*s2_end
+select *f3,*f86
+*f1
+goto *s1
+*s1_end
+goto *f3
+*f3
+goto *s3
+*s3_end
+select *f4,*f5,*f6,*f7
+*f4
+goto *s4
+*s4_end
+inc %ark_point
+select *f515,*f8
+*f5
+goto *s5
+*s5_end
+inc %cel_point
+select *f516,*f9
+*f6
+if (%ren_point>=1) goto *f11
+goto *f10
+*f7
+if (%nana_point>=2) goto *f13
+goto *f12
+*f515
+goto *s515
+*s515_end
+goto *f15
+*f8
+goto *s8
+*s8_end
+inc %ark_point
+goto *f260
+*f516
+goto *s516
+*s516_end
+goto *f15
+*f9
+goto *s9
+*s9_end
+inc %cel_point
+goto *f260
+*f10
+goto *s10
+*s10_end
+inc %aki_point
+inc %guest_image5
+goto *f15
+*f11
+goto *s11
+*s11_end
+select *f10,*f14
+*f12
+goto *s12
+*s12_end
+goto *f21
+*f13
+goto *s13
+*s13_end
+mov %yume05,1
+goto *f21
+*f14
+if (%flg6>=1) goto *f302
+goto *f301
+*f301
+goto *s301
+*s301_end
+inc %ren_point
+inc %pointflg301
+inc %flg1
+goto *f15
+*f302
+goto *s302
+*s302_end
+goto *f21
+*f15
+goto *s15
+*s15_end
+select *f16,*f17,*f18
+*f16
+goto *s16
+*s16_end
+goto *f21
+*f17
+goto *s17
+*s17_end
+inc %bunka_info_point
+goto *f21
+*f18
+if (%flg6>=1) goto *f20
+goto *f19
+*f19
+goto *s19
+*s19_end
+inc %ren_point
+inc %pointflg19
+goto *f21
+*f20
+goto *s20
+*s20_end
+goto *f21
+*f21
+if (%flgO>=1 && %flgQ>=1) goto *f401
+if (%flgQ>=1) goto *f402
+if (%flgO>=1) goto *f400
+goto *f22
+*f22
+goto *s22
+*s22_end
+select *f27,*f23,*f28
+*f260
+goto *s260
+*s260_end
+select *f27,*f23,*f28
+*f23
+if (%ark_point>=1) goto *f24
+if (%cel_point>=1) goto *f25
+goto *f26
+*f24
+goto *s24
+*s24_end
+goto *f35
+*f25
+goto *s25
+*s25_end
+goto *f35
+*f26
+goto *s26
+*s26_end
+goto *f35
+*f27
+goto *s27
+*s27_end
+inc %guest_image14
+goto *f35
+*f28
+if (%aki_point>=1) goto *f29
+goto *f31
+*f29
+goto *s29
+*s29_end
+select *f300,*f31
+*f300
+goto *s300
+*s300_end
+inc %kaibyo_point
+inc %pointflg300
+goto *f35
+*f31
+if (%flg6>=1) goto *f34
+goto *f32
+*f32
+goto *s32
+*s32_end
+inc %ren_point
+inc %pointflg32
+goto *f35
+*f34
+goto *s34
+*s34_end
+goto *f35
+*f35
+if (%flg5>=1) goto *f38
+if (%flgA>=1) goto *f37
+goto *f36
+*f36
+goto *s36
+*s36_end
+goto *f39
+*f37
+goto *s37
+*s37_end
+goto *f39
+*f38
+goto *s38
+*s38_end
+goto *f39
+*f39
+goto *s39
+*s39_end
+select *f40,*f518
+*f40
+goto *s40
+*s40_end
+inc %flgA
+goto *f41
+*f518
+goto *s518
+*s518_end
+goto *f41
+*f41
+if (%ark_point>=1) goto *f43
+if (%cel_point>=1) goto *f43
+goto *f42
+*f42
+goto *s42
+*s42_end
+select *f44,*f45,*f46
+*f43
+goto *s43
+*s43_end
+select *f44,*f45,*f46,*f194
+*f44
+goto *s44
+*s44_end
+goto *f53
+*f45
+if (%bunka_info_point>=1) goto *f49
+if (%flgN>=1) goto *f48
+goto *f47
+*f46
+if (%aki_point>=1) goto *f51
+goto *f52
+*f47
+goto *s47
+*s47_end
+inc %nana_point
+inc %pointflg47
+inc %flgA
+goto *f53
+*f48
+goto *s48
+*s48_end
+inc %yume01
+goto *f53
+*f49
+goto *s49
+*s49_end
+goto *f53
+*f50
+goto *s50
+*s50_end
+goto *f53
+*f51
+goto *s51
+*s51_end
+select *f50,*f52
+*f52
+goto *s52
+*s52_end
+inc %nana_point
+inc %pointflg52
+goto *f53
+*f53
+goto *s53
+*s53_end
+select *f54,*f59,*f55,*f56
+*f54
+goto *s54
+*s54_end
+inc %flgP
+goto *f62
+*f55
+goto *s55
+*s55_end
+inc %his_point
+inc %pointflg55
+goto *f62
+*f56
+goto *s56
+*s56_end
+select *f58,*f57
+*f57
+goto *s57
+*s57_end
+inc %flgQ
+inc %guest_image4_1
+goto *f62
+*f58
+goto *s58
+*s58_end
+goto *f62
+*f59
+if (%aki_point>=1) goto *f60
+goto *f61
+*f60
+goto *s60
+*s60_end
+inc %flgO
+goto *f62
+*f61
+goto *s61
+*s61_end
+inc %gojitsudan_point
+inc %pointflg61
+goto *f62
+*f62
+goto *s62
+*s62_end
+goto *f63
+*f63
+if (%flgM<1) goto *f64
+if (%flgC>=1) goto *f66
+if (%flgA>=1) goto *f65
+goto *f64
+*f64
+goto *s64
+*s64_end
+goto *f67
+*f65
+goto *s65
+*s65_end
+inc %gojitsudan_point
+inc %pointflg65
+inc %guest_image2
+goto *f67
+*f66
+goto *s66
+*s66_end
+goto *f67
+*f67
+inc %flgM
+if (%flgI>=1 && %flgK>=1 && %flgL>=1 && %flg6<1) goto *f306
+if (%flgE>=1 && %flgF>=1 && %flgG>=1 && %flgH>=1 && %flg4>=1 && %flgC>=1 && %flg5<1) goto *f305
+if (%kaibyo_point>=1 && %flg3>=1 && %flg4<1 && %ren_point>=6 && %flg5<1) goto *f248
+if (%kaibyo_point>=1 && %ren_point>=6 && %flg5<1) goto *f247
+if (%flg3>=1 && %flg4<1 && %ren_point>=6 && %flg5<1) goto *f246
+if (%kaibyo_point>=1 && %flg3>=1 && %flg4<1) goto *f71
+if (%ren_point>=6 && %flg5<1) goto *f245
+if (%flg3>=1 && %flg4<1) goto *f70
+if (%kaibyo_point>=2) goto *f69
+goto *f68
+*f305
+goto *s305
+*s305_end
+inc %flg5
+goto *endofplay
+*f306
+goto *s306
+*s306_end
+inc %flg6
+goto *endofplay
+*f68
+goto *s68
+*s68_end
+select *f72,*f73,*f74
+*f69
+goto *s69
+*s69_end
+select *f72,*f73,*f74,*f84
+*f70
+goto *s70
+*s70_end
+select *f72,*f73,*f74,*f85
+*f245
+goto *s245
+*s245_end
+select *f72,*f73,*f74,*f250
+*f71
+goto *s71
+*s71_end
+select *f72,*f73,*f74,*f84,*f85
+*f246
+goto *s246
+*s246_end
+select *f72,*f73,*f74,*f85,*f250
+*f247
+goto *s247
+*s247_end
+select *f72,*f73,*f74,*f84,*f250
+*f248
+goto *s248
+*s248_end
+select *f72,*f73,*f74,*f84,*f85,*f250
+*f72
+if (%flg5>=1) goto *f77
+if (%flgB>=1) goto *f76
+goto *f75
+*f73
+if (%flg7>=1) goto *f259
+if (%flg5>=1) goto *f80
+if (%flgA>=1) goto *f79
+goto *f78
+*f74
+if (%flgK>=1) goto *f83
+if (%flg4>=1) goto *f82
+goto *f81
+*f75
+goto *s75
+*s75_end
+goto *endofplay
+*f76
+goto *s76
+*s76_end
+inc %flgE
+inc %guest_image8
+goto *endofplay
+*f77
+goto *s77
+*s77_end
+goto *endofplay
+*f78
+goto *s78
+*s78_end
+goto *endofplay
+*f79
+goto *s79
+*s79_end
+inc %flgE
+inc %guest_image8
+goto *endofplay
+*f80
+goto *s80
+*s80_end
+goto *endofplay
+*f81
+goto *s81
+*s81_end
+goto *endofplay
+*f82
+goto *s82
+*s82_end
+inc %flgC
+goto *endofplay
+*f83
+goto *s83
+*s83_end
+inc %flgL
+goto *endofplay
+*f84
+goto *s84
+*s84_end
+inc %flgZ
+goto *endofplay
+*f85
+goto *s85
+*s85_end
+inc %flg4
+goto *endofplay
+*f250
+goto *s250
+*s250_end
+select *f251,*f251,*f251,*f251,*f251,[%flg6==0]*f256,*f258
+*f251
+goto *s251
+*s251_end
+goto *endofplay
+*f256
+goto *s256
+*s256_end
+add %ren_point,2
+inc %pointflg256
+goto *endofplay
+*f258
+goto *s258
+*s258_end
+inc %yume07
+goto *endofplay
+*f259
+goto *s259
+*s259_end
+goto *endofplay
+*f400
+goto *s400
+*s400_end
+select *f22,*f223
+*f401
+goto *s401
+*s401_end
+select *f22,*f223,*f501
+*f402
+goto *s402
+*s402_end
+select *f22,*f501
+*f223
+goto *s223
+*s223_end
+select *f224,*f225,*f226
+*f501
+goto *s501
+*s501_end
+goto *endofplay
+*f224
+goto *s224
+*s224_end
+inc %flg_kissa
+goto *f227
+*f225
+goto *s225
+*s225_end
+inc %flg_kashiisyo
+goto *f227
+*f226
+goto *s226
+*s226_end
+inc %flg_eigakan
+goto *f227
+*f227
+goto *s227
+*s227_end
+select *f228,*f229,*f230
+*f228
+goto *s228
+*s228_end
+goto *f231
+*f229
+goto *s229
+*s229_end
+inc %gojitsudan_point
+inc %pointflg229
+goto *f231
+*f230
+goto *s230
+*s230_end
+goto *f231
+*f231
+goto *s231
+*s231_end
+select *f232,*f241
+*f232
+if (%flg_kissa>=1) goto *f233
+if (%flg_kashiisyo>=1) goto *f236
+if (%flg_eigakan>=1) goto *f237
+\
+goto *endofplay
+*f233
+if (%ren_point>=6) goto *f234
+goto *f235
+*f234
+goto *s234
+*s234_end
+add %ren_point,3
+inc %pointflg234
+goto *f244
+*f235
+goto *s235
+*s235_end
+goto *f244
+*f236
+goto *s236
+*s236_end
+goto *f244
+*f237
+goto *s237
+*s237_end
+goto *f244
+*f238
+if (%cel_point>=1) goto *f240
+goto *f239
+*f239
+goto *f244
+*f240
+goto *f244
+*f241
+if (%his_point>=2) goto *f242
+goto *f243
+*f242
+goto *s242
+*s242_end
+inc %guest_image1
+goto *f244
+*f243
+goto *s243
+*s243_end
+goto *f244
+*f244
+goto *s244
+*s244_end
+goto *endofplay
+*f86
+goto *s86
+*s86_end
+goto *f87
+*f87
+if (%flg4>=1) goto *f89
+goto *f88
+*f88
+goto *s88
+*s88_end
+goto *f91
+*f89
+goto *s89
+*s89_end
+goto *f91
+*f91
+goto *s91
+*s91_end
+select *f92,*f95,*f98,*f101,*f102,*f103,*f106,*f154
+*f92
+if (%flg6>=1) goto *f93
+goto *f94
+*f93
+goto *s93
+*s93_end
+inc %flg_onemu
+goto *f109
+*f94
+goto *s94
+*s94_end
+inc %flg_onemu
+inc %ren_point
+inc %pointflg94
+goto *f109
+*f95
+if (%flg6>=1 && %flg7<1) goto *f96
+goto *f97
+*f96
+goto *s96
+*s96_end
+select *f506,*f505
+*f505
+goto *s505
+*s505_end
+select *f508,*f507
+*f506
+goto *s506
+*s506_end
+goto *endofplay
+*f507
+goto *s507
+*s507_end
+select *f510,*f509
+*f508
+goto *s508
+*s508_end
+goto *endofplay
+*f509
+goto *s509
+*s509_end
+inc %flg7
+goto *endofplay
+*f510
+goto *s510
+*s510_end
+goto *endofplay
+*f97
+goto *s97
+*s97_end
+goto *f109
+*f98
+goto *s98
+*s98_end
+select *f100,*f99
+*f99
+goto *s99
+*s99_end
+goto *f109
+*f100
+goto *s100
+*s100_end
+inc %guest_image13
+goto *endofplay
+*f101
+goto *s101
+*s101_end
+inc %flg_syashin
+goto *f109
+*f102
+goto *s102
+*s102_end
+inc %kaibyo_point
+inc %pointflg102
+goto *f109
+*f103
+if (%flg7>=1) goto *f104
+if (%flg6>=1) goto *f153
+goto *f105
+*f104
+if (%ren_point>=12) goto *f307
+goto *f308
+*f307
+goto *s307
+*s307_end
+select *f512,*f511
+*f308
+goto *s308
+*s308_end
+inc %flg8
+goto *endofplay
+*f511
+goto *s511
+*s511_end
+inc %flg8
+goto *endofplay
+*f512
+goto *s512
+*s512_end
+inc %flg8
+goto *endofplay
+*f105
+goto *s105
+*s105_end
+inc %ren_point
+inc %pointflg105
+goto *f109
+*f153
+goto *s153
+*s153_end
+goto *f109
+*f106
+goto *s106
+*s106_end
+if (%flgZ>=1) goto *f108
+goto *f107
+*f107
+goto *s107
+*s107_end
+goto *f109
+*f108
+goto *s108
+*s108_end
+inc %kagi_point
+inc %pointflg108
+goto *f109
+*f109
+if (%flgD>=1) goto *f112
+if (%flgC>=1) goto *f111
+goto *f110
+*f110
+goto *s110
+*s110_end
+goto *f113
+*f111
+goto *s111
+*s111_end
+goto *f113
+*f112
+goto *s112
+*s112_end
+goto *f113
+*f113
+goto *s113
+*s113_end
+select *f114,*f117,*f121,*f126,*f131,*f135
+*f114
+if (%flg_onemu>=1) goto *f116
+goto *f115
+*f115
+goto *s115
+*s115_end
+goto *f138
+*f116
+goto *s116
+*s116_end
+inc %yume06
+goto *f138
+*f117
+if (%ark_point>=1) goto *f130
+goto *f118
+*f118
+goto *s118
+*s118_end
+select *f120,*f119
+*f119
+goto *s119
+*s119_end
+goto *f138
+*f120
+goto *s120
+*s120_end
+goto *endofplay
+*f121
+if (%ark_point>=1) goto *f130
+goto *f122
+*f122
+if (%his_point>=1) goto *f124
+goto *f123
+*f123
+goto *s123
+*s123_end
+goto *f138
+*f124
+goto *s124
+*s124_end
+inc %his_point
+inc %pointflg124
+goto *f138
+*f126
+goto *s126
+*s126_end
+if (%kagi_point>=2) goto *f129
+if (%kagi_point>=1) goto *f128
+goto *f127
+*f127
+goto *s127
+*s127_end
+goto *f138
+*f128
+goto *s128
+*s128_end
+goto *f138
+*f129
+goto *s129
+*s129_end
+goto *f252
+*f252
+if (%flg_syashin>=1) goto *f254
+if (%ark_point>=1) goto *f255
+goto *f253
+*f253
+goto *s253
+*s253_end
+goto *f138
+*f254
+goto *s254
+*s254_end
+goto *f138
+*f255
+goto *s255
+*s255_end
+goto *endofplay
+*f130
+goto *s130
+*s130_end
+inc %guest_image3
+goto *f138
+*f131
+if (%flg_onemu>=1) goto *f133
+goto *f132
+*f132
+goto *s132
+*s132_end
+inc %guest_image4_2
+goto *f141
+*f133
+goto *s133
+*s133_end
+inc %yume06
+goto *f138
+*f135
+goto *s135
+*s135_end
+goto *quiz
+*quiz_end
+if (%answer_point>=10) goto *f136
+goto *f137
+*f136
+goto *s136
+*s136_end
+inc %kagi_point
+inc %pointflg136
+goto *f138
+*f137
+goto *s137
+*s137_end
+goto *endofplay
+*f138
+if (%flgA<1) goto *f139
+goto *f140
+*f139
+goto *s139
+*s139_end
+inc %flgA
+inc %flgF
+goto *endofplay
+*f140
+goto *s140
+*s140_end
+select *f145,*f303
+*f303
+goto *s303
+*s303_end
+goto *f141
+*f141
+if (%akira_point>=2) goto *f144
+if (%flgC>=1) goto *f143
+goto *f142
+*f142
+goto *s142
+*s142_end
+goto *f67
+*f143
+goto *s143
+*s143_end
+inc %guest_image2
+goto *f67
+*f144
+goto *s144
+*s144_end
+inc %flgO
+goto *f67
+*f145
+goto *s145
+*s145_end
+select *f146,*f149,*f150
+*f146
+if (%cel_point>=1) goto *f148
+goto *f147
+*f147
+goto *s147
+*s147_end
+goto *f67
+*f148
+goto *s148
+*s148_end
+goto *f67
+*f149
+goto *s149
+*s149_end
+inc %nana_point
+inc %pointflg149
+inc %guest_image10
+goto *endofplay
+*f150
+if (%flg5>=1) goto *f152
+goto *f151
+*f151
+goto *s151
+*s151_end
+inc %flgA
+inc %flgF
+goto *endofplay
+*f152
+goto *s152
+*s152_end
+goto *endofplay
+*f194
+goto *s194
+*s194_end
+select *f195,*f207,*f219
+*f195
+if (%ark_point>=2 && %flg5>=1) goto *f196
+if (%ark_point>=2 && %flg6>=1) goto *f196
+if (%ark_point>=1) goto *f201
+goto *f197
+*f196
+goto *s196
+*s196_end
+inc %flgI
+goto *endofplay
+*f197
+goto *s197
+*s197_end
+select *f198,*f199,*f200
+*f198
+goto *s198
+*s198_end
+goto *f222
+*f199
+goto *s199
+*s199_end
+inc %yume08
+goto *f222
+*f200
+goto *s200
+*s200_end
+goto *endofplay
+*f201
+if (%flg5>=1) goto *f206
+goto *f202
+*f202
+goto *s202
+*s202_end
+select *f203,*f205,*f204
+*f203
+goto *s203
+*s203_end
+goto *f222
+*f204
+goto *s204
+*s204_end
+goto *f222
+*f205
+goto *s205
+*s205_end
+goto *f222
+*f206
+goto *s206
+*s206_end
+select *f203,*f204
+*f207
+if (%cel_point>=2 && %flg5>=1) goto *f208
+if (%cel_point>=1) goto *f213
+goto *f209
+*f208
+goto *s208
+*s208_end
+inc %flgI
+goto *endofplay
+*f209
+goto *s209
+*s209_end
+select *f210,*f211,*f212
+*f210
+goto *s210
+*s210_end
+goto *f222
+*f211
+goto *s211
+*s211_end
+inc %yume09
+goto *f222
+*f212
+goto *s212
+*s212_end
+goto *f222
+*f213
+if (%flg5>=1) goto *f218
+goto *f214
+*f214
+goto *s214
+*s214_end
+select *f215,*f216,*f217
+*f215
+goto *s215
+*s215_end
+goto *f222
+*f216
+goto *s216
+*s216_end
+inc %flgN
+goto *f222
+*f217
+goto *s217
+*s217_end
+goto *f222
+*f218
+goto *s218
+*s218_end
+select *f216,*f217
+*f219
+if (%flg5>=1) goto *f220
+if (%flgA>=1) goto *f221
+goto *f220
+*f220
+goto *s220
+*s220_end
+inc %yume10
+inc %guest_image7
+goto *f53
+*f221
+goto *s221
+*s221_end
+inc %yume10
+inc %flgH
+inc %guest_image7
+goto *f53
+*f222
+goto *f62
+*f154
+if (%flgP>=1) goto *f156
+goto *f155
+*f155
+goto *s155
+*s155_end
+select *f157,*f160,*f166,*f170,*f173
+*f156
+goto *s156
+*s156_end
+select *f157,*f160,*f166,*f170,*f172,*f173
+*f157
+goto *s157
+*s157_end
+mov $nextflow,"*f158"
+if (%flg1<1) goto *f179
+goto *f158
+*f158
+goto *s158
+*s158_end
+inc %ark_point
+select *f159,*f517
+*f159
+goto *s159
+*s159_end
+inc %yume03
+inc %flgG
+goto *endofplay
+*f517
+goto *s517
+*s517_end
+goto *f180
+*f160
+goto *s160
+*s160_end
+mov $nextflow,"*f161"
+if (%flg1<1) goto *f179
+goto *f161
+*f161
+goto *s161
+*s161_end
+inc %akira_point
+select *f162,*f163
+*f162
+goto *s162
+*s162_end
+goto *f180
+*f163
+goto *s163
+*s163_end
+if (%ren_point>=9) goto *f165
+goto *f164
+*f164
+goto *s164
+*s164_end
+inc %akira_point
+inc %gojitsudan_point
+inc %pointflg164
+goto *f140
+*f165
+goto *s165
+*s165_end
+inc %ren_point
+inc %pointflg165
+goto *f140
+*f166
+if (%flg6>=1) goto *f169
+if (%flg4>=1) goto *f168
+goto *f167
+*f167
+goto *s167
+*s167_end
+inc %ren_point
+inc %pointflg167
+goto *f180
+*f168
+goto *s168
+*s168_end
+add %ren_point,2
+inc %pointflg168
+goto *f180
+*f169
+goto *s169
+*s169_end
+goto *f180
+*f170
+mov $nextflow,"*f171"
+if (%flg1<1) goto *f179
+goto *f171
+*f171
+goto *s171
+*s171_end
+inc %nana_point
+inc %pointflg171
+goto *f180
+*f172
+goto *s172
+*s172_end
+inc %yume04
+goto *f180
+*f173
+goto *s173
+*s173_end
+mov $nextflow,"*f174"
+if (%flg1<1) goto *f179
+goto *f174
+*f174
+goto *s174
+*s174_end
+select *f175,*f176
+*f175
+goto *s175
+*s175_end
+inc %flgN
+goto *endofplay
+*f176
+goto *s176
+*s176_end
+inc %cel_point
+select *f177,*f178
+*f177
+goto *s177
+*s177_end
+goto *f180
+*f178
+goto *s178
+*s178_end
+inc %flgG
+goto *endofplay
+*f179
+goto *s179
+*s179_end
+inc %flg1
+goto $nextflow
+*f180
+goto *s180
+*s180_end
+select *f181,*f182
+*f181
+goto *s181
+*s181_end
+goto *f109
+*f182
+if (%flg5>=1) goto *f185
+if (%flg4>=1) goto *f184
+goto *f183
+*f183
+goto *s183
+*s183_end
+select *f186,*f190
+*f184
+goto *s184
+*s184_end
+select *f186,*f190
+*f185
+goto *s185
+*s185_end
+select *f186,*f190
+*f186
+if (%flg6>=1) goto *f189
+if (%flgA>=1) goto *f188
+goto *f187
+*f187
+goto *s187
+*s187_end
+inc %flgF
+goto *f193
+*f188
+goto *s188
+*s188_end
+inc %flg3
+goto *f193
+*f189
+goto *s189
+*s189_end
+goto *f193
+*f190
+if (%flg5>=1) goto *f192
+goto *f191
+*f191
+goto *s191
+*s191_end
+inc %flgF
+goto *f193
+*f192
+goto *s192
+*s192_end
+inc %flgK
+goto *f193
+*f193
+goto *s193
+*s193_end
+goto *f140

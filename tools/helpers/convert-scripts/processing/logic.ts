@@ -10,8 +10,8 @@ import { Block, CommandToken, ConditionToken, LabelToken, ReturnToken, TextToken
 import { generateScenes, splitBlocks } from '../utils/nscriptr_convert.ts';
 import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { updateGameJsonWithChoices } from '../utils/choices_extractor.ts';
-import { isLogicLabel, processVarName } from './common.ts';
-import { processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
+import { isLogicLabel, isSceneLabel, processVarName } from './common.ts';
+import { addChoiceCondition, processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
 
 const outputPathPrefix = '../../../public/static/'
 const outputDir = 'scenes'
@@ -45,15 +45,6 @@ function redirect(token: CommandToken) {
 		}
 	}
 }
-function addChoiceCondition(token: Token, label: string, condition: string) {
-	if (token instanceof CommandToken && token.cmd == 'select') {
-		const i = token.args.indexOf(label)
-		if (i < 0) throw Error(`Expected choice ${label}, got ${token.args}`)
-		token.args[i] = `[${condition}]${label}`
-		return true
-	}
-	return false
-}
 
 function logic_tokenFixes(token: Token): void|boolean|string {
 	if (token instanceof ReturnToken) return false
@@ -83,8 +74,8 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 				if (token.args[0] == "*regard_update")
 					return false
 				
-				if (/^\*s\d\w+$/.test(token.args[0])) {// gosub *sXXX
-					token.cmd = 'goto'
+				token.cmd = 'goto'
+				if (/^\*s\d+$/.test(token.args[0])) {// gosub *sXXX
 					redirect(token)
 				}
 				return true
@@ -103,57 +94,83 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 			case 'rnd' :
 				if (token.args[0] != '%msgno' || token.args[1] != '3')
 					throw Error(`Expected arguments "%msgno,3" for "rnd" command`)
-				return 'goto *quiz1' // block logic replaced afterwards
-			case 'ld' : case 'play' :
-				return true // in quiz blocks, moved afterwards to first questions
+				return true
 			default:
 				throw Error(`Unrecognized command ${token.toString()}`)
 		}
 	}
 	throw Error(`Unrecognized token type of ${token}`)
 }
+function insertSceneEnd(blocks: Map<string, Block>, block: Block) {
+	for (const [token, index] of block) {
+		if (token instanceof CommandToken && token.cmd == 'goto') {
+			const scene = token.args[0].substring(1) // exclude '*' at the start
+			if (isSceneLabel(scene)) {
+				if (/^quiz\d$/.test(scene)) {
+					debugger;
+				} else {
+					const sceneEndBlock = block.split(index+1, `${scene}_end`)
+					blocks.set(sceneEndBlock.name, sceneEndBlock)
+				}
+			}
+		}
+	}
+}
+
+const blockFixes: Record<string, (block: Block)=>void> = {
+	'f250' : (block)=> {
+		let i = block.findIndex(t=>t instanceof CommandToken && t.args.includes("*f256"))
+		if (i >= 0) {
+			addChoiceCondition(block.at(i)!, "*f256", "%flg6==0")
+			i = block.findLastIndex(t=>t instanceof CommandToken && t.cmd == 'select')
+			block.delete(i)
+		}
+	}
+}
 
 function getBlockProps(
 		lang_block_fixes: Map<string, (block: Block)=>void>,
 		label: string) {
-	const tokenFixes = [logic_tokenFixes]
-	const blockFixes: ((block: Block)=>void)[] = []
+	const tFixes = [logic_tokenFixes]
+	const bFixes: ((block: Block)=>void)[] = []
+	if (Object.hasOwn(blockFixes, label))
+		bFixes.push(blockFixes[label])
 	if (isLogicLabel(label)) {
 		switch (label) {
 			case 'dummy' :
-				tokenFixes.push((t)=> { })
-				blockFixes.push((block)=> { })
+				tFixes.push((t)=> { })
+				bFixes.push((block)=> { })
 				break
 			case 'ignored' :
 				return null
-			case 'quiz1' : case 'quiz2' : case 'quiz3' :
-				tokenFixes.unshift(t=>t instanceof LabelToken) // remove all from quizN, used as logic blocks
-				blockFixes.push(b=>b.extend(`gosub *${label}_1`))
 		}
 		if (lang_block_fixes.has(label))
-			blockFixes.push(lang_block_fixes.get(label)!)
-		return { tokenFixes, blockFixes }
+			bFixes.push(lang_block_fixes.get(label)!)
+		return { tokenFixes: tFixes, blockFixes: bFixes }
 	} else {
 		return null
 	}
 }
 
 function interBlockFixes(blocks: Map<string, Block>) {
-	{
-		// move quiz to its own logic block
-		const f135 = blocks.get('f135')!
-		const quiz = blocks.get('quiz')!
-		const quizN = [1, 2, 3].map(n=>blocks.get(`quiz${n}`)!)
-		const i = f135.indexOf('gosub *quiz')
-		const quizEnd = new Block('quiz_end', f135.slice(i+1))
-		quizEnd.insert(0, '*quiz_end')
-		blocks.set('quiz_end', quizEnd)
-		f135.replace(i, f135.length - i, 'goto *quiz')
-		for (const q of quizN) {
-			q?.extend("goto *quiz_end")
-		}
+	for (const block of blocks.values()) {
+		insertSceneEnd(blocks, block)
 	}
-	
+	{ // f135 handles quiz result. Move to quiz_end
+		
+		const s135_end = blocks.get('s135_end')!
+		const i = s135_end.indexOf('goto *quiz')
+		if (i < 0) throw Error(`Expected 'gosub *quiz' in f135`)
+		const quizEnd = s135_end.split(i+1, 'quiz_end')
+		blocks.set('quiz_end', quizEnd)
+	}
+
+	//sort block again
+	const entries = [...blocks.entries()].sort(([_1, b1], [_2, b2])=>b1.firstLineIndex - b2.firstLineIndex)
+	blocks.clear()
+	for (const [label, block] of entries) {
+		blocks.set(label, block)
+	}
 }
 
 //#endregion ###################################################################
@@ -176,9 +193,9 @@ function genTree(blocks: Map<string, Block>) {
 	//1. extract block children links
 	const tree = new Map(Array.from(blocks.entries()).map(([label, block], i)=> {
 		const children = block.tokens.flatMap(extractDestinations)
-		const scene = children.find(lbl=>!isLogicLabel(lbl) && lbl != 'endofplay')
-		const others = [...new Set(children.filter(lbl=>lbl != scene && lbl != 'endofplay')).values()]
-		return [label, {scene, children: new Set(others), parents: new Set<string>(), index: -1}]
+		const scenes = children.filter(lbl=>isSceneLabel(lbl))
+		const others = [...new Set(children.filter(lbl=>!scenes.includes(lbl) && lbl != 'endofplay')).values()]
+		return [label, {scenes, children: new Set(others), parents: new Set<string>(), index: -1}]
 	}))
 	//2. add link to parent
 	for (const [label, {children}] of tree.entries()) {
@@ -189,11 +206,11 @@ function genTree(blocks: Map<string, Block>) {
 		}
 	}
 	//3. move links before scenes to parent nodes, link to skip nodes
-	for (const [label, {scene, children, parents}] of tree.entries()) {
-		if (scene) {
+	for (const [label, {scenes, children, parents}] of tree.entries()) {
+		if (scenes.length > 0) {
 			if (children.size > 0) {
 				if (parents.size == 0)
-					throw Error(`link before scene ${scene}, but no parent`)
+					throw Error(`link before scenes ${scenes}, but no parent`)
 				for (const parent of parents) {
 					const parentNode = tree.get(parent)!
 					for (const child of children)
@@ -208,17 +225,25 @@ function genTree(blocks: Map<string, Block>) {
 				}
 				children.clear()
 			}
-			const skipLabel = `skip${scene.substring(1)}`
-			const skipNode = tree.get(skipLabel)
-			if (!skipNode)
-				throw Error(`missing ${skipLabel} for scene ${scene}`)
-			skipNode.parents.add(label)
-			children.add(skipLabel)
+			let endLabel
+			if (scenes.length > 1) {
+				if (scenes.some(lbl=>!(/^quiz\d$/.test(lbl))))
+					throw Error(`Unexpected multiple scenes for node ${label}`)
+				endLabel = "quiz_end"
+			} else {	
+				endLabel = `${scenes[0]}_end`
+			}
+			
+			const endNode = tree.get(endLabel)
+			if (!endNode)
+				throw Error(`missing ${endLabel} for scenes ${scenes}`)
+			endNode.parents.add(label)
+			children.add(endLabel)
 		}
 	}
 	//4. bypass non-scene blocks
-	for (const [label, {scene, parents, children}] of tree.entries()) {
-		if (!scene) {
+	for (const [label, {scenes, parents, children}] of tree.entries()) {
+		if (scenes.length == 0) {
 			for (const child of children) {
 				const childNode = tree.get(child)!
 				for (const parent of parents)
@@ -235,11 +260,11 @@ function genTree(blocks: Map<string, Block>) {
 				tree.get(child)!.parents.delete(label)
 		}
 	}
-	tree.set('openning', {scene: 'openning', children: new Set(['f20']), parents: new Set(), index: 0})
-	tree.get('f20')!.parents.add('openning')
+	tree.get('f500')?.children.forEach(lbl=>tree.get(lbl)!.index = 0)
+
 
 	//5. determine order index, easier for creating contexts when parsing scenes
-	const queue = [tree.get('openning')]
+	const queue = Array.from(tree.get('f500')!.children, lbl=>tree.get(lbl))
 	while (queue.length > 0) {
 		const currentNode = queue.shift()!
 		for (const child of currentNode.children) {
@@ -262,15 +287,15 @@ function genTree(blocks: Map<string, Block>) {
 		}
 	}
 	//6. filter and sort labels
-	const sceneNodes = Array.from(tree.values()).filter(({scene})=>scene != null)
+	const sceneNodes = Array.from(tree.values()).filter(({scenes})=>scenes.length > 0)
 		 .sort(({index: i1}, {index: i2})=>i1 - i2)
 
-	return sceneNodes.map(({scene, parents, children, index})=> {
-		if (index < 0) throw Error(`node of ${scene} was not assigned an index`)
-		const pStr = Array.from(parents.values(), l=>tree.get(l)!.scene).sort().join(',')
-		const cStr = Array.from(children.values(), l=>tree.get(l)!.scene).sort().join(',')
-		return `${scene}:${pStr}|${cStr}`
-	}).join('\n')
+	return sceneNodes.map(({scenes, parents, children, index})=> {
+		if (index < 0) throw Error(`node of ${scenes} was not assigned an index`)
+		const pStr = Array.from(parents.values(), l=>tree.get(l)!.scenes).flat().sort().join(',')
+		const cStr = Array.from(children.values(), l=>tree.get(l)!.scenes).flat().sort().join(',')
+		return scenes.map(s=>`${s}:${pStr}|${cStr}`)
+	}).flat().join('\n')
 }
 
 function extractChoices(blocks: Map<string, Block>) {
@@ -294,7 +319,7 @@ function extractChoices(blocks: Map<string, Block>) {
 		})
 		const labels = args.filter(a => !isText(a))
 		select.args = labels
-		return [label.replace('skip', 'f'), texts]
+		return [label.replace('_end', ''), texts]
 	}).filter(x=>x != null))
 }
 

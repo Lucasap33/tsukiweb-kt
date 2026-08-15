@@ -2,10 +2,10 @@ import {switch_regex, processCondition as _processCondition} from "@tsukiweb/com
 const CONDITION_REGEXP = /^(?<lhs>(%\w+|\d+))(?<op>[=!><]+)(?<rhs>(%\w+|\d+))$/
 
 function isLogicLabel(label: string) {
-	return /^(f|skip)\d+$/.test(label) || /^quiz(\d(_\d(true|false))?)?$/.test(label)
+	return /^(f|skip)\d+$/.test(label) || ["quiz"].includes(label)
 }
 function isSceneLabel(label: string) {
-	return /^s\d+$/.test(label) || ['openning', 'eclipse'].includes(label) || /^quiz\d(_\d)?$/.test(label)
+	return /^s\d+$/.test(label) || ['openning', 'eclipse'].includes(label) || /^quiz\d$/.test(label)
 }
 
 function processVarName(varName: string) {
@@ -29,6 +29,7 @@ function processVarName(varName: string) {
 			}
 			throw Error(`regard variable ${m[0]} not recognized`)
 		}],
+		[/^%flg\w$/, (m: RegExpMatchArray)=>m[0]]
 		// ignore all other variables
 	], varName)
 }
