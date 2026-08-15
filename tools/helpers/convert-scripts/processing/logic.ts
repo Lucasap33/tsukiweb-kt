@@ -16,7 +16,7 @@ import { addChoiceCondition, processCondition } from '@tsukiweb/common/tools/con
 const outputPathPrefix = '../../../public/static/'
 const outputDir = 'scenes'
 const fullscripts = [
-//	['jp', 'fullscript-kt_jp.txt'],
+	['jp', 'fullscript-kt_jp.txt'],
 	['en', 'fullscript-kt_en.txt'],
 ]
 const LOGIC_FILE = "logic"
@@ -65,14 +65,9 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 				let varName = processVarName(token.args[0])
 				if (!varName) return false
 				if (varName)
-				token.args[0] = varName
-				// route cleared determined with scene completion
-				if (varName.match(/^%clear(ed|_\w+)$/))
-					return false
+					token.args[0] = varName
 				return true
 			case 'gosub':
-				if (token.args[0] == "*regard_update")
-					return false
 				
 				token.cmd = 'goto'
 				if (/^\*s\d+$/.test(token.args[0])) {// gosub *sXXX
@@ -83,14 +78,9 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 				return redirect(token);
 			case 'select':
 				token.args = token.args.map(x=>(x).trim())
-				if (token.args.length == 4 &&
-						token.args[1].match(/^\*f5\d{2}$/) &&
-						token.args[3] == '*endofplay') {
-					token.cmd = 'osiete'
-					token.args = [token.args[1]]
-				}
 				return redirect(token)
-			case '\\' : return true; // only one occurrence on a failsafe path
+			case '\\' :
+				return false; // only one occurrence on a failsafe path
 			case 'rnd' :
 				if (token.args[0] != '%msgno' || token.args[1] != '3')
 					throw Error(`Expected arguments "%msgno,3" for "rnd" command`)

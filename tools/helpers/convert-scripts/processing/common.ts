@@ -12,7 +12,7 @@ function processVarName(varName: string) {
 	return switch_regex(varName, [
 		["%sceneskip"			, null], // ignore sceneskip tests
 		[/^%pointflag\d{2,3}$/	, null], // special variables used to increase unreset points
-		[/^%([a-z]+)_point/	, (m: RegExpMatchArray)=> {
+		[/^%([a-z]+)_point$/	, (m: RegExpMatchArray)=> {
 			switch (m[1]) {
 				case 'ren' : case 'ark'	: case 'gojitsudan' : case 'kagi': case 'answer': case 'akira': return m[0]
 				case 'akiha'	: return '%aki_point'
@@ -28,9 +28,8 @@ function processVarName(varName: string) {
 				case 'syashin'	: return '%flg_syashin'
 			}
 			throw Error(`regard variable ${m[0]} not recognized`)
-		}],
-		[/^%flg\w$/, (m: RegExpMatchArray)=>m[0]]
-		// ignore all other variables
+		}]
+		// keep all other variables as-is
 	], varName)
 }
 

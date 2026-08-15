@@ -432,7 +432,6 @@ goto *endofplay
 goto *s79
 *s79_end
 inc %flgE
-inc %guest_image8
 goto *endofplay
 *f80
 goto *s80
@@ -546,7 +545,6 @@ select *f232,*f241
 if (%flg_kissa>=1) goto *f233
 if (%flg_kashiisyo>=1) goto *f236
 if (%flg_eigakan>=1) goto *f237
-\
 goto *endofplay
 *f233
 if (%ren_point>=6) goto *f234
