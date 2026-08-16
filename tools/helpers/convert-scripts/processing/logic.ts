@@ -30,12 +30,13 @@ const GEN_LOGIC 	   = true
 
 const redirected_scenes = {
 	dummy : "dummy2",
+	f400: null, f402: null, // replaced by 401
 }
 
 function redirect(token: CommandToken) {
 	for (const [i, arg] of token.args.entries()) {
 		if (typeof arg == 'string' && arg.startsWith('*')) {
-			let label = arg.substring(1)
+			let label: string|null = arg.substring(1)
 			if (label in redirected_scenes) {
 				label = redirected_scenes[label as keyof typeof redirected_scenes]
 				if (!label)
@@ -68,7 +69,6 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 					token.args[0] = varName
 				return true
 			case 'gosub':
-				
 				token.cmd = 'goto'
 				if (/^\*s\d+$/.test(token.args[0])) {// gosub *sXXX
 					redirect(token)
@@ -115,6 +115,14 @@ const blockFixes: Record<string, (block: Block)=>void> = {
 			i = block.findLastIndex(t=>t instanceof CommandToken && t.cmd == 'select')
 			block.delete(i)
 		}
+	},
+	'f21': (block)=> {
+		(block.find(t=>t.toString().includes("f401")) as ConditionToken).condition = "%flgO || %flgQ"
+	},
+	'f401': (block)=> {
+		const sel = block.find(t=>t instanceof CommandToken && t.cmd == 'select')!
+		addChoiceCondition(sel, "*f223", "%flgO")
+		addChoiceCondition(sel, "*f501", "%flgQ")
 	}
 }
 
@@ -131,7 +139,7 @@ function getBlockProps(
 				tFixes.push((t)=> { })
 				bFixes.push((block)=> { })
 				break
-			case 'ignored' :
+			case 'f400' : case 'f402' : // use f401 instead
 				return null
 		}
 		if (lang_block_fixes.has(label))

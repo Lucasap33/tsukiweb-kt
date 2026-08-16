@@ -174,6 +174,10 @@ function interScenesFixes(blocks: Map<string, Block>) {
 			blocks.delete(subquiz.name)
 		}
 	}
+	// s400, s401 and s402 are identical. Conditions are moved to choice after
+	// s400 end has additional delay and line break, keeping s401
+	blocks.delete('s400')
+	blocks.delete('s402')
 }
 
 //#endregion ###################################################################

@@ -135,9 +135,7 @@ goto *s20
 *s20_end
 goto *f21
 *f21
-if (%flgO>=1 && %flgQ>=1) goto *f401
-if (%flgQ>=1) goto *f402
-if (%flgO>=1) goto *f400
+if (%flgO || %flgQ) goto *f401
 goto *f22
 *f22
 goto *s22
@@ -484,18 +482,10 @@ goto *endofplay
 goto *s259
 *s259_end
 goto *endofplay
-*f400
-goto *s400
-*s400_end
-select *f22,*f223
 *f401
 goto *s401
 *s401_end
-select *f22,*f223,*f501
-*f402
-goto *s402
-*s402_end
-select *f22,*f501
+select *f22,[%flgO]*f223,[%flgQ]*f501
 *f223
 goto *s223
 *s223_end
