@@ -5,12 +5,12 @@ function isLogicLabel(label: string) {
 	return /^(f|skip)\d+$/.test(label) || ["quiz"].includes(label)
 }
 function isSceneLabel(label: string) {
-	return /^s\d+$/.test(label) || ['openning', 'eclipse'].includes(label) || /^quiz\d$/.test(label)
+	return /^se?\d+$/.test(label) || ['openning', 'eclipse'].includes(label) || /^quiz\d(_\d+)?$/.test(label)
 }
 
 function processVarName(varName: string) {
 	return switch_regex(varName, [
-		["%sceneskip"			, null], // ignore sceneskip tests
+		//["%sceneskip"			, null], // ignore sceneskip tests
 		[/^%pointflag\d{2,3}$/	, null], // special variables used to increase unreset points
 		[/^%([a-z]+)_point$/	, (m: RegExpMatchArray)=> {
 			switch (m[1]) {

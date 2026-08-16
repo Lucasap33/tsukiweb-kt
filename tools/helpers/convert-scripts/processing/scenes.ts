@@ -16,7 +16,7 @@ import { processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.t
 const outputPathPrefix = '../../../public/static/'
 const outputDir = 'scenes'
 const fullscripts = [
-//	['jp', 'fullscript-kt_jp.txt'],
+	['jp', 'fullscript-kt_jp.txt'],
 	['en', 'fullscript-kt_en.txt'],
 ]
 
@@ -29,7 +29,8 @@ const fullscripts = [
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const COLOR_IMAGES = new Map(Object.entries({
-	'"dummy"' : '#000000',
+	'"bg/ima_10"' : '#000000',
+	'"bg/ima_11"' : '#ffffff',
 }))
 
 function commandFix(token: Token) {
@@ -44,14 +45,26 @@ function commandFix(token: Token) {
 			token.args[0] = processVarName(token.args[0])!
 			if (!token.args[0])
 				return false
-			if (COLOR_IMAGES.has(token.args[1]))
-				token.args[1] = COLOR_IMAGES.get(token.args[1])!
 			break
+		case 'gosub' :
+		case 'goto' :
+			switch (token.args[0]) {
+				case "*set_window_mm" : return false // TODO see effect in original game.
+				case "*set_window" : return false
+				case "*reset_window" : return false
+				case "*eroskipeffect" : return false
+				default :
+					if (/^\*s\d+eroend$/.test(token.args[0]))
+						return false
+				throw Error(`Unknown gosub target ${token.args[0]}`)
+			}
 		case 'wave' : case 'waveloop' :
 			const m = token.args[0].match(/^"?se(?<n>\d+)"?$/)
 			if (m) {
 				// se0 -> se_01
 				token.args[0] = `se_${String(+m.groups!.n + 1).padStart(2, '0')}`
+			} else {
+				throw Error(`Unexpected wave id ${token.args[0]}`)
 			}
 			break
 	}
@@ -88,10 +101,6 @@ function cleanSceneEnd(block: Block) {
 					token.cmd = '\\' // convert '@' to '\\'
 					stop = true
 					break
-				case 'select' :
-					// console.log(`removing 'select' command line in ${file}`)
-					block.delete(i) // no 'select' in scenes
-					break
 			}
 			if (stop)
 				break
@@ -106,6 +115,15 @@ function cleanSceneEnd(block: Block) {
 
 function sceneFixes(block: Block) {
 	//remove '@' before '\\'
+	const skipStart = block.findIndex(t=>t instanceof ConditionToken && t.condition.startsWith('%sceneskip'))
+	if (skipStart >= 0) {
+		const skip = block.at(skipStart+1)
+		if (skip instanceof CommandToken && skip.cmd == 'skip') {
+			const skipLength = parseInt(skip.args[0])
+			const skipEnd = block.findIndex(t=>t.lineIndex >= skip.lineIndex + skipLength)
+			block.delete(skipStart, skipEnd-skipStart)
+		}
+	}
 	for (const [token, i] of block) {
 		if (token instanceof CommandToken && token.cmd == '\\') {
 			const prev = block.at(i-1)
@@ -138,6 +156,24 @@ function eroskip_fixes(pages: ([number, number]|[number]|number)[], block: Block
 }
 
 function interScenesFixes(blocks: Map<string, Block>) {
+	
+	// Merge scene sX with seX
+	const sceneEnds = blocks.values().filter(b=>/^se\d+$/.test(b.name))
+	for (const block of sceneEnds) {
+		blocks.get(`s${block.name.substring(2)}`)?.extend(block)
+		block.delete(0, block.length)
+		blocks.delete(block.name)
+	}
+	// Merge quizX_Y into quizX
+	for (let i=1; i <= 3; i++) {
+		const quiz = blocks.get(`quiz${i}`)!
+		for (let j = 1; j <= 10; j++) {
+			const subquiz = blocks.get(`quiz${i}_${j}`)!
+			quiz.extend(subquiz)
+			subquiz.delete(0, subquiz.length)
+			blocks.delete(subquiz.name)
+		}
+	}
 }
 
 //#endregion ###################################################################
@@ -152,6 +188,8 @@ const kept_commands = [
 	'@', '\\', 'click', 'br', 'textcolor', // text commands, wait click
 	'!w', 'wait', 'waittimer', 'delay', // delay
 	'mov', 'add', 'sub', 'inc', 'dec', // set variables
+	'lsp', 'lsph', 'vsp', 'print', // replaced with ld, cl or bg
+	'select', // used for quiz, to be replaced with special command
 ]
 // TODO: selgosub commands should be removed. They are only useful in KT
 // in some contexts (7 occurrences), for which a solution must be found
@@ -159,9 +197,13 @@ const kept_commands = [
 const ignored_commands = [
 	'setwindow', 'windoweffect',
 	'setcursor', 'autoclick',
+	'selnum',
 	'!s', '!sd',
 	'resettimer',
 	'goto', 'osiete', 'return', 'selgosub', //logic-only commands
+	'saveon', 'saveoff', // (en/dis)able saving to improve perf. on NScr engine. Useless here
+	'btndef', 'blt', // used in s530, whole section replaced with scrolling background
+	'csp', // useless: needs 'print' to work, but immediately followed by bg
 	
 ]
 const deleted_scenes = [
@@ -233,14 +275,16 @@ async function processSingleScript(folder: string, filename: string,
 	}
 
 	let txt = fs.readFileSync(fullscriptPath, 'utf-8')
+				.replaceAll('\n\t', '\n')
+				.replaceAll(/^select\s*(\r?\n([`"][^`"]*[`"],\s*\*\w+,\s*\r?\n)*([`"][^`"]*[`"],\s*\*\w+))$/gm, (m)=> m.replaceAll(/\r?\n/g, ' '))
 	let eroskip_pages = {}
 	let block_fixes = {}
 	let preprocess_module_path = path.join(process.cwd(), outputPathPrefix, folder, 'preprocess.js')
 	if (fs.existsSync(preprocess_module_path)) {
 		preprocess_module_path = path.relative(import.meta.dirname, preprocess_module_path)
 		const lang_module = await import(preprocess_module_path.replaceAll('\\', '/'))
-		if ('th_raw_fixes' in lang_module)
-			txt = lang_module.th_raw_fixes(txt) || txt
+		if ('kt_raw_fixes' in lang_module)
+			txt = lang_module.kt_raw_fixes(txt) || txt
 		if ('eroskip_pages' in lang_module)
 			eroskip_pages = lang_module.eroskip_pages
 		if ('block_fixes' in lang_module)

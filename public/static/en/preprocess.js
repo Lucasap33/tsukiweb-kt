@@ -5,8 +5,19 @@
  * @returns {string|null} the changed script, or null if no change was made
  */
 function kt_raw_fixes(text) {
-    text = text.replace(/` How did you get here?@\v*` This is an error…\\/, "") // text removed afterwards anyway
-    return null;
+    text = text
+        .replace( // Text in logic, unused
+            /` How did you get here?@\v*` This is an error…\\/,
+            "")
+        .replaceAll( // Eroskips added manually in all languages
+            /if %eroskip<1 skip 2\v*\s*gosub \*eroskipeffect:goto *\w+eroend/gm,
+            "")
+        .replace( // Add missing ` before text
+            "\nclass B's teacher, English teacher",
+            "\n`class B's teacher, English teacher",
+        )
+        .replaceAll('“', '"').replaceAll('”', '"')
+    return text;
 }
 
 /**
@@ -19,7 +30,7 @@ function kt_raw_fixes(text) {
 const block_fixes = {
     "f79": (block)=> {
         block.delete(block.indexOf("inc %guest_image8"))
-    }
+    },
     //scene: (tokens)=> { //token changes.}
 }
 
