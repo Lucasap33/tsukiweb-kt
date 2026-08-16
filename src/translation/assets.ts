@@ -3,7 +3,13 @@ import { settings } from "../engine/settings"
 import {TrackSourceId, strings} from "./lang"
 import { ResolutionId, TextImage } from "@tsukiweb/common/translation/lang"
 import { closeBB } from "@tsukiweb/common/utils/Bbcode"
+import { AssetsCache } from "@tsukiweb/common/utils/AssetsCache"
 import { assetPath, imageFormat } from "@tsukiweb/common/utils/images"
+
+export const assets = new AssetsCache<{
+  'audio': AudioBuffer|undefined
+  'graph': string
+}>()
 
 //##############################################################################
 //#                                  PRIVATE                                   #

@@ -1,4 +1,4 @@
-import { audioSePath, audioTrackPath } from "../translation/assets"
+import { assets, audioSePath, audioTrackPath } from "../translation/assets"
 import { settings } from "./settings"
 import { observe } from "@tsukiweb/common/utils/Observer"
 import { GameAudioManager } from "@tsukiweb/common/audio/AudioManager"
@@ -23,13 +23,36 @@ function getUrl(id: string): string {
   return audioSePath(id)
 }
 
-export const audio = new GameAudioManager(settings, getUrl)
+async function createAudioBuffer(url: string) {
+  const result = await fetch(url)
+  if (!result.ok)
+    throw Error(`audio file ${url} not found: ${result.statusText}`)
+  const data = await result.arrayBuffer()
+  return audio.context.decodeAudioData(data)
+}
+
+export const audio = new GameAudioManager(settings, assets, "audio")
+assets.setProvider("audio", (id)=> {
+  const normalizedId = id.startsWith('"') && id.endsWith('"')
+    ? id.substring(1, id.length - 1)
+    : id
+  if (/^(word|bg|tachi|event|evt)\//.test(normalizedId))
+    return undefined
+  const url = getUrl(normalizedId)
+  if (normalizedId.startsWith('*') && audio.streamingEnabled)
+    return { url, value: undefined }
+  return { url, value: createAudioBuffer(url) }
+})
 
 //__________________________________observers___________________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // update track source
-observe(settings, 'trackSource', audio.clearBuffers.bind(audio, true))
+observe(settings, 'trackSource', ()=> {
+  assets.clear()
+  if (audio.track)
+    audio.playTrack(audio.track, true)
+})
 
 observe(displayMode, 'screen', (screen)=> {
   const inGame = (screen == SCREEN.WINDOW)

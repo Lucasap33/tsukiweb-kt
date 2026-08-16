@@ -1,12 +1,12 @@
 import { objectMatch, splitFirst } from "@tsukiweb/common/utils/utils";
 import { settings } from "../../../engine/settings";
-import { imageSrc, wordImage } from "translation/assets";
+import { assets, imageSrc, wordImage } from "translation/assets";
 import { BG_POSITIONS, Graphics, GraphicsTransition, Quake, Rocket, SpritePos, SPRITES_POSITIONS } from "@tsukiweb/common/graphics";
 import { ScriptPlayer } from "engine/ScriptPlayer";
 import Timer from "@tsukiweb/common/utils/timer";
 import cg from "features/gallery/utils/gallery";
 import { displayMode } from "app/utils/display";
-import { isImage, preloadImage } from "@tsukiweb/common/utils/images";
+import { isImage } from "@tsukiweb/common/utils/images";
 
 
 /**
@@ -49,8 +49,29 @@ function preloadGraphic(image: string) {
 		return
 	if (src.startsWith('"'))
 		src = src.replaceAll('"', '')
-	return preloadImage(imageSrc(src)).catch(() => {})
+	if (src.startsWith('#'))
+		return
+	return assets.get("graph", src).catch(() => {})
 }
+
+assets.setProvider('graph', (id: string)=> {
+	if (id.startsWith('"') && id.endsWith('"'))
+		id = id.substring(1, id.length - 1)
+	const match = id.match(/^(word|bg|tachi|event|evt)\//)
+	if (!match)
+		return undefined
+	if (match[1] == 'word')
+		return null
+	const url = imageSrc(id)
+	return {
+		url,
+		value: fetch(url).then(response=> {
+			if (!response.ok)
+				throw Error(`image file ${url} not found: ${response.statusText}`)
+			return url
+		})
+	}
+})
 
 //##############################################################################
 //#region                       COMMAND HANDLERS

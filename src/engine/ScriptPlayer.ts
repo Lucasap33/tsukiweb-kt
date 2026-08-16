@@ -2,6 +2,7 @@ import { ScriptPlayerBase } from "@tsukiweb/common/script/ScriptPlayer"
 import { CharId, LabelName } from "app/utils/types";
 import { creditsScript, fetchBlockLines, isScene, nextLabel } from "engine/utils";
 import { settings } from "engine/settings";
+import { assets } from "translation/assets";
 import { getGameVariable, setGameVariable } from "engine/variables";
 import { CommandRecord, NumVarName, VarName, VarType } from "@tsukiweb/common/script/types";
 import { History } from "./history";
@@ -110,13 +111,10 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, Hi
 //##############################################################################
 
     override isLinePageBreak(line: string, index: number, sceneLines: string[],
-                    label: LabelName, playing: boolean): boolean {
-        if (super.isLinePageBreak(line, index, sceneLines, label, playing))
+                    label: LabelName): boolean {
+        if (super.isLinePageBreak(line, index, sceneLines, label))
             return true
         if (line.startsWith('phase')) {
-            if (playing) // count all phases as page while playing game
-                return true
-            // when counting pages outside of gameplay,
             // avoid counting 2 pages for conditional phases which have 2 'phase'
             if (!sceneLines[index+1].startsWith('skip'))
                 return true
@@ -156,6 +154,11 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, Hi
         if (result == "endofplay")
             return null
         return result
+    }
+
+    protected override preloadAssets(list: Set<string>): void {
+        for (const asset of list)
+            assets.load(undefined, asset)
     }
 
 //#endregion

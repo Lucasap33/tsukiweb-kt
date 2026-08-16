@@ -8,6 +8,7 @@ import { Button } from "@tsukiweb/common/ui-core"
 import { ProgressPanel } from "features/game/components/shared/ProgressPanel";
 import { getSceneTitle, isScene } from "engine/utils";
 import { SceneName } from "app/utils/types";
+import { settings } from "engine/settings";
 
 type SaveDetailsProps = {
 	id?: number
@@ -20,8 +21,8 @@ const SaveDetails = ({id, saveState, deleteSave}: SaveDetailsProps)=> {
 	const progress = saveState?.scenes.reduce((s1, s2)=>jsonMerge(s2, s1))
 	const graphics = jsonMerge(saveState?.graphics ?? {},
 			lastPage?.graphics ?? {bg: "#000"})
-	const points = progress?.points ?? {}
-	const flags = progress?.flags ?? []
+	const points = settings.flowchartBadges ? progress?.points ?? {} : {}
+	const flags = settings.flowchartBadges ? progress?.flags ?? [] : []
 	const lastScene = saveState?.pages.findLast(p=>p.label && isScene(p.label))?.label as SceneName|undefined
 
 	return (
