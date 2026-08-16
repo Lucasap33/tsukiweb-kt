@@ -5,6 +5,7 @@ export enum SCREEN {
   LOAD = "/load",
   GALLERY = "/gallery",
   SCENES = "/scenes",
+  DREAMS = "/dreams",
 }
 
 export const displayMode: {

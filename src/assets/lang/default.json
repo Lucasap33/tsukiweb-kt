@@ -33,7 +33,8 @@
   },
   "extra": {
     "gallery": "Gallery",
-    "scenes": "Flowchart"
+    "scenes": "Flowchart",
+    "dreams": "Ten Nights of Dreams"
   },
   "config": {
     "on": "ON",
@@ -51,8 +52,7 @@
     "volume-system-se": "System SFX Volume",
     "track-source": "Music source",
     "track-sources": {
-      "original": "Original (2000)",
-      "everafter": "Ever After (2002)",
+      "original": "Original (2001)",
       "tsukibako": "Tsuki-Bako (2003)"
     },
     "track-source-help": [
@@ -179,15 +179,14 @@
 
   "images": {
     "words": {
-      "fin": "#ffffff$c`[center][noline][color=black][font=serif]Fin`",
-      "end": "#ffffff$b`[right][noline][color=black][font=serif]END`",
-      "pd_fin": "#000000$b`[right][noline][font=serif]Fin`",
-      "pd_genshi": "#000000$b`[right][noline][font=serif][u]Short Story/Alliance of Illusionary Eyes`",
-      "pd_tea": "#000000$t`[left][noline][noline][font=serif][u]Moon Tea`",
-      "pd_one_a": "#000000$c`[center][noline][font=serif]1st Day/1`",
-      "pd_one_b": "#000000$c`[center][noline][font=serif]1st Day/2`",
-      "pd_two": "#000000$c`[center][noline][font=serif]2nd Day`",
-      "pd_three": "#000000$c`[center][noline][font=serif]3rd Day`"
+      "ganba_02": "#ed9dba$b`[center][noline][color=white][font=cursive]/beginning`",
+      "ganba_03": "#003d84$b`[center][noline][color=white][font=cursive]/the examiner speaks`",
+      "ganba_04": "#ed9dba$b`[center][noline][color=white][font=cursive]/end`",
+      "kanwa_01": "#000000$b`[center][noline][color=white]A STORY FOR THE EVENING`",
+      "kishin_01": "#000000$b`[right][noline][color=#81001c][font=cursive]Red Demon God`",
+      "kishin_02": "#000000$b`[right][noline][color=#81001c][font=cursive]/ Prologue`",
+      "kishin_03": "#000000$b`[right][noline][color=#81001c][font=cursive]/ Introduction, Development, Turn`",
+      "kishin_04": "#000000$b`[right][noline][color=#81001c][font=cursive]/ Conclusion`"
     },
     "thumb": {
       "": "./jp/images_thumb/%0"
@@ -199,7 +198,6 @@
   "audio": {
     "tracks": {
       "original": ["./jp/CD_original/track%"],
-      "everafter": ["./jp/CD_everafter/track%"],
       "tsukibako": ["./jp/CD_tsukibako/track%"]
     },
     "waves": ["./jp/wave/%"]
@@ -209,6 +207,16 @@
   "scenario": {
 
     "scenes": {
+      "s528": "Good luck, Ciel-sensei",
+      "s529": "A Story for the Evening",
+      "s530": "Crimson Moon",
+      "s531": "Red Demon God",
+      "s532": "Nanako-chan SOS!",
+      "s533": "Imogirisou",
+      "s534": "Flower of Thanatos",
+      "s535": "Hisui-chan, Inversion Inpulse!",
+      "s536": "The Tohno Family Con Game",
+      "s537": "Dawn"
     }
   },
   

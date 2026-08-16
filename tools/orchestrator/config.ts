@@ -41,7 +41,7 @@ const DEFAULT_CONFIG: ToolConfig = {
   PUBLIC: '../public',
 }
 
-const CD_NAMES = ['CD_original', 'CD_everafter', 'CD_tsukibako'] as const
+const CD_NAMES = ['CD_original', 'CD_tsukibako'] as const
 type CdName = typeof CD_NAMES[number]
 
 type PartialToolConfig = Partial<ToolConfig>

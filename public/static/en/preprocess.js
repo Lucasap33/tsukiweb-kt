@@ -16,6 +16,7 @@ function kt_raw_fixes(text) {
             "\nclass B's teacher, English teacher",
             "\n`class B's teacher, English teacher",
         )
+        .replaceAll(/(image\\word\\[^"\r\n]+)_en\.jpg/g, "$1.jpg")
         .replaceAll('“', '"').replaceAll('”', '"')
     return text;
 }

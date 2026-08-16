@@ -7,7 +7,6 @@ const serverUrl = 'https://ktweb.holofield.fr'
 // List assets files to use from remote instead of fetching from local
 const remotePaths: string[] = [
 	'/res/flowchart-spritesheets',
-	'^/static/[^/]+/CD_everafter',
 	'^/static/[^/]+/CD_original',
 	'^/static/[^/]+/CD_tsukibako',
 	'^/static/[^/]+/images',

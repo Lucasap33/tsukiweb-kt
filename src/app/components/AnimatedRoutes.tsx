@@ -14,6 +14,7 @@ import SceneReplayScreen from "app/screens/SceneReplayScreen";
 import TitleMenuScreen from "app/screens/TitleMenuScreen";
 import Window from "app/screens/Window";
 import { SCREEN } from "app/utils/display";
+import DreamsScreen from "app/screens/DreamsScreen";
 
 const AnimatedRoutes = () => {
 	const [location] = useLocation()
@@ -70,6 +71,9 @@ const AnimatedRoutes = () => {
 					</Route>
 					<Route path={SCREEN.SCENES}>
 						<ExtraLayout>WIP</ExtraLayout>
+					</Route>
+					<Route path={SCREEN.DREAMS}>
+						<ExtraLayout><DreamsScreen /></ExtraLayout>
 					</Route>
 
 					<Route path={SCREEN.WINDOW}>
