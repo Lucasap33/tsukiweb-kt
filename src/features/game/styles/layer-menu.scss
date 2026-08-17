@@ -1,7 +1,7 @@
 %layer-menu {
-	--menu-bg: linear-gradient(-40deg, rgb(36 42 128) 26%, rgb(2 125 184));
-	--menu-bg-strips: linear-gradient(180deg, hsl(200.94deg 96% 40%), hsl(201 96% 30% / 1), hsl(200.94deg 96% 40%));
-	--menu-backdrop: rgb(3 35 81 / 55%);
+	--menu-bg: linear-gradient(-40deg, var(--sunset-wine) 26%, var(--sunset-copper));
+	--menu-bg-strips: linear-gradient(180deg, var(--sunset-gold), var(--sunset-copper), var(--sunset-gold));
+	--menu-backdrop: rgb(22 8 7 / 62%);
 	--panel-trans-time: 0.35s;
 
 	z-index: 4;
@@ -95,7 +95,7 @@
 			letter-spacing: 1px;
 
 			&.on {
-				background: linear-gradient(90deg, #00d2ff 40%, oklch(1.8 0.15 220.72 / 1) 60%, #00d2ff);
+				background: linear-gradient(90deg, var(--sunset-gold) 40%, var(--sunset-ivory) 60%, var(--sunset-gold));
 				background-size: 300% 100%;
 				animation: gradientAnimation 4s linear infinite;
 				@keyframes gradientAnimation {

@@ -16,6 +16,7 @@
 
 	.skip-modal {
 		@extend %info-box;
+		background-color: rgb(43 13 12 / 78%);
 		align-self: center;
 		margin: 1rem;
 		width: min(540px, 100%);

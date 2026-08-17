@@ -99,7 +99,7 @@
 					color: #ffffffe8;
 
 					.choice {
-						background-color: rgb(1 14 36 / 70%);
+						background-color: rgb(43 13 12 / 78%);
 						border: 1px solid var(--surface-light);
 						white-space: nowrap;
 						overflow: hidden;
@@ -137,7 +137,7 @@
 				font-style: italic;
 				color: #dddddd;
 				padding: 0.2em 0.6em 0.2em 4em;
-				background-image: linear-gradient(45deg, transparent 20%, #006cff);
+				background-image: linear-gradient(45deg, transparent 20%, var(--sunset-copper));
 				z-index: 1;
 			}
 
@@ -266,7 +266,7 @@
 			}
 			.save-details-content {
 				z-index: 1;
-				border-image: linear-gradient(hsl(202deg 94.34% 31.13% / 40%), hsl(222deg 100% 14% / 70%)) fill 1;
+				border-image: linear-gradient(rgb(197 72 32 / 40%), rgb(43 13 12 / 78%)) fill 1;
 			}
 		}
 
@@ -320,9 +320,9 @@
 			fill: url(#gradient-vertical) yellow;
 		}
 		#gradient-vertical {
-			--color-stop-1: #00c3ff;
-			--color-stop-2: #77e190;
-			--color-stop-3: #ffff1c;
+			--color-stop-1: var(--sunset-copper);
+			--color-stop-2: var(--sunset-gold);
+			--color-stop-3: var(--sunset-ivory);
 		}
 		&:hover, &:focus-visible, .keyboard-navigating &:focus {
 			opacity: 1;

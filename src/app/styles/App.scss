@@ -1,17 +1,68 @@
 :root {	
 	--safe-area-max-inset-bottom: env(safe-area-max-inset-bottom, 0px);
+	--sunset-night: #160807;
+	--sunset-wine: #2b0d0c;
+	--sunset-brown: #5e2214;
+	--sunset-copper: #c54820;
+	--sunset-gold: #f2a629;
+	--sunset-sun: #ffd96a;
+	--sunset-ivory: #fff3d0;
+	--sunset-muted: #d8b68b;
 
-	--toastify-color-progress-dark: #0a2f85;
+	--surface-light: var(--sunset-copper);
+	--surface-light-active: var(--sunset-sun);
+	--surface-dark: var(--sunset-wine);
+	--color-link: var(--sunset-sun);
+	--menu-container: rgb(22 8 7 / 76%);
+	--selected-shadow: 0 0 0 1px var(--sunset-sun) inset,
+		0 0 14px rgb(242 166 41 / 72%) inset,
+		0 0 70px rgb(197 72 32 / 38%) inset;
+	--separator: rgb(255 217 106 / 18%);
+	--scrollbar-color: #9f3b1f;
+	--scrollbar-hover: var(--sunset-copper);
+	--message-container-border: #a44725;
+	--message-container-background: rgb(94 34 20 / 42%);
+	--btn-select-accent: var(--sunset-sun);
+	--btn-select-bg: rgb(94 34 20 / 82%);
+	--btn-title-menu-bg: linear-gradient(180deg, var(--sunset-ivory), var(--sunset-gold) 62%, var(--sunset-copper));
+	--btn-title-menu-shadow: var(--sunset-gold);
+	--page-title: linear-gradient(180deg, var(--sunset-ivory), var(--sunset-sun) 58%, var(--sunset-copper));
+	--placeholder: var(--sunset-brown);
+	--attention: var(--sunset-sun);
+	--off-color: #ff6652;
+
+	--toastify-color-progress-dark: var(--sunset-gold);
 	--toastify-font-family: var(--ui-font);
-	--toastify-color-dark: #01060e;
-	--toastify-color-progress-dark: #0087ff;
+	--toastify-color-dark: var(--sunset-night);
+}
 
-	--route-ark: #e2df17;
-	--route-cel: #002878;
-	--route-aki: #b35a1f;
-	--route-his: #ea1c1c;
-	--route-koha: #ff00ff;
-	--route-eclipse: #a50404;
+#root {
+	&::before, &::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+	}
+	&::before {
+		background:
+			repeating-linear-gradient(76deg, transparent 0 26px, rgb(255 217 106 / 7%) 27px 29px, transparent 30px 58px),
+			radial-gradient(ellipse at 18% 105%, rgb(242 166 41 / 55%), transparent 42%),
+			radial-gradient(ellipse at 82% 108%, rgb(197 72 32 / 48%), transparent 44%);
+		filter: blur(1px);
+		opacity: .8;
+	}
+	&::after {
+		background-image: repeating-radial-gradient(circle at 30% 40%, rgb(255 243 208 / 18%) 0 .5px, transparent .8px 3px);
+		background-size: 4px 4px;
+		mix-blend-mode: soft-light;
+		opacity: .2;
+	}
+}
+
+dialog.modal {
+	background-color: color-mix(in srgb, var(--surface-dark), var(--sunset-copper) 8%);
+	border-color: var(--surface-light);
 }
 
 .page {

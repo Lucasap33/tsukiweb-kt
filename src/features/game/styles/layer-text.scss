@@ -112,14 +112,14 @@
 		animation: fadeIn 1s ease-out, rotate 4s ease-in-out infinite;
 		@keyframes rotate {
 			0% {
-				filter: opacity(0.4) drop-shadow(0 0 1px #7edbff) ;
+				filter: opacity(0.4) drop-shadow(0 0 1px var(--sunset-sun)) ;
 				transform: rotate(0deg);
 			}
 			50% {
-				filter: opacity(1) drop-shadow(0 0 2px #7edbff) brightness(1.2);
+				filter: opacity(1) drop-shadow(0 0 2px var(--sunset-sun)) brightness(1.2);
 			}
 			100% {
-				filter: opacity(0.4) drop-shadow(0 0 1px #7edbff);
+				filter: opacity(0.4) drop-shadow(0 0 1px var(--sunset-sun));
 				transform: rotate(360deg);
 			}
 		}

@@ -18,11 +18,11 @@
 	--text-bg-portrait: linear-gradient(90deg,
 		rgb(0 0 0 / 0.4) 0%,
 		rgb(0 0 0 / 0.4) 100%);
-	--menu-button-bg: rgb(14 79 187);
-	--gradient-layer: linear-gradient(180deg, #001325, rgb(0 61 127 / 90%));
-	--transparent-layer: #001532bf;
-	--history-separator: linear-gradient(90deg, #1b9ab900 0%, #1fb8ff 50%, #1b9ab900 100%);
-	--textbox-adv-bg: linear-gradient(0deg, rgb(1 109 188 / 70%) 0%, #00315a);
+	--menu-button-bg: var(--sunset-copper);
+	--gradient-layer: linear-gradient(180deg, var(--sunset-night), rgb(94 34 20 / 94%));
+	--transparent-layer: rgb(43 13 12 / 78%);
+	--history-separator: linear-gradient(90deg, transparent 0%, var(--sunset-sun) 50%, transparent 100%);
+	--textbox-adv-bg: linear-gradient(0deg, rgb(94 34 20 / 82%) 0%, var(--sunset-wine));
 }
 
 .progress-panel  {

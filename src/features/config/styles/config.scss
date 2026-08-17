@@ -34,7 +34,7 @@
 
 		& > .title {
 			font-weight: 600;
-			background: linear-gradient(180deg, #00a5ff 0%, #0080ab 100%);
+			background: var(--page-title);
 			background-clip: text;
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
@@ -223,7 +223,7 @@
 			&:focus {
 				outline-color: transparent;
 				border-color: var(--color-link);
-				box-shadow: 0 0 0 2px rgba(0, 165, 255, 0.2);
+				box-shadow: 0 0 0 2px rgb(242 166 41 / 24%);
 			}
 
 			&::placeholder {

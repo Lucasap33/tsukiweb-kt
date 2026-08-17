@@ -1,4 +1,4 @@
-import gameLogo from "@assets/images/game-logo.webp"
+import gameLogo from "@assets/images/game-logo.svg"
 import '@features/title-menu/styles/title-menu.scss'
 import * as m from "motion/react-m"
 import { MdOutlineVolumeOff, MdOutlineVolumeUp } from 'react-icons/md'
@@ -13,7 +13,7 @@ import { continueGame, newGame, savesManager } from "engine/savestates";
 import { settings } from "engine/settings";
 import AppInfo from "features/title-menu/components/AppInfo";
 import TranslationSwitch from "features/title-menu/components/TranslationSwitch";
-import { strings, useStrings } from "translation/lang";
+import { useStrings } from "translation/lang";
 import { SCREEN } from "app/utils/display";
 import { useScreenAutoNavigate } from "app/hooks";
 

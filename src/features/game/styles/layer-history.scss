@@ -54,11 +54,11 @@
 
 			&[page-type="phase"] {
 				background-image: linear-gradient(90deg,
-					#1b9ab900 0%,
-					#00aed9 30%,
-					#fff 50%,
-					#00aed9 70%,
-					#1b9ab900 100%
+					transparent 0%,
+					var(--sunset-copper) 30%,
+					var(--sunset-ivory) 50%,
+					var(--sunset-copper) 70%,
+					transparent 100%
 				);
 				height: 4px;
 				&::after {

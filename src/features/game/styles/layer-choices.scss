@@ -17,6 +17,7 @@
 	}
 	.choice {
 		@extend %info-box;
+		background-color: rgb(43 13 12 / 78%);
 		padding: .4em 1.2em;
 		font-size: clamp(1em, 4.2vmin, 1.36em);
 		backdrop-filter: none;

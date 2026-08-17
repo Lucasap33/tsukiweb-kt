@@ -5,7 +5,7 @@ import '../styles/App.scss'
 import '@tsukiweb/common/graphics/styles/graphics.scss'
 import ExtraLayout from "features/title-menu/components/ExtraLayout";
 import { useCallback, useEffect, useState } from "react";
-import { Particles } from "@tsukiweb/common/ui-core";
+import HarvestWind from "app/components/HarvestWind";
 import ConfigScreen from "app/screens/ConfigScreen";
 import DisclaimerScreen from "app/screens/DisclaimerScreen";
 import GalleryScreen from "app/screens/GalleryScreen";
@@ -45,12 +45,12 @@ const AnimatedRoutes = () => {
 		pathname.startsWith(path)
 	)
 	const keyPresence = isExtra ? "extra" : pathname
-	const showParticles = pathname !== "/window"
+	const showBackdrop = pathname !== "/window"
 	const titleKey = showDisclaimer ? "title-behind-disclaimer" : "title"
 
 	return (
 		<LazyMotion features={domAnimation} strict>
-			{showParticles && <Particles />}
+			{showBackdrop && <HarvestWind />}
 			<AnimatePresence mode="wait">
 				<Switch location={pathname} key={keyPresence}>
 					<Route path="/">

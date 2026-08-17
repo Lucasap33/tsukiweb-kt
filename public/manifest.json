@@ -5,8 +5,8 @@
   "short_name": "Kagetsu Tohya",
   "start_url": "./",
   "scope": "./",
-  "theme_color": "#062b64",
-  "background_color": "#00153f",
+  "theme_color": "#2b0d0c",
+  "background_color": "#160807",
   "display": "standalone",
   "icons": [
     {
