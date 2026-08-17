@@ -179,14 +179,28 @@
 
   "images": {
     "words": {
-      "ganba_02": "#ed9dba$b`[center][noline][color=white][font=cursive]/beginning`",
-      "ganba_03": "#003d84$b`[center][noline][color=white][font=cursive]/the examiner speaks`",
-      "ganba_04": "#ed9dba$b`[center][noline][color=white][font=cursive]/end`",
-      "kanwa_01": "#000000$b`[center][noline][color=white]A STORY FOR THE EVENING`",
-      "kishin_01": "#000000$b`[right][noline][color=#81001c][font=cursive]Red Demon God`",
-      "kishin_02": "#000000$b`[right][noline][color=#81001c][font=cursive]/ Prologue`",
+      "fin": "#ffffff$c`[center][noline][color=black][font=serif]Fin`",
+      "end": "#ffffff$b`[right][noline][color=black][font=serif]END`",
+      "ganba_02": "#ed9dba$c`[center][size=1.5em][color=#c6004b][font=cursive][shadow=white,0.15em]/beginning`",
+      "ganba_03": "#003d84$c`[center][noline][color=white][font=cursive]/the examiner speaks`",
+      "ganba_04": "#ed9dba$c`[center][noline][color=white][font=cursive]/end`",
+      "hana_01": "#f6d4d3$c`[right][noline][color=#51003e][font=cursive]Flower of Thanatos`",
+      "kanwa_01": "#000000$c`[center][noline][color=white]A STORY FOR THE EVENING`",
+      "kishin_01": "#000000$c`[right][noline][color=#81001c][font=cursive]Red Demon God`",
+      "kishin_02": "#000000$c`[right][noline][color=#81001c][font=cursive]/ Prologue`",
       "kishin_03": "#000000$b`[right][noline][color=#81001c][font=cursive]/ Introduction, Development, Turn`",
-      "kishin_04": "#000000$b`[right][noline][color=#81001c][font=cursive]/ Conclusion`"
+      "kishin_04": "#000000$b`[right][noline][color=#81001c][font=cursive]/ Conclusion`",
+      "moon_01": "#000000$t`[left][size=1.5em][color=white][font=serif][shadow=#720007,0.15em]Crimson Moon`",
+      "moon_02": "#000000$c`[center][size=1.5em][color=white][font=serif][shadow=#720007,0.15em]/1`",
+      "moon_03": "#000000$c`[center][size=1.5em][color=white][font=serif][shadow=#720007,0.15em]/2`",
+      "moon_04": "#000000$c`[center][size=1.5em][color=white][font=serif][shadow=#720007,0.15em]/3`",
+      "moon_05": "#000000$c`[center][size=1.5em][color=white][font=serif][shadow=#720007,0.15em]/4`",
+      "sos_02": "#000000$t`[left][size=1.5em][color=white][font=serif][shadow=#222732,0.15em]/1`",
+      "sos_03": "#000000$t`[left][size=1.5em][color=white][font=serif][shadow=#222732,0.15em]/2`",
+      "sos_04": "#000000$c`[center][size=1.5em][color=white][font=serif][shadow=#222732,0.15em]/`",
+      "sos_05": "#000000$b`[right][size=1.5em][color=white][font=serif][shadow=#222732,0.15em]/3`",
+      "sos_06": "#000000$b`[right][size=1.5em][color=white][font=serif][shadow=#222732,0.15em]/4`",
+      "ssb_01": "#000000$c`[center][color=black]The Tohno Family Con Game`"
     },
     "thumb": {
       "": "./jp/images_thumb/%0"
