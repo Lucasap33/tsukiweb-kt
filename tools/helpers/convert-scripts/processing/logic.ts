@@ -12,6 +12,7 @@ import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { updateGameJsonWithChoices } from '../utils/choices_extractor.ts';
 import { isLogicLabel, isSceneLabel, processVarName } from './common.ts';
 import { addChoiceCondition, processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
+import { ins } from 'motion/react-client';
 
 const outputPathPrefix = '../../../public/static/'
 const outputDir = 'scenes'
@@ -107,44 +108,98 @@ function insertSceneEnd(blocks: Map<string, Block>, block: Block) {
 	}
 }
 
-const blockFixes: Record<string, (block: Block)=>void> = {
-	'f250' : (block)=> {
-		let i = block.findIndex(t=>t instanceof CommandToken && t.args.includes("*f256"))
-		if (i >= 0) {
-			addChoiceCondition(block.at(i)!, "*f256", "%flg6==0")
-			i = block.findLastIndex(t=>t instanceof CommandToken && t.cmd == 'select')
-			block.delete(i)
-		}
-	},
-	'f21': (block)=> {
-		(block.find(t=>t.toString().includes("f401")) as ConditionToken).condition = "%flgO || %flgQ"
-	},
-	'f401': (block)=> {
-		const sel = block.find(t=>t instanceof CommandToken && t.cmd == 'select')!
-		addChoiceCondition(sel, "*f223", "%flgO")
-		addChoiceCondition(sel, "*f501", "%flgQ")
-	}
-}
 
 function getBlockProps(
 		lang_block_fixes: Map<string, (block: Block)=>void>,
 		label: string) {
-	const tFixes = [logic_tokenFixes]
-	const bFixes: ((block: Block)=>void)[] = []
-	if (Object.hasOwn(blockFixes, label))
-		bFixes.push(blockFixes[label])
+	const tokenFixes = [logic_tokenFixes]
+	const blockFixes: ((block: Block)=>void)[] = []
 	if (isLogicLabel(label)) {
 		switch (label) {
-			case 'dummy' :
-				tFixes.push((t)=> { })
-				bFixes.push((block)=> { })
+			case 'f21' : tokenFixes.push(t=> {
+					if (t instanceof ConditionToken && (t.command as CommandToken).args[0] == 'f401')
+						t.condition = "%flgO || %flgQ"
+				})
 				break
-			case 'f400' : case 'f402' : // use f401 instead
+			case 'f41' : tokenFixes.push(t=> {
+					if (t instanceof ConditionToken)
+						return false
+					if (t instanceof CommandToken && t.cmd == 'goto')
+						t.args[0] = '*f43'
+				})
+				break
+			case 'f43' : tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select')
+						addChoiceCondition(t, "*f194", "%ark_point>=1 || %ciel_point>=1")
+				})
+				break;
+			case 'f67' : tokenFixes.push(t=> {
+					if (t instanceof ConditionToken) {
+						if (!['*f305', '*f306'].includes((t.command as CommandToken).args[0]))
+							return false
+					} else if (t instanceof CommandToken && t.args[0] == '*f68')
+						t.args[0] = '*f248'
+				})
+				break
+			case 'f154' : tokenFixes.push(t=> {
+					if (t instanceof ConditionToken)
+						return false
+					if (t instanceof CommandToken && t.args[0] == '*f155')
+						t.args[0] = '*f156'
+				})
+				break
+			case 'f156': tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select')
+						addChoiceCondition(t, "*f172", "%flgP")
+				})
+				break
+			case 'f201' : tokenFixes.push(t=> {
+					if (t instanceof ConditionToken)
+						return false
+				})
+				break
+			case 'f202' : tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select')
+						addChoiceCondition(t, "*f205", "!%flg5")
+				})
+				break
+			case 'f248' : tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select') {
+						addChoiceCondition(t, "*f84", "%kaibyo_point>=2")
+						addChoiceCondition(t, "*f85", "%flg3 && !%flg4")
+						addChoiceCondition(t, "*f250", "%ren_point>=1 && !%flg5")
+					}
+				})
+				break
+
+			case 'f250' : tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select') {
+						if (t.args.includes("*f256"))
+							addChoiceCondition(t, "*f256", "%flg6==0")
+						else
+							return false // only keep first select
+					}
+				})
+				break
+			case 'f42' : // -> f43
+			case 'f68' : case 'f69' : case 'f70' : case 'f71' : // -> f248
+			case 'f155' : // -> f156
+			case 'f206' : // -> f202
+			case 'f245' : case 'f246' : case 'f247' : // -> f248
+			case 'f400' : case 'f402' : // -> f401
 				return null
+			
+			case 'f401' : tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select') {
+						addChoiceCondition(t, "*f223", "%flgO")
+						addChoiceCondition(t, "*f501", "%flgQ")
+					}
+				})
+				break
 		}
 		if (lang_block_fixes.has(label))
-			bFixes.push(lang_block_fixes.get(label)!)
-		return { tokenFixes: tFixes, blockFixes: bFixes }
+			blockFixes.push(lang_block_fixes.get(label)!)
+		return { tokenFixes: tokenFixes, blockFixes: blockFixes }
 	} else {
 		return null
 	}

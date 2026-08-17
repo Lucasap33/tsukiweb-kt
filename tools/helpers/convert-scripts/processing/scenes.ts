@@ -178,6 +178,7 @@ function interScenesFixes(blocks: Map<string, Block>) {
 	// s400 end has additional delay and line break, keeping s401
 	blocks.delete('s400')
 	blocks.delete('s402')
+	blocks.delete('s42')
 }
 
 //#endregion ###################################################################
@@ -211,7 +212,12 @@ const ignored_commands = [
 	
 ]
 const deleted_scenes = [
-	'dummy'
+	's42', // -> s43
+	's68', 's69', 's70', 's71', // -> s248
+	's155', // -> s156
+	's206', // -> s202
+	's245', 's246', 's247', // -> f248
+	's400', 's402', // -> s401
 ]
 
 function token_filter(token: Token) {

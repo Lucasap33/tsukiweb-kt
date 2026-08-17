@@ -135,7 +135,7 @@ goto *s20
 *s20_end
 goto *f21
 *f21
-if (%flgO || %flgQ) goto *f401
+if (%flgO>=1 && %flgQ>=1) goto *f401
 goto *f22
 *f22
 goto *s22
@@ -222,17 +222,11 @@ goto *s518
 *s518_end
 goto *f41
 *f41
-if (%ark_point>=1) goto *f43
-if (%cel_point>=1) goto *f43
-goto *f42
-*f42
-goto *s42
-*s42_end
-select *f44,*f45,*f46
+goto *f43
 *f43
 goto *s43
 *s43_end
-select *f44,*f45,*f46,*f194
+select *f44,*f45,*f46,[%ark_point>=1 || %ciel_point>=1]*f194
 *f44
 goto *s44
 *s44_end
@@ -345,14 +339,7 @@ goto *f67
 inc %flgM
 if (%flgI>=1 && %flgK>=1 && %flgL>=1 && %flg6<1) goto *f306
 if (%flgE>=1 && %flgF>=1 && %flgG>=1 && %flgH>=1 && %flg4>=1 && %flgC>=1 && %flg5<1) goto *f305
-if (%kaibyo_point>=1 && %flg3>=1 && %flg4<1 && %ren_point>=6 && %flg5<1) goto *f248
-if (%kaibyo_point>=1 && %ren_point>=6 && %flg5<1) goto *f247
-if (%flg3>=1 && %flg4<1 && %ren_point>=6 && %flg5<1) goto *f246
-if (%kaibyo_point>=1 && %flg3>=1 && %flg4<1) goto *f71
-if (%ren_point>=6 && %flg5<1) goto *f245
-if (%flg3>=1 && %flg4<1) goto *f70
-if (%kaibyo_point>=2) goto *f69
-goto *f68
+goto *f248
 *f305
 goto *s305
 *s305_end
@@ -363,38 +350,10 @@ goto *s306
 *s306_end
 inc %flg6
 goto *endofplay
-*f68
-goto *s68
-*s68_end
-select *f72,*f73,*f74
-*f69
-goto *s69
-*s69_end
-select *f72,*f73,*f74,*f84
-*f70
-goto *s70
-*s70_end
-select *f72,*f73,*f74,*f85
-*f245
-goto *s245
-*s245_end
-select *f72,*f73,*f74,*f250
-*f71
-goto *s71
-*s71_end
-select *f72,*f73,*f74,*f84,*f85
-*f246
-goto *s246
-*s246_end
-select *f72,*f73,*f74,*f85,*f250
-*f247
-goto *s247
-*s247_end
-select *f72,*f73,*f74,*f84,*f250
 *f248
 goto *s248
 *s248_end
-select *f72,*f73,*f74,*f84,*f85,*f250
+select *f72,*f73,*f74,[%kaibyo_point>=2]*f84,[%flg3 && !%flg4]*f85,[%ren_point>=1 && !%flg5]*f250
 *f72
 if (%flg5>=1) goto *f77
 if (%flgB>=1) goto *f76
@@ -959,12 +918,11 @@ goto *s200
 *s200_end
 goto *endofplay
 *f201
-if (%flg5>=1) goto *f206
 goto *f202
 *f202
 goto *s202
 *s202_end
-select *f203,*f205,*f204
+select *f203,[!%flg5]*f205,*f204
 *f203
 goto *s203
 *s203_end
@@ -977,10 +935,6 @@ goto *f222
 goto *s205
 *s205_end
 goto *f222
-*f206
-goto *s206
-*s206_end
-select *f203,*f204
 *f207
 if (%cel_point>=2 && %flg5>=1) goto *f208
 if (%cel_point>=1) goto *f213
@@ -1051,16 +1005,11 @@ goto *f53
 *f222
 goto *f62
 *f154
-if (%flgP>=1) goto *f156
-goto *f155
-*f155
-goto *s155
-*s155_end
-select *f157,*f160,*f166,*f170,*f173
+goto *f156
 *f156
 goto *s156
 *s156_end
-select *f157,*f160,*f166,*f170,*f172,*f173
+select *f157,*f160,*f166,*f170,[%flgP]*f172,*f173
 *f157
 goto *s157
 *s157_end

@@ -46,11 +46,6 @@
       "1. I'll skip class.",
       "2. No, I must attend class diligently."
     ],
-    "s42": [
-      "1. Drop by the tea room.",
-      "2. Stay in the classroom.",
-      "3. Go straight home."
-    ],
     "s43": [
       "1. Drop by the tea room.",
       "2. Stay in the classroom.",
@@ -70,50 +65,6 @@
     "s56": [
       "1. … Forget it… I'll end up dying if I act hastily.",
       "2. … Just a little won't hurt, will it?"
-    ],
-    "s68": [
-      "1. The murder cases that have been happening.",
-      "2. The hallucinations of the end of the world.",
-      "3. Something that I'm forgetting."
-    ],
-    "s69": [
-      "1. The murder cases that have been happening.",
-      "2. The hallucinations of the end of the world.",
-      "3. Something that I'm forgetting.",
-      "4. Extermination of the cat demon in the detached building."
-    ],
-    "s70": [
-      "1. The murder cases that have been happening.",
-      "2. The hallucinations of the end of the world.",
-      "3. Something that I'm forgetting.",
-      "4. Taking a stroll on the night streets."
-    ],
-    "s245": [
-      "1. The murder cases that have been happening.",
-      "2. The hallucinations of the end of the world.",
-      "3. Something that I'm forgetting.",
-      "4. … Eh? Another dream?"
-    ],
-    "s71": [
-      "1. The murder cases that have been happening.",
-      "2. The hallucinations of the end of the world.",
-      "3. Something that I'm forgetting.",
-      "4. Extermination of the cat demon in the detached building.",
-      "5. Taking a stroll on the night streets."
-    ],
-    "s246": [
-      "1. The murder cases that have been happening.",
-      "2. The hallucinations of the end of the world.",
-      "3. Something that I'm forgetting.",
-      "4. Taking a stroll on the night streets.",
-      "5. … Eh? Another dream?"
-    ],
-    "s247": [
-      "1. The murder cases that have been happening.",
-      "2. The hallucinations of the end of the world.",
-      "3. Something that I'm forgetting.",
-      "4. Extermination of the cat demon in the detached building.",
-      "5. … Eh? Another dream?"
     ],
     "s248": [
       "1. The murder cases that have been happening.",
@@ -217,10 +168,6 @@
       "2. I want to ask about the recent incidents.",
       "3. I want to ask about yesterday."
     ],
-    "s206": [
-      "1. I want to hear about the cat.",
-      "2. I want to ask about yesterday."
-    ],
     "s209": [
       "1. …… Go home quietly.",
       "2. …… Excuse myself.",
@@ -234,13 +181,6 @@
     "s218": [
       "1. It's about school.",
       "2. It's about yesterday."
-    ],
-    "s155": [
-      "1. Go to Arcueid's place.",
-      "2. Wait in the tea house.",
-      "3. Go to the park.",
-      "4. Visit Arihiko's place.",
-      "5. Go to Ciel-senpai's place."
     ],
     "s156": [
       "1. Go to Arcueid's place.",
