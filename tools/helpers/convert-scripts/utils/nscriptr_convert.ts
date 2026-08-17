@@ -107,6 +107,7 @@ function genericTokenFixes(clickRE: RegExp|null, token: Token) {
             token.text = token.text.replaceAll(clickRE, '@')
         
         token.text = token.text
+                .replaceAll(/#((?!ffffff)[\da-f]{6})(.*?)#ffffff/gi, '[color=#$1]$2[/]')
                 .replaceAll(/@{2,}/g, '@')// remove dup. '@' if any
                 .replaceAll(/[-―─―—]{2,}/g, (match)=> `[line=${match.length}]`)
     } else if (token instanceof CommandToken) {
