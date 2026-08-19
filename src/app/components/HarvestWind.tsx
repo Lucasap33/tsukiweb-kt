@@ -7,8 +7,12 @@ const SPRITE_WIDTH = 256
 const SPRITE_HEIGHT = 180
 const TILE_STRIDE = 144
 const ATLAS_SCALE = 4
-const MAX_GUSTS = 2
+const MAX_GUSTS = 10
 const FLOATER_LIFETIME = 9000
+const BREATH_AMPL_MEAN = .02
+const BREATH_AMPL_STDEV = .005
+const BREATH_PERIOD_MEAN = 10
+const BREATH_PERIOD_STDEV = .5
 const TAU = Math.PI * 2
 
 const PALETTES = [
@@ -60,12 +64,35 @@ interface Floater {
 	bornAt: number
 }
 
-const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
-
-const sample = (seed: number) => {
-	const value = Math.sin(seed * 12.9898) * 43758.5453
-	return value - Math.floor(value)
+function normal(rand_gen: ()=>number, mean: number, stdev: number) {
+	const u = 1 - rand_gen(); // Converting [0,1) to (0,1]
+	const v = rand_gen();
+	const z = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+	// Transform to the desired mean and standard deviation:
+	return z * stdev + mean;
 }
+
+class PRNG {
+	private _value: number
+	public nextNormal: (mean: number, stdev: number)=>number
+	constructor(seed: number = (Date.now() % 1e9)/1e9) {
+		this._value = seed
+		this.nextNormal = normal.bind(undefined, this.next.bind(this))
+	}
+	setSeed(value: number) {
+		this._value = value
+	}
+	getSeed() {
+		return this._value
+	}
+	next() {
+		const value = Math.sin(this._value * 12.9898) * 43758.5453
+		this._value = value
+		return value - Math.floor(value)
+	}
+}
+
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
 
 const createAtlas = () => {
 	const canvas = document.createElement("canvas")
@@ -76,6 +103,7 @@ const createAtlas = () => {
 	ctx.setTransform(ATLAS_SCALE, 0, 0, ATLAS_SCALE, 0, 0)
 	ctx.lineCap = "round"
 	ctx.lineJoin = "round"
+	const prng = new PRNG()
 
 	for (let depth = 0; depth < DEPTH_COUNT; depth++) {
 		const palette = PALETTES[depth]
@@ -90,56 +118,56 @@ const createAtlas = () => {
 			ctx.clip()
 
 			for (let blade = 0; blade < bladeCount; blade++) {
-					const seed = variant * 109 + blade * 13 + 1
-					const rootX = offsetX + (blade + sample(seed) * .9) / bladeCount * TILE_STRIDE
-					const rootY = offsetY + SPRITE_HEIGHT - 2 - sample(seed + 9) * 10
-					const length = 94 + sample(seed + 1) * 58
-					const lean = .68 + (sample(seed + 2) - .5) * .12
-					const reach = length * lean
-					const rise = length * (.3 + sample(seed + 3) * .2)
-					const tipX = rootX + reach
-					const tipY = rootY - rise
-					const color = sample(seed + 4) > .72 ? palette[1] : sample(seed + 5) > .38 ? palette[2] : palette[0]
+				const rootX = offsetX + (blade + prng.next() * .9) * TILE_STRIDE / bladeCount
+				const rootY = offsetY + SPRITE_HEIGHT - 2 - prng.next() * SPRITE_HEIGHT/3
+				const length = prng.nextNormal(120, 20)
+				const lean = prng.nextNormal(.68, .05)
+				const reach = length * lean
+				const rise = length * prng.nextNormal(.4, .07)
+				const tipX = rootX + reach
+				const tipY = rootY - rise
+				let colorValue = prng.next()
+				const color = colorValue > 0.72 ? palette[1] : colorValue > 0.24 ? palette[2] : palette[0]
 
-					ctx.globalAlpha = (.42 + sample(seed + 6) * .42) * (.72 + depth * .12)
-					if (sample(seed + 7) > .62) {
-						const ribbonWidth = .9 + sample(seed + 8) * 1.8
-						ctx.fillStyle = color
-						ctx.beginPath()
-						ctx.moveTo(rootX - ribbonWidth / 2, rootY)
-						ctx.bezierCurveTo(
-							rootX + reach * .18,
-							rootY - rise * .08,
-							rootX + reach * .62,
-							rootY - rise * .92,
-							tipX,
-							tipY,
-						)
-						ctx.bezierCurveTo(
-							rootX + reach * .58,
-							rootY - rise * .82,
-							rootX + reach * .16,
-							rootY - rise * .02,
-							rootX + ribbonWidth / 2,
-							rootY,
-						)
-						ctx.closePath()
-						ctx.fill()
-					} else {
-						ctx.strokeStyle = color
-						ctx.lineWidth = .45 + sample(seed + 8) * 1.15
-						ctx.beginPath()
-						ctx.moveTo(rootX, rootY)
-						ctx.bezierCurveTo(
-							rootX + reach * .18,
-							rootY - rise * .08,
-							rootX + reach * .62,
-							rootY - rise * .92,
-							tipX,
-							tipY,
-						)
-						ctx.stroke()
-					}
+				ctx.globalAlpha = (.42 + prng.next() * .42) * (.72 + depth * .12)
+				if (prng.next() > .62) {
+					const ribbonWidth = .9 + prng.next() * 1.8
+					ctx.fillStyle = color
+					ctx.beginPath()
+					ctx.moveTo(rootX - ribbonWidth / 2, rootY)
+					ctx.bezierCurveTo(
+						rootX + reach * .62,
+						rootY - rise * .92,
+						rootX + reach * .62,
+						rootY - rise * .92,
+						tipX,
+						tipY,
+					)
+					ctx.bezierCurveTo(
+						rootX + reach * .58,
+						rootY - rise * .82,
+						rootX + reach * .58,
+						rootY - rise * .82,
+						rootX + ribbonWidth / 2,
+						rootY,
+					)
+					ctx.closePath()
+					ctx.fill()
+				} else {
+					ctx.strokeStyle = color
+					ctx.lineWidth = .45 + prng.next() * 1.15
+					ctx.beginPath()
+					ctx.moveTo(rootX, rootY)
+					ctx.bezierCurveTo(
+						rootX + reach * .62,
+						rootY - rise * .92,
+						rootX + reach * .62,
+						rootY - rise * .92,
+						tipX,
+						tipY,
+					)
+					ctx.stroke()
+				}
 			}
 			ctx.restore()
 		}
@@ -170,6 +198,10 @@ const HarvestWind = () => {
 		let lastFrame = 0
 		let nextGustAt = 0
 		let nextFloaterAt = 0
+		let breath_period = normal(Math.random, BREATH_PERIOD_MEAN, BREATH_PERIOD_STDEV)*1000
+		let breath_ampl = normal(Math.random, BREATH_AMPL_MEAN, BREATH_AMPL_STDEV)
+		const prng = new PRNG()
+		const seed = prng.getSeed()
 
 		const createTiles = () => {
 			const aspectRatio = dimensions.height / dimensions.width
@@ -178,29 +210,28 @@ const HarvestWind = () => {
 				: dimensions.mobile ? 6 : 8
 			const viewportScale = clamp(dimensions.width / 1280, .85, 1.75)
 			tiles = []
-
 			for (let row = 0; row < rowCount; row++) {
-				const depth = row / (rowCount - 1)
+				prng.setSeed(seed + row)
+				const depth = row / (rowCount - 1.3)
 				const projectedDepth = Math.pow(depth, 1.22)
 				const scale = (.34 + projectedDepth * 1.31) * viewportScale
 				const width = SPRITE_WIDTH * scale
 				const step = TILE_STRIDE * scale
-				const y = dimensions.horizon + projectedDepth * (dimensions.height - dimensions.horizon + 20)
+				const y = dimensions.horizon + projectedDepth * (dimensions.height - dimensions.horizon + SPRITE_HEIGHT/4)
 				const palette = projectedDepth < .25 ? 0 : projectedDepth < .68 ? 1 : 2
 				const tileCount = Math.ceil(dimensions.width / step) + 1
 				const startX = dimensions.width - tileCount * step
 
 				for (let index = 0; index < tileCount; index++) {
 					const x = startX + index * step
-					const seed = row * 131 + index * 17 + 1
 					tiles.push({
 						x,
 						y,
 						scale,
 						alpha: .42 + projectedDepth * .5,
-						phase: sample(seed) * TAU,
-						speed: .72 + sample(seed + 1) * .48,
-						variant: Math.floor(sample(seed + 2) * VARIANT_COUNT),
+						phase: prng.next() * TAU,
+						speed: prng.nextNormal(1, .08),
+						variant: Math.floor(prng.next() * VARIANT_COUNT),
 						depth: palette,
 					})
 				}
@@ -210,7 +241,7 @@ const HarvestWind = () => {
 		const spawnGust = (now: number) => {
 			const fieldHeight = dimensions.height - dimensions.horizon
 			gusts.push({
-				y: dimensions.horizon + fieldHeight * (.16 + Math.random() * .7),
+				y: dimensions.horizon + fieldHeight * (.16 + Math.random()),
 				radiusX: dimensions.width * (.18 + Math.random() * .12),
 				radiusY: fieldHeight * (.14 + Math.random() * .1),
 				strength: .035 + Math.random() * .035,
@@ -265,13 +296,19 @@ const HarvestWind = () => {
 						bend += (1 - distance) * (1 - distance) * Math.sin(progress * Math.PI) * gust.strength
 					}
 				}
+				const breath = breath_ampl *Math.sin(
+					((now % breath_period) / breath_period) * TAU
+					+ (tile.x + tile.y) / 1000)
 
 				const width = SPRITE_WIDTH * tile.scale
 				const height = SPRITE_HEIGHT * tile.scale
 				const visibleWidth = Math.min(width, dimensions.width - tile.x)
 				ctx.save()
 				ctx.translate(tile.x, tile.y)
-				ctx.transform(1, 0, -bend, 1, 0, 0)
+				ctx.transform(
+					1    , breath,
+					-bend-breath, 1,
+					0    , 0)
 				ctx.globalAlpha = tile.alpha
 				ctx.drawImage(
 					atlas,
