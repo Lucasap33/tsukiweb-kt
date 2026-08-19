@@ -70,6 +70,10 @@
 				letter-spacing: 1px;
 				width: fit-content;
 				padding-block: .6em;
+
+				text-shadow: 0 0 8px var(--sunset-brown);
+				background: none;
+				-webkit-text-fill-color: unset;
 			}
 		}
 		.back-button {

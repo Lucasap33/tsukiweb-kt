@@ -42,6 +42,7 @@ export default defineConfig(({ mode }) => ({
 		chunkSizeWarningLimit: 1000,
 	},
 	server: {
-		proxy: mode === 'proxy' ? proxyRules : {}
+		proxy: mode === 'proxy' ? proxyRules : {},
+		host: 'ktweb.localhost',
 	}
 }))

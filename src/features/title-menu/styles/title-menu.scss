@@ -11,15 +11,13 @@
 		display: flex;
 		align-self: center;
 		align-items: center;
-		justify-content: center;
-		padding: 1em;
 		min-height: 0;
 		position: relative;
 		isolation: isolate;
 		aspect-ratio: 1;
 		height: auto;
-		max-height: 100%;
-		width: min(600px, 100%);
+		max-height: 80%;
+		width: min(600px, 80%);
 
 		.game-logo {
 			display: block;
@@ -75,6 +73,12 @@
 			column-gap: 2.4em;
 			justify-content: center;
 			align-items: flex-start;
+
+			.menu-item {
+				text-shadow: 0 0 8px var(--sunset-brown);
+				background: none;
+				-webkit-text-fill-color: unset;
+			}
 		}
 	}
 
@@ -100,10 +104,7 @@
 	@media (max-height: 540px) and (orientation: landscape) {
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 1fr;
-		.logo {
-			width: min(340px, 80%, 85vh);
-			max-height: none;
-		}
+
 		.menu {
 			margin-bottom: 0;
 			height: 100%;
