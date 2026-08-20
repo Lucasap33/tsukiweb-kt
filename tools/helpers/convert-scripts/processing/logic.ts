@@ -167,7 +167,7 @@ function getBlockProps(
 					if (t instanceof CommandToken && t.cmd == 'select') {
 						addChoiceCondition(t, "*f84", "%kaibyo_point>=2")
 						addChoiceCondition(t, "*f85", "%flg3 && !%flg4")
-						addChoiceCondition(t, "*f250", "%ren_point>=1 && !%flg5")
+						addChoiceCondition(t, "*f250", "%ren_point>=6 && !%flg5")
 					}
 				})
 				break

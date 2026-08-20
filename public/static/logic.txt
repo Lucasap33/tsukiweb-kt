@@ -78,7 +78,7 @@ goto *f260
 *f10
 goto *s10
 *s10_end
-inc %aki_point
+inc %flg_aki
 inc %guest_image5
 goto *f15
 *f11
@@ -101,7 +101,6 @@ goto *f301
 goto *s301
 *s301_end
 inc %ren_point
-inc %pointflg301
 inc %flg1
 goto *f15
 *f302
@@ -119,7 +118,7 @@ goto *f21
 *f17
 goto *s17
 *s17_end
-inc %bunka_info_point
+inc %flg_bunka
 goto *f21
 *f18
 if (%flg6>=1) goto *f20
@@ -128,7 +127,6 @@ goto *f19
 goto *s19
 *s19_end
 inc %ren_point
-inc %pointflg19
 goto *f21
 *f20
 goto *s20
@@ -167,7 +165,7 @@ goto *s27
 inc %guest_image14
 goto *f35
 *f28
-if (%aki_point>=1) goto *f29
+if (%flg_aki>=1) goto *f29
 goto *f31
 *f29
 goto *s29
@@ -177,7 +175,6 @@ select *f300,*f31
 goto *s300
 *s300_end
 inc %kaibyo_point
-inc %pointflg300
 goto *f35
 *f31
 if (%flg6>=1) goto *f34
@@ -186,7 +183,6 @@ goto *f32
 goto *s32
 *s32_end
 inc %ren_point
-inc %pointflg32
 goto *f35
 *f34
 goto *s34
@@ -232,17 +228,16 @@ goto *s44
 *s44_end
 goto *f53
 *f45
-if (%bunka_info_point>=1) goto *f49
+if (%flg_bunka>=1) goto *f49
 if (%flgN>=1) goto *f48
 goto *f47
 *f46
-if (%aki_point>=1) goto *f51
+if (%flg_aki>=1) goto *f51
 goto *f52
 *f47
 goto *s47
 *s47_end
 inc %nana_point
-inc %pointflg47
 inc %flgA
 goto *f53
 *f48
@@ -266,7 +261,6 @@ select *f50,*f52
 goto *s52
 *s52_end
 inc %nana_point
-inc %pointflg52
 goto *f53
 *f53
 goto *s53
@@ -281,7 +275,6 @@ goto *f62
 goto *s55
 *s55_end
 inc %his_point
-inc %pointflg55
 goto *f62
 *f56
 goto *s56
@@ -298,7 +291,7 @@ goto *s58
 *s58_end
 goto *f62
 *f59
-if (%aki_point>=1) goto *f60
+if (%flg_aki>=1) goto *f60
 goto *f61
 *f60
 goto *s60
@@ -309,7 +302,6 @@ goto *f62
 goto *s61
 *s61_end
 inc %gojitsudan_point
-inc %pointflg61
 goto *f62
 *f62
 goto *s62
@@ -328,7 +320,6 @@ goto *f67
 goto *s65
 *s65_end
 inc %gojitsudan_point
-inc %pointflg65
 inc %guest_image2
 goto *f67
 *f66
@@ -353,7 +344,7 @@ goto *endofplay
 *f248
 goto *s248
 *s248_end
-select *f72,*f73,*f74,[%kaibyo_point>=2]*f84,[%flg3 && !%flg4]*f85,[%ren_point>=1 && !%flg5]*f250
+select *f72,*f73,*f74,[%kaibyo_point>=2]*f84,[%flg3 && !%flg4]*f85,[%ren_point>=6 && !%flg5]*f250
 *f72
 if (%flg5>=1) goto *f77
 if (%flgB>=1) goto *f76
@@ -430,7 +421,6 @@ goto *endofplay
 goto *s256
 *s256_end
 add %ren_point,2
-inc %pointflg256
 goto *endofplay
 *f258
 goto *s258
@@ -480,7 +470,6 @@ goto *f231
 goto *s229
 *s229_end
 inc %gojitsudan_point
-inc %pointflg229
 goto *f231
 *f230
 goto *s230
@@ -502,7 +491,6 @@ goto *f235
 goto *s234
 *s234_end
 add %ren_point,3
-inc %pointflg234
 goto *f244
 *f235
 goto *s235
@@ -571,7 +559,6 @@ goto *s94
 *s94_end
 inc %flg_onemu
 inc %ren_point
-inc %pointflg94
 goto *f109
 *f95
 if (%flg6>=1 && %flg7<1) goto *f96
@@ -631,7 +618,6 @@ goto *f109
 goto *s102
 *s102_end
 inc %kaibyo_point
-inc %pointflg102
 goto *f109
 *f103
 if (%flg7>=1) goto *f104
@@ -663,7 +649,6 @@ goto *endofplay
 goto *s105
 *s105_end
 inc %ren_point
-inc %pointflg105
 goto *f109
 *f153
 goto *s153
@@ -682,7 +667,6 @@ goto *f109
 goto *s108
 *s108_end
 inc %kagi_point
-inc %pointflg108
 goto *f109
 *f109
 if (%flgD>=1) goto *f112
@@ -745,7 +729,6 @@ goto *f138
 goto *s124
 *s124_end
 inc %his_point
-inc %pointflg124
 goto *f138
 *f126
 goto *s126
@@ -810,7 +793,6 @@ goto *f137
 goto *s136
 *s136_end
 inc %kagi_point
-inc %pointflg136
 goto *f138
 *f137
 goto *s137
@@ -870,7 +852,6 @@ goto *f67
 goto *s149
 *s149_end
 inc %nana_point
-inc %pointflg149
 inc %guest_image10
 goto *endofplay
 *f150
@@ -1056,13 +1037,11 @@ goto *s164
 *s164_end
 inc %akira_point
 inc %gojitsudan_point
-inc %pointflg164
 goto *f140
 *f165
 goto *s165
 *s165_end
 inc %ren_point
-inc %pointflg165
 goto *f140
 *f166
 if (%flg6>=1) goto *f169
@@ -1072,13 +1051,11 @@ goto *f167
 goto *s167
 *s167_end
 inc %ren_point
-inc %pointflg167
 goto *f180
 *f168
 goto *s168
 *s168_end
 add %ren_point,2
-inc %pointflg168
 goto *f180
 *f169
 goto *s169
@@ -1092,7 +1069,6 @@ goto *f171
 goto *s171
 *s171_end
 inc %nana_point
-inc %pointflg171
 goto *f180
 *f172
 goto *s172

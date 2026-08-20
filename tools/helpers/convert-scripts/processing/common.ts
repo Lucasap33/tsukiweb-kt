@@ -11,24 +11,25 @@ function isSceneLabel(label: string) {
 function processVarName(varName: string) {
 	return switch_regex(varName, [
 		//["%sceneskip"			, null], // ignore sceneskip tests
-		[/^%pointflag\d{2,3}$/	, null], // special variables used to increase unreset points
-		[/^%([a-z]+)_point$/	, (m: RegExpMatchArray)=> {
+		[/^%pointflg\d{1,3}$/	, null], // special variables used to increase unreset points
+		[/^%([a-z_]+)_point$/	, (m: RegExpMatchArray)=> {
 			switch (m[1]) {
-				case 'ren' : case 'ark'	: case 'gojitsudan' : case 'kagi': case 'answer': case 'akira': return m[0]
-				case 'akiha'	: return '%aki_point'
+				case 'ren' : case 'ark'	: case 'akira': case 'gojitsudan' :
+				case 'kagi': case 'kaibyo': case 'answer': return m[0]
 				case 'kohaku'	: return '%koha_point'
 				case 'hisui'	: return '%his_point'
 				case 'ciel'		: return '%cel_point'
-				case 'kaibyo'	: return '%kaibyo_point'
 				case 'nanako'	: return '%nana_point'
+				case 'akiha'	: return '%flg_aki'
 				case 'kissa'	: return '%flg_kissa'
 				case 'kashiisyo': return '%flg_kashiisyo'
 				case 'eigakan'	: return '%flg_eigakan'
 				case 'onemu'	: return '%flg_onemu'
 				case 'syashin'	: return '%flg_syashin'
+				case 'bunka_info': return '%flg_bunka'
 			}
 			throw Error(`regard variable ${m[0]} not recognized`)
-		}]
+		}],
 		// keep all other variables as-is
 	], varName)
 }
