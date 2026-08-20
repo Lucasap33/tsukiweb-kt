@@ -6,7 +6,6 @@ const DEPTH_COUNT = 3
 const SPRITE_WIDTH = 256
 const SPRITE_HEIGHT = 180
 const TILE_STRIDE = 144
-const ATLAS_SCALE = 4
 const MAX_GUSTS = 10
 const FLOATER_LIFETIME = 9000
 const BREATH_AMPL_MEAN = .02
@@ -31,12 +30,16 @@ const FLOATER_COLORS = [
 interface Tile {
 	x: number
 	y: number
-	scale: number
 	alpha: number
 	phase: number
 	speed: number
-	variant: number
-	depth: number
+	breathPhase: number
+	halfWidth: number
+	height: number
+	visibleWidth: number
+	sourceX: number
+	sourceY: number
+	sourceWidth: number
 }
 
 interface Gust {
@@ -46,6 +49,9 @@ interface Gust {
 	strength: number
 	startedAt: number
 	duration: number
+	centerX: number
+	centerY: number
+	frameStrength: number
 }
 
 interface Floater {
@@ -93,14 +99,18 @@ class PRNG {
 }
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
+const atlasCache = new Map<number, HTMLCanvasElement>()
 
-const createAtlas = () => {
+const createAtlas = (atlasScale: number) => {
+	const cachedAtlas = atlasCache.get(atlasScale)
+	if (cachedAtlas) return cachedAtlas
+
 	const canvas = document.createElement("canvas")
-	canvas.width = SPRITE_WIDTH * VARIANT_COUNT * ATLAS_SCALE
-	canvas.height = SPRITE_HEIGHT * DEPTH_COUNT * ATLAS_SCALE
+	canvas.width = SPRITE_WIDTH * VARIANT_COUNT * atlasScale
+	canvas.height = SPRITE_HEIGHT * DEPTH_COUNT * atlasScale
 
 	const ctx = canvas.getContext("2d")!
-	ctx.setTransform(ATLAS_SCALE, 0, 0, ATLAS_SCALE, 0, 0)
+	ctx.setTransform(atlasScale, 0, 0, atlasScale, 0, 0)
 	ctx.lineCap = "round"
 	ctx.lineJoin = "round"
 	const prng = new PRNG()
@@ -174,34 +184,50 @@ const createAtlas = () => {
 	}
 
 	ctx.globalAlpha = 1
+	atlasCache.set(atlasScale, canvas)
 	return canvas
 }
 
-const HarvestWind = () => {
+interface Props {
+	active: boolean
+}
+
+const HarvestWind = ({ active }: Props) => {
+	const containerRef = useRef<HTMLDivElement>(null)
 	const canvasRef = useRef<HTMLCanvasElement>(null)
+	const setActiveRef = useRef<(active: boolean)=>void>(null)
 
 	useEffect(() => {
+		const container = containerRef.current
 		const canvas = canvasRef.current
 		const ctx = canvas?.getContext("2d", { alpha: true })
-		if (!canvas || !ctx) return
+		if (!container || !canvas || !ctx) return
 
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+		const mobile = window.matchMedia("(pointer: coarse)").matches
+		const maxDpr = mobile ? 1.25 : 2
+		const targetFps = mobile ? 24 : 60
+		const atlasScale = mobile ? 2 : 4
+		const floatersEnabled = !mobile
 		const dimensions = { width: 0, height: 0, horizon: 0, mobile: false }
-		const atlas = createAtlas()
+		const atlas = createAtlas(atlasScale)
 		let fieldGradient: CanvasGradient
 		let horizonGradient: CanvasGradient
 		let tiles: Tile[] = []
 		let gusts: Gust[] = []
 		let floaters: Floater[] = []
 		let raf = 0
-		let resizeRaf = 0
 		let lastFrame = 0
+		let nextFrameAt = 0
 		let nextGustAt = 0
 		let nextFloaterAt = 0
+		let dpr = 1
+		let clearTop = 0
 		let breath_period = normal(Math.random, BREATH_PERIOD_MEAN, BREATH_PERIOD_STDEV)*1000
 		let breath_ampl = normal(Math.random, BREATH_AMPL_MEAN, BREATH_AMPL_STDEV)
 		const prng = new PRNG()
 		const seed = prng.getSeed()
+		const frameDuration = 1000 / targetFps
 
 		const createTiles = () => {
 			const aspectRatio = dimensions.height / dimensions.width
@@ -210,32 +236,44 @@ const HarvestWind = () => {
 				: dimensions.mobile ? 6 : 8
 			const viewportScale = clamp(dimensions.width / 1280, .85, 1.75)
 			tiles = []
+			clearTop = dimensions.horizon - 12
 			for (let row = 0; row < rowCount; row++) {
 				prng.setSeed(seed + row)
 				const depth = row / (rowCount - 1.3)
 				const projectedDepth = Math.pow(depth, 1.22)
 				const scale = (.34 + projectedDepth * 1.31) * viewportScale
 				const width = SPRITE_WIDTH * scale
+				const height = SPRITE_HEIGHT * scale
 				const step = TILE_STRIDE * scale
 				const y = dimensions.horizon + projectedDepth * (dimensions.height - dimensions.horizon + SPRITE_HEIGHT/4)
 				const palette = projectedDepth < .25 ? 0 : projectedDepth < .68 ? 1 : 2
 				const tileCount = Math.ceil(dimensions.width / step) + 1
 				const startX = dimensions.width - tileCount * step
+				clearTop = Math.min(clearTop, y - height - Math.abs(breath_ampl) * width - 2)
 
 				for (let index = 0; index < tileCount; index++) {
 					const x = startX + index * step
+					const visibleWidth = Math.min(width, dimensions.width - x)
+					const phase = prng.next() * TAU
+					const speed = prng.nextNormal(1, .08)
+					const variant = Math.floor(prng.next() * VARIANT_COUNT)
 					tiles.push({
 						x,
 						y,
-						scale,
 						alpha: .42 + projectedDepth * .5,
-						phase: prng.next() * TAU,
-						speed: prng.nextNormal(1, .08),
-						variant: Math.floor(prng.next() * VARIANT_COUNT),
-						depth: palette,
+						phase,
+						speed,
+						breathPhase: (x + y) / 1000,
+						halfWidth: width / 2,
+						height,
+						visibleWidth,
+						sourceX: variant * SPRITE_WIDTH * atlasScale,
+						sourceY: palette * SPRITE_HEIGHT * atlasScale,
+						sourceWidth: visibleWidth / scale * atlasScale,
 					})
 				}
 			}
+			clearTop = Math.max(0, Math.floor(clearTop))
 		}
 
 		const spawnGust = (now: number) => {
@@ -247,6 +285,9 @@ const HarvestWind = () => {
 				strength: .035 + Math.random() * .035,
 				startedAt: now,
 				duration: 3000 + Math.random() * 2200,
+				centerX: 0,
+				centerY: 0,
+				frameStrength: 0,
 			})
 			nextGustAt = now + 2000 + Math.random() * 2200
 		}
@@ -279,50 +320,52 @@ const HarvestWind = () => {
 			ctx.fillStyle = horizonGradient
 			ctx.fillRect(0, dimensions.horizon - 12, dimensions.width, dimensions.height * .18)
 
+			for (let j = 0; j < gusts.length; j++) {
+				const gust = gusts[j]
+				const progress = (now - gust.startedAt) / gust.duration
+				gust.centerX = -gust.radiusX + progress * (dimensions.width + gust.radiusX * 2)
+				gust.centerY = gust.y - progress * dimensions.height * .035
+				gust.frameStrength = Math.sin(progress * Math.PI) * gust.strength
+			}
+
+			const breathTime = ((now % breath_period) / breath_period) * TAU
 			for (let i = 0; i < tiles.length; i++) {
 				const tile = tiles[i]
 				let bend = .025 + Math.sin(now * .00042 * tile.speed + tile.phase) * .014
 
 				for (let j = 0; j < gusts.length; j++) {
 					const gust = gusts[j]
-					const progress = (now - gust.startedAt) / gust.duration
-					const centerX = -gust.radiusX + progress * (dimensions.width + gust.radiusX * 2)
-					const centerY = gust.y - progress * dimensions.height * .035
-					const dx = (tile.x + SPRITE_WIDTH * tile.scale / 2 - centerX) / gust.radiusX
-					const dy = (tile.y - centerY) / gust.radiusY
+					const dx = (tile.x + tile.halfWidth - gust.centerX) / gust.radiusX
+					const dy = (tile.y - gust.centerY) / gust.radiusY
 					const distance = dx * dx + dy * dy
-
 					if (distance < 1) {
-						bend += (1 - distance) * (1 - distance) * Math.sin(progress * Math.PI) * gust.strength
+						bend += (1 - distance) * (1 - distance) * gust.frameStrength
 					}
 				}
-				const breath = breath_ampl *Math.sin(
-					((now % breath_period) / breath_period) * TAU
-					+ (tile.x + tile.y) / 1000)
+				const breath = breath_ampl * Math.sin(breathTime + tile.breathPhase)
 
-				const width = SPRITE_WIDTH * tile.scale
-				const height = SPRITE_HEIGHT * tile.scale
-				const visibleWidth = Math.min(width, dimensions.width - tile.x)
-				ctx.save()
-				ctx.translate(tile.x, tile.y)
-				ctx.transform(
-					1    , breath,
-					-bend-breath, 1,
-					0    , 0)
+				ctx.setTransform(
+					dpr,
+					breath * dpr,
+					(-bend - breath) * dpr,
+					dpr,
+					tile.x * dpr,
+					tile.y * dpr,
+				)
 				ctx.globalAlpha = tile.alpha
 				ctx.drawImage(
 					atlas,
-					tile.variant * SPRITE_WIDTH * ATLAS_SCALE,
-					tile.depth * SPRITE_HEIGHT * ATLAS_SCALE,
-					visibleWidth / tile.scale * ATLAS_SCALE,
-					SPRITE_HEIGHT * ATLAS_SCALE,
+					tile.sourceX,
+					tile.sourceY,
+					tile.sourceWidth,
+					SPRITE_HEIGHT * atlasScale,
 					0,
-					-height,
-					visibleWidth,
-					height,
+					-tile.height,
+					tile.visibleWidth,
+					tile.height,
 				)
-				ctx.restore()
 			}
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 		}
 
 		const drawFloaters = (now: number, delta: number) => {
@@ -358,42 +401,52 @@ const HarvestWind = () => {
 		}
 
 		const draw = (now: number, delta = 0) => {
-			ctx.clearRect(0, 0, dimensions.width, dimensions.height)
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+			const top = floatersEnabled ? 0 : clearTop
+			ctx.clearRect(0, top, dimensions.width, dimensions.height - top)
 			drawField(now)
-			if (delta) drawFloaters(now, delta)
+			if (delta && floatersEnabled) drawFloaters(now, delta)
 			ctx.globalAlpha = 1
 		}
 
 		const animate = (now: number) => {
-			const delta = lastFrame ? Math.min(now - lastFrame, 50) : 1000 / 60
-			lastFrame = now
+			raf = 0
+			if (!nextFrameAt || now >= nextFrameAt - .5) {
+				const delta = lastFrame ? Math.min(now - lastFrame, 50) : frameDuration
+				lastFrame = now
+				nextFrameAt = nextFrameAt ? nextFrameAt + frameDuration : now + frameDuration
+				if (nextFrameAt <= now) nextFrameAt = now + frameDuration
 
-			for (let i = gusts.length - 1; i >= 0; i--) {
-				if (now - gusts[i].startedAt >= gusts[i].duration) gusts.splice(i, 1)
+				for (let i = gusts.length - 1; i >= 0; i--) {
+					if (now - gusts[i].startedAt >= gusts[i].duration) gusts.splice(i, 1)
+				}
+				if (now >= nextGustAt && gusts.length < MAX_GUSTS) spawnGust(now)
+
+				if (floatersEnabled) {
+					const floaterLimit = dimensions.mobile ? 1 : 3
+					if (now >= nextFloaterAt && floaters.length < floaterLimit) spawnFloater(now)
+				}
+
+				draw(now, delta)
 			}
-			if (now >= nextGustAt && gusts.length < MAX_GUSTS) spawnGust(now)
-
-			const floaterLimit = dimensions.mobile ? 1 : 3
-			if (now >= nextFloaterAt && floaters.length < floaterLimit) spawnFloater(now)
-
-			draw(now, delta)
 			raf = requestAnimationFrame(animate)
 		}
 
 		const start = () => {
-			if (reducedMotion || document.hidden || raf) return
+			if (reducedMotion || raf || !dimensions.width) return
 			lastFrame = 0
+			nextFrameAt = 0
 			raf = requestAnimationFrame(animate)
 		}
 
 		const stop = () => {
-			cancelAnimationFrame(raf)
+			if (raf) cancelAnimationFrame(raf)
 			raf = 0
 		}
 
 		const resize = () => {
-			const rect = canvas.getBoundingClientRect()
-			const dpr = Math.min(window.devicePixelRatio || 1, 2)
+			const rect = container.getBoundingClientRect()
+			dpr = Math.min(window.devicePixelRatio || 1, maxDpr)
 			dimensions.width = rect.width
 			dimensions.height = rect.height
 			dimensions.horizon = rect.height * .55
@@ -424,33 +477,32 @@ const HarvestWind = () => {
 			draw(reducedMotion ? 0 : now)
 		}
 
-		const onResize = () => {
-			if (resizeRaf) return
-			resizeRaf = requestAnimationFrame(() => {
-				resizeRaf = 0
-				resize()
-			})
-		}
+		const setActive = (value: boolean) => value ? start() : stop()
+		setActiveRef.current = setActive
 
-		const onVisibilityChange = () => {
-			if (document.hidden) stop()
-			else start()
-		}
-
+		const resizeObserver = new ResizeObserver(resize)
+		resizeObserver.observe(container)
 		resize()
-		window.addEventListener("resize", onResize, { passive: true })
-		document.addEventListener("visibilitychange", onVisibilityChange)
-		start()
 
 		return () => {
 			stop()
-			cancelAnimationFrame(resizeRaf)
-			window.removeEventListener("resize", onResize)
-			document.removeEventListener("visibilitychange", onVisibilityChange)
+			resizeObserver.disconnect()
+			if (setActiveRef.current === setActive) setActiveRef.current = null
 		}
 	}, [])
 
-	return <canvas ref={canvasRef} className={styles["harvest-wind"]} aria-hidden />
+	useEffect(() => {
+		const syncActivity = () => setActiveRef.current?.(active && !document.hidden)
+		syncActivity()
+		document.addEventListener("visibilitychange", syncActivity)
+		return () => document.removeEventListener("visibilitychange", syncActivity)
+	}, [active])
+
+	return (
+		<div ref={containerRef} className={styles["harvest-wind"]} data-active={active} aria-hidden>
+			<canvas ref={canvasRef} />
+		</div>
+	)
 }
 
 export default memo(HarvestWind)

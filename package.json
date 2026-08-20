@@ -1,6 +1,6 @@
 {
-	"name": "tsukiweb",
-	"version": "0.7.1",
+	"name": "tsukiweb-kt",
+	"version": "0.0.1",
 	"private": true,
 	"type": "module",
 	"engines": {
@@ -20,7 +20,7 @@
 		"motion": "^13.1.0",
 		"react": "^19.2.8",
 		"react-dom": "^19.2.8",
-		"react-error-boundary": "^6.1.2",
+		"react-error-boundary": "^6.1.3",
 		"react-icons": "^5.7.0",
 		"react-toastify": "^11.1.0",
 		"sass": "^1.102.0",

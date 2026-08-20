@@ -50,7 +50,7 @@ const AnimatedRoutes = () => {
 
 	return (
 		<LazyMotion features={domAnimation} strict>
-			{showBackdrop && <HarvestWind />}
+			<HarvestWind active={showBackdrop && !showDisclaimer} />
 			<AnimatePresence mode="wait">
 				<Switch location={pathname} key={keyPresence}>
 					<Route path="/">
