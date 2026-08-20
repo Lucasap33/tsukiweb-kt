@@ -82,6 +82,44 @@ const blockFixes = new Map(Object.entries({
 	'dummy': (block: Block)=> {
 	},
 }))
+
+function quizFix(block: Block, blocks: Map<string, Block>) {
+	for (let i=1; i <= 10; i++) {
+		const b = blocks.get(`${block.name}_${i}`)
+		if (b) {
+			block.extend(b)
+			blocks.delete(b.name)
+		}
+	}
+	for (const [token, i] of block) {
+		if (token instanceof CommandToken && token.cmd == 'select') {
+			token.cmd = 'prompt'
+			let j = i-1
+			let textToken = undefined
+			while (j > 0 && !((textToken = block.at(j)) instanceof TextToken)) {
+				if (!(textToken instanceof CommandToken))
+					throw Error(`Unexpected token ${textToken} before question in ${block.name}`)
+				if (['br', '\\'].includes(textToken.cmd))
+					block.delete(j)
+				else {
+					throw Error(
+						`Unexpected command ${textToken} before quiz in ${block.name}`)
+				}
+				j--
+			}
+			if (!(textToken instanceof TextToken))
+				throw Error(`${block.name} question not preceded by Text token`)
+			block.delete(j)
+			token.args.unshift('%answer', `\`${textToken.text.replaceAll('@', '')}\``)
+			let m
+			for (let k = 0; k < token.args.length; k++) {
+				if (m = token.args[k].match(/^\*quiz\d_\d(true|false)$/))
+					token.args[k] = m[1] == 'false' ? '0' : '1'
+			}
+			block.insert(block.indexOf(token)+1, `add %answer_point,%answer`)
+		}
+	}
+}
 // 1. Put '\' after last text of scenes (fix text skip before choices)
 // and selects outside logic file. Remove '@' if present and trailing 'br'.
 function cleanSceneEnd(block: Block) {
@@ -167,12 +205,7 @@ function interScenesFixes(blocks: Map<string, Block>) {
 	// Merge quizX_Y into quizX
 	for (let i=1; i <= 3; i++) {
 		const quiz = blocks.get(`quiz${i}`)!
-		for (let j = 1; j <= 10; j++) {
-			const subquiz = blocks.get(`quiz${i}_${j}`)!
-			quiz.extend(subquiz)
-			subquiz.delete(0, subquiz.length)
-			blocks.delete(subquiz.name)
-		}
+		quizFix(quiz, blocks)
 	}
 	// s400, s401 and s402 are identical. Conditions are moved to choice after
 	// s400 end has additional delay and line break, keeping s401
