@@ -943,12 +943,11 @@ goto *s212
 *s212_end
 goto *f222
 *f213
-if (%flg5>=1) goto *f218
 goto *f214
 *f214
 goto *s214
 *s214_end
-select *f215,*f216,*f217
+select [!%flg5]*f215,*f216,*f217
 *f215
 goto *s215
 *s215_end
@@ -962,10 +961,6 @@ goto *f222
 goto *s217
 *s217_end
 goto *f222
-*f218
-goto *s218
-*s218_end
-select *f216,*f217
 *f219
 if (%flg5>=1) goto *f220
 if (%flgA>=1) goto *f221
@@ -998,6 +993,7 @@ mov $nextflow,"*f158"
 if (%flg1<1) goto *f179
 goto *f158
 *f158
+mov $nextflow,""
 goto *s158
 *s158_end
 inc %ark_point
@@ -1019,6 +1015,7 @@ mov $nextflow,"*f161"
 if (%flg1<1) goto *f179
 goto *f161
 *f161
+mov $nextflow,""
 goto *s161
 *s161_end
 inc %akira_point
@@ -1066,6 +1063,7 @@ mov $nextflow,"*f171"
 if (%flg1<1) goto *f179
 goto *f171
 *f171
+mov $nextflow,""
 goto *s171
 *s171_end
 inc %nana_point
@@ -1082,6 +1080,7 @@ mov $nextflow,"*f174"
 if (%flg1<1) goto *f179
 goto *f174
 *f174
+mov $nextflow,""
 goto *s174
 *s174_end
 select *f175,*f176

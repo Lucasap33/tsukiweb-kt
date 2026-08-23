@@ -116,6 +116,21 @@ function quizFix(block: Block, blocks: Map<string, Block>) {
 				if (m = token.args[k].match(/^\*quiz\d_\d(true|false)$/))
 					token.args[k] = m[1] == 'false' ? '0' : '1'
 			}
+			// insert a page break before the prompt, remove br
+			for (let i = block.indexOf(token); i >= 0; i--) {
+				const tok = block.at(i)
+				if (tok instanceof TextToken) {
+					if (tok.text.endsWith('@'))
+						tok.text = tok.text.substring(0, tok.text.length-1)
+					block.insert(i+1, '\\')
+				} else if (tok instanceof CommandToken) {
+					if (tok.cmd == '\\')
+						break
+					if (tok.cmd == 'br')
+						block.delete(i)
+				}
+			}
+			//block.insert(block.indexOf(token), '\\')
 			block.insert(block.indexOf(token)+1, `add %answer_point,%answer`)
 		}
 	}
@@ -249,6 +264,7 @@ const deleted_scenes = [
 	's68', 's69', 's70', 's71', // -> s248
 	's155', // -> s156
 	's206', // -> s202
+	's218', // -> s214
 	's245', 's246', 's247', // -> f248
 	's400', 's402', // -> s401
 ]

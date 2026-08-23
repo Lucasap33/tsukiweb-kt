@@ -22,6 +22,7 @@ export const GALLERY_IMAGES: Record<string, GalleryImg> = {
 	"event/ren_h08": { group: "ren", h: true },
 	"event/ren_h09": { group: "ren", h: true },
 
+	"event/cel_e04": { group: "yume" },
 	"event/yume_e01": { group: "yume" },
 	"event/yume_e01z": { group: "yume", altOf: "event/yume_e01" },
 	"event/yume_e02": { group: "yume" },

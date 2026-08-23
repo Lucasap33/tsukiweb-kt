@@ -55,8 +55,8 @@ export class History extends HistoryBase<ScriptPlayer, PageType,
 //________________________________page creation_________________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  onChoicePrompt(choices: Choice[]) {
-    this.setPage({ type: 'choice', choices, selected: -1 })
+  onChoicePrompt(text: string, choices: Choice[]) {
+    this.setPage({ type: 'choice', text: text, choices, selected: -1 })
   }
 
   onChoiceSelected(selection: number) {

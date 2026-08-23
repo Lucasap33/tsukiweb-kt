@@ -30,8 +30,8 @@ const GEN_LOGIC 	   = true
 //##############################################################################
 
 const redirected_scenes = {
-	dummy : "dummy2",
 	f400: null, f402: null, // replaced by 401
+	f218: null, // replaced by 214
 }
 
 function redirect(token: CommandToken) {
@@ -153,6 +153,22 @@ function getBlockProps(
 						addChoiceCondition(t, "*f172", "%flgP")
 				})
 				break
+			case 'f158' : blockFixes.push(b=> {
+					b.insert(1, 'mov $nextflow, ""')
+				})
+				break
+			case 'f161' : blockFixes.push(b=> {
+					b.insert(1, 'mov $nextflow, ""')
+				})
+				break
+			case 'f171' : blockFixes.push(b=> {
+					b.insert(1, 'mov $nextflow, ""')
+				})
+				break
+			case 'f174' : blockFixes.push(b=> {
+					b.insert(1, 'mov $nextflow, ""')
+				})
+				break
 			case 'f201' : tokenFixes.push(t=> {
 					if (t instanceof ConditionToken)
 						return false
@@ -161,6 +177,12 @@ function getBlockProps(
 			case 'f202' : tokenFixes.push(t=> {
 					if (t instanceof CommandToken && t.cmd == 'select')
 						addChoiceCondition(t, "*f205", "!%flg5")
+				})
+				break
+			case 'f214': tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select') {
+						addChoiceCondition(t, "*f215", "!%flg5")
+					}
 				})
 				break
 			case 'f248' : tokenFixes.push(t=> {
@@ -185,6 +207,7 @@ function getBlockProps(
 			case 'f68' : case 'f69' : case 'f70' : case 'f71' : // -> f248
 			case 'f155' : // -> f156
 			case 'f206' : // -> f202
+			case 'f218' : // -> f214
 			case 'f245' : case 'f246' : case 'f247' : // -> f248
 			case 'f400' : case 'f402' : // -> f401
 				return null

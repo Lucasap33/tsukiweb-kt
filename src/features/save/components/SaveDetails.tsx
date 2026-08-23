@@ -38,7 +38,7 @@ const SaveDetails = ({id, saveState, deleteSave}: SaveDetailsProps)=> {
 					</div>
 				</div>
 				<div className="save-details-content">
-					<ProgressPanel regard={points} flags={flags}/>
+					<ProgressPanel points={points} flags={flags}/>
 
 					<div className="actions">
 						<Button onClick={deleteSave.bind(null, id)}

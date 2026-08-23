@@ -1,6 +1,6 @@
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { strings } from "translation/lang"
-import { CharId } from "app/utils/types";
+import { PointId } from "app/utils/types";
 
 
 const EndingList = ({ CHARS, script }: { CHARS: string[], script: ScriptPlayer }) => {
@@ -21,7 +21,7 @@ const EndingList = ({ CHARS, script }: { CHARS: string[], script: ScriptPlayer }
 	)
 }
 
-const RegardRow = ({ char, value, max }: {char: CharId, value: number, max: number}) => {
+const RegardRow = ({ char, value, max }: {char: PointId, value: number, max: number}) => {
 	const iconParams = {
 		className:"heart-icon",
 		fill: `url(#${char}_grad)`
@@ -30,7 +30,7 @@ const RegardRow = ({ char, value, max }: {char: CharId, value: number, max: numb
 	return (
 		<div className="row">
 			<img className="char" src={`./res/chars/${char}.webp`}
-				alt={strings.characters[char]} />
+				alt={strings.characters[char as keyof typeof strings.characters] ?? char} />
 			<div className="hearts-list">
 				<svg viewBox="-3.3 -3.3 13.5 6.3">
 					<use href="#regard_heart" {...iconParams} className="badge"/>
@@ -61,17 +61,17 @@ const FlagsList = ({ flags }: { flags: string[] }) => {
 type Props = {
 	script: ScriptPlayer,
 	flags?: never
-	regard?: never
+	points?: never
 } | {
 	script?: never,
 	flags: Set<string>|Array<string>,
-	regard: Partial<Record<CharId, number>>
+	points: Partial<Record<PointId, number>>
 }
-export const ProgressPanel = ({script, flags, regard}: Props) => {
+export const ProgressPanel = ({script, flags, points}: Props) => {
 
 	if (script) {
 		flags = script.flags
-		regard = Object.fromEntries(script.points.entries())
+		points = Object.fromEntries(script.points.entries())
 	}
 
 	return (

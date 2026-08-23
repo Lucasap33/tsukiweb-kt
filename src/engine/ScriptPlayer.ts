@@ -1,18 +1,18 @@
 import { ScriptPlayerBase } from "@tsukiweb/common/script/ScriptPlayer"
-import { CharId, LabelName } from "app/utils/types";
+import { PointId, LabelName, SceneName } from "app/utils/types";
 import { creditsScript, fetchBlockLines, isScene, nextLabel } from "engine/utils";
-import { settings } from "engine/settings";
+import { settings, viewedScene } from "engine/settings";
 import { assets } from "translation/assets";
-import { getGameVariable, setGameVariable } from "engine/variables";
-import { CommandRecord, NumVarName, VarName, VarType } from "@tsukiweb/common/script/types";
+import { CommandRecord, VarName, VarType } from "@tsukiweb/common/script/types";
 import { History } from "./history";
 import { extractInstructions } from "@tsukiweb/common/script/utils";
+import { SCENE_ATTRS } from "app/utils/constants";
 
 //#endregion ###################################################################
 //#region                             TYPES
 //##############################################################################
 
-export type Points = Record<CharId|'kagi'|'answer', number>
+export type Points = Record<PointId, number>
 
 //#endregion ###################################################################
 //#region                         BASE COMMANDS
@@ -73,7 +73,7 @@ function processGoSub(arg: string, _: string, script: ScriptPlayer, onFinish: Vo
 //#endregion
 //##############################################################################
 
-export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, History> {
+export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, History> {
 
 //#endregion ###################################################################
 //#region                         ATTRS & PROPS
@@ -82,7 +82,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, Hi
 //_____________________________private attributes_______________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
+    private _tempVariables = new Map<string, string|number>()
 //_______________________public attributes & properties_________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     
@@ -107,6 +107,14 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, Hi
     }
 
 //#endregion ###################################################################
+//#region                        PRIVATE METHODS
+//##############################################################################
+
+    viewedScene(label: SceneName) {
+        return viewedScene(label) || this.history.hasScene(label)
+    }
+
+//#endregion ###################################################################
 //#region                        PUBLIC METHODS
 //##############################################################################
 
@@ -114,10 +122,8 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, Hi
                     label: LabelName): boolean {
         if (super.isLinePageBreak(line, index, sceneLines, label))
             return true
-        if (line.startsWith('phase')) {
-            // avoid counting 2 pages for conditional phases which have 2 'phase'
-            if (!sceneLines[index+1].startsWith('skip'))
-                return true
+        if (line.startsWith('prompt')) {
+            return true
         }
         return false
     }
@@ -130,6 +136,31 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, Hi
         return { }
     }
 
+    override hasFlag(flag: string) {
+        if (super.hasFlag(flag))
+            return true
+        if (flag.length == 1)
+            return SCENE_ATTRS["scene-points"].flags[flag].some(s=>this.viewedScene(s))
+        return false
+    }
+    override setFlag(flag: string) {
+        if (flag.length > 1)
+            super.setFlag(flag)
+        // permanent flags are calculated with viewed scenes
+    }
+    override getPoints(id: PointId) {
+        if (SCENE_ATTRS["scene-points"].reset.includes(id))
+            return super.getPoints(id)
+        else
+            return Object.entries(SCENE_ATTRS["scene-points"].points[id])
+                .reduce((sum, [s, p])=> this.viewedScene(s as SceneName) ? sum + p : sum, 0)
+    }
+    override setPoints(id: PointId, value: number) {
+        if (SCENE_ATTRS["scene-points"].reset.includes(id))
+            super.setPoints(id, value)
+        // permanent points are calculated with viewed scenes
+    }
+
     //static override defaultPageContext() { return ScriptPlayerBase.defaultPageContext() }
     
     //static override defaultBlockContext() { return ScriptPlayerBase.defaultBlockContext() }
@@ -137,12 +168,41 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, CharId, {}, {}, Hi
 //#endregion ###################################################################
 //#region                      INHERITED ABSTRACTS
 //##############################################################################
-
     override writeVariable<T extends VarName>(name: T, value: VarType<T>) {
-        setGameVariable(this, name as NumVarName, value as number)
+        let m
+        if ((m = name.match(/^%flg_?([\dA-Za-z]+)$/))) {
+            if (value != 0)
+                this.setFlag(m[1])
+            else
+                this.deleteFlag(m[1])
+        } else if ((m = name.match(/^%(\w+)_point$/))) {
+            this.setPoints(m[1] as PointId, value as number)
+        } else if (["%answer", "$nextflow"].includes(name)) {
+            this._tempVariables.set(name, value)
+        } else {
+			throw Error(`Unknown or read-only variable ${name}`)
+        }
     }
+
     override readVariable<T extends VarName>(name: T): VarType<T> {
-        return getGameVariable(this, name as NumVarName) as VarType<T>
+        let m
+        if ((m = name.match(/^%flg_?([\dA-Za-z]+)$/))) {
+            return (this.hasFlag(m[1]) ? 1 : 0) as VarType<T>
+        } else if ((m = name.match(/^%(\w+)_point$/))) {
+            return this.getPoints(m[1] as PointId) as VarType<T>
+        } else if (this._tempVariables.has(name)) {
+            return this._tempVariables.get(name) as VarType<T>
+        } else switch (name) {
+            case '%answer' as VarName : return 0 as VarType<T>
+            case '$nextflow' as VarName:
+                // if for some reason the variable was not save,
+                // check which value should be stored form the history
+                if (this.history.hasScene('s157')) return '*f158' as VarType<T>
+                if (this.history.hasScene('s160')) return '*f161' as VarType<T>
+                if (this.history.hasScene('s173')) return '*f174' as VarType<T>
+                else return 's171' as VarType<T> // no scene for f170
+            default : throw Error(`Unknown variable ${name}`)
+        }
     }
 
     override fetchLines(label: LabelName): Promise<string[]> {

@@ -27,12 +27,20 @@ const TextContent = ({ text }: { text: string }) => {
 }
 
 const ChoiceContent = ({ content }: { content: PageEntry<"choice"> }) => {
-	const { choices, selected } = content
-	return choices.map(({ str, index }) =>
+	const { text, choices, selected } = content
+	const choicesElmts = choices.map(({ str, index }) =>
 		<div key={index} className={classNames('choice', { selected: index == selected })}>
-			{str}
+			<Bbcode text={str}/>
 		</div>
 	)
+	if (text?.length ?? 0 > 0) {
+		return <>
+			<Bbcode text={text}/>
+			{choicesElmts}
+		</>
+	} else {
+		return choicesElmts
+	}
 }
 
 const SkipContent = ({ history, content }: { history: History, content: PageEntry<"skip"> }) => {

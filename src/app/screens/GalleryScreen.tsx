@@ -3,7 +3,6 @@ import '@features/gallery/styles/gallery.scss'
 import * as m from "motion/react-m"
 import { AnimatePresence, Variants } from 'motion/react'
 import { PageTabsLayout } from '@tsukiweb/common/ui-core'
-import { CharId } from 'app/utils/types'
 import GalleryImage from 'features/gallery/components/GalleryImage'
 import { audio } from 'engine/audio'
 import { GalleryTotal } from 'features/gallery/components/GalleryComponents'
@@ -14,6 +13,7 @@ import { strings, useStrings } from 'translation/lang';
 import { SCREEN } from 'app/utils/display';
 import { useScreenAutoNavigate } from 'app/hooks';
 import { GALLERY_IMAGES } from 'features/gallery/utils/gallery-data';
+import { GalleryImg } from 'app/utils/types';
 
 const container: Variants = {
 	hidden: { opacity: 0 },
@@ -43,7 +43,7 @@ const galleryTabs = new Set(Object.values(GALLERY_IMAGES).map(img=>img.group))
 const GalleryScreen = () => {
 	useScreenAutoNavigate(SCREEN.GALLERY)
 	const strings = useStrings()
-	const [selectedTab, setSelectedTab] = useQueryParam<CharId>("tab", "ren")
+	const [selectedTab, setSelectedTab] = useQueryParam<GalleryImg['group']>("tab", "ren")
 
 	const tabImages: string[] = useMemo(() => {
 		const imagesTmp = cg.getByGroup(selectedTab)

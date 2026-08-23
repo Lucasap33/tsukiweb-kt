@@ -17,6 +17,11 @@ export const APP_INFO = {
 
 export const SCENE_ATTRS: {
   'scene-names': PartialRecord<SceneName, string>,
+  'scene-points': {
+    reset: string[],
+    flags: Record<string, SceneName[]>,
+    points: Record<string, Record<SceneName, number>>
+  }
   'scene-graphs': PartialRecord<SceneName, ThumbnailsGraphics>,
   'scene-deadEnds': Array<SceneName>,
   'scene-osiete': Array<SceneName>,

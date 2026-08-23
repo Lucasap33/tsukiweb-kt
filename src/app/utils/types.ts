@@ -1,20 +1,21 @@
-export type CharId = 'aki'|'ark'|'cel'|'his'|'koha'|'akira'|'ren'|'yume'
+export type PointId = 'akira' | 'answer' | 'ark' | 'cel' | 'hisui' | 'kagi'
+					| 'kaibyo' | 'nana' | 'ren' | 'gojitsudan'
 
-export type SceneName = `s${number}`|`q${number}`
+export type SceneName = `s${number}`
 
 type FBlockName = `f${number}`
 
 export type LabelName = SceneName | FBlockName | 'endofplay'
 
-export type Choice = {
+export type Choice<T = any> = {
 	index: number
 	str: string
-	label: LabelName,
+	value: T,
 	disable?: boolean
 }
 
 export type GalleryImg = {
-	group: CharId,
+	group: 'yume' | 'ren',
 	h?: true,
 	altOf?: string
 }

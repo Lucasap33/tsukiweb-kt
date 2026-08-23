@@ -16,7 +16,6 @@ function processVarName(varName: string) {
 			switch (m[1]) {
 				case 'ren' : case 'ark'	: case 'akira': case 'gojitsudan' :
 				case 'kagi': case 'kaibyo': case 'answer': return m[0]
-				case 'kohaku'	: return '%koha_point'
 				case 'hisui'	: return '%his_point'
 				case 'ciel'		: return '%cel_point'
 				case 'nanako'	: return '%nana_point'

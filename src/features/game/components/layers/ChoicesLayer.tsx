@@ -9,6 +9,7 @@ import { checkIfCondition } from "@tsukiweb/common/script/utils"
 import { Choice, LabelName } from "app/utils/types";
 import { strings } from "translation/lang";
 import { history } from "engine/history"
+import { VarName } from "@tsukiweb/common/script/types";
 
 const container: Variants = {
 	hidden: {},
@@ -38,13 +39,44 @@ type SelectionCallback = (choice: Choice)=>void
 //##############################################################################
 
 
+function processChoices<T extends Array<Choice<any>>>(
+			setChoices: (choices: Choice[])=>void,
+			setText: (text: string)=>void,
+			onSelectionRef: RefObject<SelectionCallback | undefined>,
+			onSelection: SelectionCallback,
+			text: string, choices: T,
+			onFinish: VoidFunction
+		) {
+	onSelectionRef.current = (choice)=> {
+		//console.debug(choice)
+		onSelectionRef.current = undefined
+		onSelection(choice)
+		setChoices([])
+		onFinish()
+		history.onChoiceSelected(choice.index)
+	}
+
+	if (choices.length == 1)
+		onSelectionRef.current(choices[0])
+	else {
+		setText(text)
+		setChoices(choices)
+		
+		history.onChoicePrompt(text, choices)
+		return {
+			next: ()=>{}, // prevent continuing to next instruction
+		}
+	}
+}
+
 function processSelect(setChoices: (choices: Choice[])=>void,
-											 onSelection: RefObject<SelectionCallback|undefined>,
-											 arg: string, _cmd: string, script: ScriptPlayer,
-											 onFinish: VoidFunction) {
+					   setText: (text: string)=>void,
+					   onSelection: RefObject<SelectionCallback|undefined>,
+					   arg: string, _cmd: string, script: ScriptPlayer,
+					   onFinish: VoidFunction) {
 	const currentLabel = script.currentLabel.replace('skip', 'f') as LabelName
 	const labels = arg.split(',')
-	const choices: Choice[] = labels.map((item, index) => {
+	const choices: Choice<LabelName>[] = labels.map((item, index) => {
 		const m = item.match(/^(\([^\)]*\))?(\[[^\]]*\])?(\*\w+)$/)
 		if (!m)
 			throw Error(`Unable to parse choice entry "${item}"`)
@@ -61,33 +93,43 @@ function processSelect(setChoices: (choices: Choice[])=>void,
 		return {
 			index,
 			str: strings.choices[currentLabel]![index],
-			label,
+			value: label,
 			disable
 		}
 	}).filter(x => x != null)
 
-	if (choices.length == 0)
-		console.error(`canot parse choices ${arg}`)
-
-	onSelection.current = (choice)=> {
-		//console.debug(choice)
-		script.setNextLabel(choice.label)
+	return processChoices(setChoices, setText, onSelection, (choice)=>{
+		script.setNextLabel(choice.value)
 		script.skipCurrentBlock()
-		onSelection.current = undefined
-		setChoices([])
-		onFinish()
-		history.onChoiceSelected(choice.index)
-	}
+	}, "", choices, onFinish)
+}
 
-	if (choices.length == 1)
-		onSelection.current(choices[0])
-	else {
-		setChoices(choices)
-		history.onChoicePrompt(choices)
-		return {
-			next: ()=>{}, // prevent continuing to next instruction
+function processPrompt(setChoices: (choices: Choice[])=>void,
+			setText: (text: string)=>void,
+			onSelection: RefObject<SelectionCallback|undefined>,
+			arg: string, _cmd: string, script: ScriptPlayer,
+			onFinish: VoidFunction	
+		) {
+	let m = arg.match(/^(?<var>[%$]\w+),\s*`(?<text>[^`]+)`,/)
+	if (!m)
+		throw Error(`Ill-formated 'prompt' argument`)
+	const varName = m.groups!['var']
+	const text = m.groups!['text']
+	arg = arg.substring(m[0].length)
+	const choices: Choice<string|number>[] = Array.from(
+		arg.matchAll(/,?`(?<text>[^`]*)`,\s*(?<val>[^,]),?/g),
+		(m, index)=> {
+			let {text, val} = m.groups! as {text: string, val: string|number}
+			if (text.startsWith('%'))
+				val = parseInt(val as string)
+			return {
+				str: text, value: val, index
+			} as Choice
 		}
-	}
+	)
+	return processChoices(setChoices, setText, onSelection, (choice)=> {
+		script.writeVariable(varName as VarName, choice.value)
+	}, text, choices, onFinish)
 }
 
 //#endregion ###################################################################
@@ -102,11 +144,14 @@ type Props = {
 
 const ChoicesLayer = ({script, display, navigable}: Props) => {
 	const [choices, setChoices] = useState<Choice[]>([])
+	const [text, setText] = useState<string>("")
 	const onSelection = useRef<SelectionCallback|undefined>(undefined)
 
 	useEffect(()=> {
 		script.setCommand('select',
-			processSelect.bind(null, setChoices, onSelection))
+			processSelect.bind(null, setChoices, setText, onSelection))
+		script.setCommand('prompt',
+			processPrompt.bind(null, setChoices, setText, onSelection))
 	}, [script])
 
 	if (!display || choices.length == 0) return null
@@ -114,6 +159,11 @@ const ChoicesLayer = ({script, display, navigable}: Props) => {
 	return (
 		<div className="layer" id="layer-choices">
 			<m.div className="choices-container" variants={container} initial="hidden" animate="show">
+				{text.length > 0 &&
+					<m.div variants={item} style={{width: '100%', display: 'grid'}}>
+						<span><Bbcode text={text}/></span>
+					</m.div>
+				}
 				{choices.map((choice, i) =>
 					<m.div key={choice.index} variants={item} style={{width: '100%', display: 'grid'}}>
 						<Button
