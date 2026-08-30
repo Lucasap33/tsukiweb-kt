@@ -8,7 +8,8 @@ import { Token, CommandToken, TextToken, ConditionToken, LabelToken, ErrorToken,
 //#region                       GENERIC FIXES
 //##############################################################################
 
-const durations = new Map(Object.entries({'fst': 400, 'mid': 800, 'slw': 1500}))
+const durations = new Map(Object.entries({
+    'fastest': 50, 'fst': 400, 'mid': 800, 'slw': 1500, 'slowest': 12000}))
 
 function simplifyImage(image: string) {
     return image.replaceAll('\\', '/')

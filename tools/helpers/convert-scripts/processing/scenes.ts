@@ -67,6 +67,21 @@ function commandFix(token: Token) {
 				throw Error(`Unexpected wave id ${token.args[0]}`)
 			}
 			break
+		case 'vsp' :
+			if (token.args[1] == '0')
+				return false // sprite removed automatically
+			token.cmd = 'ld'
+			let img
+			switch(token.args[0]) {
+				case '0' : img = '":a;image\\tachi\\his_nt05a.jpg"'; break
+				case '1' : img = '":a;image\\tachi\\his_nt05b.jpg"'; break
+				case '2' : img = '":a;image\\tachi\\his_nt05c.jpg"'; break
+				case '3' : img = '":a;image\\tachi\\his_nt05d.jpg"'; break
+				default : throw Error(
+					`Unexpected argument value '${token.args[0]}'for vsp`)
+			}
+			token.args = ['c', img, 'crossfade_fastest']
+			break
 	}
 }
 
@@ -79,8 +94,17 @@ const tokenFixes = new Map(Object.entries({
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const blockFixes = new Map(Object.entries({
-	'dummy': (block: Block)=> {
+	's533': (block: Block)=> {
+		processJumps(block)
+		const i = block.findIndex(t=>t instanceof CommandToken && t.cmd == 'lsp')
+		const tok = block.at(i)! as CommandToken
+		tok.cmd = 'ld'
+		tok.args = ['c', tok.args[1], (block.at(i+1)! as CommandToken).args[1]]
+		block.delete(i+1) // delete 'cl c,crossfade_slw' that follow lsp
+		const bg = block.find((t, j)=> j > i && t instanceof CommandToken && t.cmd == 'bg')
+		// TODO Exceptionally, during bg change, center sprite should remain
 	},
+	's530': processJumps
 }))
 
 function quizFix(block: Block, blocks: Map<string, Block>) {
@@ -123,6 +147,7 @@ function quizFix(block: Block, blocks: Map<string, Block>) {
 					if (tok.text.endsWith('@'))
 						tok.text = tok.text.substring(0, tok.text.length-1)
 					block.insert(i+1, '\\')
+					break
 				} else if (tok instanceof CommandToken) {
 					if (tok.cmd == '\\')
 						break
@@ -162,6 +187,20 @@ function cleanSceneEnd(block: Block) {
 				token.text = token.text.substring(0, token.text.length-1)
 			block.insert(i+1, new CommandToken(token.lineIndex, '\\'))
 			break
+		}
+	}
+}
+
+function processJumps(block: Block) {
+	for (let [t, i] of block) {
+		if (t instanceof ConditionToken)
+			t = t.command
+		if (t instanceof CommandToken && t.cmd == 'jumpb') {
+			const j = block.lastIndexOf('~', i)
+			if (j < 0) throw Error(`Unexpected 'jumpb' without '~'`)
+			t.cmd = 'skip'
+			t.args = [(block.at(j)!.lineIndex - t.lineIndex).toString()]
+			block.delete(j) // assume only one '~' per jump
 		}
 	}
 }
@@ -236,12 +275,13 @@ function interScenesFixes(blocks: Map<string, Block>) {
 const kept_commands = [
 	'play', 'playstop', 'wave', 'waveloop', 'wavestop', 'mp3loop', 'stop', // audio
 	'bg', 'ld', 'cl','quakex', 'quakey', 'monocro', // graphics
-	'if', 'skip', 'jumpf', 'jumpb', '~', // in-scene movements
+	'if', 'skip', // in-scene movements
+	'jumpb', '~', // replaced with skip
 	'gosub', // used for phase transitions
 	'@', '\\', 'click', 'br', 'textcolor', // text commands, wait click
 	'!w', 'wait', 'waittimer', 'delay', // delay
 	'mov', 'add', 'sub', 'inc', 'dec', // set variables
-	'lsp', 'lsph', 'vsp', 'print', // replaced with ld, cl or bg
+	'lsp', 'vsp', // replaced with ld
 	'select', // used for quiz, to be replaced with special command
 ]
 // TODO: selgosub commands should be removed. They are only useful in KT
@@ -256,8 +296,10 @@ const ignored_commands = [
 	'goto', 'osiete', 'return', 'selgosub', //logic-only commands
 	'saveon', 'saveoff', // (en/dis)able saving to improve perf. on NScr engine. Useless here
 	'btndef', 'blt', // used in s530, whole section replaced with scrolling background
-	'csp', // useless: needs 'print' to work, but immediately followed by bg
-	
+	'csp', // useless: needs 'print' to work, but always immediately followed by bg
+	'print', // preceeding vsp replaced by ld
+	'lsph', // sprite statically replaced in vsp
+	'jumpf', // only used in menus
 ]
 const deleted_scenes = [
 	's42', // -> s43
