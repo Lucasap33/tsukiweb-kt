@@ -89,6 +89,8 @@ const HistoryTab = ({
 	}: HistoryTabProps) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const pagesArray = Array.from(history.allPages)
+	const [ratioWidth, ratioHeight] = settings.fixedRatio.split('/').map(Number)
+	const gameTextWidth = ratioWidth ? `min(100%, calc(${100 * ratioWidth / ratioHeight}vh - 12cqmin))` : undefined
 
 	useLayoutEffect(() => {
 		if (containerRef.current) {
@@ -106,7 +108,7 @@ const HistoryTab = ({
 
 	return (
 		<div id="history" className="scroll-container" ref={containerRef}>
-			<div className="text-container" style={{ minHeight: "calc(100% + 2px)"}}>
+			<div className="text-container" style={{ minHeight: "calc(100% + 2px)", width: gameTextWidth }}>
 				{pagesArray.map((page, i) =>
 					<PageElement key={i} history={history} content={page}
 						onLoad={() => handlePageClick(i)}
