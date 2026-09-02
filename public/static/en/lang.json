@@ -23,7 +23,8 @@
       "data": "No data collected, everything is stored in your browser. Manage your data %0here%1."
     },
     "install": "Install",
-    "share": "Share"
+    "share": "Share",
+    "copied": "Copied to clipboard"
   },
   "extra": {
     "gallery": "Gallery",

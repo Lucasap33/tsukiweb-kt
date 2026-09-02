@@ -23,7 +23,8 @@
       "data": "全てがブラウザに保存されて、データを集められません。データを%0ここで%1管理できます。"
     },
     "install": "Install",
-    "share": "Share"
+    "share": "Share",
+    "copied": "Copied to clipboard"
   },
   "extra": {
     "gallery": "ギャラリー",

@@ -76,6 +76,36 @@
 		z-index: 0;
 		overflow: hidden;
 		pointer-events: none;
+		container-type: inline-size;
+
+		// Spécial effect for words
+		.kanwa-line {
+			position: relative;
+			display: inline-block;
+
+			&::after {
+				content: "";
+				position: absolute;
+				top: calc(100% + 0.2em);
+				width: 100vw;
+				height: 1px;
+				background-color: currentColor;
+			}
+			&.kanwa-line-to-right {
+				margin-left: calc(10cqw - var(--margin));
+
+				&::after {
+					left: 0;
+				}
+			}
+			&.kanwa-line-from-left {
+				margin-right: calc(10cqw - var(--margin));
+
+				&::after {
+					right: 0;
+				}
+			}
+		}
 
 		.blur {
 			filter: blur(80px) brightness(0.4);
