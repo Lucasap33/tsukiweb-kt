@@ -3,7 +3,7 @@ import { AnimatePresence, LazyMotion, domAnimation } from 'motion/react';
 import '@tsukiweb/common/styles/main.scss'
 import '../styles/App.scss'
 import '@tsukiweb/common/graphics/styles/graphics.scss'
-import ExtraLayout from "features/title-menu/components/ExtraLayout";
+import ExtraShell from "app/layouts/ExtraShell";
 import { useCallback, useEffect, useState } from "react";
 import HarvestWind from "app/components/HarvestWind";
 import ConfigScreen from "app/screens/ConfigScreen";
@@ -64,16 +64,16 @@ const AnimatedRoutes = () => {
 					</Route>
 
 					<Route path={SCREEN.GALLERY}>
-						<ExtraLayout><GalleryScreen /></ExtraLayout>
+						<ExtraShell><GalleryScreen /></ExtraShell>
 					</Route>
 					<Route path={`${SCREEN.SCENES}/:sceneId`}>
-						<ExtraLayout><SceneReplayScreen /></ExtraLayout>
+						<ExtraShell><SceneReplayScreen /></ExtraShell>
 					</Route>
 					<Route path={SCREEN.SCENES}>
-						<ExtraLayout>WIP</ExtraLayout>
+						<ExtraShell>WIP</ExtraShell>
 					</Route>
 					<Route path={SCREEN.DREAMS}>
-						<ExtraLayout><DreamsScreen /></ExtraLayout>
+						<ExtraShell><DreamsScreen /></ExtraShell>
 					</Route>
 
 					<Route path={SCREEN.WINDOW}>

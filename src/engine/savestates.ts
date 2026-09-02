@@ -63,6 +63,8 @@ class SavesManager extends SavesManagerBase<SaveState> {
           id = save.id ?? save.date
         }
         //save = await updateSave(save)
+        if (!Object.hasOwn(save, 'pages'))
+          throw Error(`Ill-formed save`)
         return save
       })
     )
@@ -118,4 +120,3 @@ export function compareSaveStates(ss1: SaveState, ss2: SaveState) {
 	return ss1.id == QUICK_SAVE_ID ? -1 : ss2.id == QUICK_SAVE_ID ? 1
 		: (ss2.date ?? 0) - (ss1.date ?? 0)
 }
-

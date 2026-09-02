@@ -43,6 +43,6 @@ export default defineConfig(({ mode }) => ({
 	},
 	server: {
 		proxy: mode === 'proxy' ? proxyRules : {},
-		host: 'ktweb.localhost',
+		port: 5174
 	}
 }))
