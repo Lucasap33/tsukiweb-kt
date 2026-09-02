@@ -6,14 +6,13 @@
 	grid-template-columns: 210px 1fr;
 	grid-template-areas: "extra-menu extra-content";
 	padding: 0;
-	background: rgb(42 21 0 / 60%);
+	isolation: isolate;
 
 	.rightOrnament, .leftOrnament {
 		position: absolute;
 		pointer-events: none;
 		opacity: 0.62;
 		width: clamp(150px, 20vw, 250px);
-		filter: sepia(1) saturate(1.35) brightness(1.18);
 		mix-blend-mode: screen;
 		-webkit-mask-image: linear-gradient(to right, transparent, black 8em);
 		mask-image: linear-gradient(to right, transparent, black 8em);
@@ -87,6 +86,7 @@
 		grid-area: extra-content;
 		min-width: 0;
 		min-height: 0;
+		display: grid;
 	}
 
 	@media screen and (orientation: portrait) and (max-width: 979px) {

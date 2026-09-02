@@ -7,7 +7,6 @@
 	pointer-events: none;
 	opacity: 0.62;
 	width: clamp(150px, 20vw, 250px);
-	filter: sepia(1) saturate(1.35) brightness(1.18);
 	mix-blend-mode: screen;
 	-webkit-mask-image: linear-gradient(to right, transparent, black 8em);
 	mask-image: linear-gradient(to right, transparent, black 8em);

@@ -46,10 +46,37 @@ dialog.modal {
 	height: 100%;
 	position: relative;
 	display: flex;
-	background: rgb(42 21 0 / 60%);
+}
 
-	&#title-menu {
+.page-backdrop {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+
+	&::before, &::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		transition: opacity .3s ease-out;
+	}
+
+	&::before {
+		background: rgb(42 21 0 / 60%);
+	}
+
+	&::after {
 		background: linear-gradient(180deg, transparent, rgba(42 21 0 / 20%));
+		opacity: 0;
+	}
+
+	&[data-variant="title"] {
+		&::before {
+			opacity: 0;
+		}
+		&::after {
+			opacity: 1;
+		}
 	}
 }
 /* Overlay */
