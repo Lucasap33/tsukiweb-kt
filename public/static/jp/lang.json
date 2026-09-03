@@ -95,7 +95,7 @@
     "controls": {
       "next": "つぎ",
       "graphics": "Show / hide text",
-      "menu": "Back, Show / Hide menu",
+      "back": "Back, Show / Hide menu",
       "bg_move": "Move background image",
       "auto_play": "オートモード",
       "page_nav": "次／前のページへ",

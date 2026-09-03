@@ -78,7 +78,7 @@
 		}
 		.back-action {
 			padding: .5rem;
-			padding-bottom: calc(1.5rem + var(--safe-area-max-inset-bottom));
+			padding-bottom: 1.5rem;
 		}
 	}
 
@@ -113,7 +113,6 @@
 				width: 100%;
 				min-width: 0;
 				margin: 0;
-				padding-top: .5em;
 				padding-inline: var(--page-padding);
 				font-size: 0.8em;
 				gap: 1.8em;

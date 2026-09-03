@@ -77,7 +77,9 @@ const DreamsList = () => {
 			<SceneShortcut
 				unlocked={true}
 				images={{
-					"bg": "bg/bg_40a"
+					"bg": "bg/bg_34a",
+					"l": "tachi/koha_t05",
+					"r": "tachi/his_t04"
 				}}
 				title={strings.scenario.scenes.s534}
 				onClick={play.bind(undefined, "s534")}
