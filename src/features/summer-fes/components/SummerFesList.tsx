@@ -67,6 +67,17 @@ const SummerFesList = () => {
 				onKeyDown={e => e.key === "Enter" && play("s542")}
 				nav-auto={1}
 			/>
+			{/* Only display once all Summer Festival scenes have been completed */}
+			<SceneShortcut
+				unlocked={true}
+				images={{
+					"bg": "bg/ima_02"
+				}}
+				title={strings.scenario.scenes.s543}
+				onClick={play.bind(undefined, "s543")}
+				onKeyDown={e => e.key === "Enter" && play("s543")}
+				nav-auto={1}
+			/>
 		</div>
 	)
 }
