@@ -16,6 +16,7 @@ type StringsTypeBase = {
   images: {
     "redirect-ids": Record<string, ImageRedirect<`${string}\$${string}`>>
     "redirected-images": Record<string, string|ImageRedirect<string>>
+    "word-subtitles": Record<string, string>
     "words": Record<string, string>
   } & Record<ResolutionId, Record<string, string>>
   choices: PartialRecord<LabelName, string[]>
@@ -46,6 +47,7 @@ export const {
   assetsPath: ASSETS_PATH,
   optionalPaths: [
     "images.words",
+    "images.word-subtitles",
     "images.thumb",
     "images.src",
     "audio",

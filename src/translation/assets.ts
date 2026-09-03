@@ -5,11 +5,14 @@ import { ResolutionId, TextImage } from "@tsukiweb/common/translation/lang"
 import { closeBB } from "@tsukiweb/common/utils/Bbcode"
 import { AssetsCache } from "@tsukiweb/common/utils/AssetsCache"
 import { assetPath, imageFormat } from "@tsukiweb/common/utils/images"
+import { WORD_IMAGE_IDS } from "@assets/game/word-images"
 
 export const assets = new AssetsCache<{
   'audio': AudioBuffer|undefined
   'graph': string
 }>()
+
+const WORD_IMAGES = new Set<string>(WORD_IMAGE_IDS)
 
 //##############################################################################
 //#                                  PRIVATE                                   #
@@ -106,6 +109,11 @@ export function imageSrc(img: string, res: ResolutionId = "src") {
 export function wordImage(img: string) : string {
   if (img.startsWith("word/"))
     img = img.substring("word/".length)
+  if (WORD_IMAGES.has(img)) {
+    const subtitle = strings.images["word-subtitles"][img]
+    const text = subtitle ? `$b\`${closeBB(`[center]${subtitle}`)}\`` : ""
+    return `"word/${img}"${text}`
+  }
   const textImage = strings.images.words[img]
   if (!textImage) {
     throw Error(`unknown word-image ${img}`)

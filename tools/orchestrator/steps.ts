@@ -31,6 +31,7 @@ import {
 } from '@tsukiweb/common/tools/utils/fs-utils.ts'
 import { resolveExecutable, runCommand, withWorkingDirectory } from '@tsukiweb/common/tools/utils/process-utils.ts'
 import { logger } from '@tsukiweb/common/tools/utils/logger.ts'
+import { WORD_IMAGE_IDS } from '../../src/assets/game/word-images.ts'
 import {
   check,
   combine,
@@ -53,6 +54,7 @@ const ARC_DIRS = [
   'image/event',
   'image/tachi',
 ]
+const WORD_IMAGE_FILES = WORD_IMAGE_IDS.map(id => `image/word/${id}.jpg`)
 
 const arcDir = (paths: Paths) => path.join(paths.workspace, path.basename(paths.arcArchive))
 const nonEmptyDirCheck = (directory: string) => nonEmptyDirectoryCheck(directory, displayPath(directory))
@@ -60,12 +62,25 @@ const fileCheck = (file: string) => fileExistsCheck(file, displayPath(file))
 
 async function arcDirsCheck(paths: Paths): Promise<Check> {
   return combine(await Promise.all(
-    ARC_DIRS.map(dir => nonEmptyDirCheck(path.join(arcDir(paths), dir)))
+    [
+      ...ARC_DIRS.map(dir => nonEmptyDirCheck(path.join(arcDir(paths), dir))),
+      ...WORD_IMAGE_FILES.map(file => fileCheck(path.join(arcDir(paths), file))),
+    ]
   ))
 }
 
 async function imageDirChecks(paths: Paths): Promise<CheckDetail[]> {
-  return Promise.all(['tachi', 'bg', 'event'].map(dir => nonEmptyDirCheck(path.join(paths.img, dir))))
+  return Promise.all([
+    ...['tachi', 'bg', 'event'].map(dir => nonEmptyDirCheck(path.join(paths.img, dir))),
+    ...WORD_IMAGE_IDS.map(id => fileCheck(path.join(paths.img, 'word', `${id}.jpg`))),
+  ])
+}
+
+async function convertedWordImageChecks(paths: Paths): Promise<CheckDetail[]> {
+  return Promise.all([
+    ...WORD_IMAGE_IDS.map(id => fileCheck(path.join(paths.images, 'word', `${id}.avif`))),
+    ...WORD_IMAGE_IDS.map(id => fileCheck(path.join(paths.imagesThumb, 'word', `${id}.avif`))),
+  ])
 }
 
 async function extractedAssetsAndImagesCheck(paths: Paths): Promise<Check> {
@@ -107,10 +122,12 @@ async function prepareImgFolder(paths: Paths): Promise<void> {
 
   await copyDirectory(path.join(arcDir(paths), 'image', 'bg'), path.join(paths.img, 'bg'), paths.workspace)
   await copyDirectory(path.join(arcDir(paths), 'image', 'event'), path.join(paths.img, 'event'), paths.workspace)
+  await copyDirectory(path.join(arcDir(paths), 'image', 'word'), path.join(paths.img, 'word'), paths.workspace)
 }
 
 async function extractAssetsAndPrepareImages(paths: Paths): Promise<void> {
-  await extractNsa(paths.arcArchive, arcDir(paths), ARC_DIRS)
+  await ensureEmptyDirInside(arcDir(paths), path.join(arcDir(paths), 'image', 'word'))
+  await extractNsa(paths.arcArchive, arcDir(paths), [...ARC_DIRS, ...WORD_IMAGE_FILES])
   const nscript = path.join(paths.tools, 'nscript.dat')
   if (await pathExists(nscript)) {
     await extractNscript(nscript, path.join(paths.staticJp, 'sources', 'fullscript-kt_jp.txt'))
@@ -264,6 +281,9 @@ export function createSteps(context: StepContext): OrchestratorStep[] {
       ]),
       isDone: async () => combine([
         await nonEmptyDirCheck(paths.imgX2),
+        ...await Promise.all(
+          WORD_IMAGE_IDS.map(id => fileCheck(path.join(paths.imgX2, 'word', `${id}.png`)))
+        ),
       ]),
       run: async () => runWaifu2x(context),
     },
@@ -277,6 +297,7 @@ export function createSteps(context: StepContext): OrchestratorStep[] {
       isDone: async () => combine([
         await nonEmptyDirCheck(paths.images),
         await nonEmptyDirCheck(paths.imagesThumb),
+        ...await convertedWordImageChecks(paths),
       ]),
       run: async () => runImageConversion(paths),
     },

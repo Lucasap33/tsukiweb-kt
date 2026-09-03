@@ -220,6 +220,14 @@
     ]
   },
   "images": {
+    "word-subtitles": {
+      "ganba_01": "Good luck, Ciel-sensei",
+      "ganba_04": "/end",
+      "sos_01": "NANAKO-CHAN SOS",
+      "ssa_01": "HISUI-CHAN, Inversion Impulse!",
+      "ssc_01": "Dawn",
+      "sss_01": "Drinking. Dreaming Moon"
+    },
     "words": {
       "fin": "#ffffff$c`[center][noline][color=black][font=serif]Fin`",
       "end": "#ffffff$b`[right][noline][color=black][font=serif]END`"

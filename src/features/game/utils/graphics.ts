@@ -60,8 +60,6 @@ assets.setProvider('graph', (id: string)=> {
 	const match = id.match(/^(word|bg|tachi|event|evt)\//)
 	if (!match)
 		return undefined
-	if (match[1] == 'word')
-		return null
 	const url = imageSrc(id)
 	return {
 		url,

@@ -89,8 +89,8 @@ const DreamsList = () => {
 			<SceneShortcut
 				unlocked={true}
 				images={{
-					"bg": "bg/bg_59",
-					"r": "tachi/akira_02"
+					"bg": "bg/bg_34a",
+					"c": "tachi/his_t03"
 				}}
 				title={strings.scenario.scenes.s535}
 				onClick={play.bind(undefined, "s535")}
@@ -111,8 +111,8 @@ const DreamsList = () => {
 			<SceneShortcut
 				unlocked={true}
 				images={{
-					"bg": "bg/bg_59",
-					"r": "tachi/akira_02"
+					"bg": "bg/bg_28b",
+					"c": "tachi/ark_t05b"
 				}}
 				title={strings.scenario.scenes.s537}
 				onClick={play.bind(undefined, "s537")}

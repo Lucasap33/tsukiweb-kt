@@ -177,12 +177,12 @@
   "scripts-dir": "./jp/scenes/",
 
   "images": {
+    "word-subtitles": {},
     "words": {
       "fin": "#ffffff$c`[center][noline][color=black][font=serif]Fin`",
       "end": "#ffffff$b`[right][noline][color=black][font=serif]END`",
       "ganba_02": "#ed9dba$c`[center][size=1.5em][color=#c6004b][font=cursive][shadow=white,0.15em]/beginning`",
       "ganba_03": "#003d84$c`[center][noline][color=white][font=cursive]/the examiner speaks`",
-      "ganba_04": "#ed9dba$c`[center][noline][color=white][font=cursive]/end`",
       "hana_01": "#f6d4d3$c`[right][noline][color=#51003e][font=cursive]Flower of Thanatos`",
       "kanwa_01": "#000000$c`[center][noline][color=white]A STORY FOR THE EVENING`",
       "kanwa_02": "#000000$t`[left][noline][color=white][font=serif][i][class=kanwa-line kanwa-line-to-right]1/7 In the Beginning`",
