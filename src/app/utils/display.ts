@@ -4,6 +4,7 @@ export enum SCREEN {
   CONFIG = "/config",
   LOAD = "/load",
   GALLERY = "/gallery",
+  SUMMER_FES = "/summer-fes",
   SCENES = "/scenes",
   DREAMS = "/dreams",
 }

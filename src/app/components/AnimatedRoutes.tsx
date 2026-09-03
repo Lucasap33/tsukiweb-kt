@@ -15,6 +15,7 @@ import TitleMenuScreen from "app/screens/TitleMenuScreen";
 import Window from "app/screens/Window";
 import { SCREEN } from "app/utils/display";
 import DreamsScreen from "app/screens/DreamsScreen";
+import SummerFesScreen from "app/screens/SummerFesScreen";
 
 const AnimatedRoutes = () => {
 	const [location] = useLocation()
@@ -41,7 +42,7 @@ const AnimatedRoutes = () => {
 		setShowDisclaimer(false)
 	}, [])
 
-	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES, SCREEN.DREAMS].some(path =>
+	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES, SCREEN.SUMMER_FES, SCREEN.DREAMS].some(path =>
 		pathname.startsWith(path)
 	)
 	const keyPresence = isExtra ? "extra" : pathname
@@ -72,6 +73,9 @@ const AnimatedRoutes = () => {
 					</Route>
 					<Route path={SCREEN.SCENES}>
 						<ExtraShell>WIP</ExtraShell>
+					</Route>
+					<Route path={SCREEN.SUMMER_FES}>
+						<ExtraShell><SummerFesScreen /></ExtraShell>
 					</Route>
 					<Route path={SCREEN.DREAMS}>
 						<ExtraShell><DreamsScreen /></ExtraShell>

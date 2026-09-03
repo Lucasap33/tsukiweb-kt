@@ -91,6 +91,15 @@ const ExtraMenu = () => {
 					nav-auto={1}>
 					{strings.extra.scenes}
 				</TitleMenuButton>
+				<TitleMenuButton id="extra-summer-fes"
+					audio={audio}
+					onClick={()=>navigate(SCREEN.SUMMER_FES)}
+					active={currentPage === SCREEN.SUMMER_FES}
+					aria-selected={currentPage === SCREEN.SUMMER_FES}
+					role="tab"
+					nav-auto={1}>
+					{strings.extra["summer-fes"]}
+				</TitleMenuButton>
 				<TitleMenuButton id="extra-dreams"
 					audio={audio}
 					onClick={()=>navigate(SCREEN.DREAMS)}

@@ -1,0 +1,19 @@
+@use '@tsukiweb/common/ui-core/styles/_mixins.scss' as *;
+
+#summer-fes {
+	overflow-y: auto;
+	scrollbar-gutter: stable;
+	padding: var(--page-padding);
+	padding-bottom: 60px;
+
+	.scenes-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(208px, 100%), 1fr) minmax(min(208px, 100%), 1fr));
+		isolation: isolate;
+		gap: 8px;
+
+		@media screen and (max-width: 440px) {
+			grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+		}
+	}
+}
