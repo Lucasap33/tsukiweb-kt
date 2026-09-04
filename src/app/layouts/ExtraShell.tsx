@@ -9,6 +9,8 @@ import { SCREEN, displayMode } from "app/utils/display";
 import { useDefaultNavBack, useNavBackRef } from "@tsukiweb/common/hooks"
 import Ornament from "@assets/images/ornament.webp"
 import PageBackButton from "app/components/PageBackButton"
+import { settings, viewedScene } from "engine/settings";
+import { useFestivalsAccess } from "features/summer-fes/hooks/useFestivalsAccess";
 
 const ExtraShell = ({ children }: PropsWithChildren) => {
 	const focusCurrentMenuItem = () => {
@@ -52,6 +54,7 @@ const ExtraMenu = () => {
 	const [location, navigate] = useLocation()
 	const strings = useStrings()
 	const currentPage = "/" + location.split("/")[1]
+	const { menuOpened, hasUnseenFes } = useFestivalsAccess()
 
 	useDefaultNavBack(back)
 
@@ -91,15 +94,18 @@ const ExtraMenu = () => {
 					nav-auto={1}>
 					{strings.extra.scenes}
 				</TitleMenuButton>
-				<TitleMenuButton id="extra-summer-fes"
-					audio={audio}
-					onClick={()=>navigate(SCREEN.SUMMER_FES)}
-					active={currentPage === SCREEN.SUMMER_FES}
-					aria-selected={currentPage === SCREEN.SUMMER_FES}
-					role="tab"
-					nav-auto={1}>
-					{strings.extra["summer-fes"]}
-				</TitleMenuButton>
+				{menuOpened &&
+					<TitleMenuButton id="extra-summer-fes"
+						audio={audio}
+						onClick={()=>navigate(SCREEN.SUMMER_FES)}
+						active={currentPage === SCREEN.SUMMER_FES}
+						aria-selected={currentPage === SCREEN.SUMMER_FES}
+						attention={hasUnseenFes}
+						role="tab"
+						nav-auto={1}>
+						{strings.extra["summer-fes"]}
+					</TitleMenuButton>
+				}
 				<TitleMenuButton id="extra-dreams"
 					audio={audio}
 					onClick={()=>navigate(SCREEN.DREAMS)}
