@@ -41,15 +41,6 @@ dialog.modal {
 	border-color: var(--surface-light);
 }
 
-.graphics div.bg img[alt^="[[sprite:word/"] {
-	object-fit: contain;
-
-	& + .text {
-		-webkit-text-stroke: 5px #000;
-		paint-order: stroke fill;
-	}
-}
-
 .page {
 	width: 100%;
 	height: 100%;
@@ -99,4 +90,38 @@ dialog.modal {
 
 .Toastify__progress-bar--wrp {
 	height: 3px;
+}
+
+// words images
+.graphics div.bg img[alt^="[[sprite:word/"] {
+	object-fit: contain;
+
+	&[alt="[[sprite:word/ganba_01]]"] {
+		background: #a9d2df;
+	}
+
+	&[alt="[[sprite:word/ganba_04]]"] {
+		background: #ed9dba;
+	}
+
+	&[alt="[[sprite:word/sos_01]]"] {
+		background: #b40006;
+	}
+
+	&[alt="[[sprite:word/ssa_01]]"] {
+		background: #fff;
+	}
+
+	&[alt="[[sprite:word/ssc_01]]"] {
+		background: linear-gradient(#000103, #010a31 80%, #000624);
+	}
+
+	&[alt="[[sprite:word/sss_01]]"] {
+		background: linear-gradient(#394b6a, #2d456e 45%, #0d1b28);
+	}
+
+	& + .text {
+		-webkit-text-stroke: 5px #000;
+		paint-order: stroke fill;
+	}
 }
