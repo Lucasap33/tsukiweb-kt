@@ -139,7 +139,7 @@
 		}
 	}
 
-	@media screen and (orientation: landscape) and (max-height: 600px) {
+	@include mobile-landscape {
 		grid-template-columns: minmax(160px, min-content) 1fr;
 		.extra-menu {
 			font-size: .8em;
