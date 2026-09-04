@@ -12,11 +12,8 @@ function kt_raw_fixes(text) {
         .replaceAll( // Eroskips added manually in all languages
             /if %eroskip<1 skip 2\v*\s*gosub \*eroskipeffect:goto *\w+eroend/gm,
             "")
-        .replace( // Add missing ` before text
-            "\nclass B's teacher, English teacher",
-            "\n`class B's teacher, English teacher",
-        )
-        .replaceAll(/(image\\word\\[^"\r\n]+)_en\.jpg/g, "$1.jpg")
+        .replaceAll(/^(?![`;])([ \t]*)(.*@.*)$/gm, "`$1$2") // Add missing ` before text
+        .replaceAll(/(image\\word\\[^"\r\n]+)_en\.jpg/g, "$1.jpg") // Remove _en suffix from image names
         .replaceAll('“', '"').replaceAll('”', '"')
     return text;
 }

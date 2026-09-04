@@ -424,8 +424,8 @@ async function processSingleScript(folder: string, filename: string): Promise<[s
 	if (fs.existsSync(preprocess_module_path)) {
 		preprocess_module_path = path.relative(import.meta.dirname, preprocess_module_path)
 		const lang_module = await import(preprocess_module_path.replaceAll('\\', '/'))
-		if ('raw_fixes' in lang_module)
-			txt = lang_module.th_raw_fixes(txt) || txt
+		if ('kt_raw_fixes' in lang_module)
+			txt = lang_module.kt_raw_fixes(txt) || txt
 		if ('block_fixes' in lang_module)
 			block_fixes = lang_module.block_fixes
 	}
