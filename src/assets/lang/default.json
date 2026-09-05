@@ -129,7 +129,6 @@
   },
   "game": {
     "skip-viewed": "You have already seen this scene.",
-    "skip-hscene": "This scene contains adult content.",
     "skip-hcontent": "This passage contains adult content.",
     "skip-prompt": "Do you want to skip it?",
     "toast-qsave": "Progress has been saved",
@@ -137,8 +136,7 @@
     "toast-load-success": "Your data has been loaded",
     "toast-save-fail": "Could not save progress",
     "toast-load-fail": "Could not restore progress",
-    "toast-autoplay-stop": "Auto-play stopped",
-    "toast-ffw-stop": "Fast-Forward stopped"
+    "toast-autoplay-stop": "Auto-play stopped"
   },
   "menu": {
     "graphics": "Graphics",

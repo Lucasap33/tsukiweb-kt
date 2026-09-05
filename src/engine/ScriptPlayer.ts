@@ -1,12 +1,13 @@
 import { ScriptPlayerBase } from "@tsukiweb/common/script/ScriptPlayer"
 import { PointId, LabelName, SceneName } from "app/utils/types";
-import { creditsScript, fetchBlockLines, isScene, nextLabel } from "engine/utils";
+import { isScene } from "engine/utils";
 import { settings, viewedScene } from "engine/settings";
 import { assets } from "translation/assets";
 import { CommandRecord, VarName, VarType } from "@tsukiweb/common/script/types";
 import { History } from "./history";
 import { extractInstructions } from "@tsukiweb/common/script/utils";
 import { SCENE_ATTRS } from "app/utils/constants";
+import { creditsScript, fetchBlockLines } from "./script-loader"
 
 //#endregion ###################################################################
 //#region                             TYPES
@@ -210,10 +211,11 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
     }
     
     protected override nextLabel(label: LabelName): LabelName | null {
-        const result = nextLabel(label)
-        if (result == "endofplay")
-            return null
-        return result
+        if (/^s\d+a?$/.test(label))
+            return `${label}_end` as LabelName
+        if (/^quizz\d_10$/.test(label))
+            return "f135"
+        return null
     }
 
     protected override preloadAssets(list: Set<string>): void {
