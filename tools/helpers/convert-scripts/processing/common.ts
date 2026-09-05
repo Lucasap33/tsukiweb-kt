@@ -10,6 +10,7 @@ function isSceneLabel(label: string) {
 
 function processVarName(varName: string) {
 	return switch_regex(varName, [
+		[/^%guest_image/, null], // remove guest images unlocks
 		//["%sceneskip"			, null], // ignore sceneskip tests
 		[/^%pointflg\d{1,3}$/	, null], // special variables used to increase unreset points
 		[/^%([a-z_]+)_point$/	, (m: RegExpMatchArray)=> {

@@ -29,9 +29,6 @@ function kt_raw_fixes(text) {
  * @type {Record<string, (block: Block)=>void>}
  */
 const block_fixes = {
-    "f79": (block)=> {
-        block.delete(block.indexOf("inc %guest_image8"))
-    },
     //scene: (tokens)=> { //token changes.}
 }
 
