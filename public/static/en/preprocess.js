@@ -1,6 +1,6 @@
 
 /**
- * Make changes to the raw script of Kagetsu Tohya, before the conversion.
+ * Make changes to the raw script of the game, before the conversion.
  * @param {string} text complete script text
  * @returns {string|null} the changed script, or null if no change was made
  */
@@ -9,8 +9,11 @@ function kt_raw_fixes(text) {
         .replace( // Text in logic, unused
             /` How did you get here?@\v*` This is an error…\\/,
             "")
-        .replaceAll( // Eroskips added manually in all languages
-            /if %eroskip<1 skip 2\v*\s*gosub \*eroskipeffect:goto *\w+eroend/gm,
+        .replaceAll( // Remove manual page ranges
+            /^if %eroskip<1 skip 2\r?\n[ \t]*gosub \*eroskipeffect:(?:bg [^\r\n]*:)?goto \*s\d+eroend[ \t]*\r?$/gm,
+            "")
+        .replaceAll( // Keep the original continuation in the same scene
+            /^\*s\d+eroend[ \t]*\r?$/gm,
             "")
         .replaceAll(/^(?![`;])([ \t]*)(.*@.*)$/gm, "`$1$2") // Add missing ` before text
         .replaceAll(/(image\\word\\[^"\r\n]+)_en\.jpg/g, "$1.jpg") // Remove _en suffix from image names
@@ -19,7 +22,7 @@ function kt_raw_fixes(text) {
 }
 
 /**
- * Make changes on blocks (both for Tsukihime and Plus-Disc) that are easier to
+ * Make changes on blocks that are easier to
  * do here than on the raw text. The chages are performed after
  * all automatic fixes. Commands can be inserted as text, they will be
  * converted to tokens afterwards.
@@ -42,7 +45,11 @@ const block_fixes = {
  * }
  */
 const eroskip_pages = {
-
+    s256: [[10, 43]],
+    s511: [[7, 100]],
+    s544: [[1, 31]],
+    s545: [[12, 39]],
+    s546: [[5, 69]],
 }
 
 export {
