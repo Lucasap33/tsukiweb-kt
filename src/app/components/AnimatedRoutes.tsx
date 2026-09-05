@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import HarvestWind from "app/components/HarvestWind";
 import ConfigScreen from "app/screens/ConfigScreen";
 import DisclaimerScreen from "app/screens/DisclaimerScreen";
+import FlowchartScreen from "app/screens/FlowchartScreen";
 import GalleryScreen from "app/screens/GalleryScreen";
 import LoadScreen from "app/screens/LoadScreen";
 import SceneReplayScreen from "app/screens/SceneReplayScreen";
@@ -72,7 +73,7 @@ const AnimatedRoutes = () => {
 						<ExtraShell><SceneReplayScreen /></ExtraShell>
 					</Route>
 					<Route path={SCREEN.SCENES}>
-						<ExtraShell>WIP</ExtraShell>
+						<ExtraShell><FlowchartScreen /></ExtraShell>
 					</Route>
 					<Route path={SCREEN.SUMMER_FES}>
 						<ExtraShell><SummerFesScreen /></ExtraShell>

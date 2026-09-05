@@ -75,6 +75,7 @@ const MenuLayer = ({display, script, show, layers, qSave, qLoad}: Props) => {
 
 	const graphicMode   = () => { layers.graphics  = true }
 	const historyMode   = () => { layers.history   = true }
+	const flowchartMode = () => { layers.flowchart = true }
 	const saveMode      = () => { layers.save      = true }
 	const loadMode      = () => { layers.load      = true }
 	const configMode    = () => { layers.config    = true }
@@ -107,6 +108,11 @@ const MenuLayer = ({display, script, show, layers, qSave, qLoad}: Props) => {
 						<Button {...LAYER_PROPS} onClick={historyMode} nav-y={1}>
 							{strings.menu["history"]}
 						</Button>
+						}
+						{show?.flowchart &&
+							<Button {...LAYER_PROPS} onClick={flowchartMode} nav-y={2}>
+								{strings.extra.scenes}
+							</Button>
 						}
 						{show?.save &&
 						<Button {...LAYER_PROPS} onClick={saveMode} nav-y={3}>

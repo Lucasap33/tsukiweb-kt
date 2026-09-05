@@ -1,8 +1,9 @@
 import { memo, useCallback, useLayoutEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { Button, FixedFooter } from '@tsukiweb/common/ui-core';
+import Flowchart from 'features/flowchart/components/Flowchart';
 import { playScene } from 'engine/savestates';
-import { strings } from 'translation/lang';
+import { useStrings } from 'translation/lang';
 import PageElement from '../history/PageElement';
 import { ProgressPanel } from '../shared/ProgressPanel';
 import { History } from 'engine/history';
@@ -23,10 +24,15 @@ type Props = {
 	divProps?: React.HTMLProps<HTMLDivElement>
 }
 const HistoryLayer = ({ display, history, onRewind, layers, continueScript = true, show, divProps }: Props) => {
+	const strings = useStrings()
 	const rootRef = useRef<HTMLDivElement>(null)
 
 	const handleClose = useCallback(()=> {
 		layers.back()
+	}, [layers])
+
+	const setLayer = useCallback((layer: 'history' | 'flowchart')=> {
+		layers[layer] = true
 	}, [layers])
 
 	const loadPage = useCallback((index: number)=> {
@@ -57,11 +63,17 @@ const HistoryLayer = ({ display, history, onRewind, layers, continueScript = tru
 					history={history}
 					onPageSelect={loadPage}
 				/>
+			: layers.flowchart ?
+				<FlowchartTab key={history.lastScene.label}
+					history={history}
+					onSceneSelect={loadScene}
+					continueScript={continueScript}
+				/>
 			: null
 			}
 
 			<FixedFooter style={{ background: "var(--transparent-layer)" }}>
-				{layers.history && <>
+				{(layers.history || layers.flowchart) && <>
 					<Button
 						variant="default"
 						className="back-button"
@@ -70,6 +82,26 @@ const HistoryLayer = ({ display, history, onRewind, layers, continueScript = tru
 					>
 						{`<<`} {strings.back}
 					</Button>
+					{show?.flowchart && <>
+						<Button
+							variant="select"
+							onClick={() => setLayer('history')}
+							active={layers.history}
+							style={{ marginLeft: '1em', flex: 1 }}
+							nav-x={-1} nav-y={10000}
+						>
+							{strings.menu.history}
+						</Button>
+						<Button
+							variant="select"
+							onClick={() => setLayer('flowchart')}
+							active={layers.flowchart}
+							style={{ marginLeft: '.5em', flex: 1 }}
+							nav-x={0} nav-y={10000}
+						>
+							{strings.extra.scenes}
+						</Button>
+					</>}
 				</>}
 			</FixedFooter>
 		</div>
@@ -125,15 +157,19 @@ type FlowchartTabProps = {
 	continueScript: boolean
 	onSceneSelect: (label: LabelName)=>void
 }
-const FlowchartTab = ({ history, continueScript }: FlowchartTabProps) => {
+const FlowchartTab = ({ history, continueScript, onSceneSelect }: FlowchartTabProps) => {
 	const isSceneReplay = !continueScript
 
 	useLayoutEffect(()=> {
 		const activeNode = document.querySelector(`.fc-scene.active`)
 		if (activeNode) {
-			activeNode.scrollIntoView({ behavior: "instant", block: "center" })
+			activeNode.scrollIntoView({ behavior: "instant", block: "center", inline: "center" })
 		}
 	}, [history])
+
+	const handleSceneSelect = useCallback((id: SceneName)=> {
+		onSceneSelect(id)
+	}, [onSceneSelect])
 
 	return (
 		<div id="flowchart-progress" className="scroll-container">
@@ -142,6 +178,13 @@ const FlowchartTab = ({ history, continueScript }: FlowchartTabProps) => {
 					<ProgressPanel script={history.script!}/>
 				</div>
 			)}
+			<div className="flowchart-container">
+				<Flowchart
+					history={isSceneReplay ? undefined : history}
+					onSceneClick={handleSceneSelect}
+					mode={isSceneReplay ? 'viewer' : 'playthrough'}
+				/>
+			</div>
 		</div>
 	)
 }

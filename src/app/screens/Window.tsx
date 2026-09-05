@@ -101,7 +101,7 @@ const Window = () => {
 				<SkipLayer script={script} history={history} layers={layers}/>
 
 				<HistoryLayer
-					display={layers.history}
+					display={layers.history || layers.flowchart}
 					history={history}
 					layers={layers}
 					continueScript={script.continueScript}

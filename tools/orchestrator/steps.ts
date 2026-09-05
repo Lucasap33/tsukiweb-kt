@@ -301,17 +301,17 @@ export function createSteps(context: StepContext): OrchestratorStep[] {
       ]),
       run: async () => runImageConversion(paths),
     },
-    // {
-    //   id: 5,
-    //   title: 'Create spritesheets',
-    //   canRun: async () => combine([
-    //     await nonEmptyDirCheck(paths.img),
-    //   ]),
-    //   isDone: async () => combine([
-    //     await nonEmptyDirCheck(paths.flowchartSpritesheets),
-    //   ]),
-    //   run: async () => runSpritesheets(paths),
-    // },
+    {
+      id: 5,
+      title: 'Create spritesheets',
+      canRun: async () => combine([
+        await nonEmptyDirCheck(paths.img),
+      ]),
+      isDone: async () => combine([
+        await nonEmptyDirCheck(paths.flowchartSpritesheets),
+      ]),
+      run: async () => runSpritesheets(paths),
+    },
     {
       id: 6,
       title: 'Convert wave files',

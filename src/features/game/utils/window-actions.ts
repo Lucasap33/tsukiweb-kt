@@ -195,6 +195,7 @@ export class UserActionsHandler {
 			case "q_load"   : this.quickLoad(); break
 			case "menu"		: layers.menu = !layers.menu; break
 			case "history"  : layers.history  = !layers.history; break
+			case "flowchart": layers.flowchart = !layers.flowchart; break
 			case "graphics" : layers.graphics = !layers.graphics; break
 			case "load"     : layers.load     = !layers.load; break
 			case "save"     : layers.save     = !layers.save; break
