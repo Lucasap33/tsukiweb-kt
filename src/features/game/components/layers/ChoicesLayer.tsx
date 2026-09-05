@@ -74,7 +74,7 @@ function processSelect(setChoices: (choices: Choice[])=>void,
 					   onSelection: RefObject<SelectionCallback|undefined>,
 					   arg: string, _cmd: string, script: ScriptPlayer,
 					   onFinish: VoidFunction) {
-	const currentLabel = script.currentLabel.replace('skip', 'f') as LabelName
+	const currentLabel = script.currentLabel.replace(/_end$/, '') as LabelName
 	const labels = arg.split(',')
 	const choices: Choice<LabelName>[] = labels.map((item, index) => {
 		const m = item.match(/^(\([^\)]*\))?(\[[^\]]*\])?(\*\w+)$/)

@@ -73,7 +73,7 @@ export class History extends HistoryBase<ScriptPlayer, PageType,
 
   override onPageStart(context: PageContext): void {
     const {label} = context
-    if (isScene(label) || (label.startsWith('skip') && context.page == 0))
+    if (isScene(label) || (label.endsWith('_end') && context.page == 0))
       super.onPageStart(context)
   }
 

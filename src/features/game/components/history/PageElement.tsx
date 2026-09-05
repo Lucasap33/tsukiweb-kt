@@ -2,7 +2,7 @@ import { memo, Fragment, ReactNode, useCallback, useMemo } from "react"
 import { Button } from "@tsukiweb/common/ui-core"
 import { MdHistory } from "react-icons/md"
 import classNames from "classnames"
-import { Bbcode, bb } from "@tsukiweb/common/utils/Bbcode"
+import { Bbcode } from "@tsukiweb/common/utils/Bbcode"
 import { History, PageEntry } from "engine/history"
 import { SceneName } from "app/utils/types"
 import { DivProps } from "@tsukiweb/common/types"
@@ -48,7 +48,7 @@ const SkipContent = ({ history, content }: { history: History, content: PageEntr
 	const sceneTitle = getSceneTitle(label as SceneName)??label
 	return (
 		<span className='skip'>
-			{bb(strings.history.skipped.replace('%0', sceneTitle))}
+			{strings.history.skipped.replace('%0', sceneTitle)}
 		</span>
 	)
 }
