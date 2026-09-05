@@ -7,7 +7,7 @@ const DreamsList = () => {
 	const strings = useStrings()
 
 	const play = (id: SceneName)=> {
-		playScene(id, {viewedOnly: false, continueScript: true})
+		playScene(id, {viewedOnly: false, continueScript: false})
 	}
 
 	return (
