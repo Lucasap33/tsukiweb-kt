@@ -362,7 +362,7 @@
     "s34"   : {"bg":"bg/bg_04"},
     "s300"  : {"bg":"bg/bg_04", "l": "tachi/aki_t04a", "r": "tachi/ari_t05"},
     "s36"   : {"bg":"bg/bg_10a"},
-    "s37"   : {"bg":"event/ren_e05z"},
+    "s37"   : {"bg":"event/ren_e05"},
     "s38"   : {"bg":"bg/bg_10a"},
     "s39"   : {"bg":"bg/bg_10a"},
     "s40"   : {"bg":"bg/ima_23"},

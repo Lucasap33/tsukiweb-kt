@@ -1,6 +1,18 @@
 import {switch_regex, processCondition as _processCondition} from "@tsukiweb/common/tools/convert-scripts/utils.ts"
 const CONDITION_REGEXP = /^(?<lhs>(%\w+|\d+))(?<op>[=!><]+)(?<rhs>(%\w+|\d+))$/
 
+function preprocessRawScript(text: string) {
+	return text
+		.replaceAll('ren_e01z', 'ren_e01')
+		.replaceAll('ren_e05z', 'ren_e05')
+		.replaceAll('yume_e01z', 'yume_e01')
+		.replaceAll('yume_e03z', 'yume_e03')
+		.replaceAll('yume_e04z', 'yume_e04')
+		.replaceAll('yume_e06z', 'yume_e06a')
+		.replaceAll('yume_e16z', 'yume_e16')
+		.replaceAll('yume_e19z', 'yume_e19')
+}
+
 function isLogicLabel(label: string) {
 	return /^(f|skip)\d+$/.test(label) || ["quiz"].includes(label)
 }
@@ -58,6 +70,7 @@ function processCondition(condition: string): string|null {
 }
 
 export {
+	preprocessRawScript,
 	isLogicLabel,
 	isSceneLabel,
     processVarName,

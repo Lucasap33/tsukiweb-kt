@@ -10,7 +10,7 @@ import { Block, CommandToken, ConditionToken, LabelToken, ReturnToken, TextToken
 import { generateScenes, splitBlocks, writeScenes } from '../utils/nscriptr_convert.ts';
 import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { fixContexts } from '../utils/context.ts';
-import { processVarName, isSceneLabel } from './common.ts';
+import { processVarName, isSceneLabel, preprocessRawScript } from './common.ts';
 import { processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
 
 const outputPathPrefix = '../../../public/static/'
@@ -378,6 +378,7 @@ async function processSingleScript(folder: string, filename: string,
 	let txt = fs.readFileSync(fullscriptPath, 'utf-8')
 				.replaceAll('\n\t', '\n')
 				.replaceAll(/^select\s*(\r?\n([`"][^`"]*[`"],\s*\*\w+,\s*\r?\n)*([`"][^`"]*[`"],\s*\*\w+))$/gm, (m)=> m.replaceAll(/\r?\n/g, ' '))
+	txt = preprocessRawScript(txt)
 	let eroskip_pages = {}
 	let block_fixes = {}
 	let preprocess_module_path = path.join(process.cwd(), outputPathPrefix, folder, 'preprocess.js')
