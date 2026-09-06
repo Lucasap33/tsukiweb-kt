@@ -14,9 +14,8 @@ import FC from "../../../assets/game/flowchart.json"
 type FcNodeId = SceneName|string
 type FcNodeAttrs = FlowchartNodeAttrs<FcNodeId> & {
 	col: number
-	align?: FcNodeId
 	cutAt?: number
-}
+} & ({ align?: FcNodeId, below?: never } | {below?: FcNodeId, align?: never})
 
 //##############################################################################
 //#region                           FLOWCHART
@@ -80,17 +79,19 @@ export class GameFlowchart extends Flowchart<FcNode> {
 export class FcNode extends FlowchartNode<FcNodeId, GameFlowchart> {
 	column: number
 	_align: FcNodeId | FcNode | null
+	_below: FcNodeId | FcNode | null
 	cutAt: number
 	_boundRect: [number, number, number, number] | null = null
 	_state: number = -1
 	_navY: number | null
 
-	constructor(id: FcNodeId, {col, cutAt, align, ...attrs}: FcNodeAttrs,
+	constructor(id: FcNodeId, {col, cutAt, align, below, ...attrs}: FcNodeAttrs,
 				flowchart: GameFlowchart) {
 		super(id, attrs, flowchart)
 		this.column = col
 		this.cutAt = cutAt ?? 0
 		this._align = align ?? null
+		this._below = below ?? null
 		this._navY = null
 	}
 	
@@ -149,6 +150,21 @@ export class FcNode extends FlowchartNode<FcNodeId, GameFlowchart> {
 		if (this._align && !(this._align instanceof FcNode))
 			this._align = this.flowchart.getNode(this._align) as FcNode
 		return (this._align as FcNode|null) ?? null
+	}
+	get aboveNode(): FcNode|null {
+		if (this._below && !(this._below instanceof FcNode))
+			this._below = this.flowchart.getNode(this._below) as FcNode
+		return (this._below as FcNode|null) ?? null
+	}
+	get anchorNodes(): FcNode[] {
+		const parents: FcNode[] = this.parents
+		const aligned = this.alignedNode
+		if (aligned)
+			return [...parents, aligned]
+		const above = this.aboveNode
+		if (above)
+			return [...parents, above]
+		return parents
 	}
 	get scene(): boolean {
 		return isScene(this.id)
@@ -214,6 +230,8 @@ export class FcNode extends FlowchartNode<FcNodeId, GameFlowchart> {
 			let top
 			if (this.alignedNode && this.alignedNode.visible)
 				top = this.alignedNode.top
+			else if (this.aboveNode && this.aboveNode.visible)
+				top = this.aboveNode.bottom + DY
 			else if (this.parents.length > 0)
 				top = Math.max(0, ...this.parents.map(node => node.bottom)) + (this.visible ? DY*2 : 0)
 			else
