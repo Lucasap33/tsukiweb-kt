@@ -132,7 +132,7 @@
 			}
 		}
 		&.unlocked:not(.disabled) {
-			stroke: hsl(var(--group-hue), 100%, 50%, 1);
+			stroke: hsl(var(--group-hue), 100%, 90%, 1);
 			outline-color: transparent;
 			cursor: pointer;
 
@@ -160,9 +160,9 @@
 		stop-color: #000000;
 		
 		&.enabled {
-			stroke: hsl(var(--group-hue), 100%, 50%, 1);
+			stroke: hsl(var(--group-hue), 100%, 90%, 1);
 			@media (pointer: fine) {
-				filter: drop-shadow(0 0 1px hsl(var(--group-hue), 100%, 50%, 1));
+				filter: drop-shadow(0 0 1px hsl(var(--group-hue), 100%, 90%, 1));
 			}
 		}
 		&.disabled {
