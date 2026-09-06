@@ -31,7 +31,7 @@ export class GameFlowchart extends Flowchart<FcNode> {
 				if (col != undefined) acc[id] = {col, ...attrs} // filter non-fc scenes
 				return acc
 			}, {} as Record<string, FcNodeAttrs>)
-		})
+		}, FC.groups)
 		this._history = history
 	}
 

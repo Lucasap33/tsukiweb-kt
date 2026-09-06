@@ -9,6 +9,7 @@ type Props = {
 
 type DashedPath = {
 	id: string
+	group?: string
 	d: string
 	disabled: boolean
 	style: React.CSSProperties
@@ -28,10 +29,11 @@ function buildPathD(x1: number, y1: number, x2: number, y2: number): string {
 }
 
 const AllConnections = ({ fcNodes, mode = 'viewer' }: Props) => {
-	const { disabledD, enabledD, dashed } = useMemo(() => {
+	const { disabledD, enabledDs, enabledDashed, disabledDashed } = useMemo(() => {
 		const disabledSegs: string[] = []
-		const enabledSegs: string[] = []
-		const dashed: DashedPath[] = []
+		const enabledSegs = new Map<string|undefined, string[]>()
+		const enabledDashed: DashedPath[] = []
+		const disabledDashed: DashedPath[] = []
 
 		for (const node of fcNodes) {
 			for (const parent of node.parents) {
@@ -43,39 +45,58 @@ const AllConnections = ({ fcNodes, mode = 'viewer' }: Props) => {
 					: parent.state !== FcNodeState.ENABLED || node.state !== FcNodeState.ENABLED
 
 				const d = buildPathD(x1, y1, x2, y2)
+				const group = parent.group
 
 				if (node.cutAt !== 0) {
 					const totalLength = (y2 - y1) + Math.abs(x2 - x1)
 					const bl = OVERLAP_BREAK_LENGTH
 					const cutLength = node.cutAt * DY
-					dashed.push({
+					const dash = {
 						id: `${parent.id}-${node.id}`,
+						group: group,
 						d,
 						disabled: isDisabled,
 						style: {
 							strokeDasharray: `${totalLength - cutLength - bl / 2} ${bl} ${cutLength - bl / 2}`,
 						},
-					})
+					}
+					if (isDisabled)
+						disabledDashed.push(dash)
+					else
+						enabledDashed.push(dash)
+				} else if (isDisabled) {
+					disabledSegs.push(d)
 				} else {
-					(isDisabled ? disabledSegs : enabledSegs).push(d)
+					enabledSegs.getOrInsert(group, []).push(d)
 				}
 			}
 		}
-
+		const enabledDs = Object.fromEntries(enabledSegs.entries().map(
+			([g, paths])=> [g, paths.join(' ')])) as Record<string, string>
 		return {
 			disabledD: disabledSegs.join(' '),
-			enabledD:  enabledSegs.join(' '),
-			dashed,
+			enabledDs: enabledDs,
+			enabledDashed,
+			disabledDashed
 		}
 	}, [fcNodes, mode])
-
 	return <>
-		{disabledD && <path className="fc-link disabled" d={disabledD} />}
-		{enabledD  && <path className="fc-link enabled" d={enabledD}  />}
-		{dashed.map(({ id, d, disabled, style }) => (
+		{disabledDashed.map(({ id, d, disabled, group, style }) => (
 			<path
 				key={id} id={id}
-				className={disabled ? "fc-link disabled" : "fc-link enabled"}
+				className={`${disabled ? "fc-link disabled" : "fc-link enabled"}${group ? ` group-${group}` : ''}`}
+				d={d}
+				style={style}
+			/>
+		))}
+		{disabledD && <path className="fc-link disabled" d={disabledD} />}
+		{Object.entries(enabledDs).map(([g, d], index)=> 
+			<path key={index} className={`fc-link enabled${g ? ` group-${g}` : ''}`} d={d}  />
+		)}
+		{enabledDashed.map(({ id, d, disabled, group, style }) => (
+			<path
+				key={id} id={id}
+				className={`${disabled ? "fc-link disabled" : "fc-link enabled"}${group ? ` group-${group}` : ''}`}
 				d={d}
 				style={style}
 			/>

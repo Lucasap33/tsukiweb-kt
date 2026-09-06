@@ -32,8 +32,9 @@ const VisibleScene = ({ node, graph, shouldBlur, popover, closePopover, onClick,
 	const classes = classNames("fc-scene", "unlocked", {
 		"active": node.active,
 		"blur": shouldBlur,
-		"disabled": disabled
-	})
+		"disabled": disabled,
+	}, node.group ? `group-${node.group}` : undefined)
+
 
 	const interactionProps = disabled ? { tabIndex: -1 } : {
 	  onClick: onAction,

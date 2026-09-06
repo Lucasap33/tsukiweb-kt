@@ -67,8 +67,27 @@
 			shape-rendering: optimizeSpeed;
 		}
 	}
+	.group-morning { // yellow
+	--group-hue: 60deg;
+	}
+	.group-school { // blue
+		--group-hue: 180deg;
+	}
+	.group-festival { // dark blue
+		--group-hue: 240deg;
+	}
+	.group-mansion { // red
+		--group-hue: 360deg;
+	}
+	.group-street { // green
+		--group-hue: 120deg;
+	}
+	.group-evening { // pink
+		--group-hue: 300deg;
+	}
 	
 	.fc-scene {
+
 		stroke: var(--inactive-connection);
 		stroke: color-mix(in srgb, var(--inactive-connection) 50%, #000);
 		stroke-width: .6;
@@ -82,6 +101,27 @@
 
 		&.disabled {
 			pointer-events: none;
+			filter: sepia(15%) hue-rotate(calc(var(--group-hue) - 30deg)) brightness(80%) saturate(420%);
+			/*
+			&.group-morning { // yellow
+				filter: sepia(15%) hue-rotate(30deg) brightness(80%) saturate(420%);
+			}
+			&.group-school { // blue
+				filter: sepia(15%) hue-rotate(150deg) brightness(80%) saturate(420%);
+			}
+			&.group-festival { // dark blue
+				filter: sepia(15%) hue-rotate(210deg) brightness(80%) saturate(420%);
+			}
+			&.group-mansion { // red
+				filter: sepia(15%) hue-rotate(330deg) brightness(80%) saturate(420%);
+			}
+			&.group-street { // green
+				filter: sepia(15%) hue-rotate(90deg) brightness(80%) saturate(420%);
+			}
+			&.group-evening { // pink
+				filter: sepia(15%) hue-rotate(270deg) brightness(80%) saturate(420%);
+			}
+			*/
 
 			& > image {
 				filter: brightness(0.5) grayscale(1);
@@ -92,7 +132,7 @@
 			}
 		}
 		&.unlocked:not(.disabled) {
-			stroke: var(--active-connection);
+			stroke: hsl(var(--group-hue), 100%, 50%, 1);
 			outline-color: transparent;
 			cursor: pointer;
 
@@ -120,9 +160,9 @@
 		stop-color: #000000;
 		
 		&.enabled {
-			stroke: var(--active-connection);
+			stroke: hsl(var(--group-hue), 100%, 50%, 1);
 			@media (pointer: fine) {
-				filter: drop-shadow(0 0 1px rgb(165, 94, 1));
+				filter: drop-shadow(0 0 1px hsl(var(--group-hue), 100%, 50%, 1));
 			}
 		}
 		&.disabled {

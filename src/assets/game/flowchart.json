@@ -276,5 +276,13 @@
     "s251"    : {"col":6.5,"from":["s250"]},
     "s256"    : {"col":7.5,"from":["s250"],"align":"s251"},
     "s258"    : {"col":8.5,"from":["s250"],"align":"s251"}
+  },
+  "groups": {
+    "morning" : ["bs1"],
+    "school"  : ["s3"],
+    "festival": ["s223"],
+    "mansion" : ["s86", "bs110"],
+    "street"  : ["s156"],
+    "evening" : ["bs248"]
   }
 }
