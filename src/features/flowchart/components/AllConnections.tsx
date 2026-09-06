@@ -18,8 +18,9 @@ function buildPathD(x1: number, y1: number, x2: number, y2: number): string {
 	let d = `M${x1},${y1}`
 	if (x1 === x2)        d += `V${y2}`
 	else if (y1 === y2)   d += `H${x2}`
+
 	else {
-		const turnY = x2 > x1 ? y1 + DY : y2 - DY
+		const turnY = y2 > y1+DY*1.5 ? x2 > x1 ? y1 + DY : y2 - DY : y2
 		if (turnY > y1) d += `V${turnY}`
 		d += `H${x2}V${y2}`
 	}
