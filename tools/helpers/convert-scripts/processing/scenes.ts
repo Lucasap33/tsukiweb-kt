@@ -85,8 +85,30 @@ function commandFix(token: Token) {
 	}
 }
 
+function merge_images(token: Token, bottom: string, top: string, replace: string) {
+	if ((token instanceof CommandToken) && token.cmd == 'bg') {
+		const img = token.args[0]
+		if (img.includes(bottom)) {
+			token.args[0] = img.replace(bottom, replace)
+			token.args.push('bottom')
+			return true
+		} else if (img.includes(top)) {
+			token.args[0] = img.replace(top, replace)
+			token.args.push('top')
+			return true
+		}
+	}
+	return false
+}
+
 const tokenFixes = new Map(Object.entries({
 	'dummy': (token: Token)=> {
+	},
+	's159': (token: Token)=> {
+		merge_images(token, 'yume_e12b', 'yume_e12a', 'yume_e12')
+	},
+	's530': (token: Token)=> {
+		merge_images(token, 'yume_e12b', 'yume_e12a', 'yume_e12')
 	},
 }))
 
