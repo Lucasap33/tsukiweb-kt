@@ -8,7 +8,6 @@ import { COLUMN_WIDTH, DY, PopoverProvider, SCENE_HEIGHT, SCENE_WIDTH, SVG_DEFS 
 import { usePanZoom } from "@tsukiweb/common/hooks"
 import ScenePopover from "./ScenePopover";
 import AllConnections from "./AllConnections";
-import { useStrings } from "translation/lang"
 
 
 type Props = {
@@ -18,7 +17,6 @@ type Props = {
 }
 
 const Flowchart = ({history, onSceneClick, mode = 'viewer'}: Props)=> {
-	useStrings()
 	const flowchart = new GameFlowchart(history)
 	const svgRef = useRef<SVGSVGElement>(null)
 	const stageRef = useRef<HTMLDivElement>(null)
