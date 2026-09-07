@@ -1,4 +1,4 @@
-export type PointId = 'akira' | 'answer' | 'ark' | 'cel' | 'hisui' | 'kagi'
+export type PointId = 'akira' | 'answer' | 'ark' | 'cel' | 'his' | 'kagi'
 					| 'kaibyo' | 'nana' | 'ren' | 'gojitsudan'
 
 export type SceneName = `s${number}`

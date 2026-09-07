@@ -20,9 +20,9 @@ function buildPathD(x1: number, y1: number, x2: number, y2: number): string {
 
 	const turnY = x2 > x1 ? y1 + DY : y2 - DY
 
-	return  turnY > y1
+	return (turnY > y1 && turnY < y2)
 		? `M${x1},${y1}V${turnY}H${x2}V${y2}`
-		: `M${x1},${y1}H${x2}V${y2}`
+		: `M${x1},${y1}V${y2}H${x2}`
 }
 
 const AllConnections = ({ fcNodes, mode = 'viewer' }: Props) => {

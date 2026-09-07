@@ -68,7 +68,7 @@
 		}
 	}
 	.group-morning { // yellow
-	--group-hue: 60deg;
+		--group-hue: 60deg;
 	}
 	.group-school { // blue
 		--group-hue: 180deg;
@@ -102,26 +102,6 @@
 		&.disabled {
 			pointer-events: none;
 			filter: sepia(15%) hue-rotate(calc(var(--group-hue) - 30deg)) brightness(80%) saturate(420%);
-			/*
-			&.group-morning { // yellow
-				filter: sepia(15%) hue-rotate(30deg) brightness(80%) saturate(420%);
-			}
-			&.group-school { // blue
-				filter: sepia(15%) hue-rotate(150deg) brightness(80%) saturate(420%);
-			}
-			&.group-festival { // dark blue
-				filter: sepia(15%) hue-rotate(210deg) brightness(80%) saturate(420%);
-			}
-			&.group-mansion { // red
-				filter: sepia(15%) hue-rotate(330deg) brightness(80%) saturate(420%);
-			}
-			&.group-street { // green
-				filter: sepia(15%) hue-rotate(90deg) brightness(80%) saturate(420%);
-			}
-			&.group-evening { // pink
-				filter: sepia(15%) hue-rotate(270deg) brightness(80%) saturate(420%);
-			}
-			*/
 
 			& > image {
 				filter: brightness(0.5) grayscale(1);
@@ -162,7 +142,7 @@
 		&.enabled {
 			stroke: hsl(var(--group-hue), 100%, 90%, 1);
 			@media (pointer: fine) {
-				filter: drop-shadow(0 0 1px hsl(var(--group-hue), 100%, 90%, 1));
+				filter: drop-shadow(0 0 1px hsl(var(--group-hue), 60%, 20%, 1));
 			}
 		}
 		&.disabled {

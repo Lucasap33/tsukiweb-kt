@@ -8,6 +8,9 @@ import { COLUMN_WIDTH, DY, PopoverProvider, SCENE_HEIGHT, SCENE_WIDTH, SVG_DEFS 
 import { usePanZoom } from "@tsukiweb/common/hooks"
 import ScenePopover from "./ScenePopover";
 import AllConnections from "./AllConnections";
+import { settings } from "engine/settings";
+import AllBadges from "./AllBadges";
+import { BADGES_DEFINES } from "./badges";
 
 
 type Props = {
@@ -65,6 +68,7 @@ const Flowchart = ({history, onSceneClick, mode = 'viewer'}: Props)=> {
 					version="1.1"
 					xmlns="http://www.w3.org/2000/svg">
 					{SVG_DEFS}
+					{BADGES_DEFINES}
 					<g className="fc-connections">
 						<AllConnections fcNodes={visibleNodes} mode={mode} />
 					</g>
@@ -74,6 +78,11 @@ const Flowchart = ({history, onSceneClick, mode = 'viewer'}: Props)=> {
 							activeNode={activeNode}
 							onClick={onSceneClick}
 						/>
+					</g>
+					<g className="fc-badges">
+						{settings.flowchartBadges &&
+							<AllBadges nodes={visibleNodes} />
+						}
 					</g>
 				</svg>
 			</div>
