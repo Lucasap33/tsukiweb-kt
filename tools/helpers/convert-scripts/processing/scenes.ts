@@ -102,8 +102,6 @@ function merge_images(token: Token, bottom: string, top: string, replace: string
 }
 
 const tokenFixes = new Map(Object.entries({
-	'dummy': (token: Token)=> {
-	},
 	's159': (token: Token)=> {
 		merge_images(token, 'yume_e12b', 'yume_e12a', 'yume_e12')
 	},

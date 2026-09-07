@@ -11,96 +11,111 @@ type DashedPath = {
 	id: string
 	group?: string
 	d: string
-	disabled: boolean
-	style: React.CSSProperties
+	strokeDasharray: string
 }
 
 function buildPathD(x1: number, y1: number, x2: number, y2: number): string {
-	let d = `M${x1},${y1}`
-	if (x1 === x2)        d += `V${y2}`
-	else if (y1 === y2)   d += `H${x2}`
+	if (x1 === x2) return `M${x1},${y1}V${y2}`
+	if (y1 === y2) return `M${x1},${y1}H${x2}`
 
-	else {
-		const turnY = y2 > y1+DY*1.5 ? x2 > x1 ? y1 + DY : y2 - DY : y2
-		if (turnY > y1) d += `V${turnY}`
-		d += `H${x2}V${y2}`
-	}
-	return d
+	const turnY = x2 > x1 ? y1 + DY : y2 - DY
+
+	return  turnY > y1
+		? `M${x1},${y1}V${turnY}H${x2}V${y2}`
+		: `M${x1},${y1}H${x2}V${y2}`
 }
 
 const AllConnections = ({ fcNodes, mode = 'viewer' }: Props) => {
-	const { disabledD, enabledDs, enabledDashed, disabledDashed } = useMemo(() => {
-		const disabledSegs: string[] = []
-		const enabledSegs = new Map<string|undefined, string[]>()
+	const { disabledD, enabledPaths, enabledDashed, disabledDashed } = useMemo(() => {
+		const disabledPaths: string[] = []
+		const enabledByGroup = new Map<string|undefined, string[]>()
 		const enabledDashed: DashedPath[] = []
 		const disabledDashed: DashedPath[] = []
+		const playthrough = mode === "playthrough"
 
 		for (const node of fcNodes) {
+			const { centerX: x2, top: y2 } = node
+
 			for (const parent of node.parents) {
 				const { centerX: x1, bottom: y1 } = parent
-				const { centerX: x2, top: y2 } = node
+				const group = parent.group
 
-				const isDisabled = mode === 'playthrough'
+				const disabled = playthrough
 					? !parent.flowchart.hasTransition(parent.id, node.id)
 					: parent.state !== FcNodeState.ENABLED || node.state !== FcNodeState.ENABLED
-
 				const d = buildPathD(x1, y1, x2, y2)
-				const group = parent.group
 
 				if (node.cutAt !== 0) {
 					const totalLength = (y2 - y1) + Math.abs(x2 - x1)
-					const bl = OVERLAP_BREAK_LENGTH
 					const cutLength = node.cutAt * DY
-					const dash = {
+					const halfBreakLength = OVERLAP_BREAK_LENGTH / 2
+					const path = {
 						id: `${parent.id}-${node.id}`,
 						group: group,
 						d,
-						disabled: isDisabled,
-						style: {
-							strokeDasharray: `${totalLength - cutLength - bl / 2} ${bl} ${cutLength - bl / 2}`,
-						},
+						strokeDasharray:
+							`${totalLength - cutLength - halfBreakLength} ` +
+							`${OVERLAP_BREAK_LENGTH} ` +
+							`${cutLength - halfBreakLength}`,
 					}
-					if (isDisabled)
-						disabledDashed.push(dash)
-					else
-						enabledDashed.push(dash)
-				} else if (isDisabled) {
-					disabledSegs.push(d)
-				} else {
-					enabledSegs.getOrInsert(group, []).push(d)
+
+					if (disabled) disabledDashed.push(path)
+					else enabledDashed.push(path)
+
+					continue
 				}
+
+				if (disabled) {
+					disabledPaths.push(d)
+					continue
+				}
+
+				const paths = enabledByGroup.get(group)
+
+				if (paths) paths.push(d)
+				else enabledByGroup.set(group, [d])
 			}
 		}
-		const enabledDs = Object.fromEntries(enabledSegs.entries().map(
-			([g, paths])=> [g, paths.join(' ')])) as Record<string, string>
+
+		const enabledPaths = Array.from(enabledByGroup, ([group, paths]) => [
+			group, paths.join(" ")
+		] as const)
+
 		return {
-			disabledD: disabledSegs.join(' '),
-			enabledDs: enabledDs,
+			disabledD: disabledPaths.join(' '),
+			enabledPaths: enabledPaths,
 			enabledDashed,
 			disabledDashed
 		}
 	}, [fcNodes, mode])
+
 	return <>
-		{disabledDashed.map(({ id, d, disabled, group, style }) => (
+		{disabledDashed.map(({ id, d, group, strokeDasharray }) =>
 			<path
 				key={id} id={id}
-				className={`${disabled ? "fc-link disabled" : "fc-link enabled"}${group ? ` group-${group}` : ''}`}
+				className={`fc-link disabled${group ? ` group-${group}` : ''}`}
 				d={d}
-				style={style}
+				strokeDasharray={strokeDasharray}
 			/>
-		))}
-		{disabledD && <path className="fc-link disabled" d={disabledD} />}
-		{Object.entries(enabledDs).map(([g, d], index)=> 
-			<path key={index} className={`fc-link enabled${g ? ` group-${g}` : ''}`} d={d}  />
 		)}
-		{enabledDashed.map(({ id, d, disabled, group, style }) => (
+		{disabledD &&
+			<path className="fc-link disabled" d={disabledD} />
+		}
+		{enabledPaths.map(([group, d]) =>
+			<path
+				key={group ?? "__ungrouped"}
+				className={`fc-link enabled${group ? ` group-${group}` : ''}`}
+				d={d}
+			/>
+		)}
+		{enabledDashed.map(({ id, d, group, strokeDasharray }) =>
 			<path
 				key={id} id={id}
-				className={`${disabled ? "fc-link disabled" : "fc-link enabled"}${group ? ` group-${group}` : ''}`}
+				className={`fc-link enabled${group ? ` group-${group}` : ''}`}
 				d={d}
-				style={style}
+				strokeDasharray={strokeDasharray}
 			/>
-		))}
+		)}
 	</>
 }
 

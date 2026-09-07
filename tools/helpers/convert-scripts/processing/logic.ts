@@ -12,10 +12,8 @@ import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { updateGameJsonWithChoices } from '../utils/choices_extractor.ts';
 import { isLogicLabel, isSceneLabel, processVarName } from './common.ts';
 import { addChoiceCondition, processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
-import { ins } from 'motion/react-client';
 
 const outputPathPrefix = '../../../public/static/'
-const outputDir = 'scenes'
 const fullscripts = [
 	['jp', 'fullscript-kt_jp.txt'],
 	['en', 'fullscript-kt_en.txt'],
