@@ -91,13 +91,11 @@ const Window = () => {
 					/>
 				</RatioContainer>
 
-				{script.continueScript &&
-					<ChoicesLayer
-						script={script}
-						display={layers.text && (topLayer == 'text' || topLayer == 'menu')}
-						navigable={topLayer == 'text'}
-					/>
-				}
+				<ChoicesLayer
+					script={script}
+					display={layers.text && (topLayer == 'text' || topLayer == 'menu')}
+					navigable={topLayer == 'text'}
+				/>
 				<SkipLayer script={script} history={history} layers={layers}/>
 
 				<HistoryLayer
