@@ -233,7 +233,10 @@
       "end": "#ffffff$b`[right][noline][color=black][font=serif]END`"
     },
     "src": {
-      "tachi/osiete": "./images/%0"
+      "tachi/osiete": "./images/%0",
+      "tachi/osiete_b": "./images/%0",
+      "bg/ima_27a": "./images/%0",
+      "bg/ima_27b": "./images/%0"
     }
   },
   "scenario": {
