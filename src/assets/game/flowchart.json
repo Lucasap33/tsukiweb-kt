@@ -327,7 +327,12 @@
       "s156": {"conditions":[0,0,0,0,"%flgP",0]}
     },
     "conditions": {
-      "s2": "%flgM"
+      "s2": "%flgM",
+      "s305": "%flgE && %flgF && %flgG && %flgH && %flg4 && %flgC && !%flg5",
+      "s519": "%flgZ && !%flg2",
+      "s405": "%flg7",
+      "s404": "%flg5 && %ren_point>=5",
+      "s403": "%flg1 && %ren_point=>3"
     }
   },
     

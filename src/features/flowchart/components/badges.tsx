@@ -7,8 +7,8 @@ export const FLAG_BACKGROUND = "#668a00"
 
 function characterGradient(char: PointId) {
   return <linearGradient id={`${char}_grad`} x1="0" x2="1" y1="1" y2="0">
-    <stop offset="0" stopColor={`color-mix(in oklch, var(--route-${char}) 80%, white)`} />
-    <stop offset="1" stopColor={`color-mix(in oklch, var(--route-${char}) 80%, black)`} />
+    <stop offset="0" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, white)`} />
+    <stop offset="1" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, black)`} />
   </linearGradient>
 }
 
