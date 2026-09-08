@@ -51,7 +51,7 @@ export class GameFlowchart extends Flowchart<FcNode> {
 
 	hasTransition(fromId: FcNodeId, toId: FcNodeId): boolean {
 		const history = (this._history as any)?.scenes?.all()
-		if (!history || history.length < 2) return false
+		if (!history?.length) return false
 
 		const fromNode = this.getNode(fromId)
 		const toNode = this.getNode(toId)
@@ -59,6 +59,8 @@ export class GameFlowchart extends Flowchart<FcNode> {
 
 		const fromSet = new Set(fromNode.scene ? [fromId] : fromNode.parentSceneNodes.map(n => n.id))
 		const toSet = new Set(toNode.scene ? [toId] : toNode.childSceneNodes.map(n => n.id))
+
+		if (fromSet.size === 0) return toSet.has(history[0].label)
 
 		return history.some((scene: { label: string }, i: number) => 
 			i < history.length - 1 && 
@@ -195,7 +197,7 @@ export class FcNode extends FlowchartNode<FcNodeId, GameFlowchart> {
 			}
 			else {
 				const parentSceneNodes = this.parentSceneNodes
-				let maxState = Math.max(FcNodeState.HIDDEN, ...parentSceneNodes.map(n=>n.state))
+				let maxState = Math.max(parentSceneNodes.length ? FcNodeState.HIDDEN : FcNodeState.ENABLED, ...parentSceneNodes.map(n=>n.state))
 				if (maxState < FcNodeState.ENABLED) {
 					this._state = maxState
 				} else {
