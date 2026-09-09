@@ -74,8 +74,8 @@ const SceneCondition = ({condition}: {condition: string})=> {
 		if (token == '!') return null
 		if (!token.startsWith('%'))
 			return <TokenDisplay key={i} token={token} /> // operator or number
-		if (token.startsWith('%regard')) {
-			const char = token.split('_')[1]
+		if (token.endsWith('_point')) {
+			const char = token.split('_')[0].substring(1) // between '%' and '_'
 			return <RegardBadge key={i} char={char} />
 		}
 		else if (token.startsWith('%flg')) {
