@@ -1,0 +1,523 @@
+{
+  "scripts-dir": "./scenes",
+  "choices": {
+    "s2": [
+      "1. Andr~ a scuola.",
+      "2. Rester~ a casa."
+    ],
+    "s3": [
+      "1. Andiamo all'appartamento di Arcueid.",
+      "2. Andiamo a casa della senpai Ciel.",
+      "3. Nah, andiamo dritti a scuola.",
+      "4. Hm, e se facessi visita senza invito a casa Inui?"
+    ],
+    "s4": [
+      "1. Vado serenamente a scuola.",
+      "2. Resto a chiacchierare con Arcueid un altro po'."
+    ],
+    "s5": [
+      "1. … Non posso cedere.",
+      "2. … No, io VOGLIO cedere."
+    ],
+    "s11": [
+      "1. Vado a scuola insieme ad Akiha.",
+      "2. Vado a scuola da solo."
+    ],
+    "s15": [
+      "1. Passer~ dall'aula del Club di Cerimonia del Tè.",
+      "2. Andiamo dritti in classe.",
+      "3. Hmm, e se mi fermassi in cortile?"
+    ],
+    "s22": [
+      "1. Vado a mangiare in mensa!",
+      "2. Scrocco qualcosa alla Senpai nell'aula di Cerimonia del Tè!",
+      "3. Me ne vado a mangiare in pace nel cortile!"
+    ],
+    "s260": [
+      "1. Vado a mangiare in mensa!",
+      "2. Scrocco qualcosa alla Senpai nell'aula di Cerimonia del Tè!",
+      "3. Me ne vado a mangiare in pace nel cortile!"
+    ],
+    "s29": [
+      "1. Pranzer~ insieme ad Akiha.",
+      "2. No, pranzer~ da solo."
+    ],
+    "s39": [
+      "1. Salter~ la lezione.",
+      "2. No, andr~ in classe come un bravo studente."
+    ],
+    "s43": [
+      "1. Passer~ dall'aula di Cerimonia del Tè.",
+      "2. Rester~ in classe.",
+      "3. Me ne andr~ dritto a casa.",
+      "4. Uscir~ in città."
+    ],
+    "s51": [
+      "1. Torno insieme ad Akiha.",
+      "2. Torno da solo."
+    ],
+    "s53": [
+      "1. Rester~ nella mia stanza.",
+      "2. Andr~ da Akiha nella sua stanza.",
+      "3. Chiacchierer~ un po' con Hisui.",
+      "4. Andr~ nella stanza di Kohaku."
+    ],
+    "s56": [
+      "1. … Lasciamo perdere… l'imprudenza potrebbe risultarmi letale.",
+      "2. … Solo un'occhiatina non pu~ essere un problema, no?"
+    ],
+    "s248": [
+      "1. Gli omicidi che stanno avvenendo.",
+      "2. Le allucinazioni del confine del mondo.",
+      "3. Qualcosa che ho dimenticato.",
+      "4. L'eliminazione del demone gatto nell'annesso.",
+      "5. Una passeggiata per le strade notturne.",
+      "6. … Eh? Un altro sogno?"
+    ],
+    "s250": [
+      "1. Dev'essere per forza Arcueid.",
+      "2. Potrebbe essere la senpai Ciel.",
+      "3. Akiha è una buona possibilità.",
+      "4. Magari è Hisui.",
+      "5. Forse è Kohaku.",
+      "6. … Per qualche motivo mi viene in mente quella bambina.",
+      "7. E se fossero Kohaku e Hisui insieme?"
+    ],
+    "s401": [
+      "1. È un giorno come un altro.",
+      "2. No, oggi è il giorno del festival della cultura!",
+      "3. Non era… il festival di atletica?"
+    ],
+    "s223": [
+      "1. La Caffetteria Mordi-e-Fuggi 'Low Kick.'",
+      "2. Il Noleggio Costumi e Fotografie 'Marble Phantasm.'",
+      "3. Il Misterioso Cinema 'Planetarium.'"
+    ],
+    "s227": [
+      "1. Al terzo piano, dalle classi del primo anno.",
+      "2. Al secondo piano, dalle classi del secondo anno.",
+      "3. Al primo piano, dalle classi del terzo anno."
+    ],
+    "s231": [
+      "1. Devo andare a dare una mano ai miei compagni!",
+      "2. Per il momento, andr~ a passeggio."
+    ],
+    "s91": [
+      "1. Mi piacerebbe riposarmi nella mia stanza.",
+      "2. Andr~ nella Foresta dei Nanaya.",
+      "3. Andr~ in camera di Akiha.",
+      "4. Magari vado a dare una mano a Hisui.",
+      "5. Andr~ a fare compagnia a Kohaku.",
+      "6. Andr~ a prendere il sole in cortile.",
+      "7. Andr~ a prendere il sole nell'annesso.",
+      "8. Sono stufo di stare nella villa, vado a fare un giro!"
+    ],
+    "s96": [
+      "1. Ne approfitto!",
+      "2. Sono davvero sicuro che sia quella giusta[line=4]!?"
+    ],
+    "s505": [
+      "1. Attacco dall'ombra dell'albero che cade……!",
+      "2. Sono davvero sicuro che sia quella giusta[line=4]!?"
+    ],
+    "s507": [
+      "1. …… Il collo……!",
+      "2. Sono davvero sicuro che sia quella giusta[line=4]!?"
+    ],
+    "s98": [
+      "1. Il sonnellino di Akiha deve finire!",
+      "2. …… No, un momento… Disturbare qualcuno mentre dorme non è bello."
+    ],
+    "s307": [
+      "1. …… Guarda il sangue sul mio dito.",
+      "2. …… Scuote la testa, a disagio."
+    ],
+    "s113": [
+      "1. Andr~ a farmi una dormita in camera mia.",
+      "2. Andr~ a parlare un po' con Akiha.",
+      "3. Cercher~ Hisui.",
+      "4. Dar~ una mano a Kohaku.",
+      "5. Andr~ all'annesso.",
+      "6. Cosa c'è nella stanza di Makihisa?"
+    ],
+    "s118": [
+      "1. Colgo l'attimo!",
+      "2. Magari è meglio di no…"
+    ],
+    "s140": [
+      "1. Andr~ a mangiare fuori!",
+      "2. La cena alla villa è più che sufficiente."
+    ],
+    "s145": [
+      "1. Il Ristorante indiano Messian.",
+      "2. Il Ristorante Cinese Mobile Mark II.",
+      "3. Il barbecue a Dai Teito nella città vicina."
+    ],
+    "s194": [
+      "1. da Arcueid.",
+      "2. dalla senpai Ciel.",
+      "3. … nel vicolo."
+    ],
+    "s197": [
+      "1. …… Tornarmene buono a casa.",
+      "2. …… Controllare il letto!",
+      "3. …… E se invece le rovistassi nella cassettiera?"
+    ],
+    "s202": [
+      "1. Voglio parlare di quel gatto.",
+      "2. Voglio parlare degli ultimi eventi in città.",
+      "3. Voglio parlare di cosa ho fatto ieri."
+    ],
+    "s209": [
+      "1. …… Me ne torno buono a casa.",
+      "2. …… Mi permetto di entrare.",
+      "3. …… Rovisto nella cassettiera della Senpai!"
+    ],
+    "s214": [
+      "1. Il killer.",
+      "2. La scuola.",
+      "3. Ieri."
+    ],
+    "s156": [
+      "1. Andr~ all'appartamento di Arcueid.",
+      "2. Aspetter~ alla caffetteria.",
+      "3. Andr~ al parco.",
+      "4. Andr~ a far visita ad Arihiko a casa sua.",
+      "5. Andr~ dal dottor Jinan.",
+      "5. Andr~ all'appartamento della senpai Ciel."
+    ],
+    "s158": [
+      "1. Aaah! Succeda quel che deve succedere!",
+      "2. No, devo calmarmi e andare via!"
+    ],
+    "s161": [
+      "1. Saluto Akira.",
+      "2. Pranzo insieme ad Akira."
+    ],
+    "s174": [
+      "1. Giusto, devo studiare in vista degli esami!",
+      "2. No, lo studio pu~ aspettare fino a domani!"
+    ],
+    "s176": [
+      "1. …… Scappo via senza di lei……",
+      "2. …… No, devo bere l'amaro calice fino in fondo."
+    ],
+    "s180": [
+      "1. Torner~ alla villa.",
+      "2. No, rester~ in strada un altro po'."
+    ],
+    "s183": [
+      "1. Andr~ sulla via principale.",
+      "2. Andr~ all'incrocio."
+    ],
+    "s184": [
+      "1. Andr~ sulla via principale.",
+      "2. Andr~ all'incrocio."
+    ],
+    "s185": [
+      "1. Andr~ sulla via principale.",
+      "2. Andr~ all'incrocio."
+    ]
+  },
+  "images": {
+    "word-subtitles": {
+      "ganba_01": "Good luck, Ciel-sensei",
+      "ganba_04": "/end",
+      "sos_01": "NANAKO-CHAN SOS",
+      "ssa_01": "HISUI-CHAN, Inversion Impulse!",
+      "ssc_01": "Dawn",
+      "sss_01": "Drinking. Dreaming Moon"
+    },
+    "words": {
+      "fin": "#ffffff$c`[center][noline][color=black][font=serif]Fin`",
+      "end": "#ffffff$b`[right][noline][color=black][font=serif]END`"
+    },
+    "src": {
+      "tachi/osiete": "./images/%0",
+      "tachi/osiete_b": "./images/%0",
+      "bg/ima_27a": "./images/%0",
+      "bg/ima_27b": "./images/%0"
+    }
+  },
+  "scenario": {
+    "scenes": {
+      "s528": "Good luck, Ciel-sensei",
+      "s529": "A Story for the Evening",
+      "s530": "Crimson Moon",
+      "s531": "Red Demon God",
+      "s532": "Nanako-chan SOS!",
+      "s533": "Imogirisou",
+      "s534": "Flower of Thanatos",
+      "s535": "Hisui-chan, Inversion Inpulse!",
+      "s536": "The Tohno Family Con Game",
+      "s537": "Dawn",
+      "s543": "Drinking, Dreaming Moon"
+    },
+    "dead-end": "Dead end",
+    "osiete": "Ciel's lesson"
+  },
+  "credits": [
+    {
+      "center": [
+        "[center][font=serif]Planning / [left=15]Takeuchi Takashi",
+        "[center][font=serif][hide]Planning / [/][left=15]Nasu Kinoko"
+      ]
+    },
+    {
+      "center": [
+        "",
+        "[right][font=serif]Creator / Scenario Writer / Scenario Programmer /",
+        "[right][font=serif]Nasu Kinoko"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Scenario Programming Assistant/[hide]OKSG",
+        "[right][font=serif]OKSG"
+      ]
+    },
+    {
+      "center": [
+        "",
+        "[right][font=serif]Character Design / Original Artist / CG /",
+        "[right][font=serif]Takeuchi Takashi"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]CG Assistant / [hide]Fumicchi",
+        "[right][font=serif]Fumicchi"
+      ]
+    },
+    {
+      "center": [
+        "[center][font=serif]Background / [left=15]",
+        "[center][font=serif][hide]Background / [/][left=15]Kuki Mamoru",
+        "[center][font=serif][hide]Background / [/][left=15]Takeuchi Takashi"
+      ]
+    },
+    {
+      "top": [
+        "[left][font=serif]Programming / Scenery /",
+        "[center][font=serif]Seibei"
+      ]
+    },
+    {
+      "top": [
+        "[left][font=serif]Composer / Arranger / Sound Effects",
+        "[center][font=serif]KEITA HAGA"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Special Thanks / [left=8/]",
+        "[right][font=serif][left=8]Takahashi Naoki",
+        "[right][font=serif][left=8]B46"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Special Thanks / [left=8/]",
+        "[right][font=serif][left=8]OKSG",
+        "[right][font=serif][left=8]SUBTLE",
+        "[right][font=serif][left=8]Kirihara Kojima",
+        "[right][font=serif][left=8]Hayashi Youko",
+        "[right][font=serif][size=80%](Titles Omitted)"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Playtesters /[left=3/][left=12]Uetsugi Hiroyoshi",
+        "[right][font=serif][left=12]EDF Sakata",
+        "[right][font=serif][left=12]K-1",
+        "[right][font=serif][left=12]Shiten",
+        "[right][font=serif][left=12]Derocchi",
+        "[right][font=serif][left=12]NOCKy"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Playtesters /[left=3/][left=12]B46",
+        "[right][font=serif][left=12]Mikage",
+        "[right][font=serif][left=12]Yamaguchi Tarou",
+        "[right][font=serif][left=12]Yamazaki Seiji",
+        "",
+        ""
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Playtesters /[left=15]",
+        "[right][font=serif]ALL TYPE-MOON STAFF",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "center": "[center][font=serif]Game Director /[left=3/]Nasu Kinoko"
+    },
+    {
+      "center": "[center][font=serif]Production Director /[left=3/]Takeuchi Takashi"
+    },
+    {
+      "center": "[center][font=serif][left=5/]Produced by /[left=3/]TYPE-MOON"
+    },
+    {
+      "center": "[center][font=serif][left=5/]English version /[left=3/]mirror moon",
+      "delay": 4300
+    },
+    {
+      "center": [
+        "[left][font=serif]Programming /[left=1/]chendo",
+        ""
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "",
+        "[center][font=serif][left=12]Translation /[/][left=8]AstCd2",
+        "[center][font=serif][left=12/][left=8]Ryuusoul",
+        "[center][font=serif][left=12/][left=8]TakaJun",
+        "[center][font=serif][left=12/][left=8]tjm"
+      ],
+      "delay": 4300
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Additional Translation /[left=12]",
+        "[right][font=serif][left=8]chendo",
+        "[right][font=serif][left=8]Connor",
+        "[right][font=serif][left=8]Sheep Mafia"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "[center][font=serif][left=10]Editing /[/][left=8]Ryuusoul",
+        "[center][font=serif][left=10/][left=8]TakaJun"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "[center][font=serif][left=10]Proofing /[/][left=8]Fuyutski",
+        "[center][font=serif][left=10/][left=8]Kuritsuchanrin",
+        "[center][font=serif][left=10/][left=8]LrdDimwit"
+      ],
+      "delay": 4300
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Additional Proofing /[/][left=13]",
+        "[right][font=serif][left=10]Byrnedhead",
+        "[right][font=serif][left=10]Einherjar",
+        "[right][font=serif][left=10]EVILONE",
+        "[right][font=serif][left=10]OrganGrinder",
+        "[right][font=serif][left=10]Sheep Mafia",
+        "[right][font=serif][left=10]tjm"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "[center][font=serif][left=12]Image Editing /[/][left=8]Nichigo[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]puKKa[/][left=12/]"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "[center][font=serif][left=20]Non-Ero Editing /",
+        "[center][font=serif][left=10/][left=10]Message"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "[center][font=serif][left=25]Non-Ero Image Editing /",
+        "[center][font=serif][left=15/][left=10]DarkJedi2"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "[center][font=serif][left=12]Non-Ero Proofing /[/][left=8]cyanoacry[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]DarkJedi2[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]sebasdoes[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]TareJay[/][left=12/]"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "[center][font=serif][left=18]Beta Project Management /[/][left=8]chendo",
+        "[center][font=serif][left=18/][left=8]Message",
+        "[center][font=serif][left=18/][left=8]Ryuusoul"
+      ],
+      "delay": 4300
+    },
+    {
+      "top": [
+        "[center][font=serif][left=12]Beta testing /[/][size=80%][left=12]Arturias[/][left=12]Message",
+        "[center][font=serif][left=12/][size=80%][left=12]Choco[/][left=12]Misuzu",
+        "[center][font=serif][left=12/][size=80%][left=12]Connor[/][left=12]MJPByron",
+        "[center][font=serif][left=12/][size=80%][left=12]cyanoacry[/][left=12]NegativeZero",
+        "[center][font=serif][left=12/][size=80%][left=12]DarkJedi2[/][left=12]Omega",
+        "[center][font=serif][left=12/][size=80%][left=12]Drakenavarone[/][left=12]Radical R",
+        "[center][font=serif][left=12/][size=80%][left=12]DrmChsr0[/][left=12]RhoSangJin",
+        "[center][font=serif][left=12/][size=80%][left=12]enthrop[/][left=12]RoyalKnight",
+        "[center][font=serif][left=12/][size=80%][left=12]Gaudeamus[/][left=12]Ryuusoul",
+        "[center][font=serif][left=12/][size=80%][left=12]Heretic Kazuma[/][left=12]sebasdoes",
+        "[center][font=serif][left=12/][size=80%][left=12]koko775[/][left=12]TareJay",
+        "[center][font=serif][left=12/][size=80%][left=12]litghost[/][left=12]TakaJun",
+        "[center][font=serif][left=12/][size=80%][left=12]MHOOO[/][left=12]Velocity7"
+      ],
+      "delay": 8600
+    },
+    {
+      "center": "[center][font=serif]Release Engineering /[left=3/]Message",
+      "delay": 4300
+    },
+    {
+      "top": [
+        "[left][font=serif]Special Thanks /",
+        "",
+        "[center][font=serif][left=40]insani",
+        "[center][font=serif][left=40]Ogapee",
+        "[center][font=serif][left=5/][left=35]for their great work on ONScripter",
+        "",
+        "[center][font=serif][left=40]TheXev",
+        "[center][font=serif][left=5/][left=35]for his preliminary programming groundwork",
+        "",
+        "[center][font=serif][left=40]Kawatori Shinji",
+        "[center][font=serif][left=5/][left=35]for testing the release candidates",
+        "",
+        "[center][font=serif][left=40]Shirakani and the whole alpha test crew"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": "[center][font=serif]Thanks for playing",
+      "delay": 4300
+    },
+    {
+      "bottom": "[right][font=serif][noline][color=black][copy/] 2000 TYPE-MOON All right reserved.",
+      "delay": 21500,
+      "bg": "#ffffff"
+    }
+  ]
+}

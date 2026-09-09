@@ -12,13 +12,9 @@ import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { fixContexts } from '../utils/context.ts';
 import { processVarName, isSceneLabel, preprocessRawScript } from './common.ts';
 import { processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
+import { fullscripts, outputPathPrefix } from './fullscripts.ts';
 
-const outputPathPrefix = '../../../public/static/'
 const outputDir = 'scenes'
-const fullscripts = [
-	['jp', 'fullscript-kt_jp.txt'],
-	['en', 'fullscript-kt_en.txt'],
-]
 
 //#endregion ###################################################################
 //#region                             FIXES
@@ -31,6 +27,7 @@ const fullscripts = [
 const COLOR_IMAGES = new Map(Object.entries({
 	'"bg/ima_10"' : '#000000',
 	'"bg/ima_11"' : '#ffffff',
+	'"bg/ima_11b"': '#9c0120',
 }))
 
 function commandFix(token: Token) {
@@ -401,7 +398,7 @@ async function processSingleScript(folder: string, filename: string,
 	txt = preprocessRawScript(txt)
 	let eroskip_pages = {}
 	let block_fixes = {}
-	let preprocess_module_path = path.join(process.cwd(), outputPathPrefix, folder, 'preprocess.js')
+	let preprocess_module_path = path.join(outputPathPrefix, folder, 'preprocess.js')
 	if (fs.existsSync(preprocess_module_path)) {
 		preprocess_module_path = path.relative(import.meta.dirname, preprocess_module_path)
 		const lang_module = await import(preprocess_module_path.replaceAll('\\', '/'))

@@ -12,5 +12,13 @@
     "dir": "./en",
     "fallback": "jp",
     "last-update": "2026-04-17"
+  },
+  "it-riffour": {
+    "locale": "it-IT",
+    "display-name": "🇮🇹 Italiano",
+    "authors": "Riffour",
+    "dir": "./it-riffour",
+    "last-update": "2026-09-09",
+    "fallback": "en-mm"
   }
 }

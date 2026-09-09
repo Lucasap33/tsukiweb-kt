@@ -12,12 +12,8 @@ import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { updateGameJsonWithChoices } from '../utils/choices_extractor.ts';
 import { isLogicLabel, isSceneLabel, processVarName } from './common.ts';
 import { addChoiceCondition, processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
+import { fullscripts, outputPathPrefix } from './fullscripts.ts';
 
-const outputPathPrefix = '../../../public/static/'
-const fullscripts = [
-	['jp', 'fullscript-kt_jp.txt'],
-	['en', 'fullscript-kt_en.txt'],
-]
 const LOGIC_FILE = "logic"
 const GEN_CHOICES_JSON = true
 const GEN_TREE 		   = true
@@ -418,7 +414,7 @@ async function processSingleScript(folder: string, filename: string): Promise<[s
 				.replaceAll('\n\t', '\n')
 				.replaceAll(/^select\s*(\r?\n([`"][^`"]*[`"],\s*\*\w+,\s*\r?\n)*([`"][^`"]*[`"],\s*\*\w+))$/gm, (m)=> m.replaceAll(/\r?\n/g, ' '))
 	let block_fixes = {}
-	let preprocess_module_path = path.join(process.cwd(), outputPathPrefix, folder, 'preprocess.js')
+	let preprocess_module_path = path.join(outputPathPrefix, folder, 'preprocess.js')
 	if (fs.existsSync(preprocess_module_path)) {
 		preprocess_module_path = path.relative(import.meta.dirname, preprocess_module_path)
 		const lang_module = await import(preprocess_module_path.replaceAll('\\', '/'))
