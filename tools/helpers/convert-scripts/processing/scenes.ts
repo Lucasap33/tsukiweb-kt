@@ -15,6 +15,9 @@ import { processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.t
 import { fullscripts, outputPathPrefix } from './fullscripts.ts';
 
 const outputDir = 'scenes'
+const limitScenes: string[] = [
+	//'s533'
+]
 
 //#endregion ###################################################################
 //#region                             FIXES
@@ -118,7 +121,9 @@ const blockFixes = new Map(Object.entries({
 		tok.cmd = 'ld'
 		tok.args = ['c', tok.args[1], (block.at(i+1)! as CommandToken).args[1]]
 		block.delete(i+1) // delete 'cl c,crossfade_slw' that follow lsp
-		const bg = block.find((t, j)=> j > i && t instanceof CommandToken && t.cmd == 'bg')
+		const bg = block.find((t, j)=> j > i && t instanceof CommandToken && t.cmd == 'bg') as CommandToken
+		bg.cmd = 'ld'
+		bg.args = ['bg', ...bg.args]
 		// TODO Exceptionally, during bg change, center sprite should remain
 	},
 	's530': processJumps
@@ -411,12 +416,15 @@ async function processSingleScript(folder: string, filename: string,
 	}
 	const tokens = parseScript(txt)
 	
-	const blocks = splitBlocks(tokens, getBlockProps.bind(undefined,
+	let blocks = splitBlocks(tokens, getBlockProps.bind(undefined,
 		new Map(Object.entries(block_fixes)),
 		new Map(Object.entries(eroskip_pages))
 	))
 	interScenesFixes(blocks)
 	fixContexts(blocksTree, blocks)
+	if (limitScenes.length > 0) { 
+		blocks = new Map(blocks.entries().filter(([name, _])=>limitScenes.includes(name)))
+	}
 	const fileContents = generateScenes(blocks, getFileName)
 
 	const outputPath = outputDir

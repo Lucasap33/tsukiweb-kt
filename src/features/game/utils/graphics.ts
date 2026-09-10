@@ -98,7 +98,7 @@ export function processImageCmd(
 	const change = (pos == 'a' ) ? { l: "", c: "", r: "" }
 			 : (pos == 'bg') ? { bg: image, bgAlign: alignment }
 			 : { [pos]: image }
-	const to = (pos == 'bg') ? { l: "", c: "", r: "", ...change } : change
+	const to = (cmd == 'bg') ? { l: "", c: "", r: "", ...change } : change
 	let finished = false
 
 	const _onFinish = ()=> {
@@ -106,19 +106,15 @@ export function processImageCmd(
 			return
 		finished = true
 		if (!objectMatch(script.graphics, to)) {
-			if (pos == 'a')
-				script.graphics = {l: "", c: "", r: ""}
-			else if (pos == 'bg') {
+			if (pos == 'bg') {
 				if (alignment) {
 					displayMode.bgAlignment = alignment
 					displayMode.bgMoveTime = 0
 				} else if (script.graphics.bgAlign) {
 					displayMode.bgAlignment = "center"
 				}
-				script.graphics = {bg: image, l: "", c: "", r: "", bgAlign: alignment}
-			} else {
-				script.graphics[pos as SpritePos] = image
 			}
+			script.graphics = to;
 			setTransition(undefined)
 			setRocket(undefined)
 		}
