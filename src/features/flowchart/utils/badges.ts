@@ -4,7 +4,7 @@ import { SCENE_ATTRS } from "../../../app/utils/constants";
 import FC from "../../../assets/game/flowchart.json"
 
 export type BadgeEntry = {
-  flag?: string
+  flags?: string[]
   condition?: string | {condition: string, above?: string, below?: string}
   select?: {text: string, condition?: string}[]
   selectConditions?: (0|string)[]
@@ -24,12 +24,19 @@ function buildBadgesMap() {
   badgeMapLanguageKey = getBadgeMapLanguageKey()
 
   for (const [char, entries] of Object.entries(FC.badges.points))
-  for (const [id, value] of Object.entries(entries))
-    BADGE_MAP.set(id, { char: char as PointId, value: value as number })
+    for (const [id, value] of Object.entries(entries))
+      BADGE_MAP.set(id, { char: char as PointId, value: value as number })
 
   for (const [flag, ids] of Object.entries(FC.badges.flags))
-  for (const id of ids)
-    BADGE_MAP.set(id, { ...BADGE_MAP.get(id), flag })
+    for (const id of ids) {
+      const entry = BADGE_MAP.get(id)
+      if (!entry)
+        BADGE_MAP.set(id, {flags: [flag]})
+      else if (entry.flags)
+        entry.flags.push(flag)
+      else
+        entry.flags = [flag]
+    }
 
   for (const [id, texts] of Object.entries(strings.choices)) {
     const select = texts!.map(text=>({text}))

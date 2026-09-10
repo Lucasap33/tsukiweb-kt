@@ -31,12 +31,12 @@ const RegardBadge = ({node, char, value}: {node: FcNode, char: PointId, value: n
 	)
 }
 
-const FlagBadge = ({node, flag, above}: {node: FcNode, flag: string, above?: boolean})=> {
+const FlagBadge = ({node, flag, offset = 0}: {node: FcNode, flag: string, offset?: number})=> {
 	const dX = node.width > 0 ? BADGE_RIGHT_INSET : 0
 	const dY = node.height > 0 ? DY / 2 : 0
 	
 	return (
-		<g className="badge" transform={`translate(${node.right - dX}, ${node.bottom - dY - (above ? DY * 2.2 : 0)})`}>
+		<g className="badge" transform={`translate(${node.right - dX}, ${node.bottom - dY - offset * DY * 2.2})`}>
 			<use href="#flag-icon" />
 			<text y="1.6" stroke="none" fill="white" textAnchor="middle">
 				{flag}
@@ -121,13 +121,13 @@ export const SceneBadges = ({node}: SceneBadgesProps)=> {
 	const badge = getNodeBadges(node.id)
 	if (!badge) return null
 
-	let { flag, char, value, select, condition } = badge
+	let { flags, char, value, select, condition } = badge
 	
 	return (
 		<>
 			{char && <RegardBadge node={node} char={char} value={value!} />}
 
-			{flag && <FlagBadge node={node} flag={flag} above={!!char} />}
+			{flags?.map((f, i)=><FlagBadge key={i} node={node} flag={f} offset={char ? i+1 : i} />)}
 
 			{select && <SelectBadge node={node} />}
 
