@@ -178,7 +178,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
                 this.deleteFlag(m[1])
         } else if ((m = name.match(/^%(\w+)_point$/))) {
             this.setPoints(m[1] as PointId, value as number)
-        } else if (["%answer", "$nextflow"].includes(name)) {
+        } else if (["%answer", "$nextflow", "%2100"].includes(name)) {
             this._tempVariables.set(name, value)
         } else {
 			throw Error(`Unknown or read-only variable ${name}`)
