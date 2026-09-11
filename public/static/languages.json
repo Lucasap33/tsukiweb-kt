@@ -5,7 +5,7 @@
     "dir": "./jp",
     "last-update": "2026-04-17"
   },
-  "en-mm": {
+  "en": {
     "locale": "en-US",
     "display-name": "🇬🇧 English",
     "authors": "mirror moon",
@@ -19,6 +19,14 @@
     "authors": "Riffour",
     "dir": "./it-riffour",
     "last-update": "2026-09-09",
-    "fallback": "en-mm"
+    "fallback": "en"
+  },
+  "pt-seven-nights": {
+    "locale": "pt-BR",
+    "display-name": "🇧🇷 Português",
+    "authors": "Seven Nights",
+    "dir": "./pt-seven-nights",
+    "last-update": "2026-09-11",
+    "fallback": "en"
   }
 }
