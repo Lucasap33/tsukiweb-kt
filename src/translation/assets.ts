@@ -1,3 +1,5 @@
+import { observe } from '@tsukiweb/common/utils/Observer'
+import { importedImages } from '../engine/imported-images'
 import { splitFirst } from "@tsukiweb/common/utils/utils"
 import { settings } from "../engine/settings"
 import {TrackSourceId, strings} from "./lang"
@@ -11,6 +13,8 @@ export const assets = new AssetsCache<{
   'audio': AudioBuffer|undefined
   'graph': string
 }>()
+
+observe(importedImages, 'urls', () => assets.clear())
 
 const WORD_IMAGES = new Set<string>(WORD_IMAGE_IDS)
 
@@ -70,9 +74,12 @@ export function audioSePath(se: string) {
  * @param res desired resolution.
  * @returns the requested image's url
  */
-export function imageSrc(img: string, res: ResolutionId = "src") {
+export function imageSrc(img: string, res: ResolutionId = "src"): string {
   if (img.startsWith('"') && img.endsWith('"'))
     img = img.substring(1, img.length-1)
+
+  const imported = importedImages.urls[img]
+  if (typeof imported === 'string') return imported
 
   const [dir, name] = splitFirst(img, '/')
   const root = strings.images[res]

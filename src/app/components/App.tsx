@@ -1,3 +1,5 @@
+import { useCallback, useEffect } from 'react'
+import { importedImages, releaseImportedImageUrls } from 'engine/imported-images'
 import { Router } from "wouter";
 import AnimatedRoutes from '../../app/components/AnimatedRoutes';
 import { getLocale } from "../../translation/lang";
@@ -19,12 +21,16 @@ const LocaleSetter = () => {
 
 function App() {
 	useObserved(settings, 'eroBlur')
+	const [urls] = useObserved(importedImages, 'urls')
+	const resolveImage = useCallback<typeof imageSrc>((...args) => imageSrc(...args), [urls])
+	useEffect(releaseImportedImageUrls, [urls])
+	
 	return (
 		<>
 			<LocaleSetter />
 			
 			<CommonProvider config={{
-				imageSrc: imageSrc,
+				imageSrc: resolveImage,
 				cg: {
 					shouldBlur: cg.shouldBlur
 				}

@@ -1,4 +1,6 @@
-import { ReactNode, useState } from "react"
+import { toast } from 'react-toastify'
+import { importLenImages, eraseLenImages } from 'engine/imported-images'
+import { ReactNode, useRef, useState } from "react"
 import { MdDeleteForever, MdDownload, MdFileUpload } from "react-icons/md"
 import { Button, PageSection } from "@tsukiweb/common/ui-core"
 import { bb } from "@tsukiweb/common/utils/Bbcode"
@@ -18,6 +20,22 @@ let flagSupportChecked = false
 
 const ConfigAdvancedTab = () => {
 	const strings = useStrings()
+	const imageInput = useRef<HTMLInputElement>(null)
+	const [managingImages, setManagingImages] = useState(false)
+
+	const manageImages = async (file?: File) => {
+		setManagingImages(true)
+		try {
+			if (file) await importLenImages(file)
+			else await eraseLenImages()
+			toast.success(strings['operation-successful'])
+		} catch (error) {
+			console.error(error)
+			toast.error(strings['operation-failed'])
+		} finally {
+			setManagingImages(false)
+		}
+	}
 	const [modal, setModal] = useState<{show: boolean, content: ReactNode}>({show: false, content: undefined})
 
 	const { conf, update, reset } = useConfig(settings,
@@ -166,6 +184,24 @@ const ConfigAdvancedTab = () => {
 						{ label: strings.no, value: false },
 					]}
 				/>
+			</ConfigItem>
+
+			<ConfigItem label={strings.config['len-images']}>
+				<input type="file" accept=".nsa" hidden ref={imageInput} onChange={event => {
+					const file = event.currentTarget.files?.[0]
+					event.currentTarget.value = ''
+					if (file) void manageImages(file)
+				}} />
+				<div className="config-btns">
+					<Button className="config-btn" disabled={managingImages}
+						onClick={() => imageInput.current?.click()} nav-auto={1}>
+						<MdFileUpload aria-hidden /> {strings.config['data-import']} arc.nsa
+					</Button>
+					<Button className="config-btn erase" disabled={managingImages}
+						onClick={() => manageImages()} nav-auto={1}>
+						<MdDeleteForever aria-hidden /> {strings.config['data-erase']}
+					</Button>
+				</div>
 			</ConfigItem>
 
 			<ConfigItem label={strings.config.data}>

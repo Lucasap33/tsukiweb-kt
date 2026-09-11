@@ -1,3 +1,4 @@
+import { loadImportedImages } from 'engine/imported-images'
 import { createRoot } from 'react-dom/client'
 import App from './components/App'
 import { StrictMode } from 'react'
@@ -15,7 +16,7 @@ mountDialogManager()
 registerFileHandler(FULLSAVE_EXT, importGameDataFromFile)
 initFileHandling()
 
-createRoot(document.getElementById('root') as HTMLElement).render(
+loadImportedImages().then(() => createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <ErrorBoundary FallbackComponent={PageCrash}>
       <StringsProvider>
@@ -23,4 +24,4 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </StringsProvider>
     </ErrorBoundary>
   </StrictMode>
-)
+))

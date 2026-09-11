@@ -93,6 +93,7 @@
     "data-erase": "Erase",
     "data-erase-warning": "Delete all saves, settings progress. Sure?",
     "data-erase-confirm": "All clean. Close tab.",
+    "len-images": "Manage Len's images",
     "controls": {
       "next": "Next",
       "graphics": "Show / hide text",
@@ -173,6 +174,8 @@
   "back": "Back",
   "close": "Close",
   "later": "Later",
+  "operation-failed": "Operation failed",
+  "operation-successful": "Operation successful",
 
   "scripts-dir": "./jp/scenes/",
 
