@@ -9,8 +9,10 @@ import { SCREEN, displayMode } from "app/utils/display";
 import { useDefaultNavBack, useNavBackRef } from "@tsukiweb/common/hooks"
 import Ornament from "@assets/images/ornament.webp"
 import PageBackButton from "app/components/PageBackButton"
-import { settings, viewedScene } from "engine/settings";
+import { viewedScene } from "engine/settings";
 import { useFestivalsAccess } from "features/summer-fes/hooks/useFestivalsAccess";
+import { getUnlockedDreams } from "features/dreams/components/DreamsList";
+
 
 const ExtraShell = ({ children }: PropsWithChildren) => {
 	const focusCurrentMenuItem = () => {
@@ -55,6 +57,7 @@ const ExtraMenu = () => {
 	const strings = useStrings()
 	const currentPage = "/" + location.split("/")[1]
 	const { menuOpened, hasUnseenFes } = useFestivalsAccess()
+	const unlockedDreams = getUnlockedDreams()
 
 	useDefaultNavBack(back)
 
@@ -106,15 +109,18 @@ const ExtraMenu = () => {
 						{strings.extra["summer-fes"]}
 					</TitleMenuButton>
 				}
-				<TitleMenuButton id="extra-dreams"
+				{unlockedDreams.length > 0 &&
+					<TitleMenuButton id="extra-dreams"
 					audio={audio}
 					onClick={()=>navigate(SCREEN.DREAMS)}
 					active={currentPage === SCREEN.DREAMS}
 					aria-selected={currentPage === SCREEN.DREAMS}
+					attention={unlockedDreams.some(({ id }) => !viewedScene(id))}
 					role="tab"
 					nav-auto={1}>
 					{strings.extra.dreams}
 				</TitleMenuButton>
+				}
 			</div>
 			<div className="back-action">
 				<PageBackButton onClick={()=>navigate(SCREEN.TITLE)} />
