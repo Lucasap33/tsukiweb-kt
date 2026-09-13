@@ -1,7 +1,7 @@
 import { objectMatch, splitFirst } from "@tsukiweb/common/utils/utils";
 import { settings } from "../../../engine/settings";
 import { assets, imageSrc, wordImage } from "translation/assets";
-import { BG_POSITIONS, Graphics, GraphicsTransition, Quake, Rocket, SpritePos, SPRITES_POSITIONS } from "@tsukiweb/common/graphics";
+import { BG_POSITIONS, Graphics, GraphicsTransition, Quake, Rocket, SPRITES_POSITIONS } from "@tsukiweb/common/graphics";
 import { ScriptPlayer } from "engine/ScriptPlayer";
 import Timer from "@tsukiweb/common/utils/timer";
 import cg from "features/gallery/utils/gallery";
@@ -57,7 +57,7 @@ function preloadGraphic(image: string) {
 assets.setProvider('graph', (id: string)=> {
 	if (id.startsWith('"') && id.endsWith('"'))
 		id = id.substring(1, id.length - 1)
-	const match = id.match(/^(word|bg|tachi|event|evt)\//)
+	const match = id.match(/^(word|bg|tachi|event)\//)
 	if (!match)
 		return undefined
 	const url = imageSrc(id)
@@ -114,7 +114,7 @@ export function processImageCmd(
 					displayMode.bgAlignment = "center"
 				}
 			}
-			script.graphics = to;
+			script.graphics = to
 			setTransition(undefined)
 			setRocket(undefined)
 		}

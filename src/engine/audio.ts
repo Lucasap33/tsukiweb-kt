@@ -36,7 +36,7 @@ assets.setProvider("audio", (id)=> {
   const normalizedId = id.startsWith('"') && id.endsWith('"')
     ? id.substring(1, id.length - 1)
     : id
-  if (/^(word|bg|tachi|event|evt)\//.test(normalizedId))
+  if (/^(word|bg|tachi|event)\//.test(normalizedId))
     return undefined
   const url = getUrl(normalizedId)
   if (normalizedId.startsWith('*') && audio.streamingEnabled)
