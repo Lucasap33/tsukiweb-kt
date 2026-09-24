@@ -4,7 +4,7 @@ import { DY } from "@tsukiweb/common/flowchart";
 import { PointId } from "app/utils/types";
 import { getNodeBadges } from "features/flowchart/utils/badges";
 
-const REGARD_REGEX = /^%regard_(\w+)/
+const REGARD_REGEX = /^%(\w+)_point/
 const BADGE_RIGHT_INSET = 3
 
 const SelectBadge = ({node}: {node: FcNode})=> {
@@ -20,13 +20,21 @@ const SelectBadge = ({node}: {node: FcNode})=> {
 const RegardBadge = ({node, char, value}: {node: FcNode, char: PointId, value: number})=> {
 	const dX = node.width > 0 ? BADGE_RIGHT_INSET : 0
 	const dY = node.height > 0 ? DY / 2 : 0
-
+	const transform = `translate(${node.right - dX}, ${node.bottom - dY})`
+	if (char == "kagi") {
+		return (
+			<g className="badge" transform={transform}>
+				<use href="#point_1"/>
+				<use href="#kagi-icon"/>
+			</g>
+		)
+	}
 	return (
 		<use
 			className="badge"
 			href={`#regard_${value}`}
 			fill={`url(#${char}_grad)`}
-			transform={`translate(${node.right - dX}, ${node.bottom - dY})`}
+			transform={transform}
 		/>
 	)
 }
@@ -34,20 +42,23 @@ const RegardBadge = ({node, char, value}: {node: FcNode, char: PointId, value: n
 const FlagBadge = ({node, flag, offset = 0}: {node: FcNode, flag: string, offset?: number})=> {
 	const dX = node.width > 0 ? BADGE_RIGHT_INSET : 0
 	const dY = node.height > 0 ? DY / 2 : 0
-	
-	return (
+	return  (
 		<g className="badge" transform={`translate(${node.right - dX}, ${node.bottom - dY - offset * DY * 2.2})`}>
 			<use href="#flag-icon" />
-			<text y="1.6" stroke="none" fill="white" textAnchor="middle">
-				{flag}
-			</text>
+			{flag.length == 1 ?
+				<text y="1.6" stroke="none" fill="white" textAnchor="middle">
+					{flag}
+				</text>
+			:
+				<use href={`#${flag}-icon`} />
+			}
 		</g>
 	)
 }
 
 type Condition = Exclude<Exclude<ReturnType<typeof getNodeBadges>, undefined>['condition'], undefined>
 const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})=> {
-	let x, y, angle, iconX, iconY, icon, fill, negative
+	let x, y, angle, iconX, iconY, icon, fill, negative, m
 	if (typeof condition == 'object') {
 		let above, below
 		({condition, above, below} = condition)
@@ -90,12 +101,23 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 		icon = "⋯"
 		fill = "var(--active-connection)"
 	} else if (condition!.startsWith('%flg')) {
-		icon = condition[4]
+		icon = condition.substring(4)
+		if (icon.startsWith('_'))
+			icon = icon.substring(1)
+		if (icon.length > 1)
+			icon = <use href={`#${icon}-icon`}/>
 		fill = FLAG_BACKGROUND
 		negative = condition.endsWith('==0')
-	} else if (condition.startsWith('%regard')) {
-		icon = "♥"
-		fill = `url(#${condition.match(REGARD_REGEX)![1]}_grad)`
+	} else if ((m = condition.match(REGARD_REGEX))) {
+		let id = m[1]
+		if (id == "kagi") {
+			icon = <use href={`#${id}-icon`}/>
+			fill = "#000"
+		}
+		else { 
+			icon = "♥"
+			fill = `url(#${id}_grad)`
+		}
 	} else if (condition.startsWith('%clear')) {
 		icon = "★"
 		fill = "var(--active-connection)"
@@ -105,10 +127,13 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 	}
 	return <g className="badge" transform={`translate(${x},${y})`}>
 		<use href="#cond-icon" fill={fill} {...(angle && {transform:`rotate(${angle})`})}/>
-		<text x={iconX} y={iconY} textAnchor="middle"
-				stroke="none" fill="white">
-			{icon}
-		</text>
+		{typeof icon == 'string' ?
+			<text x={iconX} y={iconY} textAnchor="middle"
+					stroke="none" fill="white">
+				{icon}
+			</text>
+		: icon
+		}
 		{negative && <use href="#cond-neg"/>}
 	</g>
 }

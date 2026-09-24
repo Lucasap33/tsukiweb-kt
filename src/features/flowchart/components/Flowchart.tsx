@@ -79,7 +79,7 @@ const Flowchart = ({history, onSceneClick, mode = 'viewer'}: Props)=> {
 							onClick={onSceneClick}
 						/>
 					</g>
-					<g className="fc-badges">
+					<g className="fc-badges" font-weight="bold">
 						{settings.flowchartBadges &&
 							<AllBadges nodes={visibleNodes} />
 						}

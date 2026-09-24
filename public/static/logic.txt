@@ -78,7 +78,7 @@ goto *f260
 *f10
 goto *s10
 *s10_end
-inc %flg_aki
+inc %aki_point
 goto *f15
 *f11
 goto *s11
@@ -163,7 +163,7 @@ goto *s27
 *s27_end
 goto *f35
 *f28
-if (%flg_aki>=1) goto *f29
+if (%aki_point>=1) goto *f29
 goto *f31
 *f29
 goto *s29
@@ -230,7 +230,7 @@ if (%flg_bunka>=1) goto *f49
 if (%flgN>=1) goto *f48
 goto *f47
 *f46
-if (%flg_aki>=1) goto *f51
+if (%aki_point>=1) goto *f51
 goto *f52
 *f47
 goto *s47
@@ -288,7 +288,7 @@ goto *s58
 *s58_end
 goto *f62
 *f59
-if (%flg_aki>=1) goto *f60
+if (%aki_point>=1) goto *f60
 goto *f61
 *f60
 goto *s60

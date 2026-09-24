@@ -32,7 +32,7 @@ function processVarName(varName: string) {
 				case 'hisui'	: return '%his_point'
 				case 'ciel'		: return '%cel_point'
 				case 'nanako'	: return '%nana_point'
-				case 'akiha'	: return '%flg_aki'
+				case 'akiha'	: return '%aki_point'
 				case 'kissa'	: return '%flg_kissa'
 				case 'kashiisyo': return '%flg_kashiisyo'
 				case 'eigakan'	: return '%flg_eigakan'
