@@ -6,67 +6,74 @@ import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
+import { createFlagBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
+
+const ICON_SIZE = 7
+const CHAR_IMG_SIZE = 7
 
 
 const RegardBadge = ({char}: {char: string}) => {
 	return char == "kagi" ? (
-		<svg className="badge" viewBox="-3.4 -3.4 7 7">
+		<svg className="badge" viewBox={`-${ICON_SIZE/2} -${ICON_SIZE/2} ${ICON_SIZE} ${ICON_SIZE}`}>
 			<use href="#point_icon"/>
 			<use href={`#${char}-icon`}/>
 		</svg>
 	) : (
-		<svg className="badge" viewBox="-13 -3.4 13 7">
+		<svg className="badge" viewBox={`-${CHAR_IMG_SIZE+ICON_SIZE*0.75} -${CHAR_IMG_SIZE/2} ${CHAR_IMG_SIZE+ICON_SIZE*0.75} ${CHAR_IMG_SIZE}`}>
 			<image href={`./res/chars/${char}.webp`}
 				className="badge"
-				x={-13} y={-3.5} height={7} />
+				x={-(CHAR_IMG_SIZE+ICON_SIZE*0.75)} y={-CHAR_IMG_SIZE/2} height={CHAR_IMG_SIZE} />
 			<use href="#regard_icon"
 				fill={`url(#${char}_grad)`}
-				transform="translate(-3.5,0.5) scale(0.75)"/>
+				strokeWidth=".8"
+				transform={`translate(-${ICON_SIZE*0.75*0.5},0.5) scale(.75)`}/>
 		</svg>
 	)
 }
 
-const FlagBadge = ({flag, negative}: {flag: string, negative?: boolean}) => {
+const FlagBadge = ({flag, negative, persists = false}: {flag: string, negative?: boolean, persists?: boolean}) => {
+	let content
+	if (flag.startsWith("quiz")) {
+		const n = parseInt(flag.at(-1)!) || 0
+		content = createQuizBadge(n)
+	} else {
+		content = createFlagBadge(flag, negative)
+	}
 	return (
 		<svg className="badge" viewBox="-3.5 -3.5 7 7">
-			<use href={negative ? "#flag-neg-icon" : "#flag-icon"}/>
-			{flag.length == 1 ?
-				<text y="1.6" stroke="none" fill="white" textAnchor="middle"
-					  font-weight="bold">
-					{flag}
-				</text>
-			:
-				<use href={`#${flag}-icon`} />
-			}
+			{content}
+			{persists && <use href="#link-icon" transform="translate(2.6,-2.2)"/>}
 		</svg>
 	)
 }
 
-const RegardValueBadge = ({ char, value }: { char: string; value: number }) => {
+const RegardValueBadge = ({ char, value, persists=false }: { char: string; value: number, persists?: boolean }) => {
 	const abs = Math.abs(value)
 	const sign = Math.sign(value)
 	return (char == "kagi") ? (
-		<svg className="badge" viewBox={`${-(abs * 3.5)} -3.5 ${abs * 7} 7`}>
+		<svg className="badge" viewBox="-3.5 -3.5 7 7">
 			<use href="#point_1"/>
 			<use href="#kagi-icon"/>
+			{persists && <use href="#link-icon" transform="translate(2.6,-2.2)"/>}
 		</svg>
 	) : (
-		<svg className="badge" viewBox={`${-(abs * 5 + 8)} -3.5 ${abs * 5 + 8} 7`}>
+		<svg className="badge" viewBox={`-${(abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE)} -${CHAR_IMG_SIZE/2} ${abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE+1} ${CHAR_IMG_SIZE}`}>
 			<image
 				href={`./res/chars/${char}.webp`}
 				className="badge"
-				x={-(abs * 5 + 8)}
-				y={-3.5}
-				height={7}
+				x={-(abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE)}
+				y={-CHAR_IMG_SIZE/2}
+				height={CHAR_IMG_SIZE}
 			/>
 			{[...Array(abs)].map((_, i) => (
 				<use
 					key={i}
 					href={`#regard_${sign}`}
 					fill={`url(#${char}_grad)`}
-					transform={`translate(${-(abs - i) * 5 + 1.5},0) scale(0.75)`}
+					transform={`translate(${-(abs - i) * ICON_SIZE*0.75 + ICON_SIZE*0.75*0.5},0) scale(0.75)`}
 				/>
 			))}
+			{persists && <use href="#link-icon" transform="translate(0,-2.2)"/>}
 		</svg>
 	)
 }
@@ -99,6 +106,10 @@ const SceneCondition = ({condition}: {condition: string})=> {
 				flag = flag.substring(1)
 			const negative = (i > 0 && (tokens[i-1] == '!'))
 			return <FlagBadge key={i} flag={flag} negative={negative} />
+		}
+		else if (token.startsWith('%quiz')) {
+			const negative = (i > 0 && (tokens[i-1] == '!'))
+			return <FlagBadge key={i} flag={token.substring(1)} negative={negative}/>
 		}
 	})
 }
@@ -138,8 +149,8 @@ const SceneBadges = ({badges}: {badges: BadgeEntry})=> {
 
 		{(flags || (char && value != null)) &&
 			<div className="badges">
-				{flags?.map(f=><FlagBadge key={f} flag={f} />)}
-				{char && value != null && <RegardValueBadge char={char} value={value} />}
+				{flags?.map(f=><FlagBadge key={f} flag={f} persists={flagPersists(f)} />)}
+				{char && value != null && <RegardValueBadge char={char} value={value} persists={pointPersists(char)} />}
 			</div>
 		}
 	</>

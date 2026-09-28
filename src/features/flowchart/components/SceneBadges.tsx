@@ -1,5 +1,5 @@
 import { FcNode } from "features/flowchart/utils/flowchart";
-import { FLAG_BACKGROUND } from "./badges";
+import { FLAG_BACKGROUND, createFlagBadge, createQuizBadge } from "./badges";
 import { DY } from "@tsukiweb/common/flowchart";
 import { PointId } from "app/utils/types";
 import { getNodeBadges } from "features/flowchart/utils/badges";
@@ -40,20 +40,17 @@ const RegardBadge = ({node, char, value}: {node: FcNode, char: PointId, value: n
 }
 
 const FlagBadge = ({node, flag, offset = 0}: {node: FcNode, flag: string, offset?: number})=> {
-	const dX = node.width > 0 ? BADGE_RIGHT_INSET : 0
-	const dY = node.height > 0 ? DY / 2 : 0
-	return  (
-		<g className="badge" transform={`translate(${node.right - dX}, ${node.bottom - dY - offset * DY * 2.2})`}>
-			<use href="#flag-icon" />
-			{flag.length == 1 ?
-				<text y="1.6" stroke="none" fill="white" textAnchor="middle">
-					{flag}
-				</text>
-			:
-				<use href={`#${flag}-icon`} />
-			}
-		</g>
-	)
+	let dX = node.width > 0 ? BADGE_RIGHT_INSET : 0
+	let dY = node.height > 0 ? DY / 2 : 0
+	dX = node.right - dX
+	dY = node.bottom - dY - offset * DY * 2.2
+	const props = {transform:`translate(${dX}, ${dY})`}
+	if (flag.startsWith('quiz')) {
+		const n = parseInt(flag.at(-1)!) || 0
+		return createQuizBadge(n, props)
+	} else {
+		return createFlagBadge(flag, false, props)
+	}
 }
 
 type Condition = Exclude<Exclude<ReturnType<typeof getNodeBadges>, undefined>['condition'], undefined>

@@ -1,16 +1,60 @@
 import { DY } from "@tsukiweb/common/flowchart/constants"
 import { PointId } from "app/utils/types";
+import { SVGProps } from "react";
 
 const HEART_PATH = `m0,2.5l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2`
 const C = DY*0.8 // unit used for condition badge
-export const FLAG_BACKGROUND = "#000000"
-export const POINT_BACKGROUND = "#000000"
+export const FLAG_BACKGROUND = "#202020"
+export const POINT_BACKGROUND = "#202020"
 
 function characterGradient(char: PointId) {
   return <linearGradient id={`${char}_grad`} x1="0" x2="1" y1="1" y2="0">
     <stop offset="0" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, white)`} />
     <stop offset="1" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, black)`} />
   </linearGradient>
+}
+
+export function createFlagBadge(id: string, negative=false, props?: SVGProps<SVGGElement>) {
+  return <g className="badge" {...props}>
+			<use href={negative ? "#flag-neg-icon" : "#flag-icon"}/>
+			{id.length > 1 ? <use href={`#${id}-icon`}/>
+      :
+				<text y="1.6" stroke="none" textAnchor="middle" fill="white">
+					{id}
+				</text>
+			}
+		</g>
+}
+export function createQuizBadge(n: number, props?: SVGProps<SVGGElement>) {
+  let id, content;
+  if (n > 0) {
+    content = <>
+      <rect x="0" width="1.35" y="-0.4" height="2.05"
+        fill={FLAG_BACKGROUND} stroke="none"/>
+      <text y="1.6" textAnchor="middle" stroke="black"
+        strokeWidth="0.05px" fill="white"
+        transform="translate(1.2,.5) scale(1)">
+        {n}
+      </text>
+    </>
+  } else {
+    content = undefined
+  }
+  return <g className="badge" {...props}>
+    <use href="#flag-icon"/>
+    <use href="#quiz-icon" opacity=".9"/>
+    {content}
+  </g>
+}
+export function flagPersists(flag: string) {
+  if (flag.length == 1) return true
+  if (flag.startsWith('quiz')) return true
+  return false
+}
+export function pointPersists(point: PointId) {
+  if (['ark', 'cel', 'aki', 'akira'].includes(point))
+    return false
+  return true
 }
 
 export const BADGES_DEFINES = <defs>
@@ -99,7 +143,14 @@ export const BADGES_DEFINES = <defs>
       -.3.3-.45-.45 1.52-1.52zm1.16-.22c.13-.13.13-.35 0-.49s-.35-.13-.49
       0-.13.35 0 .49.35.13.49 0z"
       fill="white" stroke="none"/>
-  <polygon id="flag-icon" points="0,-3.14 3,-1 1.85,2.53 -1.85,2.53 -3,-1" fill={FLAG_BACKGROUND} />
+  {// quiz icon
+  }
+  <path id="quiz-icon" d="M-.7.8h2v.8h-2zm-.4.4c0 .22-.18.4-.4.4
+      s-.4-.18-.4-.4.18-.4.4-.4.4.18.4.4m.4-2.8h2v.8h-2zm-.4.4c0 .22-.18.4-.4.4
+      s-.4-.18-.4-.4.18-.4.4-.4.4.18.4.4m.4.8h2v.8h-2zm-.4.4c0 .22-.18.4-.4.4
+      s-.4-.18-.4-.4.18-.4.4-.4.4.18.4.4"
+      fill="white" stroke="none"/>
+  <polygon id="flag-icon" points="0,-3.14 3,-1 1.85,2.53 -1.85,2.53 -3,-1" fill={FLAG_BACKGROUND}/>
   <path id="flag-neg-icon" d="m-1.85,2.53 -1.15,-3.53 3,-2.14 3,2.14 -1.15,3.53zl3.35,-4.60" fill="#000" stroke="#800"/>
   <g id="sel-icon">
     <polygon points="0,-2.8 2.7,0 0,2.7 -2.7,0" fill="var(--active-connection)"/>
@@ -109,4 +160,7 @@ export const BADGES_DEFINES = <defs>
   </g>
   <polygon id="cond-icon" points={`0,${C*1.5} ${-C},${C} ${-C},${-C} ${C},${-C} ${C},${C}`}/>
   <path id="cond-neg" d={`m ${-C},0l${C*2},0`} stroke="#500000"/>
+  <path id="link-icon" d="M0-.4v.8zm.4.5v.5c0 .22-.18.4-.4.4-.22 0-.4-.18-.4-.4
+    v-.5m.8-.2v-.5c0-.22-.18-.4-.4-.4-.22 0-.4.18-.4.4v.5"
+    stroke="white" fill="none" strokeWidth=".3" strokeLinecap="butt"/>
 </defs>
