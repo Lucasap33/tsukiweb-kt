@@ -94,17 +94,24 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 		x = node.centerX
 		y = node.top + 0.1
 	}
+	if (condition.startsWith('!')) {
+		negative = true
+		condition = condition.substring(1)
+	} else {
+		negative = false
+	}
 	if (condition.includes('||') || condition.includes('&&')) {
 		icon = "⋯"
-		fill = "var(--active-connection)"
-	} else if (condition!.startsWith('%flg')) {
+		fill = "#252525"
+		negative = false
+	} else if (condition.startsWith('%flg')) {
 		icon = condition.substring(4)
 		if (icon.startsWith('_'))
 			icon = icon.substring(1)
 		if (icon.length > 1)
 			icon = <use href={`#${icon}-icon`}/>
 		fill = FLAG_BACKGROUND
-		negative = condition.endsWith('==0')
+		negative ||= condition.endsWith('==0')
 	} else if ((m = condition.match(REGARD_REGEX))) {
 		let id = m[1]
 		if (id == "kagi") {
@@ -112,15 +119,12 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 			fill = "#000"
 		}
 		else { 
-			icon = "♥"
+			icon = <use href={`#regard_icon`} fill="white" stroke="none" transform="translate(0,0.3) scale(.6)"/>
 			fill = `url(#${id}_grad)`
 		}
-	} else if (condition.startsWith('%clear')) {
-		icon = "★"
-		fill = "var(--active-connection)"
 	} else {
 		icon = "⋯"
-		fill = "var(--active-connection)"
+		fill = "#252525"
 	}
 	return <g className="badge" transform={`translate(${x},${y})`}>
 		<use href="#cond-icon" fill={fill} {...(angle && {transform:`rotate(${angle})`})}/>
