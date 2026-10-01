@@ -27,7 +27,9 @@
 		}
 	}
 }
-
+#root {
+	--badge-background: #252525;
+}
 .flowchart-container {
 	display: flex;
 	flex-direction: column;
@@ -281,7 +283,7 @@
 				min-width: 80px;
 				padding-top: 4px;
 				padding-inline: 12px;
-				background-color: #252525;
+				background-color: var(--badge-background);
 				border-radius: $corner-radius;
 				corner-shape: scoop;
 				border-bottom: 2px solid var(--border);

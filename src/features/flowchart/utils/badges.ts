@@ -5,7 +5,7 @@ import FC from "../../../assets/game/flowchart.json"
 
 export type BadgeEntry = {
   flags?: string[]
-  condition?: string | {condition: string, above?: string, below?: string}
+  condition?: string | {condition: string, above?: string, below?: string, icon?: string}
   select?: {text: string, condition?: string}[]
   selectConditions?: (0|string)[]
   choiceN?: [[string, number]]

@@ -26,7 +26,7 @@ export function createFlagBadge(id: string, negative=false, props?: SVGProps<SVG
 		</g>
 }
 export function createQuizBadge(n: number, props?: SVGProps<SVGGElement>) {
-  let id, content;
+  let content;
   if (n > 0) {
     content = <>
       <rect x="0" width="1.35" y="-0.4" height="2.05"
@@ -45,6 +45,22 @@ export function createQuizBadge(n: number, props?: SVGProps<SVGGElement>) {
     <use href="#quiz-icon" opacity=".9"/>
     {content}
   </g>
+}
+export function createPointBadge(id: PointId, plus:boolean, props?: SVGProps<SVGGElement>) {
+  const circle_props = {cx: 0, cy: 0, r:3, fill: POINT_BACKGROUND}
+  if (!plus) {
+    return <g className="badge" {...props}>
+      <circle {...circle_props}/>
+      <use href={`#${id}-icon`}/>
+    </g>
+  } else {
+    return <g className="badge" {...props}>
+      <circle {...circle_props} stroke="none"/>
+      <path d="M0 3a3 3 0 113-3" fill="none"/>
+      <use href={`#${id}-icon`}/>
+      <use href="#point_+" transform="translate(0.3,0.4)"/>
+    </g>
+  }
 }
 export function flagPersists(flag: string) {
   if (flag.length == 1) return true
@@ -67,12 +83,6 @@ export const BADGES_DEFINES = <defs>
   {characterGradient('nana')}
   <path id="point_+" d="m1.75,0.75l0,1.75m-0.875,-0.875l1.75,0" stroke="var(--regard-plus-color, #00ff00)" fill="none"/>
   <path id="point_-" d="m1.75,0.85m-0.875,0.5l1.75,0" stroke="var(--regard-minus-color, #ff0000)" fill="none"/>
-  <circle id="point_icon" cx="0" cy="0" r="3" fill={POINT_BACKGROUND}/>
-  <g id="point_1">
-    <circle id="point_icon" cx="0" cy="0" r="3" fill={POINT_BACKGROUND}  stroke="none"/>
-    <path d="M0 3a3 3 0 113-3" fill="none"/>
-    <use href="#point_+"/>
-  </g>
   <path id="regard_icon" d={`${HEART_PATH}z`}/>
   {[1, 2, 3].map(n=>
     <g key={`regard_${n}`} id={`regard_${n}`}>
@@ -150,10 +160,33 @@ export const BADGES_DEFINES = <defs>
       s-.4-.18-.4-.4.18-.4.4-.4.4.18.4.4m.4.8h2v.8h-2zm-.4.4c0 .22-.18.4-.4.4
       s-.4-.18-.4-.4.18-.4.4-.4.4.18.4.4"
       fill="white" stroke="none"/>
+  {//cat head icon
+  }
+  <path id="kaibyo-icon" d="M0-1.67c-.24.01-.48.05-.71.13-.32-.25-.88-.45-1.17
+      -.44 0 0-.02.11 0 .17-.04 0-.11.02-.14.04.01.07.03.13.06.2-.15.6.04 1.02
+      .06 1.07-.43.8-.6 1.56-.6 1.65.12-.01.24-.04.33-.11-.02.37.1.7.11.7.1-.06
+      .19-.13.27-.21.01.21.08.43.1.42.05-.01.39-.15.46-.23.04.11.23.44.31.44.03
+      0 .2-.27.22-.3.04.13.13.36.18.4.07 0 .29-.16.44-.26.07.07.24.26.3.26.03 0
+      .2-.23.24-.28.11.09.37.28.42.26.03-.02.07-.31.1-.44.02.03.24.34.29.33.04 0
+      .21-.45.23-.66.11.15.31.4.45.45.04-.14.07-.62.1-.92.06.08.22.27.32.29-.01
+      -.67-.33-1.62-.52-1.91.14-.43.12-.6.02-.97.04-.05.05-.11.06-.17-.04-.03
+      -.12-.05-.14-.07 0-.03-.01-.18-.03-.19-.03-.01-.76.17-1.18.43-.01 0-.02 0
+      -.04-.01.33-.38.54-.41.66-.45-.2-.07-.64-.13-.88.4-.01 0-.03 0-.06-.01-.06
+      -.25.03-.46.14-.67-.26.01-.47.41-.4.66zm-.57.46c.01.06-.67.74-.99.87.07
+      -.19.05-.25.12-.39-.08-.01-.31-.09-.33-.18.05-.06.18-.13.25-.18-.1-.06-.16
+      -.13-.26-.29.09-.02.19-.03.29-.05-.06-.1-.14-.24-.14-.38.21-.03 1 .48 1.04
+      .58zm2.18-.51c-.02.04-.06.13-.12.25.02.01.2.02.25.04 0 .02-.09.18-.2.26
+      -.19-.19-.4-.28-.68-.29.22-.23.36-.28.74-.27zm-1.32 2.54c0 .21-.39.49-.7.5
+      -.33.02-.74-.18-.74-.51 0-.33.44-.45.51-.45-.22.44.02.9.1.89.19-.01.26-.59
+      .08-.91.27-.04.75.11.75.48zm1.29-.05c-.01.42-.56.53-.83.47.17-.07.22-.64
+      .11-.84.38-.09.72.1.72.37zm-.91-.3c-.11.19-.15.49.02.75-.14-.06-.31-.25-.3
+      -.39.03-.21.19-.32.28-.36zm.06.8c.12.08-.07.55-.37.19-.16.3-.7.15-.51-.13
+      -.06.32.44.3.5.05.14.21.33.19.38-.11z"
+      fill="white" stroke="none"/>
   <polygon id="flag-icon" points="0,-3.14 3,-1 1.85,2.53 -1.85,2.53 -3,-1" fill={FLAG_BACKGROUND}/>
   <path id="flag-neg-icon" d="m-1.85,2.53 -1.15,-3.53 3,-2.14 3,2.14 -1.15,3.53zl3.35,-4.60" fill="#000" stroke="#800"/>
   <g id="sel-icon">
-    <polygon points="0,-2.8 2.7,0 0,2.7 -2.7,0" fill="var(--active-connection)"/>
+    <polygon points="0,-2.8 2.7,0 0,2.7 -2.7,0" fill="var(--badge-background)"/>
     <text y="1.6" stroke="none" fill="white" textAnchor="middle">
     ?
     </text>

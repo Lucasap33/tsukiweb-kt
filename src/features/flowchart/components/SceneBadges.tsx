@@ -1,5 +1,5 @@
 import { FcNode } from "features/flowchart/utils/flowchart";
-import { FLAG_BACKGROUND, createFlagBadge, createQuizBadge } from "./badges";
+import { FLAG_BACKGROUND, createFlagBadge, createPointBadge, createQuizBadge } from "./badges";
 import { DY } from "@tsukiweb/common/flowchart";
 import { PointId } from "app/utils/types";
 import { getNodeBadges } from "features/flowchart/utils/badges";
@@ -21,12 +21,9 @@ const RegardBadge = ({node, char, value}: {node: FcNode, char: PointId, value: n
 	const dX = node.width > 0 ? BADGE_RIGHT_INSET : 0
 	const dY = node.height > 0 ? DY / 2 : 0
 	const transform = `translate(${node.right - dX}, ${node.bottom - dY})`
-	if (char == "kagi") {
+	if (["kagi", "kaibyo"].includes(char)) {
 		return (
-			<g className="badge" transform={transform}>
-				<use href="#point_1"/>
-				<use href="#kagi-icon"/>
-			</g>
+			createPointBadge(char, true, {transform})
 		)
 	}
 	return (
@@ -58,7 +55,7 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 	let x, y, angle, iconX, iconY, icon, fill, negative, m
 	if (typeof condition == 'object') {
 		let above, below
-		({condition, above, below} = condition)
+		({condition, above, below, icon} = condition)
 		if (above) {
 			const anchorNode = node.flowchart.getNode(above)
 			x = anchorNode!.centerX
@@ -87,6 +84,8 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 			iconY = DY*0.7
 			y += DY+0.1
 		}
+		if (icon)
+			condition = icon
 	} else {
 		angle = 0
 		iconX = 0
@@ -102,7 +101,7 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 	}
 	if (condition.includes('||') || condition.includes('&&')) {
 		icon = "⋯"
-		fill = "#252525"
+		fill = "var(--badge-background)"
 		negative = false
 	} else if (condition.startsWith('%flg')) {
 		icon = condition.substring(4)
@@ -111,10 +110,10 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 		if (icon.length > 1)
 			icon = <use href={`#${icon}-icon`}/>
 		fill = FLAG_BACKGROUND
-		negative ||= condition.endsWith('==0')
+		negative !== condition.endsWith('==0')
 	} else if ((m = condition.match(REGARD_REGEX))) {
 		let id = m[1]
-		if (id == "kagi") {
+		if (["kagi", "kaibyo"].includes(id)) {
 			icon = <use href={`#${id}-icon`}/>
 			fill = "#000"
 		}
@@ -122,9 +121,14 @@ const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})
 			icon = <use href={`#regard_icon`} fill="white" stroke="none" transform="translate(0,0.3) scale(.6)"/>
 			fill = `url(#${id}_grad)`
 		}
+		negative !== condition.endsWith('==0')
+	} else if (condition.startsWith('%quiz')) {
+		icon = <use href="#quiz-icon"/>
+		fill = negative ? "#800" : "#070"
+		negative = false
 	} else {
 		icon = "⋯"
-		fill = "#252525"
+		fill = "var(--badge-background)"
 	}
 	return <g className="badge" transform={`translate(${x},${y})`}>
 		<use href="#cond-icon" fill={fill} {...(angle && {transform:`rotate(${angle})`})}/>

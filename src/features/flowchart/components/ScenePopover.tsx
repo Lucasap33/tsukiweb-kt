@@ -1,22 +1,21 @@
 import { GraphicsGroup } from "@tsukiweb/common/graphics"
 import { noBb, Bbcode } from "@tsukiweb/common/utils/Bbcode"
-import { SceneName } from "app/utils/types"
+import { PointId, SceneName } from "app/utils/types"
 import { FcNode } from "features/flowchart/utils/flowchart"
 import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
-import { createFlagBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
+import { createFlagBadge, createPointBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
 
 const ICON_SIZE = 7
 const CHAR_IMG_SIZE = 7
 
 
-const RegardBadge = ({char}: {char: string}) => {
-	return char == "kagi" ? (
+const RegardBadge = ({char}: {char: PointId}) => {
+	return ["kagi", "kaibyo"].includes(char) ? (
 		<svg className="badge" viewBox={`-${ICON_SIZE/2} -${ICON_SIZE/2} ${ICON_SIZE} ${ICON_SIZE}`}>
-			<use href="#point_icon"/>
-			<use href={`#${char}-icon`}/>
+			{createPointBadge(char, false)}
 		</svg>
 	) : (
 		<svg className="badge" viewBox={`-${CHAR_IMG_SIZE+ICON_SIZE*0.75} -${CHAR_IMG_SIZE/2} ${CHAR_IMG_SIZE+ICON_SIZE*0.75} ${CHAR_IMG_SIZE}`}>
@@ -47,13 +46,12 @@ const FlagBadge = ({flag, negative, persists = false}: {flag: string, negative?:
 	)
 }
 
-const RegardValueBadge = ({ char, value, persists=false }: { char: string; value: number, persists?: boolean }) => {
+const RegardValueBadge = ({ char, value, persists=false }: { char: PointId; value: number, persists?: boolean }) => {
 	const abs = Math.abs(value)
 	const sign = Math.sign(value)
-	return (char == "kagi") ? (
+	return (["kagi", "kaibyo"].includes(char)) ? (
 		<svg className="badge" viewBox="-3.5 -3.5 7 7">
-			<use href="#point_1"/>
-			<use href="#kagi-icon"/>
+			{createPointBadge(char, true)}
 			{persists && <use href="#link-icon" transform="translate(2.6,-2.2)"/>}
 		</svg>
 	) : (
@@ -98,7 +96,7 @@ const SceneCondition = ({condition}: {condition: string})=> {
 			return <TokenDisplay key={i} token={token} /> // operator or number
 		if (token.endsWith('_point')) {
 			const char = token.split('_')[0].substring(1) // between '%' and '_'
-			return <RegardBadge key={i} char={char} />
+			return <RegardBadge key={i} char={char as PointId} />
 		}
 		else if (token.startsWith('%flg')) {
 			let flag = token.substring(4)
