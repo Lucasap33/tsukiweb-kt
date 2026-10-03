@@ -1,9 +1,9 @@
-export type PointId = 'akira' | 'answer' | 'ark' | 'cel' | 'his' | 'kagi'
+export type PointId = 'akira' | 'answer' | 'ark' | 'cel' | 'his' | 'aki' | 'kagi'
 					| 'kaibyo' | 'nana' | 'ren' | 'gojitsudan'
 
 export type SceneName = `s${number}`
 
-type FBlockName = `f${number}`
+type FBlockName = `f${number}`|`${SceneName}_end`
 
 export type LabelName = SceneName | FBlockName | 'endofplay'
 

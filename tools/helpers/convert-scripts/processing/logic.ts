@@ -197,6 +197,19 @@ function getBlockProps(
 					}
 				})
 				break
+			case 'f401' : tokenFixes.push(t=> {
+					if (t instanceof CommandToken && t.cmd == 'select') {
+						addChoiceCondition(t, "*f223", "%flgO")
+						addChoiceCondition(t, "*f501", "%flgQ")
+					}
+				})
+				break
+			case 'quiz' :
+				blockFixes.push(block=>block.replace(0, block.length,`
+					mov %answer_point,-1
+					rngsel *quiz1,*quiz2,*quiz3`))
+				break
+			
 			case 'f42' : // -> f43
 			case 'f68' : case 'f69' : case 'f70' : case 'f71' : // -> f248
 			case 'f155' : // -> f156
@@ -205,14 +218,6 @@ function getBlockProps(
 			case 'f245' : case 'f246' : case 'f247' : // -> f248
 			case 'f400' : case 'f402' : // -> f401
 				return null
-			
-			case 'f401' : tokenFixes.push(t=> {
-					if (t instanceof CommandToken && t.cmd == 'select') {
-						addChoiceCondition(t, "*f223", "%flgO")
-						addChoiceCondition(t, "*f501", "%flgQ")
-					}
-				})
-				break
 		}
 		if (lang_block_fixes.has(label))
 			blockFixes.push(lang_block_fixes.get(label)!)
@@ -226,13 +231,20 @@ function interBlockFixes(blocks: Map<string, Block>) {
 	for (const block of blocks.values()) {
 		insertSceneEnd(blocks, block)
 	}
-	{ // f135 handles quiz result. Move to quiz_end
-		
+
+	{ // f135 handles quiz result. Move to quiz(1|2|3)_end
 		const s135_end = blocks.get('s135_end')!
 		const i = s135_end.indexOf('goto *quiz')
 		if (i < 0) throw Error(`Expected 'gosub *quiz' in f135`)
-		const quizEnd = s135_end.split(i+1, 'quiz_end')
-		blocks.set('quiz_end', quizEnd)
+		s135_end.delete(i+1, s135_end.length - (i+1))
+		for (let i=1; i <= 3; i++) {
+			const blockName = `quiz${i}_end`
+			blocks.set(blockName, new Block(blockName, parseScript(`
+				if %answer_point>=0 && %answer_point<10 goto *f137
+				if %answer_point<0 && %quiz${i}_pass==0 goto *f137
+				inc %quiz${i}_pass
+				goto *f136`)))
+		}
 	}
 
 	//sort block again

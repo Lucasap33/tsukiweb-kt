@@ -1,7 +1,7 @@
 import { ScriptPlayerBase } from "@tsukiweb/common/script/ScriptPlayer"
 import { PointId, LabelName, SceneName } from "app/utils/types";
 import { isScene } from "engine/utils";
-import { settings, viewedScene } from "engine/settings";
+import { checkQuiz, passQuiz, settings, viewedScene } from "engine/settings";
 import { assets } from "translation/assets";
 import { CommandRecord, VarName, VarType } from "@tsukiweb/common/script/types";
 import { History } from "./history";
@@ -32,6 +32,7 @@ const commands: CommandRecord<ScriptPlayer> = {
     },
     'eroskip': processEroSkip,
     'gosub': processGoSub,
+    'rngsel': processRngSel,
 }
 
 function processClick(arg: string, _: string, script: ScriptPlayer,
@@ -64,17 +65,25 @@ function processEroSkip(nb_pages: string, _cmd: string, script: ScriptPlayer, on
     }
 }
 
-function processGoSub(arg: string, _: string, script: ScriptPlayer, onFinish: VoidFunction) {
+function processGoSub(arg: string) {
     const label = arg.substring(1)
     if (label == 'ending') // include the credits as part of the scene
         return creditsScript(false).flatMap(extractInstructions)
     return [{cmd: 'goto', arg}]
 }
+function processRngSel(arg: string) {
+    let labels = arg.split(',')
+    const notSeen = labels.filter(s=>!viewedScene(s))
+    if (notSeen.length > 0)
+        labels = notSeen
+    const index = Math.floor(Math.random() * notSeen.length)
+    return [{cmd: 'goto', arg: labels[index]}]
+}
 
 //#endregion
 //##############################################################################
 
-export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, History> {
+export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {nextflow: string}, History> {
 
 //#endregion ###################################################################
 //#region                         ATTRS & PROPS
@@ -105,6 +114,8 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
             if (isScene(label) && !settings.completedScenes.includes(label))
                 settings.completedScenes.push(label)
         })
+        if (initContext.nextflow)
+            this._tempVariables.set('$nextflow', initContext.nextflow)
     }
 
 //#endregion ###################################################################
@@ -130,11 +141,17 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
     }
 
     override pageContent() {
-        return { }
+        return {
+            points: {
+                // answer_point is the only variable that varies inside a scene
+                answer: this.getPoints('answer')
+            }
+        }
     }
     
     override blockContent() {
-        return { }
+        const nextflow = (this._tempVariables.get('$nextflow') ?? '') as string
+        return { nextflow }
     }
 
     override hasFlag(flag: string) {
@@ -164,7 +181,12 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
 
     //static override defaultPageContext() { return ScriptPlayerBase.defaultPageContext() }
     
-    //static override defaultBlockContext() { return ScriptPlayerBase.defaultBlockContext() }
+    static override defaultBlockContext() {
+        return  {
+            ...ScriptPlayerBase.defaultBlockContext(),
+            nextflow: ''
+        }
+    }
 
 //#endregion ###################################################################
 //#region                      INHERITED ABSTRACTS
@@ -180,6 +202,9 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
             this.setPoints(m[1] as PointId, value as number)
         } else if (["%answer", "$nextflow", "%2100"].includes(name)) {
             this._tempVariables.set(name, value)
+        } else if (/^%quiz\d_pass$/.test(name)) {
+            if (!value) throw Error(`Unexpected set ${name} = ${value}`)
+            passQuiz(parseInt(name.charAt(5)))
         } else {
 			throw Error(`Unknown or read-only variable ${name}`)
         }
@@ -193,9 +218,12 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
             return this.getPoints(m[1] as PointId) as VarType<T>
         } else if (this._tempVariables.has(name)) {
             return this._tempVariables.get(name) as VarType<T>
-        } else switch (name) {
-            case '%answer' as VarName : return 0 as VarType<T>
-            case '$nextflow' as VarName:
+        } else switch (name as string) {
+            case '%answer': return 0 as VarType<T>
+            case '%quiz1_pass': return (checkQuiz(1) ? 1 : 0) as VarType<T>
+            case '%quiz2_pass': return (checkQuiz(2) ? 1 : 0) as VarType<T>
+            case '%quiz3_pass': return (checkQuiz(3) ? 1 : 0) as VarType<T>
+            case '$nextflow':
                 // if for some reason the variable was not save,
                 // check which value should be stored form the history
                 if (this.history.hasScene('s157')) return '*f158' as VarType<T>
@@ -213,8 +241,8 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {}, H
     protected override nextLabel(label: LabelName): LabelName | null {
         if (/^s\d+a?$/.test(label))
             return `${label}_end` as LabelName
-        if (/^quizz\d_10$/.test(label))
-            return "f135"
+        if (/^quizz\d$/.test(label))
+            return "quiz_end" as LabelName
         return null
     }
 

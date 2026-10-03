@@ -1,8 +1,21 @@
 *quiz
-rnd %msgno,3
-if (%msgno==0) goto *quiz1
-if (%msgno==1) goto *quiz2
-if (%msgno==2) goto *quiz3
+mov %answer_point,-1
+rngsel *quiz1,*quiz2,*quiz3
+*quiz1_end
+if (%answer_point>=0 && %answer_point<10) goto *f137
+if (%answer_point<0 && %quiz1_pass==0) goto *f137
+inc %quiz1_pass
+goto *f136
+*quiz2_end
+if (%answer_point>=0 && %answer_point<10) goto *f137
+if (%answer_point<0 && %quiz2_pass==0) goto *f137
+inc %quiz2_pass
+goto *f136
+*quiz3_end
+if (%answer_point>=0 && %answer_point<10) goto *f137
+if (%answer_point<0 && %quiz3_pass==0) goto *f137
+inc %quiz3_pass
+goto *f136
 *f500
 if (%flgZ>=1 && %flg2<1) goto *f519
 if (%flg7>=1) goto *f405
@@ -777,9 +790,6 @@ goto *f138
 goto *s135
 *s135_end
 goto *quiz
-*quiz_end
-if (%answer_point>=10) goto *f136
-goto *f137
 *f136
 goto *s136
 *s136_end

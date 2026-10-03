@@ -120,7 +120,7 @@ function processPrompt(setChoices: (choices: Choice[])=>void,
 		arg.matchAll(/,?`(?<text>[^`]*)`,\s*(?<val>[^,]),?/g),
 		(m, index)=> {
 			let {text, val} = m.groups! as {text: string, val: string|number}
-			if (text.startsWith('%'))
+			if (varName.startsWith('%'))
 				val = parseInt(val as string)
 			return {
 				str: text, value: val, index
