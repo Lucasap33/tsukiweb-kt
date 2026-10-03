@@ -52,21 +52,25 @@ const FlagBadge = ({node, flag, offset = 0}: {node: FcNode, flag: string, offset
 
 type Condition = Exclude<Exclude<ReturnType<typeof getNodeBadges>, undefined>['condition'], undefined>
 const ConditionBadge = ({node, condition}: {node: FcNode, condition: Condition})=> {
-	let x, y, angle, iconX, iconY, icon, fill, negative, m
+	let x, y, angle, iconX, iconY, icon, fill, negative, m, align
 	if (typeof condition == 'object') {
 		let above, below
-		({condition, above, below, icon} = condition)
+		({condition, above, below, icon, align} = condition)
 		if (above) {
-			const anchorNode = node.flowchart.getNode(above)
-			x = anchorNode!.centerX
-			y = anchorNode!.top - DY
+			const anchorNode = node.flowchart.getNode(above)!
+			x = anchorNode.centerX
+			y = anchorNode.top - DY
 		} else if (below) {
-			const anchorNode = node.flowchart.getNode(below)
-			x = anchorNode!.centerX
-			y = anchorNode!.bottom + DY
+			const anchorNode = node.flowchart.getNode(below)!
+			x = anchorNode.centerX
+			y = anchorNode.bottom + DY
 		} else {
 			x = node.centerX
 			y = node.top - DY
+		}
+		if (align) {
+			const anchorNode = node.flowchart.getNode(align)!
+			y = anchorNode.top - DY
 		}
 		if (x < node.centerX) {
 			angle = -90
