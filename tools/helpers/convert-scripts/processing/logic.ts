@@ -127,6 +127,13 @@ function getBlockProps(
 						addChoiceCondition(t, "*f194", "%ark_point>=1 || %ciel_point>=1")
 				})
 				break;
+			case 'f63' : tokenFixes.push(t=> {
+					if (t instanceof ConditionToken) {
+						if (t.condition == '%flgM<1') return false
+						else if (t.condition == '%flgA>=1') t.condition += " && %flgM>=1"
+					}
+				})
+				break
 			case 'f67' : tokenFixes.push(t=> {
 					if (t instanceof ConditionToken) {
 						if (!['*f305', '*f306'].includes((t.command as CommandToken).args[0]))
@@ -163,6 +170,11 @@ function getBlockProps(
 					b.insert(1, 'mov $nextflow, ""')
 				})
 				break
+			case 'f195' : tokenFixes.push(t=> {
+                    if (t instanceof ConditionToken && t.condition.includes('flg6'))
+                        return false // flg6 implies flg5 (previous condition)
+                })
+                break
 			case 'f201' : tokenFixes.push(t=> {
 					if (t instanceof ConditionToken)
 						return false
@@ -205,7 +217,7 @@ function getBlockProps(
 				})
 				break
 			case 'quiz' :
-				blockFixes.push(block=>block.replace(0, block.length,`
+				blockFixes.push(block=>block.replace(1, block.length,`
 					mov %answer_point,-1
 					rngsel *quiz1,*quiz2,*quiz3`))
 				break
@@ -240,6 +252,7 @@ function interBlockFixes(blocks: Map<string, Block>) {
 		for (let i=1; i <= 3; i++) {
 			const blockName = `quiz${i}_end`
 			blocks.set(blockName, new Block(blockName, parseScript(`
+				*${blockName}
 				if %answer_point>=0 && %answer_point<10 goto *f137
 				if %answer_point<0 && %quiz${i}_pass==0 goto *f137
 				inc %quiz${i}_pass
@@ -307,14 +320,7 @@ function genTree(blocks: Map<string, Block>) {
 				}
 				children.clear()
 			}
-			let endLabel
-			if (scenes.length > 1) {
-				if (scenes.some(lbl=>!(/^quiz\d$/.test(lbl))))
-					throw Error(`Unexpected multiple scenes for node ${label}`)
-				endLabel = "quiz_end"
-			} else {	
-				endLabel = `${scenes[0]}_end`
-			}
+			let endLabel = `${scenes[0]}_end`
 			
 			const endNode = tree.get(endLabel)
 			if (!endNode)

@@ -1,6 +1,3 @@
-*quiz
-mov %answer_point,-1
-rngsel *quiz1,*quiz2,*quiz3
 *quiz1_end
 if (%answer_point>=0 && %answer_point<10) goto *f137
 if (%answer_point<0 && %quiz1_pass==0) goto *f137
@@ -16,6 +13,9 @@ if (%answer_point>=0 && %answer_point<10) goto *f137
 if (%answer_point<0 && %quiz3_pass==0) goto *f137
 inc %quiz3_pass
 goto *f136
+*quiz
+mov %answer_point,-1
+rngsel *quiz1,*quiz2,*quiz3
 *f500
 if (%flgZ>=1 && %flg2<1) goto *f519
 if (%flg7>=1) goto *f405
@@ -318,9 +318,8 @@ goto *s62
 *s62_end
 goto *f63
 *f63
-if (%flgM<1) goto *f64
 if (%flgC>=1) goto *f66
-if (%flgA>=1) goto *f65
+if (%flgA>=1 && %flgM>=1) goto *f65
 goto *f64
 *f64
 goto *s64
@@ -872,7 +871,6 @@ goto *s194
 select *f195,*f207,*f219
 *f195
 if (%ark_point>=2 && %flg5>=1) goto *f196
-if (%ark_point>=2 && %flg6>=1) goto *f196
 if (%ark_point>=1) goto *f201
 goto *f197
 *f196
