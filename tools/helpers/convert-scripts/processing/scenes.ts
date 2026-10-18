@@ -11,7 +11,7 @@ import { generateScenes, splitBlocks, writeScenes } from '../utils/nscriptr_conv
 import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { fixContexts } from '../utils/context.ts';
 import { processVarName, isSceneLabel, preprocessRawScript } from './common.ts';
-import { processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
+import { isCmd, processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
 import { fullscripts, outputPathPrefix } from './fullscripts.ts';
 
 const outputDir = 'scenes'
@@ -112,21 +112,87 @@ const tokenFixes = new Map(Object.entries({
 
 //_________________________________scene fixes__________________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+const centerTexts: Record<string, (b: Block)=>number[]> = {
+	s1  : b => [b.findIndex((t,i)=>isCmd(t, '\\') && b.at(i-1) instanceof TextToken)-1],
+	s36 : b => [b.findLastIndex(t=>isCmd(t, 'br'))+2],
+	s37 : b => [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ren_e05"))-3],
+	s40 : b => [b.findIndex(t=>isCmd(t, 'play') && t.args[0] == '"*5"')-2],
+	s57 : b => [b.findIndex(t=>isCmd(t, 'play') && t.args[0] == '"*14"')-3],
+	s76 : b => {
+		const i = b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("yume_e06a"))
+		const j = b.findIndex((t,j)=>j>i && t instanceof TextToken)
+		const k = b.findIndex((t,k)=>k>j && isCmd(t, "bg") && t.args[0].includes("ima_13b") && t.args[1].includes("crossfade"))
+		const l = b.findIndex((t,l)=>l>k && t instanceof TextToken)
+		return [i-3, i-2, j, k-2, l]
+	},
+	s80 : b => [b.findIndex(t=>isCmd(t, '!w'))-2,
+			//b.findIndex(t=>isCmd(t, 'play') && t.args[0] == '"*15"')
+			],
+	s83 : b => [b.findIndex(t=>t instanceof TextToken)+1],
+	s116: b=> {
+		const indices = Array.from(b)
+			.filter(([t,_])=>isCmd(t, 'textcolor') && t.args[0] == '#ff0000')
+			.map(([_,i])=>i+1)
+		indices.push(b.findLastIndex(t=>isCmd(t, 'play'))-4)
+		return indices
+	},
+	s133: b=> { // identical to s116
+		const indices = Array.from(b)
+			.filter(([t,_])=>isCmd(t, 'textcolor') && t.args[0] == '#ff0000')
+			.map(([_,i])=>i+1)
+		indices.push(b.findLastIndex(t=>isCmd(t, 'play'))-4)
+		return indices
+	},
+	s139: b=> [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ima_23"))-3],
+	s151: b=> [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ima_23"))-3],
+	s185: b=> [b.findLastIndex((t,i)=>isCmd(t,'br') && b.at(i+1) instanceof TextToken)+2],
+	s187: b=> [b.findLastIndex(t=>isCmd(t, 'play') && t.args[0] == '"*6"')-2],
+	s191: b=> [b.findLastIndex(t=>isCmd(t, 'play') && t.args[0] == '"*6"')-2],
+	s237: b=> [b.findIndex(t=>isCmd(t, 'wave'))-2]
+}
+const rightAlignTexts: Record<string, (b:Block)=>number[]> = {
+	s37: b => [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ren_e05"))-2],
+	s40: b => [b.findIndex(t=>isCmd(t, 'wave') && t.args[0] == 'se31')+3],
+
+}
+
+function align(block: Block) {
+	if (block.name in centerTexts) {
+		const indices = centerTexts[block.name](block)
+		for (const i of indices) {
+			const t = block.at(i)
+			if (t instanceof TextToken)
+				t.text = '[center]' + t.text.trim()
+			else
+				throw Error(`Expected text for alignement in ${block.name}, got ${t}`)
+		}
+	}
+	if (block.name in rightAlignTexts) {
+		const indices = rightAlignTexts[block.name](block)
+		for (const i of indices) {
+			const t = block.at(i)
+			if (t instanceof TextToken)
+				t.text = '[right]' + t.text.trim()
+			else
+				throw Error(`Expected text for alignement in ${block.name}, got ${t}`)
+		}
+	}
+}
 
 const blockFixes = new Map(Object.entries({
-	's533': (block: Block)=> {
+	s533: (block: Block)=> {
 		processJumps(block)
-		const i = block.findIndex(t=>t instanceof CommandToken && t.cmd == 'lsp')
+		const i = block.findIndex(t=>isCmd(t, 'lsp'))
 		const tok = block.at(i)! as CommandToken
 		tok.cmd = 'ld'
 		tok.args = ['c', tok.args[1], (block.at(i+1)! as CommandToken).args[1]]
 		block.delete(i+1) // delete 'cl c,crossfade_slw' that follow lsp
-		const bg = block.find((t, j)=> j > i && t instanceof CommandToken && t.cmd == 'bg') as CommandToken
+		const bg = block.find((t, j)=> j > i && isCmd(t, 'bg')) as CommandToken
 		bg.cmd = 'ld'
 		bg.args = ['bg', ...bg.args]
 		// TODO Exceptionally, during bg change, center sprite should remain
 	},
-	's530': processJumps
+	s530: processJumps,
 }))
 
 function quizFix(block: Block, blocks: Map<string, Block>) {
@@ -138,8 +204,8 @@ function quizFix(block: Block, blocks: Map<string, Block>) {
 		}
 	}
 	for (const [token, i] of block) {
-		if (token instanceof CommandToken && token.cmd == 'select') {
-			token.cmd = 'prompt'
+		if (isCmd(token, 'select')) {
+			(token as CommandToken).cmd = 'prompt'
 			let j = i-1
 			let textToken = undefined
 			while (j > 0 && !((textToken = block.at(j)) instanceof TextToken)) {
@@ -217,10 +283,10 @@ function processJumps(block: Block) {
 	for (let [t, i] of block) {
 		if (t instanceof ConditionToken)
 			t = t.command
-		if (t instanceof CommandToken && t.cmd == 'jumpb') {
+		if (isCmd(t, 'jumpb')) {
 			const j = block.lastIndexOf('~', i)
 			if (j < 0) throw Error(`Unexpected 'jumpb' without '~'`)
-			t.cmd = 'skip'
+			;(t as CommandToken).cmd = 'skip'
 			t.args = [(block.at(j)!.lineIndex - t.lineIndex).toString()]
 			block.delete(j) // assume only one '~' per jump
 		}
@@ -362,7 +428,7 @@ function getBlockProps(
 		return null
 	}
 	const token_fixes = [ token_filter, commandFix ] as Array<(t: Token)=>void|boolean>
-	const block_fixes = [ sceneFixes ] as Array<(block: Block)=>void>
+	const block_fixes = [ align, sceneFixes ] as Array<(block: Block)=>void>
 	if (tokenFixes.has(label))
 		token_fixes.push(tokenFixes.get(label)!)
 	if (blockFixes.has(label))
