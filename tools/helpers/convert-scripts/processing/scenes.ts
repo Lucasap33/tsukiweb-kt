@@ -61,8 +61,8 @@ function commandFix(token: Token) {
 		case 'wave' : case 'waveloop' :
 			const m = token.args[0].match(/^"?se(?<n>\d+)"?$/)
 			if (m) {
-				// se0 -> se_01
-				token.args[0] = `se_${String(+m.groups!.n + 1).padStart(2, '0')}`
+				// se1 -> se_01
+				token.args[0] = `se_${String(+m.groups!.n).padStart(2, '0')}`
 			} else {
 				throw Error(`Unexpected wave id ${token.args[0]}`)
 			}
@@ -115,44 +115,70 @@ const tokenFixes = new Map(Object.entries({
 const centerTexts: Record<string, (b: Block)=>number[]> = {
 	s1  : b => [b.findIndex((t,i)=>isCmd(t, '\\') && b.at(i-1) instanceof TextToken)-1],
 	s36 : b => [b.findLastIndex(t=>isCmd(t, 'br'))+2],
-	s37 : b => [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ren_e05"))-3],
-	s40 : b => [b.findIndex(t=>isCmd(t, 'play') && t.args[0] == '"*5"')-2],
-	s57 : b => [b.findIndex(t=>isCmd(t, 'play') && t.args[0] == '"*14"')-3],
+	s37 : b => [b.findIndex(t=>isCmd(t, 'bg', /ren_e05/))-3],
+	s40 : b => [b.findIndex(t=>isCmd(t, 'play', '"*5"'))-2],
+	s57 : b => [b.findIndex(t=>isCmd(t, 'play', '"*14"'))-3],
 	s76 : b => {
-		const i = b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("yume_e06a"))
+		const i = b.findIndex(t=>isCmd(t, 'bg', /yume_e06/))
 		const j = b.findIndex((t,j)=>j>i && t instanceof TextToken)
-		const k = b.findIndex((t,k)=>k>j && isCmd(t, "bg") && t.args[0].includes("ima_13b") && t.args[1].includes("crossfade"))
+		const k = b.findIndex((t,k)=>k>j && isCmd(t, 'bg', /ima_13b/, /crossfade/))
 		const l = b.findIndex((t,l)=>l>k && t instanceof TextToken)
 		return [i-3, i-2, j, k-2, l]
 	},
 	s80 : b => [b.findIndex(t=>isCmd(t, '!w'))-2,
-			//b.findIndex(t=>isCmd(t, 'play') && t.args[0] == '"*15"')
+			//b.findIndex(t=>isCmd(t, 'play', '"*15"'))
 			],
 	s83 : b => [b.findIndex(t=>t instanceof TextToken)+1],
 	s116: b=> {
 		const indices = Array.from(b)
-			.filter(([t,_])=>isCmd(t, 'textcolor') && t.args[0] == '#ff0000')
+			.filter(([t,_])=>isCmd(t, 'textcolor', '#ff0000'))
 			.map(([_,i])=>i+1)
 		indices.push(b.findLastIndex(t=>isCmd(t, 'play'))-4)
 		return indices
 	},
 	s133: b=> { // identical to s116
 		const indices = Array.from(b)
-			.filter(([t,_])=>isCmd(t, 'textcolor') && t.args[0] == '#ff0000')
+			.filter(([t,_])=>isCmd(t, 'textcolor', '#ff0000'))
 			.map(([_,i])=>i+1)
 		indices.push(b.findLastIndex(t=>isCmd(t, 'play'))-4)
 		return indices
 	},
-	s139: b=> [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ima_23"))-3],
-	s151: b=> [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ima_23"))-3],
+	s139: b=> [b.findIndex(t=>isCmd(t, 'bg', /ima_23/))-3],
+	s151: b=> [b.findIndex(t=>isCmd(t, 'bg', /ima_23/))-3],
 	s185: b=> [b.findLastIndex((t,i)=>isCmd(t,'br') && b.at(i+1) instanceof TextToken)+2],
-	s187: b=> [b.findLastIndex(t=>isCmd(t, 'play') && t.args[0] == '"*6"')-2],
-	s191: b=> [b.findLastIndex(t=>isCmd(t, 'play') && t.args[0] == '"*6"')-2],
-	s237: b=> [b.findIndex(t=>isCmd(t, 'wave'))-2]
+	s191: b=> [b.findLastIndex(t=>isCmd(t, 'play', '"*6"'))-2],
+	s187: b=> [b.findLastIndex(t=>isCmd(t, 'play', '"*6"'))-2],
+	s237: b=> {
+		const indices = [b.findIndex(t=>isCmd(t, 'wave', 'se_39'))-2]
+		//indices.push(b.findIndex(t=>isCmd(t, 'bg', /ima_22/), 0, 7)-1)
+		const i = b.findIndex(t=>isCmd(t, 'playstop'))
+		const j = b.findLastIndex(t=>t instanceof TextToken, i, 1)
+		indices.push(j)
+		indices.push(i-2)
+		return indices
+	},
+	s244: b=> {
+		let i = b.findIndex(t=>isCmd(t, 'playstop'))
+		i = b.findLastIndex(t=>isCmd(t, 'br'))
+		return [i+2]
+	},
+	s305: b=> { // identical to s116
+		const indices = [
+			b.findIndex(t=>isCmd(t, 'textcolor', '#ff0000'))+1,
+			b.findIndex(t=>isCmd(t, 'play', '"*16"'), 0, 1)-3
+		]
+		let i = b.findIndex(t=>isCmd(t, 'play', '"*5"'), indices[1], 1)
+		for(let j = b.findLastIndex(t=>isCmd(t, 'br'), i)+1; j< i; j++)
+			indices.push(j)
+		i = b.findLastIndex(t=>isCmd(t, 'waveloop'))
+		i = b.findIndex(t=> t instanceof TextToken, i, 1)
+		indices.push(i)
+		return indices
+	},
 }
 const rightAlignTexts: Record<string, (b:Block)=>number[]> = {
-	s37: b => [b.findIndex(t=>isCmd(t, 'bg') && t.args[0].includes("ren_e05"))-2],
-	s40: b => [b.findIndex(t=>isCmd(t, 'wave') && t.args[0] == 'se31')+3],
+	s37: b => [b.findIndex(t=>isCmd(t, 'bg', /ren_e05/))-2],
+	s40: b => [b.findIndex(t=>isCmd(t, 'wave', 'se31'))+3],
 
 }
 
