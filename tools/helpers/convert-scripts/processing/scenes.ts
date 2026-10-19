@@ -112,6 +112,13 @@ const tokenFixes = new Map(Object.entries({
 
 //_________________________________scene fixes__________________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// index of the text right before the next page break
+const pageEnd = (b: Block, from = 0, ignore = 0) =>
+	b.findIndex(t=>isCmd(t, '\\'), from, ignore)-1
+// index of the text right before the previous page break
+const prevPageEnd = (b: Block, before: number, ignore = 0) =>
+	b.findLastIndex(t=>isCmd(t, '\\'), before, ignore)-1
+
 const centerTexts: Record<string, (b: Block)=>number[]> = {
 	s1  : b => [b.findIndex((t,i)=>isCmd(t, '\\') && b.at(i-1) instanceof TextToken)-1],
 	s36 : b => [b.findLastIndex(t=>isCmd(t, 'br'))+2],
@@ -128,7 +135,7 @@ const centerTexts: Record<string, (b: Block)=>number[]> = {
 	s80 : b => [b.findIndex(t=>isCmd(t, '!w'))-2,
 			//b.findIndex(t=>isCmd(t, 'play', '"*15"'))
 			],
-	s83 : b => [b.findIndex(t=>t instanceof TextToken)+1],
+	s83 : b => [pageEnd(b)],
 	s116: b=> {
 		const indices = Array.from(b)
 			.filter(([t,_])=>isCmd(t, 'textcolor', '#ff0000'))
@@ -157,29 +164,89 @@ const centerTexts: Record<string, (b: Block)=>number[]> = {
 		indices.push(i-2)
 		return indices
 	},
-	s244: b=> {
-		let i = b.findIndex(t=>isCmd(t, 'playstop'))
-		i = b.findLastIndex(t=>isCmd(t, 'br'))
-		return [i+2]
-	},
-	s305: b=> { // identical to s116
-		const indices = [
-			b.findIndex(t=>isCmd(t, 'textcolor', '#ff0000'))+1,
-			b.findIndex(t=>isCmd(t, 'play', '"*16"'), 0, 1)-3
-		]
-		let i = b.findIndex(t=>isCmd(t, 'play', '"*5"'), indices[1], 1)
-		for(let j = b.findLastIndex(t=>isCmd(t, 'br'), i)+1; j< i; j++)
-			indices.push(j)
+	s305: b=> {
+		let i = b.findIndex(t=>isCmd(t, 'play', '"*16"'), 0, 1)
+		i = prevPageEnd(b, b.findIndex(t=>isCmd(t, 'play', '"*5"'), i))
+		const indices = [i-1, i]
 		i = b.findLastIndex(t=>isCmd(t, 'waveloop'))
 		i = b.findIndex(t=> t instanceof TextToken, i, 1)
 		indices.push(i)
 		return indices
 	},
+	s306: b=> [pageEnd(b, b.findIndex(t=>isCmd(t, 'waveloop', 'se_25')))],
+	s307: b=> [pageEnd(b, b.findIndex(t=>isCmd(t, 'ld', 'c', /ren_t01/, 'crossfade', '400')))],
+	s308: b=> [pageEnd(b, b.findIndex(t=>isCmd(t, 'ld', 'c', /ren_t01/, 'crossfade', '400')))],
+	s403: b=> [pageEnd(b)],
+	s404: b=> [pageEnd(b)],
+	s510: b=> [pageEnd(b, b.findIndex(t=>isCmd(t, 'bg', '#000000', 'crossfade', '1500')))],
+	s521: b=> [prevPageEnd(b, b.findIndex(t=>isCmd(t, 'bg', '#ffffff')))],
+	s523: b=> [pageEnd(b)],
+	s530: b=> {
+		const i = b.findIndex(t=>isCmd(t, 'bg', /ima_30b/))
+		const indices = [b.findLastIndex(t=>isCmd(t, '!w'), i)-1]
+		// the page can have 2 or 3 lines depending on the language
+		const j = pageEnd(b, i)
+		for (let k = b.findLastIndex(t=>isCmd(t, 'br'), j)+1; k <= j; k++)
+			indices.push(k)
+		return indices
+	},
+	s531: b=> {
+		const i = b.findIndex(t=>isCmd(t, 'bg', /kishin_04/))
+		const j = b.findIndex(t=>isCmd(t, 'wavestop'), i)
+		const k = b.findIndex(t=>isCmd(t, 'bg', /ima_02/), j)
+		const l = prevPageEnd(b, b.findLastIndex(t=>isCmd(t, 'playstop')))
+		return [
+			pageEnd(b, b.findIndex(t=>isCmd(t, 'bg', /ima_02/))),
+			prevPageEnd(b, b.findIndex(t=>isCmd(t, 'bg', /cmo_19/))),
+			pageEnd(b, i),
+			prevPageEnd(b, j),
+			b.findIndex(t=>isCmd(t, 'br'), k)+2,
+			b.findLastIndex(t=>t instanceof TextToken, l), l
+		]
+	},
+	s533: b=> {
+		const i = b.findIndex(t=>isCmd(t, 'textcolor', '#ff0000'))
+		const j = b.findIndex(t=>isCmd(t, 'textcolor', '#ff0000'), i+1)
+		const k = b.findIndex(t=>isCmd(t, 'wave', 'se_38'), j)
+		return [pageEnd(b, i), pageEnd(b, j), pageEnd(b, k)]
+	},
+	s537: b=> {
+		const i = prevPageEnd(b, b.findIndex(t=>isCmd(t, 'bg', /bg_31b/, 'crossfade', '400')))
+		const j = prevPageEnd(b, b.findIndex(t=>isCmd(t, 'waveloop', 'se_25'), i))
+		let k = b.findIndex(t=>isCmd(t, 'play', '"*16"'))
+		k = prevPageEnd(b, b.findIndex(t=>isCmd(t, 'bg', '#000000', 'crossfade', '800'), k))
+		let l = b.findIndex(t=>isCmd(t, 'bg', /cmo_19/, 'notrans'))
+		l = pageEnd(b, b.findIndex(t=>isCmd(t, '!w', '4000'), l, 1))
+		return [i, j, k, l]
+	},
+	s540: b=> {
+		let i = b.findIndex(t=>isCmd(t, 'waveloop', 'se_40'))
+		i = b.findIndex(t=>isCmd(t, '\\'), i, 3)
+		return [b.findLastIndex(t=>isCmd(t, 'br'), i)-1]
+	},
+	s545: b=> [pageEnd(b, b.findIndex(t=>isCmd(t, '!w', '5000')))],
+	s546: b=> {
+		let i = b.findIndex(t=>isCmd(t, 'bg', /bg_40a/))
+		i = b.findIndex(t=>isCmd(t, 'playstop'), i)
+		return [b.findLastIndex(t=>isCmd(t, 'br'), i)-1]
+	},
 }
 const rightAlignTexts: Record<string, (b:Block)=>number[]> = {
 	s37: b => [b.findIndex(t=>isCmd(t, 'bg', /ren_e05/))-2],
-	s40: b => [b.findIndex(t=>isCmd(t, 'wave', 'se31'))+3],
-
+	s40: b => [b.findIndex(t=>isCmd(t, 'wave', 'se_31'))+3],
+	s244: b=> [pageEnd(b, b.findIndex((t,i)=>isCmd(t, 'br') && isCmd(b.at(i+1)!, 'br')))],
+	s305: b=> [
+		b.findIndex(t=>isCmd(t, 'textcolor', '#ff0000'))+1,
+		b.findIndex(t=>isCmd(t, 'play', '"*16"'), 0, 1)-3
+	],
+	s529: b=> [pageEnd(b, b.findIndex(t=>isCmd(t, 'bg', /bg_72d/)), 1)],
+	s537: b=> {
+		const i = b.findIndex(t=>isCmd(t, 'play', '"*16"'))
+		let j = b.findIndex(t=>isCmd(t, 'bg', /bg_94/, 'lcartain'))
+		j = b.findIndex(t=>isCmd(t, 'playstop'), j)
+		j = b.findLastIndex(t=>isCmd(t, '\\'), j, 1)
+		return [b.findIndex(t=>t instanceof TextToken, i), j-2, j-1]
+	},
 }
 
 function align(block: Block) {

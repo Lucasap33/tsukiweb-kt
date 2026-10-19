@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
 
     /* Linting */
@@ -29,5 +30,5 @@
       "@features/*": ["./src/features/*"],
     }
   },
-  "include": ["src"],
+  "include": ["src", "tools"],
 }
