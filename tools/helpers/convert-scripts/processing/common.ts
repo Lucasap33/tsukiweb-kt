@@ -14,7 +14,7 @@ function preprocessRawScript(text: string) {
 }
 
 function isLogicLabel(label: string) {
-	return /^(f|skip)\d+$/.test(label) || ["quiz"].includes(label)
+	return /^(f|skip)\d+$/.test(label) || ["quiz"].includes(label) || label.startsWith("twilight_op")
 }
 function isSceneLabel(label: string) {
 	return /^se?\d+$/.test(label) || ['openning', 'eclipse'].includes(label) || /^quiz\d(_\d+)?$/.test(label)
@@ -22,6 +22,7 @@ function isSceneLabel(label: string) {
 
 function processVarName(varName: string) {
 	return switch_regex(varName, [
+		[/^%twilight/,null],
 		[/^%guest_image/, null], // remove guest images unlocks
 		//["%sceneskip"			, null], // ignore sceneskip tests
 		[/^%pointflg\d{1,3}$/	, null], // special variables used to increase unreset points

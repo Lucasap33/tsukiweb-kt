@@ -194,14 +194,14 @@ const centerTexts: Record<string, (b: Block)=>number[]> = {
 		const i = b.findIndex(t=>isCmd(t, 'bg', /kishin_04/))
 		const j = b.findIndex(t=>isCmd(t, 'wavestop'), i)
 		const k = b.findIndex(t=>isCmd(t, 'bg', /ima_02/), j)
-		const l = prevPageEnd(b, b.findLastIndex(t=>isCmd(t, 'playstop')))
+		//const l = prevPageEnd(b, b.findLastIndex(t=>isCmd(t, 'playstop')))
 		return [
 			pageEnd(b, b.findIndex(t=>isCmd(t, 'bg', /ima_02/))),
 			prevPageEnd(b, b.findIndex(t=>isCmd(t, 'bg', /cmo_19/))),
 			pageEnd(b, i),
 			prevPageEnd(b, j),
 			b.findIndex(t=>isCmd(t, 'br'), k)+2,
-			b.findLastIndex(t=>t instanceof TextToken, l), l
+			//b.findLastIndex(t=>t instanceof TextToken, l), l
 		]
 	},
 	s533: b=> {

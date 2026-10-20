@@ -11,7 +11,7 @@ import { generateScenes, splitBlocks } from '../utils/nscriptr_convert.ts';
 import { logger } from '@tsukiweb/common/tools/utils/logger.ts';
 import { updateGameJsonWithChoices } from '../utils/choices_extractor.ts';
 import { isLogicLabel, isSceneLabel, processVarName } from './common.ts';
-import { addChoiceCondition, processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
+import { addChoiceCondition, isCmd, processCondition } from '@tsukiweb/common/tools/convert-scripts/utils.ts';
 import { fullscripts, outputPathPrefix } from './fullscripts.ts';
 
 const LOGIC_FILE = "logic"
@@ -26,6 +26,8 @@ const GEN_LOGIC 	   = true
 const redirected_scenes = {
 	f400: null, f402: null, // replaced by 401
 	f218: null, // replaced by 214
+	twilight_op_2 : "f521", // renamed
+	twilight_op_3 : "f522", // renamed
 }
 
 function redirect(token: CommandToken) {
@@ -221,6 +223,35 @@ function getBlockProps(
 					mov %answer_point,-1
 					rngsel *quiz1,*quiz2,*quiz3`))
 				break
+			case 'twilight_op' :
+				blockFixes.push(b=> {
+					b.name = (b.at(0) as LabelToken).label = "f520"
+				})
+				tokenFixes.push(t=> {
+					if (isCmd(t, "select"))
+						addChoiceCondition(t, "*f522", "%flg8>=1")
+					else if (t instanceof ConditionToken)
+						return false
+				})
+				break
+			case 'twilight_op_2' :
+				blockFixes.push(b=> {
+					b.name = (b.at(0) as LabelToken).label = "f521"
+				})
+				tokenFixes.push(t=> {
+					if (isCmd(t, 'goto', '*twilight'))
+						t.args[0] = '*f500'
+				})
+				break
+			case 'twilight_op_3' :
+				blockFixes.push(b=> {
+					b.name = (b.at(0) as LabelToken).label = "f522"
+				})
+				tokenFixes.push(t=> {
+					if (isCmd(t, 'goto', '*twilight'))
+						t.args[0] = '*endofplay'
+				})
+				break
 			
 			case 'f42' : // -> f43
 			case 'f68' : case 'f69' : case 'f70' : case 'f71' : // -> f248
@@ -348,11 +379,12 @@ function genTree(blocks: Map<string, Block>) {
 				tree.get(child)!.parents.delete(label)
 		}
 	}
-	tree.get('f500')?.children.forEach(lbl=>tree.get(lbl)!.index = 0)
+	const root = tree.get('f520')!
+	root.index = 0
 
 
 	//5. determine order index, easier for creating contexts when parsing scenes
-	const queue = Array.from(tree.get('f500')!.children, lbl=>tree.get(lbl))
+	const queue = [root]
 	while (queue.length > 0) {
 		const currentNode = queue.shift()!
 		for (const child of currentNode.children) {

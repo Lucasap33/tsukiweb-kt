@@ -1162,3 +1162,15 @@ goto *f193
 goto *s193
 *s193_end
 goto *f140
+*f520
+goto *s520
+*s520_end
+select *f521,[%flg8>=1]*f522
+*f521
+goto *s521
+*s521_end
+goto *f500
+*f522
+goto *s522
+*s522_end
+goto *endofplay

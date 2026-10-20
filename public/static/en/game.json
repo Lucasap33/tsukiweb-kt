@@ -217,6 +217,10 @@
     "s185": [
       "1. To the main road.",
       "2. To the intersection."
+    ],
+    "s520": [
+      "1. Turn towards Arcueid.",
+      "2. Run in front of the dump truck."
     ]
   },
   "images": {

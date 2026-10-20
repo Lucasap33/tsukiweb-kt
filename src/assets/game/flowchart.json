@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "bs1"        : {"col":0,"from":[]},
+    "bs1"        : {"col":0,"from":["s521"],"below":"s521"},
     "bs3"        : {"col":0.5,"from":["s2"],"below":"s2"},
     "as3_3"      : {"col":2,"from":["s3"],"below":"s3"},
     "as3_4"      : {"col":3.5,"from":["s3"],"below":"s3"},
@@ -85,6 +85,9 @@
     "aquiz"      : {"col":14,"from":["quiz1","quiz2","quiz3"]}
   },
   "scenes": {
+    "s520"    : {"col":0,"from":[]},
+    "s521"    : {"col":0,"from":["s520"]},
+    "s522"    : {"col":1,"from":["s520"]},
     "s1"      : {"col":0,"from":["bs1"]},
     "s403"    : {"col":2,"from":["bs1"],"align":"s1"},
     "s404"    : {"col":3,"from":["bs1"],"align":"s1"},
@@ -458,6 +461,7 @@
   },
     
   "groups": {
+    "op": ["s520"],
     "morning" : ["bs1"],
     "school"  : ["s3"],
     "festival": ["s223"],

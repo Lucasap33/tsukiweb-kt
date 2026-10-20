@@ -80,7 +80,7 @@ export const savesManager = new SavesManager("savestates")
 //##############################################################################
 
 export function newGame() {
-  history.loadSaveState({scenes: [{label: 's1'}], pages: []})
+  history.loadSaveState({scenes: [{label: 's520'}], pages: []})
   displayMode.screen = SCREEN.WINDOW
 }
 

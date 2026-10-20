@@ -319,7 +319,7 @@ function processBlock(blocks: Map<string, Block>,
         const block = new Block(label, tokens.slice(start, stop))
         fixBlock(block, props, clickRE)
         if (block.length > 0)
-            blocks.set(label, block)
+            blocks.set(block.name, block)
     }
 }
 
