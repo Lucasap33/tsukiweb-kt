@@ -395,6 +395,8 @@ function sceneFixes(block: Block) {
 			const skipLength = parseInt(skip.args[0])
 			const skipEnd = block.findIndex(t=>t.lineIndex >= skip.lineIndex + skipLength)
 			block.delete(skipStart, skipEnd-skipStart)
+		} else {
+			block.delete(skipStart, 1)
 		}
 	}
 	for (const [token, i] of block) {

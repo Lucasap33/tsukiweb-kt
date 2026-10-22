@@ -1173,4 +1173,9 @@ goto *f500
 *f522
 goto *s522
 *s522_end
+goto *f523
+*f523
+goto *s523
+*s523_end
+inc %yume07
 goto *endofplay

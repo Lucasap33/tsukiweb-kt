@@ -328,6 +328,7 @@
     "s520"  : {"bg":"bg/ima_05"},
     "s521"  : {"bg":"bg/bg_24a", "c":"tachi/ark_nt10"},
     "s522"  : {"bg":"bg/bg_24a"},
+    "s523"  : {"bg":"bg/bg_51"},
     "s1"    : {"bg":"bg/bg_40a", "c":"tachi/his_t04"},
     "s403"  : {"bg":"bg/ima_26"},
     "s404"  : {"bg":"event/ren_e07"},

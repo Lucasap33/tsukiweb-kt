@@ -249,6 +249,15 @@ function getBlockProps(
 				})
 				tokenFixes.push(t=> {
 					if (isCmd(t, 'goto', '*twilight'))
+						t.args[0] = '*f523'
+				})
+				break
+			case 'twilight_ep' :
+				blockFixes.push(b=> {
+					b.name = (b.at(0) as LabelToken).label = "f523"
+				})
+				tokenFixes.push(t=> {
+					if (isCmd(t, 'goto', '*title'))
 						t.args[0] = '*endofplay'
 				})
 				break
