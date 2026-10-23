@@ -220,6 +220,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {next
             return this._tempVariables.get(name) as VarType<T>
         } else switch (name as string) {
             case '%answer': return 0 as VarType<T>
+            case '%smooth': return settings.smoothFlashes as VarType<T>
             case '%quiz1_pass': return (checkQuiz(1) ? 1 : 0) as VarType<T>
             case '%quiz2_pass': return (checkQuiz(2) ? 1 : 0) as VarType<T>
             case '%quiz3_pass': return (checkQuiz(3) ? 1 : 0) as VarType<T>

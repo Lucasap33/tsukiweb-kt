@@ -9,7 +9,7 @@ import { polyfillCountryFlagEmojis } from "@tsukiweb/common/utils/flagsPolyfill"
 import { imageSrc } from "translation/assets"
 import { useConfig } from "@tsukiweb/common/hooks/useConfig";
 import { exportGameData, importGameData, settings } from "engine/settings";
-import { strings, useStrings } from "translation/lang";
+import { getLocale, strings, useStrings } from "translation/lang";
 import { savesManager } from "engine/savestates";
 import { ConfigButtons, ConfigItem, ResetButton } from "../ConfigControls";
 import ConfigModal from "../ConfigModal";
@@ -17,6 +17,9 @@ import FontSelector from "../FontSelector";
 import { FULLSAVE_EXT, SAVE_EXT } from "app/utils/constants";
 
 let flagSupportChecked = false
+function msToS(ms: number) {
+	return (ms / 1000).toLocaleString(getLocale(), { maximumSignificantDigits: 3 })
+}
 
 const ConfigAdvancedTab = () => {
 	const strings = useStrings()
@@ -39,7 +42,7 @@ const ConfigAdvancedTab = () => {
 	const [modal, setModal] = useState<{show: boolean, content: ReactNode}>({show: false, content: undefined})
 
 	const { conf, update, reset } = useConfig(settings,
-		['eroBlur', 'eroSkip', 'unlockEverything', 'gameFont', 'flowchartBadges'])
+		['eroBlur', 'eroSkip', 'smoothFlashes', 'gameFont', 'flowchartBadges', 'unlockEverything'])
 
 	if (!flagSupportChecked) {
 		polyfillCountryFlagEmojis()
@@ -136,6 +139,29 @@ const ConfigAdvancedTab = () => {
 					/>
 				</ConfigItem>
 			</div>
+			<ConfigItem
+				label={strings.config["smooth-flashes"].replace('%0',msToS(conf.smoothFlashes))}
+				helpAction={()=>setModal({show: true, content:
+					<>
+						<h2>{strings.config["smooth-flashes"]}</h2>
+						{strings.config["smooth-flashes-help"].map((txt, i) =>
+							<p key={i}>{bb(txt
+								.replace('%0', strings.config["smooth-flashes-low"])
+								.replace('%1', strings.config["smooth-flashes-high"])
+							)}</p>
+						)}
+					</>
+				})}>
+				<ConfigButtons
+					currentValue={conf.smoothFlashes}
+					onChange={v => update('smoothFlashes', v)}
+					btns={[
+						{label: strings.config.off, value: 0},
+						{label: strings.config["smooth-flashes-low"], value: 80},
+						{label: strings.config["smooth-flashes-high"], value: 150},
+					]}
+				/>
+			</ConfigItem>
 
 			<ConfigItem
 				label={strings.config["game-font"]}

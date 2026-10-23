@@ -31,14 +31,12 @@ const RegardRow = ({ char, value, max }: {char: PointId, value: number, max: num
 		<div className="row">
 			<img className="char" src={`./res/chars/${char}.webp`}
 				alt={strings.characters[char as keyof typeof strings.characters] ?? char} />
-			<div className="hearts-list">
-				<svg viewBox="-3.3 -3.3 13.5 6.3">
-					<use href="#regard_icon" {...iconParams} className="badge"/>
-					<text x="3" y="2" fontSize={4} fill="#fff">
-						&times;{n}
-					</text>
-				</svg>
-			</div>
+			<svg className="hearts-list" viewBox="-3.3 -3.3 13.5 6.3">
+				<use href="#regard_icon" {...iconParams} className="badge"/>
+				<text x="3" y="2" fontSize={4} fill="#fff">
+					&times;{n}
+				</text>
+			</svg>
 		</div>
 	)
 }

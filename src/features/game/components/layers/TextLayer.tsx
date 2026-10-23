@@ -73,6 +73,10 @@ const TextLayer = ({ script, display, isTopLayer,
   const mouseCursorVisible = useMousePointer()
 
   const skip = useCallback(() => setImmediate(true), [])
+  const onTypeWriterFinish = useCallback(() => {
+    setImmediate(false)
+    onFinishRef.current?.()
+  }, [])
 
   useEffect(() => {
     const resetGlyph = () => setGlyph(null)
@@ -128,10 +132,7 @@ const TextLayer = ({ script, display, isTopLayer,
             paused={!display}
             text={lastLine}
             hideTag="hide"
-            onFinish={()=> {
-              setImmediate(false);
-              onFinishRef.current?.()
-            }}
+            onFinish={onTypeWriterFinish}
             rootSuffix={glyphNode}/>
         : glyphNode
         }

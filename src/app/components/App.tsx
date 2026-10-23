@@ -32,7 +32,8 @@ function App() {
 			<CommonProvider config={{
 				imageSrc: resolveImage,
 				cg: {
-					shouldBlur: cg.shouldBlur
+					shouldBlur: cg.shouldBlur,
+					shouldFrame: cg.isInGallery,
 				}
 			}}>
 				<Router base={import.meta.env.BASE_URL}>

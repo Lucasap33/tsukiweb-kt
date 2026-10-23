@@ -7,6 +7,7 @@ import Timer from "@tsukiweb/common/utils/timer";
 import cg from "features/gallery/utils/gallery";
 import { displayMode } from "app/utils/display";
 import { isImage } from "@tsukiweb/common/utils/images";
+import { VarName } from "@tsukiweb/common/script/types";
 
 
 /**
@@ -80,13 +81,16 @@ export function processImageCmd(
 						 setRocket: (rocket: undefined) => void,
 						 arg: string, cmd: string, script: ScriptPlayer,
 						 onFinish: VoidFunction) {
-	let pos = 'bg', image = '', effect = '', time = '', rest: string[] = []
+	let pos = 'bg', image = '', effect = '',
+		time: string|number = '', rest: string[] = []
 	switch (cmd) {
 		case 'bg' : [image, effect, time, ...rest] = arg.split(/,(?!.*`)/); break; // ignore commas inside image
 		case 'ld' : [pos, image, effect, time] = arg.split(','); break;
 		case 'cl' : [pos, effect, time] = arg.split(','); break;
 		default : throw Error(`unknown image command ${cmd} ${arg}`)
 	}
+	if (time && time.startsWith('%'))
+		time = script.readVariable(time as VarName) as number
 	let alignment: Graphics['bgAlign'] = undefined;
 	if (rest.length > 0 && BG_POSITIONS.some(x=>rest.includes(x))) {
 		alignment = rest.find(x=>BG_POSITIONS.includes(x as typeof BG_POSITIONS[number])) as Graphics['bgAlign']
