@@ -41,7 +41,7 @@ const FlagBadge = ({flag, negative, persists = false}: {flag: string, negative?:
 	return (
 		<svg className="badge" viewBox="-3.5 -3.5 7 7">
 			{content}
-			{persists && <use href="#link-icon" transform="translate(2.6,-2.2)"/>}
+			{persists && <use href="#link-icon" transform="translate(2.5,-1.9) scale(1.3)"/>}
 		</svg>
 	)
 }
@@ -52,7 +52,7 @@ const RegardValueBadge = ({ char, value, persists=false }: { char: PointId; valu
 	return (["kagi", "kaibyo"].includes(char)) ? (
 		<svg className="badge" viewBox="-3.5 -3.5 7 7">
 			{createPointBadge(char, true)}
-			{persists && <use href="#link-icon" transform="translate(2.6,-2.2)"/>}
+			{persists && <use href="#link-icon" transform="translate(2.5,-1.9) scale(1.3)"/>}
 		</svg>
 	) : (
 		<svg className="badge" viewBox={`-${(abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE)} -${CHAR_IMG_SIZE/2} ${abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE+1} ${CHAR_IMG_SIZE}`}>
@@ -71,7 +71,7 @@ const RegardValueBadge = ({ char, value, persists=false }: { char: PointId; valu
 					transform={`translate(${-(abs - i) * ICON_SIZE*0.75 + ICON_SIZE*0.75*0.5},0) scale(0.75)`}
 				/>
 			))}
-			{persists && <use href="#link-icon" transform="translate(0,-2.2)"/>}
+			{persists && <use href="#link-icon" transform="translate(0,-1.9) scale(1.3)"/>}
 		</svg>
 	)
 }

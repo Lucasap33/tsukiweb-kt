@@ -5,6 +5,9 @@ import { SVGProps } from "react";
 const HEART_PATH = `m0,2.5l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2`
 const C = DY*0.8 // unit used for condition badge
 export const FLAG_BACKGROUND = "#202020"
+export const STRIKE_COLOR = "#ff3b3b"
+export const FLAG_CONTENT = { x: 0.15, y: -0.55, scale: 0.95 }
+const FLAG_CONTENT_TRANSFORM = `translate(${FLAG_CONTENT.x},${FLAG_CONTENT.y}) scale(${FLAG_CONTENT.scale})`
 export const POINT_BACKGROUND = "#202020"
 
 export const BADGE_PATHS = {
@@ -19,10 +22,11 @@ export const BADGE_PATHS = {
   pointPlus: "m1.75,0.75l0,1.75m-0.875,-0.875l1.75,0",
   pointMinus: "m1.75,0.85m-0.875,0.5l1.75,0",
   pointArc: "M0 3a3 3 0 113-3",
-  flag: "M0,-3.14 3,-1 1.85,2.53 -1.85,2.53 -3,-1Z",
+  flag: "M-2.9,-3 Q0.15,-3.6 3.2,-3 V2.4 Q0.15,1.8 -2.9,2.4Z",
+  flagPole: "M-3.2,-3.2 V3.2",
+  strike: "M-3.2,-3.2 L3.2,3.2",
   select: "M0,-2.8 2.7,0 0,2.7 -2.7,0Z",
   cond: `M0,${C*1.5} ${-C},${C} ${-C},${-C} ${C},${-C} ${C},${C}Z`,
-  condNeg: `m ${-C},0l${C*2},0`,
   icons: {
     kashiisyo: `M0 .16l1.34 1.01h-2.69m3.5.05L.22-.23v-.2
       a.78.78 90 00-.04-1.51.78.78 90 00-.97.76h.45c0-.18.15-.34.34-.34
@@ -86,12 +90,15 @@ function characterGradient(char: PointId) {
 export function createFlagBadge(id: string, negative=false, props?: SVGProps<SVGGElement>) {
   return <g className="badge" {...props}>
 			<use href={negative ? "#flag-neg-icon" : "#flag-icon"}/>
-			{id.length > 1 ? <use href={`#${id}-icon`}/>
-      :
-				<text y="1.6" stroke="none" textAnchor="middle" fill="white">
-					{id}
-				</text>
-			}
+			<g transform={FLAG_CONTENT_TRANSFORM}>
+				{id.length > 1 ? <use href={`#${id}-icon`}/>
+				:
+					<text y="1.6" stroke={FLAG_BACKGROUND} strokeWidth=".7" paintOrder="stroke"
+						textAnchor="middle" fill="white">
+						{id}
+					</text>
+				}
+			</g>
 		</g>
 }
 export function createQuizBadge(n: number, props?: SVGProps<SVGGElement>) {
@@ -111,8 +118,10 @@ export function createQuizBadge(n: number, props?: SVGProps<SVGGElement>) {
   }
   return <g className="badge" {...props}>
     <use href="#flag-icon"/>
-    <use href="#quiz-icon" opacity=".9"/>
-    {content}
+    <g transform={FLAG_CONTENT_TRANSFORM}>
+      <use href="#quiz-icon" opacity=".9"/>
+      {content}
+    </g>
   </g>
 }
 export function createPointBadge(id: PointId, plus:boolean, props?: SVGProps<SVGGElement>) {
@@ -208,8 +217,14 @@ export const BADGES_DEFINES = <defs>
   }
   <path id="kaibyo-icon" d={BADGE_PATHS.icons.kaibyo}
       fill="white" stroke="none"/>
-  <path id="flag-icon" d={BADGE_PATHS.flag} fill={FLAG_BACKGROUND}/>
-  <path id="flag-neg-icon" d="m-1.85,2.53 -1.15,-3.53 3,-2.14 3,2.14 -1.15,3.53zl3.35,-4.60" fill="#000" stroke="#800"/>
+  <g id="flag-icon">
+    <path d={BADGE_PATHS.flagPole} fill="none" stroke="white" strokeLinecap="round"/>
+    <path d={BADGE_PATHS.flag} fill={FLAG_BACKGROUND}/>
+  </g>
+  <g id="flag-neg-icon">
+    <use href="#flag-icon"/>
+    <path d={BADGE_PATHS.strike} stroke={STRIKE_COLOR} strokeWidth="1" strokeLinecap="round"/>
+  </g>
   <g id="sel-icon">
     <path d={BADGE_PATHS.select} fill="var(--badge-background)"/>
     <text y="1.6" stroke="none" fill="white" textAnchor="middle">
@@ -217,7 +232,10 @@ export const BADGES_DEFINES = <defs>
     </text>
   </g>
   <path id="cond-icon" d={BADGE_PATHS.cond}/>
-  <path id="cond-neg" d={BADGE_PATHS.condNeg} stroke="#500000"/>
+  <filter id="link-shadow" filterUnits="userSpaceOnUse" x="-1" y="-1.5" width="2" height="3.5"
+      colorInterpolationFilters="sRGB">
+    <feDropShadow dx="-.1" dy=".15" stdDeviation=".05" floodColor="black"/>
+  </filter>
   <path id="link-icon" d="M0-.4v.8zm.4.5v.5c0 .22-.18.4-.4.4-.22 0-.4-.18-.4-.4
     v-.5m.8-.2v-.5c0-.22-.18-.4-.4-.4-.22 0-.4.18-.4.4v.5"
     stroke="white" fill="none" strokeWidth=".3" strokeLinecap="butt"/>

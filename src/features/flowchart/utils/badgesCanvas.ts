@@ -1,6 +1,6 @@
 import { DY, FcOverlayDrawer, path2D, StyleReader } from "@tsukiweb/common/flowchart"
 import { PointId } from "app/utils/types"
-import { BADGE_PATHS, FLAG_BACKGROUND, POINT_BACKGROUND } from "../components/badges"
+import { BADGE_PATHS, FLAG_BACKGROUND, FLAG_CONTENT, POINT_BACKGROUND, STRIKE_COLOR } from "../components/badges"
 import { getNodeBadges } from "./badges"
 import { FcNode } from "./flowchart"
 
@@ -25,6 +25,9 @@ type BBox = [left: number, top: number, right: number, bottom: number]
 
 const REGARD_REGEX = /^%(\w+)_point/
 const BADGE_RIGHT_INSET = 3
+const FLAG_RIGHT_INSET = 3.5
+const FLAG_SPACING = DY * 2.6
+const SHADOW_OFFSET = 0.4
 const ICON_POINTS = ["kagi", "kaibyo"]
 const COND_UNIT = DY * 0.8
 
@@ -128,11 +131,12 @@ function getBadgesLayout(node: FcNode): BadgeLayout[] {
 			? { type: 'point', x: cornerX, y: cornerY, id: char }
 			: { type: 'regard', x: cornerX, y: cornerY, char, value: value! })
 	}
+	const flagX = node.right - (node.width > 0 ? FLAG_RIGHT_INSET : 0)
 	flags?.forEach((flag, i) => {
-		const y = cornerY - (char ? i + 1 : i) * DY * 2.2
+		const y = cornerY - (char ? i + 1 : i) * FLAG_SPACING
 		layouts.push(flag.startsWith('quiz')
-			? { type: 'quiz', x: cornerX, y, n: parseInt(flag.at(-1)!) || 0 }
-			: { type: 'flag', x: cornerX, y, flag })
+			? { type: 'quiz', x: flagX, y, n: parseInt(flag.at(-1)!) || 0 }
+			: { type: 'flag', x: flagX, y, flag })
 	})
 	if (select)
 		layouts.push({ type: 'select', x: node.centerX, y: node.bottom })
@@ -174,10 +178,38 @@ function drawIcon(ctx: CanvasRenderingContext2D, name: string) {
 }
 
 function drawText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number,
-		size: number, font: string) {
+		size: number, font: string, halo = false) {
 	ctx.font = `bold ${size}px ${font}`
+	if (halo) {
+		ctx.strokeStyle = FLAG_BACKGROUND
+		ctx.lineWidth = 0.7
+		ctx.strokeText(text, x, y)
+	}
 	ctx.fillStyle = "white"
 	ctx.fillText(text, x, y)
+}
+
+function drawStrike(ctx: CanvasRenderingContext2D) {
+	ctx.strokeStyle = STRIKE_COLOR
+	ctx.lineWidth = 1
+	ctx.stroke(path2D(BADGE_PATHS.strike))
+}
+
+/** Pennant, with its content drawn in the flag part */
+function drawFlag(ctx: CanvasRenderingContext2D, drawContent: VoidFunction) {
+	ctx.fillStyle = "rgb(0 0 0 / 0.5)"
+	ctx.translate(SHADOW_OFFSET, SHADOW_OFFSET)
+	ctx.fill(path2D(BADGE_PATHS.flag))
+	ctx.translate(-SHADOW_OFFSET, -SHADOW_OFFSET)
+	ctx.strokeStyle = "white"
+	ctx.lineWidth = 0.6
+	ctx.stroke(path2D(BADGE_PATHS.flagPole))
+	drawShape(ctx, BADGE_PATHS.flag, FLAG_BACKGROUND)
+	ctx.save()
+	ctx.translate(FLAG_CONTENT.x, FLAG_CONTENT.y)
+	ctx.scale(FLAG_CONTENT.scale, FLAG_CONTENT.scale)
+	drawContent()
+	ctx.restore()
 }
 
 function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: StyleReader,
@@ -206,24 +238,27 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 			ctx.strokeStyle = "#00ff00"
 			ctx.stroke(path2D(BADGE_PATHS.pointPlus))
 			break
-		case 'flag':
-			drawShape(ctx, BADGE_PATHS.flag, FLAG_BACKGROUND)
-			if (badge.flag.length > 1)
-				drawIcon(ctx, badge.flag)
-			else
-				drawText(ctx, badge.flag, 0, 1.6, 4, font)
+		case 'flag': {
+			const { flag } = badge
+			drawFlag(ctx, () => flag.length > 1
+				? drawIcon(ctx, flag)
+				: drawText(ctx, flag, 0, 1.6, 4, font))
 			break
-		case 'quiz':
-			drawShape(ctx, BADGE_PATHS.flag, FLAG_BACKGROUND)
-			ctx.globalAlpha = 0.9
-			drawIcon(ctx, 'quiz')
-			ctx.globalAlpha = 1
-			if (badge.n > 0) {
-				ctx.fillStyle = FLAG_BACKGROUND
-				ctx.fillRect(0, -0.4, 1.35, 2.05)
-				drawText(ctx, String(badge.n), 1.2, 2.1, 4, font)
-			}
+		}
+		case 'quiz': {
+			const { n } = badge
+			drawFlag(ctx, () => {
+				ctx.globalAlpha = 0.9
+				drawIcon(ctx, 'quiz')
+				ctx.globalAlpha = 1
+				if (n > 0) {
+					ctx.fillStyle = FLAG_BACKGROUND
+					ctx.fillRect(0, -0.4, 1.35, 2.05)
+					drawText(ctx, String(n), 1.2, 2.1, 4, font)
+				}
+			})
 			break
+		}
 		case 'select':
 			drawShape(ctx, BADGE_PATHS.select, style.color("var(--badge-background)"))
 			drawText(ctx, "?", 0, 1.6, 4, font)
@@ -235,8 +270,10 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 			drawShape(ctx, BADGE_PATHS.cond, fillStyle(ctx, badge.fill, style, [-c, -c, c, c * 1.5]))
 			ctx.restore()
 			const { icon } = badge
+			if (badge.negative)
+				drawStrike(ctx)
 			if ('text' in icon) {
-				drawText(ctx, icon.text, badge.iconX, badge.iconY, 5, font)
+				drawText(ctx, icon.text, badge.iconX, badge.iconY, 5, font, badge.negative)
 			} else if ('icon' in icon) {
 				drawIcon(ctx, icon.icon)
 			} else {
@@ -246,10 +283,6 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 				ctx.fillStyle = "white"
 				ctx.fill(path2D(BADGE_PATHS.heart))
 				ctx.restore()
-			}
-			if (badge.negative) {
-				ctx.strokeStyle = "#500000"
-				ctx.stroke(path2D(BADGE_PATHS.condNeg))
 			}
 			break
 		}

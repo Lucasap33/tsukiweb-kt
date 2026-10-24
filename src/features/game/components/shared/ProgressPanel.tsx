@@ -1,25 +1,8 @@
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { strings } from "translation/lang"
 import { PointId } from "app/utils/types";
+import { FLAG_CONTENT } from "features/flowchart/components/badges";
 
-
-const EndingList = ({ CHARS, script }: { CHARS: string[], script: ScriptPlayer }) => {
-	const cleared_routes = CHARS.filter(c=>script.readVariable(`%clear_${c}`))
-	const len = cleared_routes.length
-	return (
-		<svg className="ending-list" viewBox={`-3.5 -3.5 ${7+3.5*(len-1)} 6.5`} >
-			{cleared_routes.map((c, i)=>
-				<use href="#route_icon"
-					key={`${c}-star-index`}
-					className="star-icon badge"
-					fill={`url(#${c}_grad)`}
-					stroke="rgba(255, 255, 255, 0.9)"
-					transform={`translate(${i*3.5},0)`}
-				/>
-			)}
-		</svg>
-	)
-}
 
 const RegardRow = ({ char, value, max }: {char: PointId, value: number, max: number}) => {
 	const iconParams = {
@@ -47,9 +30,11 @@ const FlagsList = ({ flags }: { flags: string[] }) => {
 			{flags.map(flag =>
 				<svg key={flag} className="badge" viewBox="-3.5 -3.5 7 7">
 					<use href="#flag-icon"/>
-					<text y="1.6" stroke="none" fill="white" textAnchor="middle">
-						{flag}
-					</text>
+					<g transform={`translate(${FLAG_CONTENT.x},${FLAG_CONTENT.y}) scale(${FLAG_CONTENT.scale})`}>
+						<text y="1.6" stroke="none" fill="white" textAnchor="middle">
+							{flag}
+						</text>
+					</g>
 				</svg>
 			)}
 		</div>
