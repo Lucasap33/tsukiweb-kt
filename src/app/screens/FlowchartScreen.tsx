@@ -15,7 +15,7 @@ const FlowchartScreen = () => {
 
 	return (
 		<div id="flowchart">
-			<div className="flowchart-container scroll-container">
+			<div className="flowchart-container">
 				<Flowchart onSceneClick={onSceneClick} />
 			</div>
 		</div>

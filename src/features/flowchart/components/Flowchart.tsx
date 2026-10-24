@@ -1,93 +1,91 @@
-
-import { memo, useRef } from "react"
+import { memo, useCallback, useMemo } from "react"
 import { FcNode, GameFlowchart } from "features/flowchart/utils/flowchart"
-import { SceneName } from "app/utils/types"
-import { AllScenes } from "./AllScenes"
+import { LabelName, SceneName } from "app/utils/types"
 import { History } from "engine/history"
-import { COLUMN_WIDTH, DY, PopoverProvider, SCENE_HEIGHT, SCENE_WIDTH, SVG_DEFS } from "@tsukiweb/common/flowchart"
-import { usePanZoom } from "@tsukiweb/common/hooks"
-import ScenePopover from "./ScenePopover";
-import AllConnections from "./AllConnections";
-import { settings } from "engine/settings";
-import AllBadges from "./AllBadges";
-import { BADGES_DEFINES } from "./badges";
-
+import { computeLinks, DY, FcCanvasItem, FcNodeState, FlowchartCanvas, flowchartBounds } from "@tsukiweb/common/flowchart"
+import ScenePopover from "./ScenePopover"
+import { BADGES_DEFINES } from "./badges"
+import { createBadgesDrawer } from "../utils/badgesCanvas"
+import { settings } from "engine/settings"
+import { getSceneGraph } from "engine/utils"
+import cg from "features/gallery/utils/gallery"
+import { isLanguageLoaded, useStrings } from "translation/lang"
 
 type Props = {
 	history?: History,
 	onSceneClick?: (id: SceneName) => void,
 	mode?: 'playthrough' | 'viewer'
+	/** scene centered when opened, if different from the last scene of `history` */
+	currentScene?: LabelName
 }
 
-const Flowchart = ({history, onSceneClick, mode = 'viewer'}: Props)=> {
-	const flowchart = new GameFlowchart(history)
-	const svgRef = useRef<SVGSVGElement>(null)
-	const stageRef = useRef<HTMLDivElement>(null)
-	const visibleNodes = flowchart.listNodes().filter(n=>n.visible)
-	let [left, top, right, bottom] = visibleNodes.reduce(
-		(vb, node)=> [
-			Math.min(vb[0], node.left),
-			Math.min(vb[1], node.top),
-			Math.max(vb[2], node.right),
-			Math.max(vb[3], node.bottom),
-		], [Number.MAX_VALUE, Number.MAX_VALUE, 0, 0])
-		
-	// add small padding
-	left -= (COLUMN_WIDTH - SCENE_WIDTH)
-	top -= DY
-	right += (COLUMN_WIDTH - SCENE_WIDTH)
-	bottom += DY
+/** Path from the bottom of a parent to the top of a child */
+function linkPath(x1: number, y1: number, x2: number, y2: number): string {
+	if (x1 === x2) return `M${x1},${y1}V${y2}`
+	if (y1 === y2) return `M${x1},${y1}H${x2}`
 
-	const width = Math.max(right - left, 10*COLUMN_WIDTH) // viewbox for at least 10 columns, otherwise it's too zoomed in
-	const height = bottom - top
-	const size = {
-		minWidthRem: width / 10,
-		minHeightRem: height / 10,
-		maxWidthPct: 100 * width / (2 * COLUMN_WIDTH), // minimum 2 scenes visible
-		maxHeightPct: 100 * height / (4 * (SCENE_HEIGHT + DY*2)), // minimum 4 scenes visible
-	}
-	const activeNode = flowchart.getNode(flowchart.activeScene)
-	usePanZoom(svgRef, {
-		maxScale: 3,
-		minScale: 0.45,
-		minVisible: '50%',
-		stageRef,
-		viewportSelector: '.scroll-container',
+	const turnY = x2 > x1 ? y1 + DY : y2 - DY
+
+	return (turnY > y1 && turnY < y2)
+		? `M${x1},${y1}V${turnY}H${x2}V${y2}`
+		: `M${x1},${y1}V${y2}H${x2}`
+}
+
+function buildItems(nodes: FcNode[], currentNode?: FcNode): FcCanvasItem<FcNode>[] {
+	const refX = currentNode?.column ?? 0
+	const refY = currentNode?.navY ?? 0
+	return nodes.flatMap((node): FcCanvasItem<FcNode>[] => {
+		if (!node.scene || node.state == FcNodeState.HIDDEN)
+			return []
+		if (node.state == FcNodeState.UNSEEN)
+			return [{ node, kind: 'hidden' }]
+		const graph = getSceneGraph(node.id as SceneName)
+		const inProgress = node.active && !node.seen
+		const { file, left, top, width, height } = node.metadatas
+		return [{
+			node,
+			kind: file ? 'image' : 'box',
+			thumbnail: file ? { file, source: [left, top, width, height] } : undefined,
+			blur: inProgress || !!(graph.bg && cg.shouldBlur(graph.bg)),
+			disabled: node.state == FcNodeState.DISABLED,
+			group: node.group,
+			popover: !inProgress,
+			nav: node.navY != null ? { x: node.column - refX, y: node.navY - refY } : undefined,
+		}]
 	})
-	
-	return (
-		<PopoverProvider renderContent={(item: FcNode) => <ScenePopover node={item} />}>
-			<div className="panzoom-stage" ref={stageRef}>
-				<svg viewBox={`${left} ${top} ${width} ${height}`}
-					ref={svgRef}
-					className="flowchart"
-					style={{
-						minWidth: `max(${size.minWidthRem}rem, var(--flowchart-width))`, maxWidth: `${size.maxWidthPct}%`,
-						minHeight: `${size.minHeightRem}rem`, maxHeight: `${size.maxHeightPct}%`,
-					}}
-					version="1.1"
-					xmlns="http://www.w3.org/2000/svg">
-					{SVG_DEFS}
-					{BADGES_DEFINES}
-					<g className="fc-connections">
-						<AllConnections fcNodes={visibleNodes} mode={mode} />
-					</g>
-					<g className="fc-scenes">
-						<AllScenes
-							nodes={visibleNodes}
-							activeNode={activeNode}
-							onClick={onSceneClick}
-						/>
-					</g>
-					<g className="fc-badges" fontWeight="bold">
-						{settings.flowchartBadges &&
-							<AllBadges nodes={visibleNodes} />
-						}
-					</g>
-				</svg>
-			</div>
-		</PopoverProvider>
-	)
+}
+
+const Flowchart = ({history, onSceneClick, mode = 'viewer', currentScene}: Props) => {
+	const strings = useStrings()
+	const flowchart = useMemo(() => new GameFlowchart(history), [history])
+	const nodes = useMemo(() => flowchart.listNodes().filter(n => n.visible), [flowchart])
+	const currentNode = flowchart.getNode(currentScene ?? flowchart.activeScene)
+	const items = useMemo(() => buildItems(nodes, currentNode), [nodes])
+	const bounds = useMemo(() => flowchartBounds(nodes), [nodes])
+	const links = useMemo(() => computeLinks(nodes, (parent, node) =>
+		flowchart.isLinkDisabled(parent, node, mode), linkPath), [nodes, mode])
+
+	const languageKey = isLanguageLoaded() ? `${strings.id}:${strings.lastUpdate ?? ""}` : ""
+	const drawBadges = useMemo(() => settings.flowchartBadges && languageKey
+		? createBadgesDrawer(items.filter(item => item.kind != 'hidden').map(item => item.node))
+		: undefined,
+	[items, languageKey])
+
+	const onSelect = useCallback((node: FcNode) =>
+		onSceneClick?.(node.id as SceneName), [onSceneClick])
+
+	return <>
+		<svg className="fc-defs">{BADGES_DEFINES}</svg>
+		<FlowchartCanvas
+			items={items}
+			links={links}
+			bounds={bounds}
+			center={currentNode?.scene ? currentNode : undefined}
+			onSelect={onSelect}
+			renderPopover={node => <ScenePopover node={node} />}
+			drawOverlay={drawBadges}
+		/>
+	</>
 }
 
 export default memo(Flowchart)
