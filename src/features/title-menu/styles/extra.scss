@@ -73,9 +73,12 @@
 				margin-block: .6em;
 				text-align: left;
 
-				text-shadow: 0 0 8px var(--sunset-brown);
 				background: none;
 				-webkit-text-fill-color: unset;
+
+				&:not([aria-selected="true"]) {
+					text-shadow: 0 0 8px var(--sunset-brown);
+				}
 			}
 		}
 		.back-action {
