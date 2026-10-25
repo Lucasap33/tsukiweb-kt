@@ -6,7 +6,7 @@ import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
-import { createFlagBadge, createPointBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
+import { createFlagBadge, createPointBadge, createQuizBadge, flagPersists, pointPersists, FLAG_VIEWBOX } from "./badges";
 
 const ICON_SIZE = 7
 const CHAR_IMG_SIZE = 7
@@ -34,12 +34,12 @@ const FlagBadge = ({flag, negative, persists = false}: {flag: string, negative?:
 	let content
 	if (flag.startsWith("quiz")) {
 		const n = parseInt(flag.at(-1)!) || 0
-		content = createQuizBadge(n)
+		content = createQuizBadge(n, negative)
 	} else {
 		content = createFlagBadge(flag, negative)
 	}
 	return (
-		<svg className="badge" viewBox="-3.5 -3.5 7 7">
+		<svg className="badge" viewBox={FLAG_VIEWBOX}>
 			{content}
 			{persists && <use href="#link-icon" transform="translate(2.5,-1.9) scale(1.3)"/>}
 		</svg>
