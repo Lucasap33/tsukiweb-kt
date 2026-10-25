@@ -1,7 +1,7 @@
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { strings } from "translation/lang"
 import { PointId } from "app/utils/types";
-import { FLAG_CONTENT, FLAG_VIEWBOX } from "features/flowchart/components/badges";
+import { badgeViewBox, FLAG_CONTENT } from "features/flowchart/components/badges";
 
 
 const RegardRow = ({ char, value, max }: {char: PointId, value: number, max: number}) => {
@@ -28,7 +28,7 @@ const FlagsList = ({ flags }: { flags: string[] }) => {
 	return (
 		<div className="flags-list">
 			{flags.map(flag =>
-				<svg key={flag} className="badge" viewBox={FLAG_VIEWBOX}>
+				<svg key={flag} className="badge" viewBox={badgeViewBox()}>
 					<use href="#flag-icon"/>
 					<g transform={`translate(${FLAG_CONTENT.x},${FLAG_CONTENT.y}) scale(${FLAG_CONTENT.scale})`}>
 						<text y="1.6" stroke="none" fill="white" textAnchor="middle">

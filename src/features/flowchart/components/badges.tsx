@@ -8,8 +8,10 @@ const BADGE_HALF = DY
 export const FLAG_BACKGROUND = "var(--flag-background)"
 export const STRIKE_COLOR = "#ff3b3b"
 export const FLAG_CONTENT = { x: 0.15, y: -0.55, scale: 0.95 }
-export const FLAG_VIEWBOX = "-3.5 -3.6 7 7.1"
 const FLAG_CONTENT_TRANSFORM = `translate(${FLAG_CONTENT.x},${FLAG_CONTENT.y}) scale(${FLAG_CONTENT.scale})`
+export const BADGE_SIZE = 7
+export const badgeViewBox = (left = -BADGE_SIZE/2, width = BADGE_SIZE) =>
+  `${left} ${-BADGE_SIZE/2} ${width} ${BADGE_SIZE}`
 export const QUIZ_ICON = { x: -1, scale: 0.75 }
 export const QUIZ_NUMBER_X = 1.4
 export const POINT_BACKGROUND = "#202020"
@@ -26,7 +28,7 @@ export const BADGE_PATHS = {
   pointPlus: "m1.75,0.75l0,1.75m-0.875,-0.875l1.75,0",
   pointMinus: "m1.75,0.85m-0.875,0.5l1.75,0",
   pointArc: "M0 3a3 3 0 113-3",
-  flag: "M-2.9,-3 Q0.15,-3.6 3.2,-3 V2.4 Q0.15,1.8 -2.9,2.4Z",
+  flag: "M-2.9,-2.9 Q0.15,-3.5 3.2,-2.9 V2.4 Q0.15,1.8 -2.9,2.4Z",
   flagPole: "M-3.2,-3.2 V3.2",
   strike: "M-3.2,-3.2 L3.2,3.2",
   select: "M-4.6,0 -2,-2.5 2,-2.5 4.6,0 2,2.5 -2,2.5Z",

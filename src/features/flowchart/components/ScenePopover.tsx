@@ -6,26 +6,27 @@ import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
-import { createFlagBadge, createPointBadge, createQuizBadge, flagPersists, pointPersists, FLAG_VIEWBOX } from "./badges";
+import { BADGE_SIZE, badgeViewBox, createFlagBadge, createPointBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
 
 const ICON_SIZE = 7
-const CHAR_IMG_SIZE = 7
+const CHAR_IMG_SIZE = BADGE_SIZE
+const HEART_STEP = ICON_SIZE*0.75
 
 
 const RegardBadge = ({char}: {char: PointId}) => {
 	return ["kagi", "kaibyo"].includes(char) ? (
-		<svg className="badge" viewBox={`-${ICON_SIZE/2} -${ICON_SIZE/2} ${ICON_SIZE} ${ICON_SIZE}`}>
+		<svg className="badge" viewBox={badgeViewBox()}>
 			{createPointBadge(char, false)}
 		</svg>
 	) : (
-		<svg className="badge" viewBox={`-${CHAR_IMG_SIZE+ICON_SIZE*0.75} -${CHAR_IMG_SIZE/2} ${CHAR_IMG_SIZE+ICON_SIZE*0.75} ${CHAR_IMG_SIZE}`}>
+		<svg className="badge" viewBox={badgeViewBox(-(CHAR_IMG_SIZE+HEART_STEP), CHAR_IMG_SIZE+HEART_STEP)}>
 			<image href={`./res/chars/${char}.webp`}
 				className="badge"
-				x={-(CHAR_IMG_SIZE+ICON_SIZE*0.75)} y={-CHAR_IMG_SIZE/2} height={CHAR_IMG_SIZE} />
+				x={-(CHAR_IMG_SIZE+HEART_STEP)} y={-CHAR_IMG_SIZE/2} height={CHAR_IMG_SIZE} />
 			<use href="#regard_icon"
 				fill={`url(#${char}_grad)`}
 				strokeWidth=".8"
-				transform={`translate(-${ICON_SIZE*0.75*0.5},0.5) scale(.75)`}/>
+				transform={`translate(-${HEART_STEP*0.5},0.5) scale(.75)`}/>
 		</svg>
 	)
 }
@@ -39,7 +40,7 @@ const FlagBadge = ({flag, negative, persists = false}: {flag: string, negative?:
 		content = createFlagBadge(flag, negative)
 	}
 	return (
-		<svg className="badge" viewBox={FLAG_VIEWBOX}>
+		<svg className="badge" viewBox={badgeViewBox()}>
 			{content}
 			{persists && <use href="#link-icon" transform="translate(2.5,-1.9) scale(1.3)"/>}
 		</svg>
@@ -49,17 +50,18 @@ const FlagBadge = ({flag, negative, persists = false}: {flag: string, negative?:
 const RegardValueBadge = ({ char, value, persists=false }: { char: PointId; value: number, persists?: boolean }) => {
 	const abs = Math.abs(value)
 	const sign = Math.sign(value)
+	const left = -(abs * HEART_STEP + CHAR_IMG_SIZE)
 	return (["kagi", "kaibyo"].includes(char)) ? (
-		<svg className="badge" viewBox="-3.5 -3.5 7 7">
+		<svg className="badge" viewBox={badgeViewBox()}>
 			{createPointBadge(char, true)}
 			{persists && <use href="#link-icon" transform="translate(2.5,-1.9) scale(1.3)"/>}
 		</svg>
 	) : (
-		<svg className="badge" viewBox={`-${(abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE)} -${CHAR_IMG_SIZE/2} ${abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE+1} ${CHAR_IMG_SIZE}`}>
+		<svg className="badge" viewBox={badgeViewBox(left, -left + 1)}>
 			<image
 				href={`./res/chars/${char}.webp`}
 				className="badge"
-				x={-(abs * ICON_SIZE*0.75 + CHAR_IMG_SIZE)}
+				x={left}
 				y={-CHAR_IMG_SIZE/2}
 				height={CHAR_IMG_SIZE}
 			/>
@@ -68,7 +70,7 @@ const RegardValueBadge = ({ char, value, persists=false }: { char: PointId; valu
 					key={i}
 					href={`#regard_${sign}`}
 					fill={`url(#${char}_grad)`}
-					transform={`translate(${-(abs - i) * ICON_SIZE*0.75 + ICON_SIZE*0.75*0.5},0) scale(0.75)`}
+					transform={`translate(${(i - abs + 0.5) * HEART_STEP},0) scale(0.75)`}
 				/>
 			))}
 			{persists && <use href="#link-icon" transform="translate(0,-1.9) scale(1.3)"/>}
