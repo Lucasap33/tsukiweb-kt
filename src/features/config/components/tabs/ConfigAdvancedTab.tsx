@@ -8,15 +8,35 @@ import { dialog } from "@tsukiweb/common/ui-core/components/ModalPrompt"
 import { polyfillCountryFlagEmojis } from "@tsukiweb/common/utils/flagsPolyfill"
 import { imageSrc } from "translation/assets"
 import { useConfig } from "@tsukiweb/common/hooks/useConfig";
-import { exportGameData, importGameData, settings } from "engine/settings";
+import { exportGameData, importGameData, settings, viewedScene } from "engine/settings";
 import { getLocale, strings, useStrings } from "translation/lang";
 import { savesManager } from "engine/savestates";
 import { ConfigButtons, ConfigItem, ResetButton } from "../ConfigControls";
 import ConfigModal from "../ConfigModal";
 import FontSelector from "../FontSelector";
-import { FULLSAVE_EXT, SAVE_EXT } from "app/utils/constants";
+import { FULLSAVE_EXT, SAVE_EXT, SCENE_ATTRS } from "app/utils/constants";
+import { SceneName } from 'app/utils/types';
 
 let flagSupportChecked = false
+
+function getPersistents() {
+	let {reset, flags, points} = SCENE_ATTRS["scene-points"]
+	
+	const filter = ([p,s]:[string,SceneName[]])=>!reset.includes(p) && s.some(viewedScene)
+
+	const flagsList = Object.entries(flags).filter(filter).map(([f])=>f)
+	const pointsObject = Object.fromEntries(
+		Object.entries(points).map(([p,s])=> [
+			p,
+			reset.includes(p) ? 0
+			: Object.entries(s).reduce((v, [s, n])=>viewedScene(s) ? v + n : v, 0)
+		] as const)
+		.filter(([_,n])=>n > 0)
+	)
+	
+	return {flags: flagsList, points: pointsObject}
+}
+
 function msToS(ms: number) {
 	return (ms / 1000).toLocaleString(getLocale(), { maximumSignificantDigits: 3 })
 }
@@ -82,7 +102,8 @@ const ConfigAdvancedTab = () => {
 		}
 		update('eroSkip', value ? 'ask' : 'no')
 	}
-
+	const {flags, points} = getPersistents()
+	
 	return (
 		<PageSection>
 			<div className="sub">
@@ -210,6 +231,21 @@ const ConfigAdvancedTab = () => {
 						{ label: strings.no, value: false },
 					]}
 				/>
+			</ConfigItem>
+
+			<ConfigItem
+				label={"Disable Progress markers"}
+				helpAction={()=>setModal({show: true, content:
+					<>
+						<h2>{"Disable Progress markers"}</h2>
+						{<>
+						<p>Disable flags and lower points that prevent reaching scenes</p>
+						<p>Flags and points in the history will still be taken into account</p>
+						</>}
+					</>
+				})}>
+				{flags.map(f=>f)}
+				{Object.entries(points).map(([p,n])=>p)}
 			</ConfigItem>
 
 			<ConfigItem label={strings.config['len-images']}>

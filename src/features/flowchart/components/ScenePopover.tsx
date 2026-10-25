@@ -1,82 +1,14 @@
 import { GraphicsGroup } from "@tsukiweb/common/graphics"
 import { noBb, Bbcode } from "@tsukiweb/common/utils/Bbcode"
-import { PointId, SceneName } from "app/utils/types"
+import { SceneName } from "app/utils/types"
 import { FcNode } from "features/flowchart/utils/flowchart"
 import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
-import { BADGE_SIZE, badgeViewBox, createFlagBadge, createPointBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
+import { badgeViewBox, createFlagBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
+import { PointBadge, FlagBadge, RegardBadge } from "@tsukiweb/common/icons/badges";
 
-const ICON_SIZE = 7
-const CHAR_IMG_SIZE = BADGE_SIZE
-const HEART_STEP = ICON_SIZE*0.75
-
-
-const RegardBadge = ({char}: {char: PointId}) => {
-	return ["kagi", "kaibyo"].includes(char) ? (
-		<svg className="badge" viewBox={badgeViewBox()}>
-			{createPointBadge(char, false)}
-		</svg>
-	) : (
-		<svg className="badge" viewBox={badgeViewBox(-(CHAR_IMG_SIZE+HEART_STEP), CHAR_IMG_SIZE+HEART_STEP)}>
-			<image href={`./res/chars/${char}.webp`}
-				className="badge"
-				x={-(CHAR_IMG_SIZE+HEART_STEP)} y={-CHAR_IMG_SIZE/2} height={CHAR_IMG_SIZE} />
-			<use href="#regard_icon"
-				fill={`url(#${char}_grad)`}
-				strokeWidth=".8"
-				transform={`translate(-${HEART_STEP*0.5},0.5) scale(.75)`}/>
-		</svg>
-	)
-}
-
-const FlagBadge = ({flag, negative, persists = false}: {flag: string, negative?: boolean, persists?: boolean}) => {
-	let content
-	if (flag.startsWith("quiz")) {
-		const n = parseInt(flag.at(-1)!) || 0
-		content = createQuizBadge(n, negative)
-	} else {
-		content = createFlagBadge(flag, negative)
-	}
-	return (
-		<svg className="badge" viewBox={badgeViewBox()}>
-			{content}
-			{persists && <use href="#link-icon" transform="translate(2.5,-1.9) scale(1.3)"/>}
-		</svg>
-	)
-}
-
-const RegardValueBadge = ({ char, value, persists=false }: { char: PointId; value: number, persists?: boolean }) => {
-	const abs = Math.abs(value)
-	const sign = Math.sign(value)
-	const left = -(abs * HEART_STEP + CHAR_IMG_SIZE)
-	return (["kagi", "kaibyo"].includes(char)) ? (
-		<svg className="badge" viewBox={badgeViewBox()}>
-			{createPointBadge(char, true)}
-			{persists && <use href="#link-icon" transform="translate(2.5,-1.9) scale(1.3)"/>}
-		</svg>
-	) : (
-		<svg className="badge" viewBox={badgeViewBox(left, -left + 1)}>
-			<image
-				href={`./res/chars/${char}.webp`}
-				className="badge"
-				x={left}
-				y={-CHAR_IMG_SIZE/2}
-				height={CHAR_IMG_SIZE}
-			/>
-			{[...Array(abs)].map((_, i) => (
-				<use
-					key={i}
-					href={`#regard_${sign}`}
-					fill={`url(#${char}_grad)`}
-					transform={`translate(${(i - abs + 0.5) * HEART_STEP},0) scale(0.75)`}
-				/>
-			))}
-			{persists && <use href="#link-icon" transform="translate(0,-1.9) scale(1.3)"/>}
-		</svg>
-	)
-}
 
 const TokenDisplay = ({ token }: { token: string }) => {
 	switch (token) {
@@ -98,7 +30,9 @@ const SceneCondition = ({condition}: {condition: string})=> {
 			return <TokenDisplay key={i} token={token} /> // operator or number
 		if (token.endsWith('_point')) {
 			const char = token.split('_')[0].substring(1) // between '%' and '_'
-			return <RegardBadge key={i} char={char as PointId} />
+			return ["kagi", "kaibyo"].includes(char) ?
+				<PointBadge key={i} icon={<use href={`#${char}-icon`}/>}/>
+				: <RegardBadge key={i} char={char} img={`./res/chars/${char}.webp`}/>
 		}
 		else if (token.startsWith('%flg')) {
 			let flag = token.substring(4)
@@ -150,7 +84,10 @@ const SceneBadges = ({badges}: {badges: BadgeEntry})=> {
 		{(flags || (char && value != null)) &&
 			<div className="badges">
 				{flags?.map(f=><FlagBadge key={f} flag={f} persists={flagPersists(f)} />)}
-				{char && value != null && <RegardValueBadge char={char} value={value} persists={pointPersists(char)} />}
+				{char && value != null && (["kagi", "kaibyo"].includes(char) ?
+					<PointBadge icon={<use href={`#${char}-icon`}/>} persists={pointPersists(char)} plus={true}/>
+				: <RegardBadge char={char} img={`./res/chars/${char}.webp`} value={value} persists={pointPersists(char)} />
+				)}
 			</div>
 		}
 	</>

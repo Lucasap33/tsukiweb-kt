@@ -272,9 +272,9 @@
   },
   "scene-points": {
     "reset": [
-      "flg_kissa", "flg_kashiisyo", "flg_eigakan", "flg_onemu", "flg_syashin",
-      "flg_bunka", "flg_aki", "ark_p", "cel_point", "akira_point",
-      "answer", "answer_point"
+      "kissa", "kashiisyo", "eigakan", "onemu", "syashin",
+      "bunka", "aki", "ark", "cel", "akira",
+      "answer"
     ],
     "flags": {
       "1": ["s179", "s301"],

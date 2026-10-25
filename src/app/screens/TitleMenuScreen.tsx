@@ -9,7 +9,7 @@ import { TitleMenuButton } from '@tsukiweb/common/ui-core'
 import { dialog } from '@tsukiweb/common/ui-core/components/ModalPrompt'
 import classNames from "classnames"
 import { audio } from "engine/audio"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { continueGame, newGame, savesManager } from "engine/savestates";
 import { importGameData, settings } from "engine/settings";
 import AppInfo from "features/title-menu/components/AppInfo";
@@ -18,6 +18,8 @@ import { useStrings } from "translation/lang";
 import { SCREEN } from "app/utils/display";
 import { useScreenAutoNavigate } from "app/hooks";
 import { FULLSAVE_EXT, SAVE_EXT } from "app/utils/constants";
+import ModalProgressSelection from "features/title-menu/components/ProgressModal";
+import { GameProgress } from "app/utils/types";
 
 
 const TitleMenuScreen = () => {
@@ -53,6 +55,7 @@ const TitleMenu = () => {
 	const strings = useStrings()
 	const [, navigate] = useLocation()
 	const canResume = useRef(savesManager.savesCount > 0 || history.pagesLength > 0)
+	const [newGameSelectShow, setNewGameSelectShow] = useState<boolean>(false)
 
 	const openLoad = async () => {
 		if (savesManager.savesCount === 0) {
@@ -70,9 +73,14 @@ const TitleMenu = () => {
 	return (
 		<nav className="menu">
 			<div className='menu-buttons'>
-				<TitleMenuButton audio={audio} onClick={newGame} nav-auto={1}>
+				<TitleMenuButton audio={audio} onClick={()=>setNewGameSelectShow(true)} nav-auto={1}>
 					{strings.title.start}
 				</TitleMenuButton>
+				<ModalProgressSelection show={newGameSelectShow} onSelect={(p: GameProgress|undefined)=> {
+					setNewGameSelectShow(false)
+					if (p)
+						newGame(p)
+				}}/>
 
 				{canResume.current &&
 				<TitleMenuButton audio={audio} onClick={continueGame} nav-auto={1}>

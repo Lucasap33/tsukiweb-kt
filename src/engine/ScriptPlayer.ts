@@ -83,7 +83,8 @@ function processRngSel(arg: string) {
 //#endregion
 //##############################################################################
 
-export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {nextflow: string}, History> {
+export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
+                            {nextflow: string, deathCount: number}, History> {
 
 //#endregion ###################################################################
 //#region                         ATTRS & PROPS
@@ -93,6 +94,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {next
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     private _tempVariables = new Map<string, string|number>()
+    private _deathCount = 0
 //_______________________public attributes & properties_________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     
@@ -116,6 +118,9 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {next
         })
         if (initContext.nextflow)
             this._tempVariables.set('$nextflow', initContext.nextflow)
+        if (initContext.deathCount)
+            this._deathCount = initContext.deathCount
+
     }
 
 //#endregion ###################################################################
@@ -151,7 +156,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {next
     
     override blockContent() {
         const nextflow = (this._tempVariables.get('$nextflow') ?? '') as string
-        return { nextflow }
+        return { nextflow, deathCount: this._deathCount }
     }
 
     override hasFlag(flag: string) {
@@ -161,30 +166,14 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {}, {next
             return SCENE_ATTRS["scene-points"].flags[flag].some(s=>this.viewedScene(s))
         return false
     }
-    override setFlag(flag: string) {
-        if (flag.length > 1)
-            super.setFlag(flag)
-        // permanent flags are calculated with viewed scenes
-    }
-    override getPoints(id: PointId) {
-        if (SCENE_ATTRS["scene-points"].reset.includes(id))
-            return super.getPoints(id)
-        else
-            return Object.entries(SCENE_ATTRS["scene-points"].points[id])
-                .reduce((sum, [s, p])=> this.viewedScene(s as SceneName) ? sum + p : sum, 0)
-    }
-    override setPoints(id: PointId, value: number) {
-        if (SCENE_ATTRS["scene-points"].reset.includes(id))
-            super.setPoints(id, value)
-        // permanent points are calculated with viewed scenes
-    }
 
     //static override defaultPageContext() { return ScriptPlayerBase.defaultPageContext() }
     
     static override defaultBlockContext() {
         return  {
             ...ScriptPlayerBase.defaultBlockContext(),
-            nextflow: ''
+            nextflow: '',
+            deathCount: 0,
         }
     }
 

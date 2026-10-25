@@ -1,25 +1,13 @@
 import { ScriptPlayer } from "engine/ScriptPlayer"
-import { strings } from "translation/lang"
-import { PointId } from "app/utils/types";
-import { badgeViewBox, FLAG_CONTENT } from "features/flowchart/components/badges";
+import { PointId } from "app/utils/types"
+import { BADGES_DEFINES } from "features/flowchart/components/badges"
+import { FlagBadge, RegardBadge} from "@tsukiweb/common/icons/badges"
 
-
-const RegardRow = ({ char, value, max }: {char: PointId, value: number, max: number}) => {
-	const iconParams = {
-		className:"heart-icon",
-		fill: `url(#${char}_grad)`
-	}
-	const n = (max == 0) ? value : Math.min(value, max)
+const PointsRow = ({ char, value }: {char: PointId, value: number}) => {
 	return (
 		<div className="row">
-			<img className="char" src={`./res/chars/${char}.webp`}
-				alt={strings.characters[char as keyof typeof strings.characters] ?? char} />
-			<svg className="hearts-list" viewBox="-3.3 -3.3 13.5 6.3">
-				<use href="#regard_icon" {...iconParams} className="badge"/>
-				<text x="3" y="2" fontSize={4} fill="#fff">
-					&times;{n}
-				</text>
-			</svg>
+			<RegardBadge char={char} img={`./res/chars/${char}.webp`}/>
+			&times;{value}
 		</div>
 	)
 }
@@ -27,27 +15,18 @@ const RegardRow = ({ char, value, max }: {char: PointId, value: number, max: num
 const FlagsList = ({ flags }: { flags: string[] }) => {
 	return (
 		<div className="flags-list">
-			{flags.map(flag =>
-				<svg key={flag} className="badge" viewBox={badgeViewBox()}>
-					<use href="#flag-icon"/>
-					<g transform={`translate(${FLAG_CONTENT.x},${FLAG_CONTENT.y}) scale(${FLAG_CONTENT.scale})`}>
-						<text y="1.6" stroke="none" fill="white" textAnchor="middle">
-							{flag}
-						</text>
-					</g>
-				</svg>
-			)}
+			{flags.map(flag => <FlagBadge flag={flag}/>)}
 		</div>
 	)
 }
 
 type Props = {
-	script: ScriptPlayer,
+	script: ScriptPlayer
 	flags?: never
 	points?: never
 } | {
-	script?: never,
-	flags: Set<string>|Array<string>,
+	script?: never
+	flags: Set<string>|Array<string>
 	points: Partial<Record<PointId, number>>
 }
 export const ProgressPanel = ({script, flags, points}: Props) => {
@@ -59,6 +38,11 @@ export const ProgressPanel = ({script, flags, points}: Props) => {
 
 	return (
 		<div className="progress-panel">
+			<svg width="20" height="20" className="defs">{BADGES_DEFINES}</svg>
+
+			{Object.entries(points ?? {}).map(([id, n])=>
+				<PointsRow key={id} char={id as PointId} value={n}/>
+			)}
 			<FlagsList flags={Array.from(flags!)}/>
 		</div>
 	)

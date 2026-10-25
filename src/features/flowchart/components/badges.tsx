@@ -218,10 +218,10 @@ export const BADGES_DEFINES = <defs>
   <path id="kaibyo-icon" d={BADGE_PATHS.icons.kaibyo}
       fill="white" stroke="none"/>
   <g id="flag-icon">
-    <path d={BADGE_PATHS.flagPole} fill="none" stroke="white" strokeLinecap="round"/>
+    <path d={BADGE_PATHS.flagPole} fill="none"/>
     <path d={BADGE_PATHS.flag} fill={FLAG_BACKGROUND}/>
   </g>
-  <path id="strike-icon" d={BADGE_PATHS.strike} stroke={STRIKE_COLOR} strokeWidth="1" strokeLinecap="round"/>
+  <path id="strike-icon" d={BADGE_PATHS.strike} stroke={STRIKE_COLOR} strokeWidth="1"/>
   <g id="flag-neg-icon">
     <use href="#flag-icon"/>
     <use href="#strike-icon"/>
@@ -236,6 +236,7 @@ export const BADGES_DEFINES = <defs>
   <filter id="link-shadow" filterUnits="userSpaceOnUse" x="-1" y="-1.5" width="2" height="3.5"
       colorInterpolationFilters="sRGB">
     <feDropShadow dx="-.1" dy=".15" stdDeviation=".05" floodColor="black"/>
+    <feDropShadow dx="+.1" dy=".15" stdDeviation=".05" floodColor="black"/>
   </filter>
   <path id="link-icon" d="M0-.4v.8zm.4.5v.5c0 .22-.18.4-.4.4-.22 0-.4-.18-.4-.4
     v-.5m.8-.2v-.5c0-.22-.18-.4-.4-.4-.22 0-.4.18-.4.4v.5"

@@ -4,7 +4,8 @@ import { textFileUserDownload, requestJSONs, twoDigits } from "@tsukiweb/common/
 import { savesManager, SaveState } from "./savestates"
 import { toast } from "react-toastify"
 import { strings, TrackSourceId } from "translation/lang"
-import { APP_VERSION, FULLSAVE_EXT } from "app/utils/constants";
+import { APP_VERSION, FULLSAVE_EXT } from "app/utils/constants"
+import { GameProgress } from "app/utils/types"
 
 const restoreSymbol = Symbol("restore")
 
@@ -17,6 +18,7 @@ class Settings extends SettingsBase {
   
   eventImages: Array<string> = new Array()
   quiz: Array<number> = []
+  progresses: Array<GameProgress> = []
 
   override getDiff() {
     const diff = super.getDiff()

@@ -7,7 +7,7 @@ import { Graphics } from "@tsukiweb/common/graphics";
 import { settings, viewedScene } from './settings';
 import { APP_VERSION, SAVE_EXT } from 'app/utils/constants';
 import { SCREEN, displayMode } from 'app/utils/display';
-import { LabelName } from 'app/utils/types';
+import { GameProgress, LabelName } from 'app/utils/types';
 
 //##############################################################################
 //#region                       TYPES & CONSTANTS
@@ -79,8 +79,12 @@ export const savesManager = new SavesManager("savestates")
 //#region                          SAVE & LOAD
 //##############################################################################
 
-export function newGame() {
-  history.loadSaveState({scenes: [{label: 's520'}], pages: []})
+export function newGame(base: GameProgress) {
+  history.loadSaveState({scenes: [{
+    label: 's520',
+    flags: Array.from(base.flags),
+    points: structuredClone(base.points)
+  }], pages: []})
   displayMode.screen = SCREEN.WINDOW
 }
 
