@@ -10,6 +10,7 @@ import { ProgressPanel } from "features/game/components/shared/ProgressPanel";
 type Props = {
 	show: boolean
     onSelect: (progress: GameProgress|undefined)=>void
+	progress?: GameProgress
 }
 
 const ProgressDisplay = ({progress}: {progress: GameProgress})=> {
@@ -25,12 +26,15 @@ const ProgressDisplay = ({progress}: {progress: GameProgress})=> {
 
     </div>
 }
-const ModalProgressSelection = ({show, onSelect}: Props) => {
+const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 	const strings = useStrings()
     const [selected, setSelected] = useState<GameProgress|undefined>(undefined)
 
     const progresses = settings.progresses
     const empty: GameProgress = { flags: [], points: {}, count: 0, lastSave: 0 }
+
+	//TODO display diff on loop count, points and flags (using negative flags)
+	// when selecting a progress in the list if a progress is provided
 
 	return (
 		<Modal

@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useRef, useMemo, useSyncExternalStore } from 'react';
+import { Fragment, useCallback, useRef, useMemo, useSyncExternalStore, useState } from 'react';
 import * as m from "motion/react-m"
 import '@features/game/styles/game.scss';
 import { HiMenu } from 'react-icons/hi';
@@ -22,22 +22,48 @@ import TextLayer from 'features/game/components/layers/TextLayer';
 import { SCREEN, displayMode } from 'app/utils/display';
 import { useScreenAutoNavigate } from 'app/hooks';
 import { InGameLayersHandler } from "@tsukiweb/common/utils/InGameLayersHandler";
+import ModalProgressSelection from 'features/title-menu/components/ProgressModal';
+import { GameProgress } from 'app/utils/types';
+import { SCENE_ATTRS } from 'app/utils/constants';
+import { kMaxLength } from 'buffer';
 
 
 const Window = () => {
 	useScreenAutoNavigate(SCREEN.WINDOW)
 	useDefaultNavBack(()=>actionsHandler.back())
+	const [showProgressModal, setShowProgressModal] = useState(false)
 	const rootRef = useRef(null)
 
 	const [script, remountScript] = useResettable(()=> {
 		const s = new ScriptPlayer(history)
 		s.addEventListener('finish', (complete) => {
-			if (complete) displayMode.screen = SCREEN.TITLE
+			if (complete) {
+				//TODO prompt to ask where to save progress
+				setShowProgressModal(true)
+			}
 		})
 		if (s.graphics.bgAlign)
 			displayMode.bgAlignment = s.graphics.bgAlign
 		return s
 	})
+	const onProgessSelect = useCallback((obj: GameProgress|undefined)=> {
+		if (!obj) {
+			//TODO ask confirmation from user to discard progress
+		} else {
+			const i = settings.progresses.indexOf(obj)
+			const filter = (k:string)=>!(SCENE_ATTRS['scene-points'].reset.includes(k))
+			const progress: GameProgress = {
+				flags: Array.from(script.flags).filter(filter),
+				points: Object.fromEntries(script.points.entries().filter(([k,v])=> filter(k))),
+				lastSave: Date.now(),
+				count: script.deathCount+1
+			}
+			settings.progresses[i] = progress
+		}
+		setShowProgressModal(false)
+		displayMode.screen = SCREEN.TITLE
+
+	}, [])
 
 	const [layers] = useResettable(()=> new InGameLayersHandler({
 		backgroundMenu: 'remove'
@@ -135,6 +161,7 @@ const Window = () => {
 				qLoad={actionsHandler.quickLoad.bind(actionsHandler)}
 				qSave={actionsHandler.quickSave.bind(actionsHandler)}
 			/>
+			<ModalProgressSelection show={showProgressModal} onSelect={onProgessSelect}/>
 		</m.div>
 	)
 }

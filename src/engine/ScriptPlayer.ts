@@ -24,12 +24,6 @@ export type Points = Record<PointId, number>
  */
 const commands: CommandRecord<ScriptPlayer> = {
     'click'  : processClick,
-    'osiete' : (label)=> {
-        // TODO : dialog box to ask user if the scene is not already seen.
-        // if yes, `goto label`, if not, 
-        // `goto *endofplay`
-        return [{cmd:'goto', arg: label}]
-    },
     'eroskip': processEroSkip,
     'gosub': processGoSub,
     'rngsel': processRngSel,
@@ -134,6 +128,10 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
 //#endregion ###################################################################
 //#region                        PUBLIC METHODS
 //##############################################################################
+
+    get deathCount() {
+        return this._deathCount
+    }
 
     override isLinePageBreak(line: string, index: number, sceneLines: string[],
                     label: LabelName): boolean {
