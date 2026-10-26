@@ -1,14 +1,13 @@
 import { DY } from "@tsukiweb/common/flowchart/constants"
 import { PointId } from "app/utils/types";
 import { SVGProps } from "react";
+import {BADGE_PATHS as BADGE_PATHS_BASE} from "@tsukiweb/common/icons/badges"
 
-const HEART_PATH = `m0,2.5l-2.5,-2.5a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2`
 const C = DY*0.8 // unit used for condition badge
 const BADGE_HALF = DY
 export const FLAG_BACKGROUND = "var(--flag-background)"
 export const STRIKE_COLOR = "#ff3b3b"
 export const FLAG_CONTENT = { x: 0.15, y: -0.55, scale: 0.95 }
-const FLAG_CONTENT_TRANSFORM = `translate(${FLAG_CONTENT.x},${FLAG_CONTENT.y}) scale(${FLAG_CONTENT.scale})`
 export const BADGE_SIZE = 7
 export const badgeViewBox = (left = -BADGE_SIZE/2, width = BADGE_SIZE) =>
   `${left} ${-BADGE_SIZE/2} ${width} ${BADGE_SIZE}`
@@ -16,21 +15,7 @@ export const QUIZ_ICON = { x: -1, scale: 0.75 }
 export const QUIZ_NUMBER_X = 1.4
 export const POINT_BACKGROUND = "#202020"
 
-export const BADGE_PATHS = {
-  heart: `${HEART_PATH}z`,
-  regard: (n: number) => n > 0
-    ? `${HEART_PATH}
-        ${"m-5,-2.2a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2".repeat(n-1)}`
-    : `${HEART_PATH}
-        m-2.5,0.5l0.6,-0.5l-1.3,-1l0.7,-1.2
-        ${`m-2.5,0a1.66,1.66,0,1,1,2.5,-2.2a1.66,1.66,0,1,1,2.5,2.2
-        m-2.29,-0.3l-0.91,-0.7l0.7,-1.2`.repeat(-n-1)}`,
-  pointPlus: "m1.75,0.75l0,1.75m-0.875,-0.875l1.75,0",
-  pointMinus: "m1.75,0.85m-0.875,0.5l1.75,0",
-  pointArc: "M0 3a3 3 0 113-3",
-  flag: "M-2.9,-2.9 Q0.15,-3.5 3.2,-2.9 V2.4 Q0.15,1.8 -2.9,2.4Z",
-  flagPole: "M-3.2,-3.2 V3.2",
-  strike: "M-3.2,-3.2 L3.2,3.2",
+export const BADGE_PATHS = {...BADGE_PATHS_BASE,
   select: "M-4.6,0 -2,-2.5 2,-2.5 4.6,0 2,2.5 -2,2.5Z",
   cond: `M0,${C*1.5} ${-BADGE_HALF},${C} ${-BADGE_HALF},${-C} ${BADGE_HALF},${-C} ${BADGE_HALF},${C}Z`,
   icons: {
@@ -93,53 +78,6 @@ function characterGradient(char: PointId) {
   </linearGradient>
 }
 
-export function createFlagBadge(id: string, negative=false, props?: SVGProps<SVGGElement>) {
-  return <g className="badge" {...props}>
-			<use href={negative ? "#flag-neg-icon" : "#flag-icon"}/>
-			<g transform={FLAG_CONTENT_TRANSFORM}>
-				{id.length > 1 ? <use href={`#${id}-icon`}/>
-				:
-					<text y="1.6" stroke={FLAG_BACKGROUND} strokeWidth=".7" paintOrder="stroke"
-						textAnchor="middle" fill="white">
-						{id}
-					</text>
-				}
-			</g>
-		</g>
-}
-export function createQuizBadge(n: number, negative=false, props?: SVGProps<SVGGElement>) {
-  return <g className="badge" {...props}>
-    <use href="#flag-icon"/>
-    <g transform={FLAG_CONTENT_TRANSFORM}>
-      {n > 0 ? <>
-        <use href="#quiz-icon" transform={`translate(${QUIZ_ICON.x},0) scale(${QUIZ_ICON.scale})`}/>
-        <text x={QUIZ_NUMBER_X} y="1.6" stroke="none" fill="white" textAnchor="middle">
-          {n}
-        </text>
-      </>
-      :
-        <use href="#quiz-icon"/>
-      }
-    </g>
-    {negative && <use href="#strike-icon"/>}
-  </g>
-}
-export function createPointBadge(id: PointId, plus:boolean, props?: SVGProps<SVGGElement>) {
-  const circle_props = {cx: 0, cy: 0, r:3, fill: POINT_BACKGROUND}
-  if (!plus) {
-    return <g className="badge" {...props}>
-      <circle {...circle_props}/>
-      <use href={`#${id}-icon`}/>
-    </g>
-  } else {
-    return <g className="badge" {...props}>
-      <circle {...circle_props} stroke="none"/>
-      <path d={BADGE_PATHS.pointArc} fill="none"/>
-      <use href={`#${id}-icon`}/>
-      <use href="#point_+" transform="translate(0.3,0.4)"/>
-    </g>
-  }
-}
 export function flagPersists(flag: string) {
   if (flag.length == 1) return true
   if (flag.startsWith('quiz')) return true
@@ -159,21 +97,6 @@ export const BADGES_DEFINES = <defs>
   {characterGradient('ren')}
   {characterGradient('akira')}
   {characterGradient('nana')}
-  <path id="point_+" d={BADGE_PATHS.pointPlus} stroke="var(--regard-plus-color, #00ff00)" fill="none"/>
-  <path id="point_-" d={BADGE_PATHS.pointMinus} stroke="var(--regard-minus-color, #ff0000)" fill="none"/>
-  <path id="regard_icon" d={BADGE_PATHS.heart}/>
-  {[1, 2, 3].map(n=>
-    <g key={`regard_${n}`} id={`regard_${n}`}>
-      <path d={BADGE_PATHS.regard(n)}/>
-      <use href="#point_+"/>
-    </g>
-  )}
-  {[-4, -1].map(n=>
-    <g key={`regard_${n}`} id={`regard_${n}`}>
-      <path d={BADGE_PATHS.regard(n)}/>
-      <use href="#point_-"/>
-    </g>
-  )}
 
   {// costume icon (hanger)
   }
@@ -213,32 +136,16 @@ export const BADGES_DEFINES = <defs>
   }
   <path id="quiz-icon" d={BADGE_PATHS.icons.quiz}
       fill="white" stroke="none"/>
+  {[1,2,3].map(n=>
+  <g id={`quiz${n}-icon`}>
+    <use href="#quiz-icon" transform={`translate(${QUIZ_ICON.x},0) scale(${QUIZ_ICON.scale})`}/>
+    <text x={QUIZ_NUMBER_X} y="1.6" stroke="none" fill="white" fontSize={4}
+          textAnchor="middle">
+      {n}
+    </text>
+  </g>)}
   {//cat head icon
   }
   <path id="kaibyo-icon" d={BADGE_PATHS.icons.kaibyo}
       fill="white" stroke="none"/>
-  <g id="flag-icon">
-    <path d={BADGE_PATHS.flagPole} fill="none"/>
-    <path d={BADGE_PATHS.flag} fill={FLAG_BACKGROUND}/>
-  </g>
-  <path id="strike-icon" d={BADGE_PATHS.strike} stroke={STRIKE_COLOR} strokeWidth="1"/>
-  <g id="flag-neg-icon">
-    <use href="#flag-icon"/>
-    <use href="#strike-icon"/>
-  </g>
-  <g id="sel-icon">
-    <path d={BADGE_PATHS.select} fill="var(--badge-background)"/>
-    <text y="1.6" stroke="none" fill="white" textAnchor="middle">
-    ?
-    </text>
-  </g>
-  <path id="cond-icon" d={BADGE_PATHS.cond}/>
-  <filter id="link-shadow" filterUnits="userSpaceOnUse" x="-1" y="-1.5" width="2" height="3.5"
-      colorInterpolationFilters="sRGB">
-    <feDropShadow dx="-.1" dy=".15" stdDeviation=".05" floodColor="black"/>
-    <feDropShadow dx="+.1" dy=".15" stdDeviation=".05" floodColor="black"/>
-  </filter>
-  <path id="link-icon" d="M0-.4v.8zm.4.5v.5c0 .22-.18.4-.4.4-.22 0-.4-.18-.4-.4
-    v-.5m.8-.2v-.5c0-.22-.18-.4-.4-.4-.22 0-.4.18-.4.4v.5"
-    stroke="white" fill="none" strokeWidth=".3" strokeLinecap="butt"/>
 </defs>

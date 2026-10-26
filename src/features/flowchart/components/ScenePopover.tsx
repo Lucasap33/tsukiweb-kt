@@ -6,7 +6,7 @@ import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
-import { badgeViewBox, createFlagBadge, createQuizBadge, flagPersists, pointPersists } from "./badges";
+import { flagPersists, pointPersists } from "./badges";
 import { PointBadge, FlagBadge, RegardBadge } from "@tsukiweb/common/icons/badges";
 
 
