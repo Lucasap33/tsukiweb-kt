@@ -1,12 +1,13 @@
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { PointId } from "app/utils/types"
 import { BADGES_DEFINES } from "features/flowchart/components/badges"
-import { FlagBadge, RegardBadge} from "@tsukiweb/common/icons/badges"
+import { FlagBadge, PointBadge, RegardBadge} from "@tsukiweb/common/icons/badges"
 
 const PointsRow = ({ char, value }: {char: PointId, value: number}) => {
 	return (
 		<div className="row">
-			<RegardBadge char={char} img={`./res/chars/${char}.webp`}/>
+			{["kaibyo", "kagi"].includes(char) ? <PointBadge icon={char}/>
+			: <RegardBadge char={char} img={`./res/chars/${char}.webp`}/>}
 			&times;{value}
 		</div>
 	)

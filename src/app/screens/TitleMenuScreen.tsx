@@ -18,8 +18,8 @@ import { useStrings } from "translation/lang";
 import { SCREEN } from "app/utils/display";
 import { useScreenAutoNavigate } from "app/hooks";
 import { FULLSAVE_EXT, SAVE_EXT } from "app/utils/constants";
-import ModalProgressSelection from "features/title-menu/components/ProgressModal";
 import { GameProgress } from "app/utils/types";
+import ModalProgressSelection from "features/save/components/ProgressModal";
 
 
 const TitleMenuScreen = () => {

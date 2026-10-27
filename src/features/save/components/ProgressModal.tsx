@@ -1,4 +1,5 @@
-import { Dispatch, useState } from "react"
+import "../styles/progress.scss"
+import { useState } from "react"
 import { useStrings } from "translation/lang"
 import { settings } from "engine/settings"
 import { Button, Modal } from "@tsukiweb/common/ui-core"

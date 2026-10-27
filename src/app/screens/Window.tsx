@@ -22,10 +22,9 @@ import TextLayer from 'features/game/components/layers/TextLayer';
 import { SCREEN, displayMode } from 'app/utils/display';
 import { useScreenAutoNavigate } from 'app/hooks';
 import { InGameLayersHandler } from "@tsukiweb/common/utils/InGameLayersHandler";
-import ModalProgressSelection from 'features/title-menu/components/ProgressModal';
+import ModalProgressSelection from 'features/save/components/ProgressModal';
 import { GameProgress } from 'app/utils/types';
 import { SCENE_ATTRS } from 'app/utils/constants';
-import { kMaxLength } from 'buffer';
 
 
 const Window = () => {
