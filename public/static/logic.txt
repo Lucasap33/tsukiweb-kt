@@ -104,7 +104,6 @@ goto *f21
 *f13
 goto *s13
 *s13_end
-mov %yume05,1
 goto *f21
 *f14
 if (%flg6>=1) goto *f302
@@ -254,7 +253,6 @@ goto *f53
 *f48
 goto *s48
 *s48_end
-inc %yume01
 goto *f53
 *f49
 goto *s49
@@ -432,7 +430,6 @@ goto *endofplay
 *f258
 goto *s258
 *s258_end
-inc %yume07
 goto *endofplay
 *f259
 goto *s259
@@ -703,7 +700,6 @@ goto *f138
 *f116
 goto *s116
 *s116_end
-inc %yume06
 goto *f138
 *f117
 if (%ark_point>=1) goto *f130
@@ -783,7 +779,6 @@ goto *f141
 *f133
 goto *s133
 *s133_end
-inc %yume06
 goto *f138
 *f135
 goto *s135
@@ -889,7 +884,6 @@ goto *f222
 *f199
 goto *s199
 *s199_end
-inc %yume08
 goto *f222
 *f200
 goto *s200
@@ -933,7 +927,6 @@ goto *f222
 *f211
 goto *s211
 *s211_end
-inc %yume09
 goto *f222
 *f212
 goto *s212
@@ -965,12 +958,10 @@ goto *f220
 *f220
 goto *s220
 *s220_end
-inc %yume10
 goto *f53
 *f221
 goto *s221
 *s221_end
-inc %yume10
 inc %flgH
 goto *f53
 *f222
@@ -996,7 +987,6 @@ select *f159,*f517
 *f159
 goto *s159
 *s159_end
-inc %yume03
 inc %flgG
 goto *endofplay
 *f517
@@ -1066,7 +1056,6 @@ goto *f180
 *f172
 goto *s172
 *s172_end
-inc %yume04
 goto *f180
 *f173
 goto *s173
@@ -1177,5 +1166,4 @@ goto *f523
 *f523
 goto *s523
 *s523_end
-inc %yume07
 goto *endofplay
