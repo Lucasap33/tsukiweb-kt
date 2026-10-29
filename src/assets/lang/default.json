@@ -133,7 +133,8 @@
     "overwrite-warning": "Confirm overwrite?",
     "quick-save": "Quick Save",
     "local-storage-warning": "Saves and settings stored in browser, deleted by browser after inactivity. Regularly export.",
-    "local-storage-last-export": "Last full export: %0"
+    "local-storage-last-export": "Last full export: %0",
+    "progress-discard": "Discard progress ?"
   },
   "game": {
     "skip-viewed": "You have already seen this scene.",

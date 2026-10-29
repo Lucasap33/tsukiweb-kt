@@ -83,7 +83,8 @@ export function newGame(base: GameProgress) {
   history.loadSaveState({scenes: [{
     label: 's520',
     flags: Array.from(base.flags),
-    points: structuredClone(base.points)
+    points: structuredClone(base.points),
+    deathCount: base.count,
   }], pages: []})
   displayMode.screen = SCREEN.WINDOW
 }

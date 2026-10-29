@@ -25,6 +25,8 @@ import { InGameLayersHandler } from "@tsukiweb/common/utils/InGameLayersHandler"
 import ModalProgressSelection from 'features/save/components/ProgressModal';
 import { GameProgress } from 'app/utils/types';
 import { SCENE_ATTRS } from 'app/utils/constants';
+import { dialog } from '@tsukiweb/common/ui-core/components/ModalPrompt';
+import { strings } from 'translation/lang';
 
 
 const Window = () => {
@@ -45,9 +47,17 @@ const Window = () => {
 			displayMode.bgAlignment = s.graphics.bgAlign
 		return s
 	})
-	const onProgessSelect = useCallback((obj: GameProgress|undefined)=> {
+	const onProgessSelect = useCallback(async (obj: GameProgress|undefined)=> {
 		if (!obj) {
-			//TODO ask confirmation from user to discard progress
+			const confirmed = await dialog.confirm({
+				text: <>
+					{strings.saves['progress-discard']}
+				</>,
+				labelYes: strings.yes,
+				labelNo: strings.no,
+			})
+			if (!confirmed)
+				return
 		} else {
 			const i = settings.progresses.indexOf(obj)
 			const filter = (k:string)=>!(SCENE_ATTRS['scene-points'].reset.includes(k))
