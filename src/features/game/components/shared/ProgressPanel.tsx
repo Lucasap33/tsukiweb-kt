@@ -1,13 +1,11 @@
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { PointId } from "app/utils/types"
-import { BADGES_DEFINES } from "features/flowchart/components/badges"
-import { FlagBadge, PointBadge, RegardBadge} from "@tsukiweb/common/icons/badges"
+import { KtFlagBadge, KtPointBadge } from "assets/icons/badges"
 
 const PointsRow = ({ char, value }: {char: PointId, value: number}) => {
 	return (
 		<div className="row">
-			{["kaibyo", "kagi"].includes(char) ? <PointBadge icon={char}/>
-			: <RegardBadge char={char} img={`./res/chars/${char}.webp`}/>}
+			<KtPointBadge name={char}/>
 			&times;{value}
 		</div>
 	)
@@ -16,7 +14,7 @@ const PointsRow = ({ char, value }: {char: PointId, value: number}) => {
 const FlagsList = ({ flags }: { flags: string[] }) => {
 	return (
 		<div className="flags-list">
-			{flags.map(flag => <FlagBadge flag={flag}/>)}
+			{flags.map(flag => <KtFlagBadge flag={flag}/>)}
 		</div>
 	)
 }
@@ -39,7 +37,6 @@ export const ProgressPanel = ({script, flags, points}: Props) => {
 
 	return (
 		<div className="progress-panel">
-			<svg width="20" height="20" className="defs">{BADGES_DEFINES}</svg>
 
 			{Object.entries(points ?? {}).map(([id, n])=>
 				<PointsRow key={id} char={id as PointId} value={n}/>

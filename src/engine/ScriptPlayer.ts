@@ -145,7 +145,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
 
     override pageContent() {
         return {
-            points: {
+            points: {//...Object.fromEntries(this.points.entries()),
                 // answer_point is the only variable that varies inside a scene
                 answer: this.getPoints('answer')
             }

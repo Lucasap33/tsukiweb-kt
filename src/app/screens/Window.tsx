@@ -32,7 +32,7 @@ import { strings } from 'translation/lang';
 const Window = () => {
 	useScreenAutoNavigate(SCREEN.WINDOW)
 	useDefaultNavBack(()=>actionsHandler.back())
-	const [showProgressModal, setShowProgressModal] = useState(false)
+	const [savedProgress, setSavedProgress] = useState<GameProgress|undefined>()
 	const rootRef = useRef(null)
 
 	const [script, remountScript] = useResettable(()=> {
@@ -40,7 +40,14 @@ const Window = () => {
 		s.addEventListener('finish', (complete) => {
 			if (complete) {
 				//TODO prompt to ask where to save progress
-				setShowProgressModal(true)
+				const filter = (k:string)=>!(SCENE_ATTRS['scene-points'].reset.includes(k))
+				const progress: GameProgress = {
+					flags: Array.from(script.flags).filter(filter),
+					points: Object.fromEntries(script.points.entries().filter(([k,v])=> filter(k))),
+					lastSave: Date.now(),
+					count: script.deathCount+1
+				}
+				setSavedProgress(progress)
 			}
 		})
 		if (s.graphics.bgAlign)
@@ -58,18 +65,11 @@ const Window = () => {
 			})
 			if (!confirmed)
 				return
-		} else {
+		} else if (savedProgress) {
 			const i = settings.progresses.indexOf(obj)
-			const filter = (k:string)=>!(SCENE_ATTRS['scene-points'].reset.includes(k))
-			const progress: GameProgress = {
-				flags: Array.from(script.flags).filter(filter),
-				points: Object.fromEntries(script.points.entries().filter(([k,v])=> filter(k))),
-				lastSave: Date.now(),
-				count: script.deathCount+1
-			}
-			settings.progresses[i] = progress
+			settings.progresses[i] = savedProgress!
 		}
-		setShowProgressModal(false)
+		setSavedProgress(undefined)
 		displayMode.screen = SCREEN.TITLE
 
 	}, [])
@@ -170,7 +170,7 @@ const Window = () => {
 				qLoad={actionsHandler.quickLoad.bind(actionsHandler)}
 				qSave={actionsHandler.quickSave.bind(actionsHandler)}
 			/>
-			<ModalProgressSelection show={showProgressModal} onSelect={onProgessSelect}/>
+			<ModalProgressSelection show={savedProgress != undefined} onSelect={onProgessSelect} progress={savedProgress}/>
 		</m.div>
 	)
 }

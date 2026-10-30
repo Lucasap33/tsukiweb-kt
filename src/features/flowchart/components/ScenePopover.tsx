@@ -1,13 +1,13 @@
 import { GraphicsGroup } from "@tsukiweb/common/graphics"
 import { noBb, Bbcode } from "@tsukiweb/common/utils/Bbcode"
-import { SceneName } from "app/utils/types"
+import { PointId, SceneName } from "app/utils/types"
 import { FcNode } from "features/flowchart/utils/flowchart"
 import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
 import { flagPersists, pointPersists } from "./badges";
-import { PointBadge, FlagBadge, RegardBadge } from "@tsukiweb/common/icons/badges";
+import { KtFlagBadge, KtPointBadge } from "assets/icons/badges";
 
 
 const TokenDisplay = ({ token }: { token: string }) => {
@@ -30,20 +30,18 @@ const SceneCondition = ({condition}: {condition: string})=> {
 			return <TokenDisplay key={i} token={token} /> // operator or number
 		if (token.endsWith('_point')) {
 			const char = token.split('_')[0].substring(1) // between '%' and '_'
-			return ["kagi", "kaibyo"].includes(char) ?
-				<PointBadge key={i} icon={<use href={`#${char}-icon`}/>}/>
-				: <RegardBadge key={i} char={char} img={`./res/chars/${char}.webp`}/>
+			return <KtPointBadge key={i} name={char as PointId}/>
 		}
 		else if (token.startsWith('%flg')) {
 			let flag = token.substring(4)
 			if (flag.startsWith('_'))
 				flag = flag.substring(1)
 			const negative = (i > 0 && (tokens[i-1] == '!'))
-			return <FlagBadge key={i} flag={flag} negative={negative} />
+			return <KtFlagBadge key={i} flag={flag} negative={negative} />
 		}
 		else if (token.startsWith('%quiz')) {
 			const negative = (i > 0 && (tokens[i-1] == '!'))
-			return <FlagBadge key={i} flag={token.substring(1)} negative={negative}/>
+			return <KtFlagBadge key={i} flag={token.substring(1)} negative={negative}/>
 		}
 	})
 }
@@ -83,11 +81,10 @@ const SceneBadges = ({badges}: {badges: BadgeEntry})=> {
 
 		{(flags || (char && value != null)) &&
 			<div className="badges">
-				{flags?.map(f=><FlagBadge key={f} flag={f} persists={flagPersists(f)} />)}
-				{char && value != null && (["kagi", "kaibyo"].includes(char) ?
-					<PointBadge icon={<use href={`#${char}-icon`}/>} persists={pointPersists(char)} plus={true}/>
-				: <RegardBadge char={char} img={`./res/chars/${char}.webp`} value={value} persists={pointPersists(char)} />
-				)}
+				{flags?.map(f=><KtFlagBadge key={f} flag={f} persists={flagPersists(f)} />)}
+				{char && value != null &&
+					<KtPointBadge name={char} value={1} persists={pointPersists(char)}/>
+				}
 			</div>
 		}
 	</>
