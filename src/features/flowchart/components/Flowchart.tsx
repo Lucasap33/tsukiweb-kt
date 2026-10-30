@@ -4,7 +4,6 @@ import { LabelName, SceneName } from "app/utils/types"
 import { History } from "engine/history"
 import { computeLinks, DY, FcCanvasItem, FcNodeState, FlowchartCanvas, flowchartBounds } from "@tsukiweb/common/flowchart"
 import ScenePopover from "./ScenePopover"
-import { BADGES_DEFINES } from "./badges"
 import { createBadgesDrawer } from "../utils/badgesCanvas"
 import { settings } from "engine/settings"
 import { getSceneGraph } from "engine/utils"
@@ -77,7 +76,6 @@ const Flowchart = ({history, onSceneClick, mode = 'viewer', currentScene}: Props
 		onSceneClick?.(node.id as SceneName), [onSceneClick])
 
 	return <>
-		<svg className="fc-defs">{BADGES_DEFINES}</svg>
 		<FlowchartCanvas
 			items={items}
 			links={links}
