@@ -1,5 +1,5 @@
 import "../styles/progress.scss"
-import { useCallback, useEffect, useState } from "react"
+import { ReactNode, useCallback, useEffect, useState } from "react"
 import { dialog } from "@tsukiweb/common/ui-core/components/ModalPrompt"
 import { getLocale, useStrings } from "translation/lang"
 import { settings } from "engine/settings"
@@ -28,21 +28,17 @@ const LoopArrows = ()=>
 		<g transform="rotate(180 20 14)">{LOOP_ARC}</g>
 	</svg>
 
-const Diff = ({v1, v2, unit = ""}: {v1: number, v2: number, unit?: string})=>
-	v1 == v2 ? null :
-	<span className={`diff ${v2 > v1 ? "up" : "down"}`}>&rarr;{v2}{unit}</span>
+const Diff = ({v1, v2, className = "", children}: {v1: number, v2: number,
+		className?: string, children: ReactNode})=>
+	<span className={`${className}${v1 == v2 ? "" : ` diff ${v2 > v1 ? "up" : "down"}`}`}>
+		{children}
+	</span>
 
-const DiffPointBadge = ({name, v1 = 0, v2 = v1}: {name: PointId, v1?: number, v2?: number})=> {
-	const changed = v2 != v1
-	return (
-		<span className={`point${v1 || v2 ? "" : " empty"}`}>
-			<KtPointBadge name={name} value={changed ? Math.sign(v2 - v1) : 0}/>
-			<span className={`value${changed ? ` diff ${v2 > v1 ? "up" : "down"}` : ""}`}>
-				&times;{v2}
-			</span>
-		</span>
-	)
-}
+const DiffPointBadge = ({name, v1 = 0, v2 = v1}: {name: PointId, v1?: number, v2?: number})=>
+	<span className={`point${v1 || v2 ? "" : " empty"}`}>
+		<KtPointBadge name={name} value={Math.sign(v2 - v1)}/>
+		<Diff v1={v1} v2={v2} className="value">&times;{v2}</Diff>
+	</span>
 
 const DiffFlagBadge = ({flag, v1 = false, v2 = v1}: {flag: string, v1?: boolean, v2?: boolean})=> {
 	const state = v1 && v2 ? "set"
@@ -77,9 +73,8 @@ const ProgressDisplay = ({progress, change, label}: DisplayProps)=> {
 			<span className="progress-count">
 				<span className="loop">
 					<LoopArrows/>
-					{count}
+					<Diff v1={count} v2={change?.count ?? count}>{change?.count ?? count}</Diff>
 				</span>
-				{change && <Diff v1={count} v2={change.count}/>}
 			</span>
 		</div>
 		{settings.flowchartBadges ? <>
@@ -98,10 +93,9 @@ const ProgressDisplay = ({progress, change, label}: DisplayProps)=> {
 				</div>
 			</div>
 		</> :
-			<div className="progress-percent">
-				{percent(progress)}%
-				{change && <Diff v1={percent(progress)} v2={percent(change)} unit="%"/>}
-			</div>
+			<Diff v1={percent(progress)} v2={percent(change ?? progress)} className="progress-percent">
+				{percent(change ?? progress)}%
+			</Diff>
 		}
 	</>
 }
@@ -166,13 +160,13 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 					variant="select"
 					onClick={setSelected.bind(undefined, empty)}
 					onDoubleClick={onSelect.bind(undefined, empty)}
-					className={`progress create${isEmptySelected ? " selected" : ""}${isEmptySelected && newProgress ? " preview" : ""}`}
+					className={`progress create${isEmptySelected ? " selected" : ""}${newProgress ? " preview" : ""}`}
 					active={isEmptySelected}
 					audio={audio}
 					clickSound="glass"
 					nav-auto={1}
 				>
-					{isEmptySelected && newProgress ?
+					{newProgress ?
 						<ProgressDisplay progress={{...newProgress, lastSave: 0}} label={strings.saves.create}/>
 					: <>
 						<MdAddCircleOutline aria-hidden/>
