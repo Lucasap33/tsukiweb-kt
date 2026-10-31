@@ -1,5 +1,6 @@
 import "../styles/progress.scss"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { dialog } from "@tsukiweb/common/ui-core/components/ModalPrompt"
 import { getLocale, useStrings } from "translation/lang"
 import { settings } from "engine/settings"
 import { Button, Modal } from "@tsukiweb/common/ui-core"
@@ -15,7 +16,7 @@ type Props = {
 }
 
 const POINTS = ["ren", "nana", "kagi", "kaibyo"] as const
-const FLAGS = Array.from("12345678ABCDEFGHIJKLMNOPQ")
+const FLAGS = Array.from("12345678ABCDEFGHIJKLMNOPQZ")
 
 const LOOP_ARC = <>
 	<path d="M3 13V7A4 4 0 0 1 7 3H33A4 4 0 0 1 37 7V10" fill="none"/>
@@ -36,8 +37,9 @@ const DiffPointBadge = ({name, v1 = 0, v2 = v1}: {name: PointId, v1?: number, v2
 	return (
 		<span className={`point${v1 || v2 ? "" : " empty"}`}>
 			<KtPointBadge name={name} value={changed ? Math.sign(v2 - v1) : 0}/>
-			<span className="value">&times;{v1}</span>
-			<Diff v1={v1} v2={v2}/>
+			<span className={`value${changed ? ` diff ${v2 > v1 ? "up" : "down"}` : ""}`}>
+				&times;{v2}
+			</span>
 		</span>
 	)
 }
@@ -113,6 +115,29 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 	const newProgress = progress
 	const isEmptySelected = selected != undefined && !progresses.includes(selected)
 
+	const handleDeleteProgress = useCallback(async (progress: GameProgress) => {
+		const confirmed = await dialog.confirm({
+			text: strings.saves["delete-warning"],
+			labelYes: strings.yes,
+			labelNo: strings.no,
+			color: "#ab0000"
+		})
+		if (confirmed) {
+			settings.progresses = settings.progresses.filter(p => p != progress)
+			setSelected(undefined)
+		}
+	}, [strings])
+
+	useEffect(() => {
+		if (!show) return
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Delete" && selected && settings.progresses.includes(selected))
+				handleDeleteProgress(selected)
+		}
+		window.addEventListener("keydown", onKeyDown, true)
+		return () => window.removeEventListener("keydown", onKeyDown, true)
+	}, [show, selected, handleDeleteProgress])
+
 	return (
 		<Modal
 			show={show}
@@ -148,7 +173,7 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 					nav-auto={1}
 				>
 					{isEmptySelected && newProgress ?
-						<ProgressDisplay progress={empty} change={newProgress} label={strings.saves.create}/>
+						<ProgressDisplay progress={{...newProgress, lastSave: 0}} label={strings.saves.create}/>
 					: <>
 						<MdAddCircleOutline aria-hidden/>
 						{strings.saves.create}

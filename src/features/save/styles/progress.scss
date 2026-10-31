@@ -58,6 +58,18 @@
 				color: inherit;
 				font-size: inherit;
 				letter-spacing: inherit;
+
+				--new-color: var(--regard-plus-color, #7ddc6a);
+				.progress-count, .point .value {
+					color: var(--new-color);
+				}
+				.progress-count .loop svg {
+					stroke: var(--new-color);
+					fill: var(--new-color);
+				}
+				.progress-flags-grid .badge.set {
+					filter: drop-shadow(0 0 2px var(--new-color));
+				}
 			}
 			> svg {
 				font-size: 1.3em;
