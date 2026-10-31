@@ -6,8 +6,17 @@ import { tokenizeCondition } from "@tsukiweb/common/script/utils"
 import { settings } from "engine/settings"
 import { BadgeEntry, getNodeBadges } from "features/flowchart/utils/badges";
 import { getSceneGraph } from "engine/utils";
-import { flagPersists, pointPersists } from "./badges";
+import { flagPersists, HourglassIcon, pointPersists } from "./badges";
 import { KtFlagBadge, KtPointBadge } from "assets/icons/badges";
+import { ReactNode } from "react";
+
+const Transient = ({children, transient}: {children: ReactNode, transient: boolean})=>
+	transient ?
+		<span className="transient-badge">
+			{children}
+			<HourglassIcon className="hourglass"/>
+		</span>
+	: children
 
 
 const TokenDisplay = ({ token }: { token: string }) => {
@@ -81,9 +90,15 @@ const SceneBadges = ({badges}: {badges: BadgeEntry})=> {
 
 		{(flags || (char && value != null)) &&
 			<div className="badges">
-				{flags?.map(f=><KtFlagBadge key={f} flag={f} persists={flagPersists(f)} />)}
+				{flags?.map(f=>
+					<Transient key={f} transient={!flagPersists(f)}>
+						<KtFlagBadge flag={f}/>
+					</Transient>
+				)}
 				{char && value != null &&
-					<KtPointBadge name={char} value={1} persists={pointPersists(char)}/>
+					<Transient transient={!pointPersists(char)}>
+						<KtPointBadge name={char} value={1}/>
+					</Transient>
 				}
 			</div>
 		}

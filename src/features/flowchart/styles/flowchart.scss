@@ -95,6 +95,20 @@
 	align-self: center;
 }
 
+.transient-badge {
+	position: relative;
+	display: inline-flex;
+	align-self: center;
+
+	.hourglass {
+		position: absolute;
+		top: -.08em;
+		right: -.11em;
+		width: .5em;
+		height: .5em;
+	}
+}
+
 .popover-container {
 	z-index: 100;
 	width: min(320px, 100%);
@@ -177,7 +191,7 @@
 				bottom: -1em;
 				display: flex;
 				gap: 0.3ch;
-				.badge {
+				.badge, .transient-badge {
 					font-size: 2.5rem;
 				}
 			}

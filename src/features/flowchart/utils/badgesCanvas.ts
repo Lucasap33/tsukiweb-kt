@@ -1,6 +1,6 @@
 import { DY, FcOverlayDrawer, path2D, StyleReader } from "@tsukiweb/common/flowchart"
 import { PointId } from "app/utils/types"
-import { BADGE_PATHS, FLAG_BACKGROUND, FLAG_CONTENT, POINT_BACKGROUND, QUIZ_ICON, QUIZ_NUMBER_X, STRIKE_COLOR } from "../components/badges"
+import { BADGE_PATHS, FLAG_BACKGROUND, FLAG_CONTENT, HOURGLASS, POINT_BACKGROUND, QUIZ_ICON, QUIZ_NUMBER_X, STRIKE_COLOR, flagPersists, pointPersists } from "../components/badges"
 import { getNodeBadges } from "./badges"
 import { FcNode } from "./flowchart"
 
@@ -33,6 +33,8 @@ const COND_UNIT = DY * 0.8
 const TEXT_SIZE = 4
 const DOTS_RADIUS = 0.4
 const DOTS_GAP = 1.2
+/** zoom range (screen pixels per flowchart unit) over which the hourglass appears */
+const HOURGLASS_ZOOM = [2.2, 3.2]
 
 
 //##############################################################################
@@ -219,7 +221,7 @@ function drawFlag(ctx: CanvasRenderingContext2D, fill: string, drawContent: Void
 }
 
 function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: StyleReader,
-		font: string) {
+		font: string, hourglassScale: number) {
 	ctx.save()
 	ctx.translate(badge.x, badge.y)
 	switch (badge.type) {
@@ -306,6 +308,41 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 		}
 	}
 	ctx.restore()
+	if (hourglassScale > 0 && ((badge.type == 'regard' && !pointPersists(badge.char))
+			|| (badge.type == 'flag' && !flagPersists(badge.flag))))
+		drawHourglass(ctx, badge.x + HOURGLASS.x, badge.y + HOURGLASS.y, hourglassScale)
+}
+
+/** 0 while the badges are too small for the hourglass to be readable, 1 once zoomed in */
+function hourglassVisibility(ctx: CanvasRenderingContext2D) {
+	const { a, b } = ctx.getTransform()
+	const pixelsPerUnit = Math.hypot(a, b) / devicePixelRatio
+	const t = Math.min(1, Math.max(0, (pixelsPerUnit - HOURGLASS_ZOOM[0])
+		/ (HOURGLASS_ZOOM[1] - HOURGLASS_ZOOM[0])))
+	return t * t * (3 - 2 * t)
+}
+
+function drawHourglass(ctx: CanvasRenderingContext2D, x: number, y: number, visibility: number) {
+	ctx.save()
+	ctx.globalAlpha *= visibility
+	ctx.translate(x, y)
+	ctx.scale(0.5 + 0.5 * visibility, 0.5 + 0.5 * visibility)
+	ctx.beginPath()
+	ctx.arc(0, 0, HOURGLASS.radius, 0, 2 * Math.PI)
+	ctx.fillStyle = HOURGLASS.background
+	ctx.fill()
+	ctx.strokeStyle = "white"
+	ctx.lineWidth = 0.3
+	ctx.stroke()
+	ctx.fillStyle = HOURGLASS.sand
+	ctx.fill(path2D(HOURGLASS.sandPath))
+	ctx.strokeStyle = HOURGLASS.glass
+	ctx.lineWidth = 0.2
+	ctx.lineJoin = 'round'
+	ctx.stroke(path2D(HOURGLASS.glassPath))
+	ctx.lineWidth = 0.28
+	ctx.stroke(path2D(HOURGLASS.frame))
+	ctx.restore()
 }
 
 /** @param isLinkEnabled whether the links below `node` are drawn as enabled */
@@ -314,12 +351,13 @@ export function createBadgesDrawer(nodes: FcNode[],
 	const badges = nodes.flatMap(node => getBadgesLayout(node, isLinkEnabled))
 	return (ctx, view, style) => {
 		const font = style.property('--ui-font') || 'sans-serif'
+		const hourglass = hourglassVisibility(ctx)
 		ctx.lineCap = 'round'
 		ctx.textAlign = 'center'
 		for (const badge of badges) {
 			if (badge.x > view.left && badge.x < view.right
 					&& badge.y > view.top && badge.y < view.bottom)
-				drawBadge(ctx, badge, style, font)
+				drawBadge(ctx, badge, style, font, hourglass)
 		}
 	}
 }

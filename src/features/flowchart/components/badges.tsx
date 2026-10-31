@@ -15,6 +15,22 @@ export const QUIZ_ICON = { x: -1, scale: 0.75 }
 export const QUIZ_NUMBER_X = 1.4
 export const POINT_BACKGROUND = "#202020"
 
+export const HOURGLASS = {
+  x: 2.5, y: -2.3, radius: 1.75,
+  background: "#160807", glass: "#fff3d0", sand: "#f2a629",
+  frame: "M-.8-1.05h1.6M-.8 1.05h1.6",
+  glassPath: "M-.6-1.05C-.6-.35-.15-.2-.15 0S-.6.35-.6 1.05H.6C.6.35.15.2.15 0S.6-.35.6-1.05Z",
+  sandPath: "M-.38-.55H.38L0-.12ZM-.48.95H.48C.42.6.1.45 0 .3-.1.45-.42.6-.48.95Z",
+}
+
+export const HourglassIcon = (props: SVGProps<SVGSVGElement>)=>
+  <svg viewBox="-2 -2 4 4" aria-hidden {...props}>
+    <circle r={HOURGLASS.radius} fill={HOURGLASS.background} stroke="white" strokeWidth=".3"/>
+    <path d={HOURGLASS.sandPath} fill={HOURGLASS.sand}/>
+    <path d={HOURGLASS.glassPath} fill="none" stroke={HOURGLASS.glass} strokeWidth=".2" strokeLinejoin="round"/>
+    <path d={HOURGLASS.frame} fill="none" stroke={HOURGLASS.glass} strokeWidth=".28" strokeLinecap="round"/>
+  </svg>
+
 export const BADGE_PATHS = {...BADGE_PATHS_BASE,
   select: "M-4.6,0 -2,-2.5 2,-2.5 4.6,0 2,2.5 -2,2.5Z",
   cond: `M0,${C*1.5} ${-BADGE_HALF},${C} ${-BADGE_HALF},${-C} ${BADGE_HALF},${-C} ${BADGE_HALF},${C}Z`,
