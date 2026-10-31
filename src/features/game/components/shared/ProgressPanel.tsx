@@ -14,7 +14,7 @@ const PointsRow = ({ char, value }: {char: PointId, value: number}) => {
 const FlagsList = ({ flags }: { flags: string[] }) => {
 	return (
 		<div className="flags-list">
-			{flags.map(flag => <KtFlagBadge flag={flag}/>)}
+			{flags.map(flag => <KtFlagBadge key={flag} flag={flag}/>)}
 		</div>
 	)
 }

@@ -1,13 +1,204 @@
+@use '@tsukiweb/common/ui-core/styles/_mixins.scss' as *;
 
-.progresses {
-	button {
-		width: fit-content;
-		height: fit-content;
-        .progress {
-		    width: 10em;
-        }
-		&:last-child {
-			border: 2px dashed var(--btn-select-accent)
+.progress-modal {
+	padding: 0;
+	max-width: 760px;
+	min-height: unset;
+	height: fit-content;
+	margin: auto;
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto;
+	box-shadow: 0 0 1em hsl(0deg 0% 0% / 80%);
+	user-select: none;
+
+	.progresses {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+		grid-auto-rows: max-content;
+		gap: .8em;
+		padding: 1.2em;
+		overflow-y: auto;
+		scrollbar-gutter: stable;
+	}
+
+	.progress {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: .7em;
+		padding: .9em 1em 1em;
+		text-align: left;
+		background-color: var(--message-container-background);
+		border: 1px solid var(--separator);
+		transition: background-color .2s ease-in-out, border-color .2s ease-in-out;
+
+		&.selected {
+			border-color: transparent;
+			background-color: var(--btn-select-bg);
+			box-shadow: 0 0 .8em rgb(0 0 0 / 50%);
+		}
+
+		&.create {
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			gap: .5em;
+			min-height: 7em;
+			background-color: transparent;
+			border: 1px dashed var(--btn-select-accent);
+			color: var(--btn-select-accent);
+			font-size: 1.05em;
+			letter-spacing: .5px;
+
+			&.preview {
+				flex-direction: column;
+				align-items: stretch;
+				justify-content: start;
+				gap: .7em;
+				color: inherit;
+				font-size: inherit;
+				letter-spacing: inherit;
+			}
+			> svg {
+				font-size: 1.3em;
+			}
+		}
+	}
+
+	.progress-header {
+		display: flex;
+		align-items: center;
+		gap: .7em;
+		padding-bottom: .6em;
+		border-bottom: 1px solid var(--separator);
+
+		.progress-date {
+			display: inline-flex;
+			align-items: center;
+			gap: .3em;
+			flex: 1;
+			color: var(--text-muted);
+			letter-spacing: .5px;
+			white-space: nowrap;
+		}
+		.progress-count {
+			display: inline-flex;
+			align-items: center;
+			gap: .25em;
+			font-weight: 600;
+			white-space: nowrap;
+
+			.loop {
+				position: relative;
+				display: inline-grid;
+				place-items: center;
+				width: 2.8em;
+				height: 1.95em;
+				margin-block: -.4em;
+
+				svg {
+					position: absolute;
+					inset: 0;
+					width: 100%;
+					height: 100%;
+					stroke: var(--btn-select-accent);
+					stroke-width: 2;
+					stroke-linecap: round;
+					fill: var(--btn-select-accent);
+				}
+			}
+		}
+	}
+
+	.progress-points {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: .3em .6em;
+
+		.point {
+			display: inline-flex;
+			align-items: center;
+			gap: .2em;
+			white-space: nowrap;
+
+			.badge {
+				font-size: 1.6em;
+			}
+			.value {
+				font-size: .95em;
+			}
+			&.empty {
+				opacity: .3;
+			}
+		}
+	}
+
+	.diff {
+		margin-left: .15em;
+		font-weight: 600;
+		&.up {
+			color: var(--regard-plus-color, #7ddc6a);
+		}
+		&.down {
+			color: var(--off-color);
+		}
+	}
+
+	.progress-percent {
+		font-size: 1.6em;
+		font-weight: 600;
+		line-height: 1;
+
+		.diff {
+			font-size: .7em;
+		}
+	}
+
+	.progress-flags-grid {
+		display: grid;
+		grid-template-columns: repeat(13, 1fr);
+		gap: 3px;
+
+		.badge {
+			width: 100%;
+			height: auto;
+			aspect-ratio: 1;
+			transition: opacity .2s, filter .2s;
+
+			&.unset {
+				opacity: .18;
+			}
+			&.gained {
+				filter: drop-shadow(0 0 2px #7ddc6a);
+			}
+		}
+	}
+
+	.buttons {
+		display: grid;
+		grid-template-columns: 1fr 1px 1fr;
+		font-size: 1.15em;
+		border-top: 1px solid var(--separator);
+
+		& > button {
+			padding: .9rem .6rem;
+
+			&:disabled {
+				opacity: .4;
+			}
+		}
+		.separator {
+			width: 1px;
+			height: 60%;
+			background-color: var(--separator);
+			align-self: center;
+		}
+	}
+
+	@include mobile-landscape {
+		.progresses {
+			padding: .8em;
 		}
 	}
 }

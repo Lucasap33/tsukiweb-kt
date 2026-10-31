@@ -66,13 +66,18 @@ const Window = () => {
 			if (!confirmed)
 				return
 		} else if (savedProgress) {
-			const i = settings.progresses.indexOf(obj)
-			settings.progresses[i] = savedProgress!
+			const progresses = [...settings.progresses]
+			const i = progresses.indexOf(obj)
+			if (i >= 0)
+				progresses[i] = savedProgress
+			else
+				progresses.push(savedProgress)
+			settings.progresses = progresses
 		}
 		setSavedProgress(undefined)
 		displayMode.screen = SCREEN.TITLE
 
-	}, [])
+	}, [savedProgress])
 
 	const [layers] = useResettable(()=> new InGameLayersHandler({
 		backgroundMenu: 'remove'
