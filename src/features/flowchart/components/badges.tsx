@@ -137,7 +137,7 @@ export const BADGES_DEFINES = <defs>
   <path id="quiz-icon" d={BADGE_PATHS.icons.quiz}
       fill="white" stroke="none"/>
   {[1,2,3].map(n=>
-  <g id={`quiz${n}-icon`}>
+  <g id={`quiz${n}-icon`} key={`quiz${n}-icon`}>
     <use href="#quiz-icon" transform={`translate(${QUIZ_ICON.x},0) scale(${QUIZ_ICON.scale})`}/>
     <text x={QUIZ_NUMBER_X} y="1.6" stroke="none" fill="white" fontSize={4}
           textAnchor="middle">

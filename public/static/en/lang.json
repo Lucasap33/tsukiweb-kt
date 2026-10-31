@@ -142,7 +142,7 @@
     "skip-prompt": "Do you want to skip it?",
     "toast-qsave": "Progress has been saved",
     "toast-qload": "Progress restored",
-    "toast-load": "Progress restored",
+    "toast-load-success": "Your data has been loaded",
     "toast-save-fail": "Could not save progress",
     "toast-load-fail": "Could not restore progress",
     "toast-autoplay-stop": "Auto-play stopped"
@@ -166,9 +166,14 @@
     "skipped": "Skipped scene %0."
   },
   "characters": {
+    "aki": "Akiha",
+    "ark": "Arcueid",
+    "cel": "Ciel",
+    "his": "Hisui",
+    "koha": "Kohaku",
+    "akira": "Akira",
     "ren": "Len",
-    "yume": "Dream",
-    "others": "Others"
+    "yume": "Yume"
   },
   "yes": "Yes",
   "no": "No",
