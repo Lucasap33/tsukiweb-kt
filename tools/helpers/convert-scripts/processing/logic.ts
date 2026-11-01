@@ -223,6 +223,12 @@ function getBlockProps(
 					mov %answer_point,-1
 					rngsel *quiz1,*quiz2,*quiz3`))
 				break
+			case 'f136' :
+				blockFixes.push(block=>block.insert(0, `mov %answer_point,0`))
+				break
+			case 'f137' :
+				blockFixes.push(block=>block.insert(0, `mov %answer_point,0`))
+				break
 			case 'twilight_op' :
 				blockFixes.push(b=> {
 					b.name = (b.at(0) as LabelToken).label = "f520"
@@ -293,9 +299,9 @@ function interBlockFixes(blocks: Map<string, Block>) {
 			const blockName = `quiz${i}_end`
 			blocks.set(blockName, new Block(blockName, parseScript(`
 				*${blockName}
-				if %answer_point>=0 && %answer_point<10 goto *f137
-				if %answer_point<0 && %quiz${i}_pass==0 goto *f137
-				inc %quiz${i}_pass
+				if %answer_point<0 && %flg_quiz${i}>0 goto *f136
+				if %answer_point<10 goto *f137
+				inc %flg_quiz${i}
 				goto *f136`)))
 		}
 	}

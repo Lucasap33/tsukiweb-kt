@@ -1,17 +1,17 @@
 *quiz1_end
-if (%answer_point>=0 && %answer_point<10) goto *f137
-if (%answer_point<0 && %quiz1_pass==0) goto *f137
-inc %quiz1_pass
+if (%answer_point<0 && %flg_quiz1>0) goto *f136
+if (%answer_point<10) goto *f137
+inc %flg_quiz1
 goto *f136
 *quiz2_end
-if (%answer_point>=0 && %answer_point<10) goto *f137
-if (%answer_point<0 && %quiz2_pass==0) goto *f137
-inc %quiz2_pass
+if (%answer_point<0 && %flg_quiz2>0) goto *f136
+if (%answer_point<10) goto *f137
+inc %flg_quiz2
 goto *f136
 *quiz3_end
-if (%answer_point>=0 && %answer_point<10) goto *f137
-if (%answer_point<0 && %quiz3_pass==0) goto *f137
-inc %quiz3_pass
+if (%answer_point<0 && %flg_quiz3>0) goto *f136
+if (%answer_point<10) goto *f137
+inc %flg_quiz3
 goto *f136
 *quiz
 mov %answer_point,-1
@@ -784,11 +784,13 @@ goto *f138
 goto *s135
 *s135_end
 goto *quiz
+mov %answer_point,0
 *f136
 goto *s136
 *s136_end
 inc %kagi_point
 goto *f138
+mov %answer_point,0
 *f137
 goto *s137
 *s137_end

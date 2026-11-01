@@ -15,8 +15,8 @@ type Props = {
 	progress?: GameProgress
 }
 
-const POINTS = ["ren", "nana", "kagi", "kaibyo"] as const
-const FLAGS = Array.from("12345678ABCDEFGHIJKLMNOPQZ")
+const POINTS = ["ren", "nana", "his", "kagi", "kaibyo"] as const
+const FLAGS = [..."12345678ABCDEFGHIJKLMNOPQZ", "quiz1", "quiz2", "quiz3"]
 
 const LOOP_ARC = <>
 	<path d="M3 13V7A4 4 0 0 1 7 3H33A4 4 0 0 1 37 7V10" fill="none"/>
@@ -99,6 +99,41 @@ const ProgressDisplay = ({progress, change, label}: DisplayProps)=> {
 		}
 	</>
 }
+type ProgressButtonProps = {
+	progress?: GameProgress
+	newProgress?: GameProgress
+} & Parameters<typeof Button>[0]
+const ProgressButton = ({progress, newProgress, className, ...props}: ProgressButtonProps)=> {
+	const [displayDiff, setDisplayDiff] = useState(0)
+	const strings = useStrings()
+	const onEnter = useCallback(()=> {
+		setDisplayDiff(displayDiff+1)
+	}, [])
+	const onLeave = useCallback(()=> {
+		setDisplayDiff(displayDiff-1)
+	}, [])
+
+	return <Button
+		variant="select"
+		onFocus={onEnter} onPointerEnter={onEnter}
+		onBlur={onLeave} onPointerLeave={onLeave}
+		className={`progress ${className ?? ""}`}
+		audio={audio}
+		clickSound="glass"
+		nav-auto={1} {...props}
+	>
+		{progress ?
+			<ProgressDisplay progress={progress}
+				change={displayDiff > 0 ? newProgress : undefined}/>
+		: newProgress ?
+			<ProgressDisplay progress={{...newProgress, lastSave: 0}}
+				label={strings.saves.create}/>
+		: <>
+			<MdAddCircleOutline aria-hidden/>
+			{strings.saves.create}
+		</>}
+	</Button>
+}
 
 const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 	const strings = useStrings()
@@ -140,39 +175,17 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 		>
 			<div className="progresses">
 				{progresses.map((progress, i) =>
-					<Button
-						key={i}
-						variant="select"
-						onClick={setSelected.bind(undefined, progress)}
-						onDoubleClick={onSelect.bind(undefined, progress)}
-						className={`progress${selected == progress ? " selected" : ""}`}
+					<ProgressButton key={i}
+						progress={progress} newProgress={newProgress}
+						onClick={onSelect.bind(undefined, progress)}
 						active={selected == progress}
-						audio={audio}
-						clickSound="glass"
-						nav-auto={1}
-					>
-						<ProgressDisplay progress={progress}
-							change={selected == progress ? newProgress : undefined}/>
-					</Button>
+						className={selected == progress ? " selected" : ""}/>
 				)}
-
-				<Button
-					variant="select"
-					onClick={setSelected.bind(undefined, empty)}
-					onDoubleClick={onSelect.bind(undefined, empty)}
-					className={`progress create${isEmptySelected ? " selected" : ""}${newProgress ? " preview" : ""}`}
+				
+				<ProgressButton newProgress={newProgress}
+					onClick={onSelect.bind(undefined, empty)}
 					active={isEmptySelected}
-					audio={audio}
-					clickSound="glass"
-					nav-auto={1}
-				>
-					{newProgress ?
-						<ProgressDisplay progress={{...newProgress, lastSave: 0}} label={strings.saves.create}/>
-					: <>
-						<MdAddCircleOutline aria-hidden/>
-						{strings.saves.create}
-					</>}
-				</Button>
+					className={`create${isEmptySelected ? " selected" : ""}${newProgress ? " preview" : ""}`}/>
 			</div>
 
 			<div className="buttons">

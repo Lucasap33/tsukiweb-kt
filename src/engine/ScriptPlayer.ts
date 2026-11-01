@@ -1,7 +1,7 @@
 import { ScriptPlayerBase } from "@tsukiweb/common/script/ScriptPlayer"
 import { PointId, LabelName, SceneName } from "app/utils/types";
 import { isScene } from "engine/utils";
-import { checkQuiz, passQuiz, settings, viewedScene } from "engine/settings";
+import { settings, viewedScene } from "engine/settings";
 import { assets } from "translation/assets";
 import { CommandRecord, VarName, VarType } from "@tsukiweb/common/script/types";
 import { History } from "./history";
@@ -189,9 +189,6 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
             this.setPoints(m[1] as PointId, value as number)
         } else if (["%answer", "$nextflow", "%2100"].includes(name)) {
             this._tempVariables.set(name, value)
-        } else if (/^%quiz\d_pass$/.test(name)) {
-            if (!value) throw Error(`Unexpected set ${name} = ${value}`)
-            passQuiz(parseInt(name.charAt(5)))
         } else {
 			throw Error(`Unknown or read-only variable ${name}`)
         }
@@ -208,9 +205,6 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
         } else switch (name as string) {
             case '%answer': return 0 as VarType<T>
             case '%smooth': return settings.smoothFlashes as VarType<T>
-            case '%quiz1_pass': return (checkQuiz(1) ? 1 : 0) as VarType<T>
-            case '%quiz2_pass': return (checkQuiz(2) ? 1 : 0) as VarType<T>
-            case '%quiz3_pass': return (checkQuiz(3) ? 1 : 0) as VarType<T>
             case '$nextflow':
                 // if for some reason the variable was not save,
                 // check which value should be stored form the history
@@ -229,8 +223,8 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
     protected override nextLabel(label: LabelName): LabelName | null {
         if (/^s\d+a?$/.test(label))
             return `${label}_end` as LabelName
-        if (/^quizz\d$/.test(label))
-            return "quiz_end" as LabelName
+        if (/^quiz\d$/.test(label))
+            return `${label}_end` as LabelName
         return null
     }
 

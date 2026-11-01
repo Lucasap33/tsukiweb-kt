@@ -39,6 +39,7 @@ export const ProgressPanel = ({script, flags, points}: Props) => {
 		<div className="progress-panel">
 
 			{Object.entries(points ?? {}).map(([id, n])=>
+				id == 'answer' ? undefined :
 				<PointsRow key={id} char={id as PointId} value={n}/>
 			)}
 			<FlagsList flags={Array.from(flags!)}/>

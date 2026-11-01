@@ -177,13 +177,6 @@ export const importGameData = async (accept = `.${FULLSAVE_EXT}`): Promise<boole
 // expose completion outside the settings object
 export const viewedScene = settings.viewedScene.bind(settings)
 
-export function passQuiz(n: number) {
-  if (!settings.quiz.includes(n))
-    settings.quiz = [...settings.quiz, n].sort()
-}
-export function checkQuiz(n: number) {
-  return settings.quiz.includes(n)
-}
 
 //TODO clean unused settings from previous versions
 

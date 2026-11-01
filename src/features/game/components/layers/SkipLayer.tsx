@@ -34,20 +34,26 @@ const SkipLayer = ({script, history, layers}: Props) => {
 		let firstBlock = true
 		const ref = script.addEventListener('beforeBlock',
 			async (label, initPage)=> {
-				if (firstBlock) {
+				if (firstBlock) { // don't skip the first scene, except for new games
 					firstBlock = false
 					if (!consumeNewGame())
 						return
 				}
-				if (initPage !== 0 || !isScene(label) || !script.continueScript) return
-
-				if (settings.enableSceneSkip && viewedScene(label)) {
-					await new Promise<boolean>((resolve)=> {
-						setMode('viewed')
-						setScene(label)
-						onFinish.current = resolve
-					})
-				}
+				if (!settings.enableSceneSkip	|| 
+					!viewedScene(label)			||
+					initPage !== 0				||
+					!isScene(label)				||
+					!script.continueScript)
+					return
+				
+				if (label.startsWith("quiz") && !script.hasFlag(label))
+					return // don't skip quiz that have not been completed
+				
+				await new Promise<boolean>((resolve)=> {
+					setMode('viewed')
+					setScene(label)
+					onFinish.current = resolve
+				})
 		})
 
 		return () => {

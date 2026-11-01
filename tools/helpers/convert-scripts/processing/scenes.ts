@@ -296,6 +296,7 @@ function quizFix(block: Block, blocks: Map<string, Block>) {
 			blocks.delete(b.name)
 		}
 	}
+	block.insert(0, `mov %answer_point,0`)
 	for (const [token, i] of block) {
 		if (isCmd(token, 'select')) {
 			(token as CommandToken).cmd = 'prompt'
@@ -318,7 +319,7 @@ function quizFix(block: Block, blocks: Map<string, Block>) {
 			token.args.unshift('%answer', `\`${textToken.text.replaceAll('@', '')}\``)
 			let m
 			for (let k = 0; k < token.args.length; k++) {
-				if (m = token.args[k].match(/^\*quiz\d_\d(true|false)$/))
+				if (m = token.args[k].match(/^\*quiz\d_\d+(true|false)$/))
 					token.args[k] = m[1] == 'false' ? '0' : '1'
 			}
 			// insert a page break before the prompt, remove br
