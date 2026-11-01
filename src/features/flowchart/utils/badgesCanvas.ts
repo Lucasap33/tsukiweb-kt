@@ -331,7 +331,7 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 	ctx.restore()
 	if (details > 0 && ((badge.type == 'regard' && !pointPersists(badge.char))
 			|| (badge.type == 'flag' && !flagPersists(badge.flag))))
-		drawHourglass(ctx, badge.x + HOURGLASS.x, badge.y + HOURGLASS.y, details)
+		drawHourglass(ctx, badge.x, badge.y, details)
 }
 
 function drawHourglass(ctx: CanvasRenderingContext2D, x: number, y: number, visibility: number) {
@@ -340,7 +340,7 @@ function drawHourglass(ctx: CanvasRenderingContext2D, x: number, y: number, visi
 	ctx.translate(x, y)
 	ctx.scale(0.5 + 0.5 * visibility, 0.5 + 0.5 * visibility)
 	ctx.beginPath()
-	ctx.arc(0, 0, HOURGLASS.radius, 0, 2 * Math.PI)
+	ctx.arc(HOURGLASS.x, HOURGLASS.y, HOURGLASS.radius, 0, 2 * Math.PI)
 	ctx.fillStyle = HOURGLASS.background
 	ctx.fill()
 	ctx.strokeStyle = "white"

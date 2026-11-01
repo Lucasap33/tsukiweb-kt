@@ -14,18 +14,18 @@ export const QUIZ_NUMBER_X = 1.4
 export const HOURGLASS = {
   x: 2.5, y: -2.3, radius: 1.75,
   background: "#160807", glass: "#fff3d0", sand: "#f2a629",
-  frame: "M-.8-1.05h1.6M-.8 1.05h1.6",
-  glassPath: "M-.6-1.05C-.6-.35-.15-.2-.15 0S-.6.35-.6 1.05H.6C.6.35.15.2.15 0S.6-.35.6-1.05Z",
-  sandPath: "M-.38-.55H.38L0-.12ZM-.48.95H.48C.42.6.1.45 0 .3-.1.45-.42.6-.48.95Z",
+  frame: "M3.3-1.2H1.7M3.3-3.4H1.7",
+  glassPath: "M3.1-3.4c0 1-.5.9-.5 1.1s.5.2.5 1.1H1.9c0-.9.5-.9.5-1.1s-.5-.1-.5-1.1Z",
+  sandPath: "M2.5-2l.6.8H1.9ZM2-2.9q.1.4.5.6.4-.2.5-.6Z",
 }
 
-export const HourglassIcon = (props: SVGProps<SVGSVGElement>)=>
-  <svg viewBox="-2 -2 4 4" aria-hidden {...props}>
-    <circle r={HOURGLASS.radius} fill={HOURGLASS.background} stroke="white" strokeWidth=".3"/>
-    <path d={HOURGLASS.sandPath} fill={HOURGLASS.sand}/>
+export const HourglassSVGIcon = (props: SVGProps<SVGGElement>)=>
+  <g {...props}>
+    <circle cx={HOURGLASS.x} cy={HOURGLASS.y} r={HOURGLASS.radius} fill={HOURGLASS.background} stroke="white" strokeWidth=".3"/>
+    <path d={HOURGLASS.sandPath} fill={HOURGLASS.sand} stroke="none"/>
     <path d={HOURGLASS.glassPath} fill="none" stroke={HOURGLASS.glass} strokeWidth=".2" strokeLinejoin="round"/>
     <path d={HOURGLASS.frame} fill="none" stroke={HOURGLASS.glass} strokeWidth=".28" strokeLinecap="round"/>
-  </svg>
+  </g>
 
 export const BADGE_PATHS = {...BADGE_PATHS_BASE,
   select: "M-4.6,0 -2,-2.5 2,-2.5 4.6,0 2,2.5 -2,2.5Z",

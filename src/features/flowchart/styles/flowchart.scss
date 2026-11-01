@@ -81,26 +81,6 @@
 	}
 }
 
-.badge {
-	font-size: 1.4em;
-	font-weight: bold;
-	align-self: center;
-}
-
-.transient-badge {
-	position: relative;
-	display: inline-flex;
-	align-self: center;
-
-	.hourglass {
-		position: absolute;
-		top: -.08em;
-		right: -.11em;
-		width: .5em;
-		height: .5em;
-	}
-}
-
 .popover-container {
 	z-index: 100;
 	width: min(320px, 100%);

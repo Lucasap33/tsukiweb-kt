@@ -1,11 +1,13 @@
 import { ScriptPlayer } from "engine/ScriptPlayer"
 import { PointId } from "app/utils/types"
 import { KtFlagBadge, KtPointBadge } from "assets/icons/badges"
+import { SCENE_ATTRS } from "app/utils/constants";
+import { flagPersists, pointPersists } from "features/flowchart/components/badges";
 
 const PointsRow = ({ char, value }: {char: PointId, value: number}) => {
 	return (
 		<div className="row">
-			<KtPointBadge name={char}/>
+			<KtPointBadge name={char} transient={!pointPersists(char)}/>
 			&times;{value}
 		</div>
 	)
@@ -14,7 +16,7 @@ const PointsRow = ({ char, value }: {char: PointId, value: number}) => {
 const FlagsList = ({ flags }: { flags: string[] }) => {
 	return (
 		<div className="flags-list">
-			{flags.map(flag => <KtFlagBadge key={flag} flag={flag}/>)}
+			{flags.map(flag => <KtFlagBadge key={flag} flag={flag} transient={!flagPersists(flag)}/>)}
 		</div>
 	)
 }
