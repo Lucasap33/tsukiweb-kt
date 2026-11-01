@@ -1,13 +1,16 @@
-import { DY, FcOverlayDrawer, path2D, StyleReader } from "@tsukiweb/common/flowchart"
+import { DY, FcOverlayDrawer, POINT_HEAD_CLIP, StyleReader, detailsVisibility, disc, drawHead,
+	getHeadImage, headClip, path2D } from "@tsukiweb/common/flowchart"
+import { FLAG_BACKGROUND, FLAG_CONTENT, POINT_BACKGROUND, POINT_RADIUS, POINT_SIGN, STRIKE_COLOR }
+	from "@tsukiweb/common/icons/badges"
 import { PointId } from "app/utils/types"
-import { BADGE_PATHS, FLAG_BACKGROUND, FLAG_CONTENT, HOURGLASS, POINT_BACKGROUND, QUIZ_ICON, QUIZ_NUMBER_X, STRIKE_COLOR, flagPersists, pointPersists } from "../components/badges"
+import { BADGE_PATHS, HOURGLASS, QUIZ_ICON, QUIZ_NUMBER_X, flagPersists, pointPersists } from "../components/badges"
 import { getNodeBadges } from "./badges"
 import { FcNode } from "./flowchart"
 
 
 type BadgeFill = 'background' | PointId | (string & {})
 
-type BadgeIcon = { text: string } | { icon: string } | { heart: true } | { dots: true }
+type BadgeIcon = { text: string } | { icon: string } | { head: PointId } | { dots: true }
 
 type BadgeLayout = { x: number, y: number } & (
 	| { type: 'regard', char: PointId, value: number }
@@ -33,8 +36,11 @@ const COND_UNIT = DY * 0.8
 const TEXT_SIZE = 4
 const DOTS_RADIUS = 0.4
 const DOTS_GAP = 1.2
-/** zoom range (screen pixels per flowchart unit) over which the hourglass appears */
-const HOURGLASS_ZOOM = [2.2, 3.2]
+const POINT_SPACING = 7
+const COND_HEAD = { y: 0.3, radius: 2.7 }
+const COND_HEAD_CLIP = headClip(disc(COND_HEAD.radius), COND_HEAD.radius)
+
+const headSrc = (char: string) => `./res/chars/${char}.webp`
 
 
 //##############################################################################
@@ -107,7 +113,7 @@ function conditionLayout(node: FcNode, condition: Condition): BadgeLayout {
 			badgeIcon = { icon: id }
 			fill = POINT_BACKGROUND
 		} else {
-			badgeIcon = { heart: true }
+			badgeIcon = { head: id as PointId }
 			fill = id
 		}
 	} else if (condition.startsWith('%quiz')) {
@@ -220,29 +226,46 @@ function drawFlag(ctx: CanvasRenderingContext2D, fill: string, drawContent: Void
 	ctx.restore()
 }
 
+function drawPoint(ctx: CanvasRenderingContext2D, char: PointId, value: number,
+		style: StyleReader, headVisibility: number) {
+	const r = POINT_RADIUS
+	ctx.beginPath()
+	ctx.arc(0, 0, r, 0, 2 * Math.PI)
+	ctx.fillStyle = fillStyle(ctx, char, style, [-r, -r, r, r])
+	ctx.fill()
+	ctx.strokeStyle = "white"
+	ctx.lineWidth = 0.6
+	ctx.stroke(path2D(BADGE_PATHS.pointArc))
+	drawHead(ctx, headSrc(char), r, POINT_HEAD_CLIP, headVisibility)
+	ctx.translate(POINT_SIGN.x, POINT_SIGN.y)
+	ctx.strokeStyle = value > 0 ? "#00ff00" : "#ff0000"
+	ctx.stroke(path2D(value > 0 ? BADGE_PATHS.pointPlus : BADGE_PATHS.pointMinus))
+	ctx.translate(-POINT_SIGN.x, -POINT_SIGN.y)
+}
+
 function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: StyleReader,
-		font: string, hourglassScale: number) {
+		font: string, details: number) {
 	ctx.save()
 	ctx.translate(badge.x, badge.y)
 	switch (badge.type) {
 		case 'regard': {
-			const n = Math.abs(badge.value)
-			const bbox: BBox = [-2.5 - 5 * (n - 1), -3.3, 2.5, 2.5]
-			drawShape(ctx, BADGE_PATHS.regard(badge.value), fillStyle(ctx, badge.char, style, bbox))
-			ctx.strokeStyle = badge.value > 0 ? "#00ff00" : "#ff0000"
-			ctx.stroke(path2D(badge.value > 0 ? BADGE_PATHS.pointPlus : BADGE_PATHS.pointMinus))
+			const n = Math.max(Math.abs(badge.value), 1)
+			for (let i = 0; i < n; i++) {
+				drawPoint(ctx, badge.char, badge.value, style, details)
+				ctx.translate(-POINT_SPACING, 0)
+			}
 			break
 		}
 		case 'point':
 			ctx.fillStyle = POINT_BACKGROUND
 			ctx.beginPath()
-			ctx.arc(0, 0, 3, 0, 2 * Math.PI)
+			ctx.arc(0, 0, POINT_RADIUS, 0, 2 * Math.PI)
 			ctx.fill()
 			ctx.strokeStyle = "white"
 			ctx.lineWidth = 0.6
 			ctx.stroke(path2D(BADGE_PATHS.pointArc))
 			drawIcon(ctx, badge.id)
-			ctx.translate(0.3, 0.4)
+			ctx.translate(POINT_SIGN.x, POINT_SIGN.y)
 			ctx.strokeStyle = "#00ff00"
 			ctx.stroke(path2D(BADGE_PATHS.pointPlus))
 			break
@@ -298,28 +321,17 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 				drawIcon(ctx, icon.icon)
 			} else {
 				ctx.save()
-				ctx.translate(0, 0.3)
-				ctx.scale(0.6, 0.6)
-				ctx.fillStyle = "white"
-				ctx.fill(path2D(BADGE_PATHS.heart))
+				ctx.translate(0, COND_HEAD.y)
+				drawHead(ctx, headSrc(icon.head), COND_HEAD.radius, COND_HEAD_CLIP, details)
 				ctx.restore()
 			}
 			break
 		}
 	}
 	ctx.restore()
-	if (hourglassScale > 0 && ((badge.type == 'regard' && !pointPersists(badge.char))
+	if (details > 0 && ((badge.type == 'regard' && !pointPersists(badge.char))
 			|| (badge.type == 'flag' && !flagPersists(badge.flag))))
-		drawHourglass(ctx, badge.x + HOURGLASS.x, badge.y + HOURGLASS.y, hourglassScale)
-}
-
-/** 0 while the badges are too small for the hourglass to be readable, 1 once zoomed in */
-function hourglassVisibility(ctx: CanvasRenderingContext2D) {
-	const { a, b } = ctx.getTransform()
-	const pixelsPerUnit = Math.hypot(a, b) / devicePixelRatio
-	const t = Math.min(1, Math.max(0, (pixelsPerUnit - HOURGLASS_ZOOM[0])
-		/ (HOURGLASS_ZOOM[1] - HOURGLASS_ZOOM[0])))
-	return t * t * (3 - 2 * t)
+		drawHourglass(ctx, badge.x + HOURGLASS.x, badge.y + HOURGLASS.y, details)
 }
 
 function drawHourglass(ctx: CanvasRenderingContext2D, x: number, y: number, visibility: number) {
@@ -349,15 +361,21 @@ function drawHourglass(ctx: CanvasRenderingContext2D, x: number, y: number, visi
 export function createBadgesDrawer(nodes: FcNode[],
 		isLinkEnabled: (node: FcNode) => boolean): FcOverlayDrawer {
 	const badges = nodes.flatMap(node => getBadgesLayout(node, isLinkEnabled))
+	for (const badge of badges) {
+		if (badge.type == 'regard')
+			getHeadImage(headSrc(badge.char))
+		else if (badge.type == 'condition' && 'head' in badge.icon)
+			getHeadImage(headSrc(badge.icon.head))
+	}
 	return (ctx, view, style) => {
 		const font = style.property('--ui-font') || 'sans-serif'
-		const hourglass = hourglassVisibility(ctx)
+		const details = detailsVisibility(ctx)
 		ctx.lineCap = 'round'
 		ctx.textAlign = 'center'
 		for (const badge of badges) {
 			if (badge.x > view.left && badge.x < view.right
 					&& badge.y > view.top && badge.y < view.bottom)
-				drawBadge(ctx, badge, style, font, hourglass)
+				drawBadge(ctx, badge, style, font, details)
 		}
 	}
 }

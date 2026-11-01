@@ -5,15 +5,11 @@ import {BADGE_PATHS as BADGE_PATHS_BASE} from "@tsukiweb/common/icons/badges"
 
 const C = DY*0.8 // unit used for condition badge
 const BADGE_HALF = DY
-export const FLAG_BACKGROUND = "var(--flag-background)"
-export const STRIKE_COLOR = "#ff3b3b"
-export const FLAG_CONTENT = { x: 0.15, y: -0.55, scale: 0.95 }
 export const BADGE_SIZE = 7
 export const badgeViewBox = (left = -BADGE_SIZE/2, width = BADGE_SIZE) =>
   `${left} ${-BADGE_SIZE/2} ${width} ${BADGE_SIZE}`
 export const QUIZ_ICON = { x: -1, scale: 0.75 }
 export const QUIZ_NUMBER_X = 1.4
-export const POINT_BACKGROUND = "#202020"
 
 export const HOURGLASS = {
   x: 2.5, y: -2.3, radius: 1.75,
