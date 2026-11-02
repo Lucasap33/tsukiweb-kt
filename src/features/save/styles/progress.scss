@@ -184,7 +184,9 @@
 
 	.buttons {
 		display: grid;
-		grid-template-columns: 1fr 1px 1fr;
+		grid-auto-columns: minmax(0, 1fr) 1px;
+		grid-auto-flow: column;
+		gap: 1px;
 		font-size: 1.15em;
 		border-top: 1px solid var(--separator);
 
@@ -193,6 +195,12 @@
 
 			&:disabled {
 				opacity: .4;
+			}
+			&.accept {
+				* {
+					filter: drop-shadow(0 0 10px var(--btn-select-accent));
+					overflow: visible;
+				}
 			}
 		}
 		.separator {

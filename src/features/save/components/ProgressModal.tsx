@@ -5,9 +5,11 @@ import { getLocale, useStrings } from "translation/lang"
 import { settings } from "engine/settings"
 import { Button, Modal } from "@tsukiweb/common/ui-core"
 import { audio } from "engine/audio"
-import { GameProgress, PointId } from "app/utils/types";
-import { MdAddCircleOutline } from "react-icons/md";
-import { KtFlagBadge, KtPointBadge } from "assets/icons/badges";
+import { GameProgress, PointId } from "app/utils/types"
+import { MdAddCircleOutline, MdArrowBack, MdCheck, MdClose, MdDeleteOutline, MdPlayArrow } from "react-icons/md"
+import { KtFlagBadge, KtPointBadge } from "assets/icons/badges"
+import { useEventActions } from "@tsukiweb/common/input/eventActions"
+import { savesKeyMap } from "features/game/utils/keybind"
 
 type Props = {
 	show: boolean
@@ -103,7 +105,8 @@ type ProgressButtonProps = {
 	progress?: GameProgress
 	newProgress?: GameProgress
 } & Parameters<typeof Button>[0]
-const ProgressButton = ({progress, newProgress, className, ...props}: ProgressButtonProps)=> {
+
+const ProgressButton = ({progress, newProgress, className, active, ...props}: ProgressButtonProps)=> {
 	const [displayDiff, setDisplayDiff] = useState(0)
 	const strings = useStrings()
 	const onEnter = useCallback(()=> {
@@ -124,7 +127,7 @@ const ProgressButton = ({progress, newProgress, className, ...props}: ProgressBu
 	>
 		{progress ?
 			<ProgressDisplay progress={progress}
-				change={displayDiff > 0 ? newProgress : undefined}/>
+				change={(displayDiff > 0 || active) ? newProgress : undefined}/>
 		: newProgress ?
 			<ProgressDisplay progress={{...newProgress, lastSave: 0}}
 				label={strings.saves.create}/>
@@ -143,6 +146,7 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 	const empty: GameProgress = { flags: [], points: {}, count: 0, lastSave: 0 }
 	const newProgress = progress
 	const isEmptySelected = selected != undefined && !progresses.includes(selected)
+	const deleteEnabled = show && !progress && selected != undefined && !isEmptySelected
 
 	const handleDeleteProgress = useCallback(async (progress: GameProgress) => {
 		const confirmed = await dialog.confirm({
@@ -157,15 +161,22 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 		}
 	}, [strings])
 
-	useEffect(() => {
-		if (!show) return
-		const onKeyDown = (e: KeyboardEvent) => {
-			if (e.key === "Delete" && selected && settings.progresses.includes(selected))
-				handleDeleteProgress(selected)
+	useEventActions(savesKeyMap, (action: string)=> {
+		if (action == "delete") {
+			handleDeleteProgress(progress!)
+			return true
 		}
-		window.addEventListener("keydown", onKeyDown, true)
-		return () => window.removeEventListener("keydown", onKeyDown, true)
-	}, [show, selected, handleDeleteProgress])
+		return false
+	}, document, {capture: true}, deleteEnabled,
+	[progress, handleDeleteProgress])
+	const onClick = useCallback((p: GameProgress)=> {
+		if (selected == p) {
+			setSelected(undefined)
+			onSelect(p)
+		} else {
+			setSelected(p)
+		}
+	}, [selected])
 
 	return (
 		<Modal
@@ -177,32 +188,47 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 				{progresses.map((progress, i) =>
 					<ProgressButton key={i}
 						progress={progress} newProgress={newProgress}
-						onClick={onSelect.bind(undefined, progress)}
+						onClick={onClick.bind(undefined, progress)}
 						active={selected == progress}
 						className={selected == progress ? " selected" : ""}/>
 				)}
 				
 				<ProgressButton newProgress={newProgress}
-					onClick={onSelect.bind(undefined, empty)}
+					onClick={onClick.bind(undefined, empty)}
 					active={isEmptySelected}
 					className={`create${isEmptySelected ? " selected" : ""}${newProgress ? " preview" : ""}`}/>
 			</div>
 
 			<div className="buttons">
-				<Button onClick={onSelect.bind(undefined, undefined)}
+				<Button onClick={()=> {
+						setSelected(undefined)
+						onSelect(undefined)
+					}}
 					nav-auto={1}
 					audio={audio}
 				>
-					{strings.close}
+					{newProgress ? <MdClose/> : <MdArrowBack/>}
 				</Button>
-				<div className="separator"/>
-				<Button onClick={onSelect.bind(undefined, selected)}
-					nav-auto={1}
-					audio={audio}
-					disabled={selected == undefined}
-				>
-					{strings.ok}
-				</Button>
+				{selected && <>
+					<div className="separator"/>
+					<Button onClick={onSelect.bind(undefined, selected)}
+						nav-auto={1}
+						audio={audio}
+						className={"accept"}
+					>
+						{newProgress ? <MdCheck/> : <MdPlayArrow/>}
+						
+					</Button>
+				</>}
+				{deleteEnabled && <>
+					<div className="separator"/>
+					<Button onClick={handleDeleteProgress.bind(undefined, selected)}
+						nav-auto={1}
+						audio={audio}
+					>
+						<MdDeleteOutline/>
+					</Button>
+				</>}
 			</div>
 		</Modal>
 	)
