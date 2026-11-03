@@ -156,7 +156,8 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 			color: "#ab0000"
 		})
 		if (confirmed) {
-			settings.progresses = settings.progresses.filter(p => p != progress)
+			const i = settings.progresses.indexOf(progress)
+			settings.progresses.splice(i, 1)
 			setSelected(undefined)
 		}
 	}, [strings])
