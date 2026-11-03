@@ -9,6 +9,8 @@ import { ProgressPanel } from "features/game/components/shared/ProgressPanel";
 import { getSceneTitle, isScene } from "engine/utils";
 import { SceneName } from "app/utils/types";
 import { settings } from "engine/settings";
+import { useEventActions } from "@tsukiweb/common/input/eventActions";
+import { savesKeyMap } from "features/game/utils/keybind";
 
 type SaveDetailsProps = {
 	id?: number
@@ -24,6 +26,15 @@ const SaveDetails = ({id, saveState, deleteSave}: SaveDetailsProps)=> {
 	const points = settings.flowchartBadges ? progress?.points ?? {} : {}
 	const flags = settings.flowchartBadges ? progress?.flags ?? [] : []
 	const lastScene = saveState?.pages.findLast(p=>p.label && isScene(p.label))?.label as SceneName|undefined
+	
+	useEventActions(savesKeyMap, (action: string)=> {
+		if (action == "delete" && id != undefined) {
+			deleteSave(id)
+			return true
+		}
+		return false
+	}, document, {capture: true}, id != undefined,
+	[id])
 
 	return (
 		<section className={classNames("info", { "preview-save": saveState !== undefined })}>		
