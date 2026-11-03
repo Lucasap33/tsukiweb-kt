@@ -89,6 +89,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
 
     private _tempVariables = new Map<string, string|number>()
     private _deathCount = 0
+    private _canSave = false
 //_______________________public attributes & properties_________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     
@@ -115,6 +116,11 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
         if (initContext.deathCount)
             this._deathCount = initContext.deathCount
 
+        this.addEventListener('finish', ()=> {
+            if (this.continueScript)
+                this._canSave = true
+        })
+
     }
 
 //#endregion ###################################################################
@@ -131,6 +137,13 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
 
     get deathCount() {
         return this._deathCount
+    }
+    get canSaveProgress() {
+        return this._canSave
+    }
+
+    onProgressSaved() {
+        this._canSave = true
     }
 
     override isLinePageBreak(line: string, index: number, sceneLines: string[],

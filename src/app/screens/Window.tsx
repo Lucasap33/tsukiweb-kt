@@ -32,52 +32,19 @@ import { strings } from 'translation/lang';
 const Window = () => {
 	useScreenAutoNavigate(SCREEN.WINDOW)
 	useDefaultNavBack(()=>actionsHandler.back())
-	const [savedProgress, setSavedProgress] = useState<GameProgress|undefined>()
 	const rootRef = useRef(null)
 
 	const [script, remountScript] = useResettable(()=> {
 		const s = new ScriptPlayer(history)
 		s.addEventListener('finish', (complete) => {
 			if (complete) {
-				//TODO prompt to ask where to save progress
-				const filter = (k:string)=>!(SCENE_ATTRS['scene-points'].reset.includes(k))
-				const progress: GameProgress = {
-					flags: Array.from(script.flags).filter(filter),
-					points: Object.fromEntries(script.points.entries().filter(([k,v])=> filter(k))),
-					lastSave: Date.now(),
-					count: script.deathCount+1
-				}
-				setSavedProgress(progress)
+				displayMode.screen = SCREEN.TITLE
 			}
 		})
 		if (s.graphics.bgAlign)
 			displayMode.bgAlignment = s.graphics.bgAlign
 		return s
 	})
-	const onProgessSelect = useCallback(async (obj: GameProgress|undefined)=> {
-		if (!obj) {
-			const confirmed = await dialog.confirm({
-				text: <>
-					{strings.saves['progress-discard']}
-				</>,
-				labelYes: strings.yes,
-				labelNo: strings.no,
-			})
-			if (!confirmed)
-				return
-		} else if (savedProgress) {
-			const progresses = [...settings.progresses]
-			const i = progresses.indexOf(obj)
-			if (i >= 0)
-				progresses[i] = savedProgress
-			else
-				progresses.push(savedProgress)
-			settings.progresses = progresses
-		}
-		setSavedProgress(undefined)
-		displayMode.screen = SCREEN.TITLE
-
-	}, [savedProgress])
 
 	const [layers] = useResettable(()=> new InGameLayersHandler({
 		backgroundMenu: 'remove'
@@ -175,7 +142,6 @@ const Window = () => {
 				qLoad={actionsHandler.quickLoad.bind(actionsHandler)}
 				qSave={actionsHandler.quickSave.bind(actionsHandler)}
 			/>
-			<ModalProgressSelection show={savedProgress != undefined} onSelect={onProgessSelect} progress={savedProgress}/>
 		</m.div>
 	)
 }

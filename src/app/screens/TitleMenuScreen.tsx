@@ -9,7 +9,7 @@ import { TitleMenuButton } from '@tsukiweb/common/ui-core'
 import { dialog } from '@tsukiweb/common/ui-core/components/ModalPrompt'
 import classNames from "classnames"
 import { audio } from "engine/audio"
-import { useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { continueGame, newGame, savesManager } from "engine/savestates";
 import { importGameData, settings } from "engine/settings";
 import AppInfo from "features/title-menu/components/AppInfo";
@@ -17,7 +17,7 @@ import TranslationSwitch from "features/title-menu/components/TranslationSwitch"
 import { useStrings } from "translation/lang";
 import { SCREEN } from "app/utils/display";
 import { useScreenAutoNavigate } from "app/hooks";
-import { FULLSAVE_EXT, SAVE_EXT } from "app/utils/constants";
+import { FULLSAVE_EXT, SAVE_EXT, SCENE_ATTRS } from "app/utils/constants";
 import { GameProgress } from "app/utils/types";
 import ModalProgressSelection from "features/save/components/ProgressModal";
 
@@ -56,6 +56,7 @@ const TitleMenu = () => {
 	const [, navigate] = useLocation()
 	const canResume = useRef(savesManager.savesCount > 0 || history.pagesLength > 0)
 	const [newGameSelectShow, setNewGameSelectShow] = useState<boolean>(false)
+	const [progressToSave, setProgressToSave] = useState<GameProgress>()
 
 	const openLoad = async () => {
 		if (savesManager.savesCount === 0) {
@@ -69,6 +70,48 @@ const TitleMenu = () => {
 		}
 		navigate(SCREEN.LOAD)
 	}
+	useEffect(()=> {
+		const script = history.script
+		if (script?.canSaveProgress) {
+			//TODO prompt to ask where to save progress
+			const filter = (k:string)=>!(SCENE_ATTRS['scene-points'].reset.includes(k))
+			const progress: GameProgress = {
+				flags: Array.from(script.flags).filter(filter),
+				points: Object.fromEntries(script.points.entries().filter(([k,v])=> filter(k))),
+				lastSave: Date.now(),
+				count: script.deathCount+1
+			}
+			setProgressToSave(progress)
+		} else {
+			setProgressToSave(undefined)
+		}
+	}, [history.script?.canSaveProgress])
+
+	const progressSelectCallback = useCallback(async (p: GameProgress|undefined)=> {
+		if (progressToSave) {
+			if (!p) {
+				const confirm = await dialog.confirm({
+					text: <>
+						{strings.saves['progress-discard']}
+					</>,
+					labelYes: strings.yes,
+					labelNo: strings.no,
+				})
+				if (!confirm)
+					return
+			} else {
+				const i = settings.progresses.indexOf(p)
+				if (i < 0)
+					settings.progresses.push(progressToSave)
+				else
+					settings.progresses[i] = progressToSave
+			}
+			history.script?.onProgressSaved()
+			setProgressToSave(undefined)
+		} else if (p)
+			newGame(p)
+		setNewGameSelectShow(false)
+	}, [progressToSave])
 
 	return (
 		<nav className="menu">
@@ -76,11 +119,10 @@ const TitleMenu = () => {
 				<TitleMenuButton audio={audio} onClick={()=>setNewGameSelectShow(true)} nav-auto={1}>
 					{strings.title.start}
 				</TitleMenuButton>
-				<ModalProgressSelection show={newGameSelectShow} onSelect={(p: GameProgress|undefined)=> {
-					setNewGameSelectShow(false)
-					if (p)
-						newGame(p)
-				}}/>
+				<ModalProgressSelection
+					show={newGameSelectShow || progressToSave != undefined}
+					progress={progressToSave}
+					onSelect={progressSelectCallback}/>
 
 				{canResume.current &&
 				<TitleMenuButton audio={audio} onClick={continueGame} nav-auto={1}>
