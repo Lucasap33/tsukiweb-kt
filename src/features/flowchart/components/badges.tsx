@@ -80,6 +80,12 @@ export const BADGE_PATHS = {...BADGE_PATHS_BASE,
       .11-.84.38-.09.72.1.72.37zm-.91-.3c-.11.19-.15.49.02.75-.14-.06-.31-.25-.3
       -.39.03-.21.19-.32.28-.36zm.06.8c.12.08-.07.55-.37.19-.16.3-.7.15-.51-.13
       -.06.32.44.3.5.05.14.21.33.19.38-.11z`,
+    celroom: `M-.6-.45a1.1 1.1 90 10.1.5A.65.65 90 01.5.05
+      a1.1 1.1 90 10.1-.5A1.1 1.1 90 00-.6-.45Z`,
+    celroom_old: `M1 0a.2.2 90 011.2 0 .2.2 90 01-1.2 0ZM-1 0a.2.2 90 01-1.2 0
+      .2.2 90 111.2 0M-.6-.45a1.1 1.1 90 10.1.5A.6.6 90 01.5.05
+      a1.1 1.1 90 10.1-.5A1.1 1.1 90 00-.6-.45Z`,
+    arkroom: `M-.35-2A2.01 2.01 90 002 .35 2.01 2.01 90 11-.35-2Z`
   } as Record<string, string>,
 }
 
@@ -96,7 +102,7 @@ export function flagPersists(flag: string) {
   return false
 }
 export function pointPersists(point: PointId) {
-  if (['ark', 'cel', 'aki', 'akira'].includes(point))
+  if (['ark', 'cel', 'aki', 'seo'].includes(point))
     return false
   return true
 }
@@ -139,6 +145,14 @@ export const BADGES_DEFINES = <defs>
   {// bed icon
   }
   <path id="onemu-icon" d={BADGE_PATHS.icons.onemu}
+      fill="white" stroke="none"/>
+  {// ciel room icon
+  }
+  <path id="celroom-icon" d={BADGE_PATHS.icons.celroom}
+      fill="white" stroke="none"/>
+  {// ark room icon
+  }
+  <path id="arkroom-icon" d={BADGE_PATHS.icons.arkroom}
       fill="white" stroke="none"/>
   {// key icon
   }

@@ -156,20 +156,40 @@ function getBlockProps(
 						addChoiceCondition(t, "*f172", "%flgP")
 				})
 				break
-			case 'f158' : blockFixes.push(b=> {
-					b.insert(1, 'mov $nextflow, ""')
+			case 'f157' : tokenFixes.push(t=> {
+					if (isCmd(t, 'mov', "$nextflow")) {
+						(t as CommandToken).cmd = 'inc'
+						t.args = ['%flg_arkroom']
+					}
 				})
 				break
-			case 'f161' : blockFixes.push(b=> {
-					b.insert(1, 'mov $nextflow, ""')
+			case 'f160' : tokenFixes.push(t=> {
+					if (isCmd(t, 'mov', "$nextflow")) {
+						(t as CommandToken).cmd = 'inc'
+						t.args = ['%flg_kissa']
+					}
 				})
 				break
-			case 'f171' : blockFixes.push(b=> {
-					b.insert(1, 'mov $nextflow, ""')
+			case 'f170' : tokenFixes.push(t=> {
+					if (isCmd(t, 'mov', "$nextflow")) {
+						return false
+					}
 				})
 				break
-			case 'f174' : blockFixes.push(b=> {
-					b.insert(1, 'mov $nextflow, ""')
+			case 'f173' : tokenFixes.push(t=> {
+					if (isCmd(t, 'mov', "$nextflow")) {
+						(t as CommandToken).cmd = 'inc'
+						t.args = ['%flg_celroom']
+					}
+				})
+				break
+			case 'f179' : tokenFixes.push(t=> {
+					if (isCmd(t, 'goto', '$nextflow'))
+						return `
+						if %flg_kissa>0 goto *f161
+						if %flg_celroom>0 goto *f174
+						if %flg_arkroom>0 goto *f158
+						goto *f171`
 				})
 				break
 			case 'f195' : tokenFixes.push(t=> {

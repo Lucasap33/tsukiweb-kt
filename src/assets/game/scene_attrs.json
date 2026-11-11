@@ -306,10 +306,11 @@
       "bunka": ["s17"],
       "eigakan": ["s226"],
       "kashiisyo": ["s225"],
-      "kissa": ["s224"],
+      "kissa": ["s160","s224"],
       "onemu": ["s93", "s94"],
-      "syashin": ["s101"]
-
+      "syashin": ["s101"],
+      "celroom": ["s173"],
+      "arkroom": ["s157"]
     },
     "points": {
       "seo": {"s161": 1, "s164": 1},

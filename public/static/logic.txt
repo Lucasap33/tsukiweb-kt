@@ -977,11 +977,10 @@ select *f157,*f160,*f166,*f170,[%flgP]*f172,*f173
 *f157
 goto *s157
 *s157_end
-mov $nextflow,"*f158"
+inc %flg_arkroom
 if (%flg1<1) goto *f179
 goto *f158
 *f158
-mov $nextflow,""
 goto *s158
 *s158_end
 inc %ark_point
@@ -998,11 +997,10 @@ goto *f180
 *f160
 goto *s160
 *s160_end
-mov $nextflow,"*f161"
+inc %flg_kissa
 if (%flg1<1) goto *f179
 goto *f161
 *f161
-mov $nextflow,""
 goto *s161
 *s161_end
 inc %seo_point
@@ -1046,11 +1044,9 @@ goto *s169
 *s169_end
 goto *f180
 *f170
-mov $nextflow,"*f171"
 if (%flg1<1) goto *f179
 goto *f171
 *f171
-mov $nextflow,""
 goto *s171
 *s171_end
 inc %nana_point
@@ -1062,11 +1058,10 @@ goto *f180
 *f173
 goto *s173
 *s173_end
-mov $nextflow,"*f174"
+inc %flg_celroom
 if (%flg1<1) goto *f179
 goto *f174
 *f174
-mov $nextflow,""
 goto *s174
 *s174_end
 select *f175,*f176
@@ -1093,7 +1088,10 @@ goto *endofplay
 goto *s179
 *s179_end
 inc %flg1
-goto $nextflow
+if (%flg_kissa>0) goto *f161
+if (%flg_celroom>0) goto *f174
+if (%flg_arkroom>0) goto *f158
+goto *f171
 *f180
 goto *s180
 *s180_end
