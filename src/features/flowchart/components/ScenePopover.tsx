@@ -81,7 +81,7 @@ const SceneBadges = ({badges}: {badges: BadgeEntry})=> {
 		{(flags || (char && value != null)) &&
 			<div className="badges">
 				{flags?.map(f=>
-					<KtFlagBadge flag={f} transient={!flagPersists(f)}/>
+					<KtFlagBadge key={f} flag={f} transient={!flagPersists(f)}/>
 				)}
 				{char && value != null &&
 					<KtPointBadge name={char} value={value} transient={!pointPersists(char)}/>

@@ -5,9 +5,6 @@ import {BADGE_PATHS as BADGE_PATHS_BASE} from "@tsukiweb/common/icons/badges"
 
 const C = DY*0.8 // unit used for condition badge
 const BADGE_HALF = DY
-export const BADGE_SIZE = 7
-export const badgeViewBox = (left = -BADGE_SIZE/2, width = BADGE_SIZE) =>
-  `${left} ${-BADGE_SIZE/2} ${width} ${BADGE_SIZE}`
 export const QUIZ_ICON = { x: -1, scale: 0.75 }
 export const QUIZ_NUMBER_X = 1.4
 
@@ -82,96 +79,35 @@ export const BADGE_PATHS = {...BADGE_PATHS_BASE,
       -.06.32.44.3.5.05.14.21.33.19.38-.11z`,
     celroom: `M-.6-.45a1.1 1.1 90 10.1.5A.65.65 90 01.5.05
       a1.1 1.1 90 10.1-.5A1.1 1.1 90 00-.6-.45Z`,
-    celroom_old: `M1 0a.2.2 90 011.2 0 .2.2 90 01-1.2 0ZM-1 0a.2.2 90 01-1.2 0
-      .2.2 90 111.2 0M-.6-.45a1.1 1.1 90 10.1.5A.6.6 90 01.5.05
-      a1.1 1.1 90 10.1-.5A1.1 1.1 90 00-.6-.45Z`,
     arkroom: `M-.35-2A2.01 2.01 90 002 .35 2.01 2.01 90 11-.35-2Z`
   } as Record<string, string>,
 }
 
-function characterGradient(char: PointId) {
-  return <linearGradient id={`${char}_grad`} x1="0" x2="1" y1="1" y2="0">
-    <stop offset="0" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, white)`} />
-    <stop offset="1" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, black)`} />
-  </linearGradient>
-}
+const GRADIENT_CHARS: PointId[] = ['ark', 'cel', 'his', 'aki', 'ren', 'seo', 'nana']
 
-export function flagPersists(flag: string) {
-  if (flag.length == 1) return true
-  if (flag.startsWith('quiz')) return true
-  return false
-}
-export function pointPersists(point: PointId) {
-  if (['ark', 'cel', 'aki', 'seo'].includes(point))
-    return false
-  return true
-}
+export const flagPersists = (flag: string) =>
+  flag.length == 1 || flag.startsWith('quiz')
+
+export const pointPersists = (point: PointId) =>
+  !['ark', 'cel', 'aki', 'seo'].includes(point)
 
 export const BADGES_DEFINES = <defs>
-  {characterGradient('ark')}
-  {characterGradient('cel')}
-  {characterGradient('his')}
-  {characterGradient('aki')}
-  {characterGradient('ren')}
-  {characterGradient('seo')}
-  {characterGradient('nana')}
-
-  {// costume icon (hanger)
-  }
-  <path id="kashiisyo-icon" d={BADGE_PATHS.icons.kashiisyo}
-      fill="white" stroke="none"/>
-  {// movie icon
-  }
-  <path id="eigakan-icon" d={BADGE_PATHS.icons.eigakan}
-      fill="white" stroke="none"/>
-  {// tea icon
-  }
-  <path id="kissa-icon_old" d="m-.94 1.4h1.6c.44 0 .8-.36.8-.8h.26
-      C2.32.6 2.79.12 2.79-.46s-.48-1.06-1.06-1.06h-3.26c-.11 0-.2.09-.2.2V.61
-      c0 .44.36.8.8.79zM1.73-1c.3 0 .54.24.54.54s-.24.54-.54.54h-.26V-.99h.26z"
-      fill="white" stroke="none"/>
-  {// tea icon (2)
-  }
-  <path id="kissa-icon" d={BADGE_PATHS.icons.kissa}
-      fill="white" stroke="none"/>
-  {// paint icon
-  }
-  <path id="bunka-icon" d={BADGE_PATHS.icons.bunka}
-      fill="white" stroke="none"/>
-  {// picture icon
-  }
-  <path id="syashin-icon" d={BADGE_PATHS.icons.syashin}
-      fill="white" stroke="none"/>
-  {// bed icon
-  }
-  <path id="onemu-icon" d={BADGE_PATHS.icons.onemu}
-      fill="white" stroke="none"/>
-  {// ciel room icon
-  }
-  <path id="celroom-icon" d={BADGE_PATHS.icons.celroom}
-      fill="white" stroke="none"/>
-  {// ark room icon
-  }
-  <path id="arkroom-icon" d={BADGE_PATHS.icons.arkroom}
-      fill="white" stroke="none"/>
-  {// key icon
-  }
-  <path id="kagi-icon" d={BADGE_PATHS.icons.kagi}
-      fill="white" stroke="none"/>
-  {// quiz icon
-  }
-  <path id="quiz-icon" d={BADGE_PATHS.icons.quiz}
-      fill="white" stroke="none"/>
+  {GRADIENT_CHARS.map(char =>
+    <linearGradient key={char} id={`${char}_grad`} x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, white)`} />
+      <stop offset="1" stopColor={`color-mix(in oklch, var(--color-${char}) 80%, black)`} />
+    </linearGradient>
+  )}
+  {Object.entries(BADGE_PATHS.icons).map(([name, d]) =>
+    <path key={name} id={`${name}-icon`} d={d} fill="white" stroke="none"/>
+  )}
   {[1,2,3].map(n=>
-  <g id={`quiz${n}-icon`} key={`quiz${n}-icon`}>
-    <use href="#quiz-icon" transform={`translate(${QUIZ_ICON.x},0) scale(${QUIZ_ICON.scale})`}/>
-    <text x={QUIZ_NUMBER_X} y="1.6" stroke="none" fill="white" fontSize={4}
-          textAnchor="middle">
-      {n}
-    </text>
-  </g>)}
-  {//cat head icon
-  }
-  <path id="kaibyo-icon" d={BADGE_PATHS.icons.kaibyo}
-      fill="white" stroke="none"/>
+    <g id={`quiz${n}-icon`} key={n}>
+      <use href="#quiz-icon" transform={`translate(${QUIZ_ICON.x},0) scale(${QUIZ_ICON.scale})`}/>
+      <text x={QUIZ_NUMBER_X} y="1.6" stroke="none" fill="white" fontSize={4}
+            textAnchor="middle">
+        {n}
+      </text>
+    </g>
+  )}
 </defs>

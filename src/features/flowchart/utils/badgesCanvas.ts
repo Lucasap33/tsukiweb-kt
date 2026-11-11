@@ -48,82 +48,48 @@ const headSrc = (char: string) => `./res/chars/${char}.webp`
 //##############################################################################
 
 function conditionLayout(node: FcNode, condition: Condition): BadgeLayout {
-	let x, y, angle, iconX, iconY, icon: string | undefined, align, m
-	let badgeIcon: BadgeIcon, fill: BadgeFill
+	let x = node.centerX, y = node.top + 0.1
+	let angle = 0, iconX = 0, iconY = DY*0.56
 	if (typeof condition == 'object') {
-		let above, below
-		({condition, above, below, icon, align} = condition)
-		if (above) {
-			const anchorNode = node.flowchart.getNode(above)!
-			x = anchorNode.centerX
-			y = anchorNode.top - DY
-		} else if (below) {
-			const anchorNode = node.flowchart.getNode(below)!
-			x = anchorNode.centerX
-			y = anchorNode.bottom + DY
-		} else {
-			x = node.centerX
-			y = node.top - DY
-		}
-		if (align) {
-			const anchorNode = node.flowchart.getNode(align)!
-			y = anchorNode.top - DY
-		}
-		if (x < node.centerX) {
-			angle = -90
-			iconX = DY*0.1
+		const { above, below } = condition
+		const anchorNode = node.flowchart.getNode(above || below || node.id)!
+		x = anchorNode.centerX
+		y = above || !below ? anchorNode.top - DY : anchorNode.bottom + DY
+		if (condition.align)
+			y = node.flowchart.getNode(condition.align)!.top - DY
+		const side = Math.sign(x - node.centerX)
+		if (side != 0) {
+			angle = side * 90
+			iconX = -side * DY*0.1
 			iconY = DY*0.48
-			x += DY+0.1
-		} else if (x > node.centerX) {
-			angle = 90
-			iconX = -DY*0.1
-			iconY = DY*0.48
-			x -= DY+0.1
+			x -= side * (DY+0.1)
 		} else {
-			angle = 0
-			iconX = 0
-			iconY = DY*0.56
 			y += DY+0.1
 		}
-		if (icon)
-			condition = icon
-	} else {
-		angle = 0
-		iconX = 0
-		iconY = DY*0.56
-		x = node.centerX
-		y = node.top + 0.1
+		condition = condition.icon || condition.condition
 	}
 	let negative = condition.startsWith('!')
 	if (negative)
 		condition = condition.substring(1)
+	let icon: BadgeIcon = { dots: true }, fill: BadgeFill = 'background'
+	const point = condition.match(REGARD_REGEX)?.[1]
 	if (condition.includes('||') || condition.includes('&&')) {
-		badgeIcon = { dots: true }
-		fill = 'background'
 		negative = false
 	} else if (condition.startsWith('%flg')) {
-		let flag = condition.substring(4)
-		if (flag.startsWith('_'))
-			flag = flag.substring(1)
-		badgeIcon = flag.length > 1 ? { icon: flag } : { text: flag }
+		const flag = condition.substring(condition.startsWith('%flg_') ? 5 : 4)
+		icon = flag.length > 1 ? { icon: flag } : { text: flag }
 		fill = FLAG_BACKGROUND
-	} else if ((m = condition.match(REGARD_REGEX))) {
-		const id = m[1]
-		if (ICON_POINTS.includes(id)) {
-			badgeIcon = { icon: id }
-			fill = POINT_BACKGROUND
-		} else {
-			badgeIcon = { head: id as PointId }
-			fill = id
-		}
+	} else if (point && ICON_POINTS.includes(point)) {
+		icon = { icon: point }
+		fill = POINT_BACKGROUND
+	} else if (point) {
+		icon = { head: point as PointId }
+		fill = point
 	} else if (condition.startsWith('%quiz')) {
-		badgeIcon = { icon: 'quiz' }
+		icon = { icon: 'quiz' }
 		fill = FLAG_BACKGROUND
-	} else {
-		badgeIcon = { dots: true }
-		fill = 'background'
 	}
-	return { type: 'condition', x, y, angle, iconX, iconY, icon: badgeIcon, fill, negative }
+	return { type: 'condition', x, y, angle, iconX, iconY, icon, fill, negative }
 }
 
 /** Position and content of the badges of a node, in flowchart coordinates */
@@ -226,20 +192,19 @@ function drawFlag(ctx: CanvasRenderingContext2D, fill: string, drawContent: Void
 	ctx.restore()
 }
 
-function drawPoint(ctx: CanvasRenderingContext2D, char: PointId, value: number,
-		style: StyleReader, headVisibility: number) {
-	const r = POINT_RADIUS
+function drawPoint(ctx: CanvasRenderingContext2D, fill: string | CanvasGradient,
+		positive: boolean, drawContent: VoidFunction) {
 	ctx.beginPath()
-	ctx.arc(0, 0, r, 0, 2 * Math.PI)
-	ctx.fillStyle = fillStyle(ctx, char, style, [-r, -r, r, r])
+	ctx.arc(0, 0, POINT_RADIUS, 0, 2 * Math.PI)
+	ctx.fillStyle = fill
 	ctx.fill()
 	ctx.strokeStyle = "white"
 	ctx.lineWidth = 0.6
 	ctx.stroke(path2D(BADGE_PATHS.pointArc))
-	drawHead(ctx, headSrc(char), r, POINT_HEAD_CLIP, headVisibility)
+	drawContent()
 	ctx.translate(POINT_SIGN.x, POINT_SIGN.y)
-	ctx.strokeStyle = value > 0 ? "#00ff00" : "#ff0000"
-	ctx.stroke(path2D(value > 0 ? BADGE_PATHS.pointPlus : BADGE_PATHS.pointMinus))
+	ctx.strokeStyle = positive ? "#00ff00" : "#ff0000"
+	ctx.stroke(path2D(positive ? BADGE_PATHS.pointPlus : BADGE_PATHS.pointMinus))
 	ctx.translate(-POINT_SIGN.x, -POINT_SIGN.y)
 }
 
@@ -249,26 +214,21 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 	ctx.translate(badge.x, badge.y)
 	switch (badge.type) {
 		case 'regard': {
-			const n = Math.max(Math.abs(badge.value), 1)
+			const { char, value } = badge
+			const r = POINT_RADIUS
+			const n = Math.max(Math.abs(value), 1)
 			for (let i = 0; i < n; i++) {
-				drawPoint(ctx, badge.char, badge.value, style, details)
+				drawPoint(ctx, fillStyle(ctx, char, style, [-r, -r, r, r]), value > 0,
+					() => drawHead(ctx, headSrc(char), r, POINT_HEAD_CLIP, details))
 				ctx.translate(-POINT_SPACING, 0)
 			}
 			break
 		}
-		case 'point':
-			ctx.fillStyle = POINT_BACKGROUND
-			ctx.beginPath()
-			ctx.arc(0, 0, POINT_RADIUS, 0, 2 * Math.PI)
-			ctx.fill()
-			ctx.strokeStyle = "white"
-			ctx.lineWidth = 0.6
-			ctx.stroke(path2D(BADGE_PATHS.pointArc))
-			drawIcon(ctx, badge.id)
-			ctx.translate(POINT_SIGN.x, POINT_SIGN.y)
-			ctx.strokeStyle = "#00ff00"
-			ctx.stroke(path2D(BADGE_PATHS.pointPlus))
+		case 'point': {
+			const { id } = badge
+			drawPoint(ctx, POINT_BACKGROUND, true, () => drawIcon(ctx, id))
 			break
+		}
 		case 'flag': {
 			const { flag } = badge
 			drawFlag(ctx, style.color(FLAG_BACKGROUND), () => flag.length > 1
