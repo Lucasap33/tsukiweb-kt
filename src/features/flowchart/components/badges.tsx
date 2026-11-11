@@ -107,7 +107,7 @@ export const BADGES_DEFINES = <defs>
   {characterGradient('his')}
   {characterGradient('aki')}
   {characterGradient('ren')}
-  {characterGradient('akira')}
+  {characterGradient('seo')}
   {characterGradient('nana')}
 
   {// costume icon (hanger)

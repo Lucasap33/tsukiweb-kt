@@ -272,8 +272,8 @@
   },
   "scene-points": {
     "reset": [
-      "kissa", "kashiisyo", "eigakan", "onemu", "syashin",
-      "bunka", "aki", "ark", "cel", "akira",
+      "kissa", "kashiisyo", "eigakan", "onemu", "syashin", "celroom", "arkroom",
+      "bunka", "aki", "ark", "cel", "seo",
       "answer"
     ],
     "flags": {
@@ -312,7 +312,7 @@
 
     },
     "points": {
-      "akira": {"s161": 1, "s164": 1},
+      "seo": {"s161": 1, "s164": 1},
       "ark": {"s4": 1, "s8": 1, "s158": 1},
       "cel": {"s5": 1, "s9": 1, "s176": 1},
       "gojitsudan": {"s61": 1, "s65": 1, "s164": 1, "s229": 1},

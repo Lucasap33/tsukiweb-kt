@@ -813,7 +813,7 @@ goto *s303
 *s303_end
 goto *f141
 *f141
-if (%akira_point>=2) goto *f144
+if (%seo_point>=2) goto *f144
 if (%flgC>=1) goto *f143
 goto *f142
 *f142
@@ -1005,7 +1005,7 @@ goto *f161
 mov $nextflow,""
 goto *s161
 *s161_end
-inc %akira_point
+inc %seo_point
 select *f162,*f163
 *f162
 goto *s162
@@ -1019,7 +1019,7 @@ goto *f164
 *f164
 goto *s164
 *s164_end
-inc %akira_point
+inc %seo_point
 inc %gojitsudan_point
 goto *f140
 *f165

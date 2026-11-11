@@ -317,7 +317,7 @@
   
   "badges": {
     "points": {
-      "akira": {"s161":1,"s164":1},
+      "seo": {"s161":1,"s164":1},
       "ark": {"s4":1,"s8":1,"s158":1},
       "cel": {"s5":1,"s9":1,"s176":1},
       "aki": {"s10":1},
@@ -419,7 +419,7 @@
       "s137": {"condition":"%quiz <= 9/10","icon":"!%quiz"},
       "s140": {"condition":"%flgA","below":"bs139"},
       "s143": {"condition":"%flgC","align":"s144"},
-      "s144": "%akira_point>=2",
+      "s144": "%seo_point>=2",
       "s148": {"condition":"%cel_point>=1","below":"as145_1"},
       "s152": {"condition":"%flg5","below":"as145_3"},
       "s153": {"condition":"%flg6 && !%flg7","above":"bs308"},

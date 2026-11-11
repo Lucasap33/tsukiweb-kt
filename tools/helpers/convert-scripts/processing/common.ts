@@ -32,12 +32,13 @@ function processVarName(varName: string) {
 		[/^%yume\d+$/, null], // yume scenes unlock uses veiwed scenes
 		[/^%([a-z_]+)_point$/	, (m: RegExpMatchArray)=> {
 			switch (m[1]) {
-				case 'ren' : case 'ark'	: case 'akira': case 'gojitsudan' :
+				case 'ren' : case 'ark'	: case 'gojitsudan' :
 				case 'kagi': case 'kaibyo': case 'answer': return m[0]
 				case 'hisui'	: return '%his_point'
 				case 'ciel'		: return '%cel_point'
 				case 'nanako'	: return '%nana_point'
 				case 'akiha'	: return '%aki_point'
+				case 'akira'	: return '%seo_point' 
 				case 'kissa'	: return '%flg_kissa'
 				case 'kashiisyo': return '%flg_kashiisyo'
 				case 'eigakan'	: return '%flg_eigakan'

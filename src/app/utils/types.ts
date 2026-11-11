@@ -1,6 +1,6 @@
 import { PartialRecord } from "@tsukiweb/common/types";
 
-export type PointId = 'akira' | 'answer' | 'ark' | 'cel' | 'his' | 'aki' | 'kagi'
+export type PointId = 'seo' | 'answer' | 'ark' | 'cel' | 'his' | 'aki' | 'kagi'
 					| 'kaibyo' | 'nana' | 'ren' | 'gojitsudan'
 
 export type SceneName = `s${number}`
