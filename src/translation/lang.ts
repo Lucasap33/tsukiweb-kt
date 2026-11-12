@@ -10,6 +10,12 @@ import { createTranslationStore } from "@tsukiweb/common/translation/langStore"
 //________________________________private types_________________________________
 //------------------------------------------------------------------------------
 
+export type DailyMessageEntry = {
+  text: string[]
+  fg?: string
+  bg?: string
+}
+
 type StringsTypeBase = {
   id: TranslationId
   lastUpdate: UpdateDateFormat
@@ -20,6 +26,10 @@ type StringsTypeBase = {
     "words": Record<string, string>
   } & Record<ResolutionId, Record<string, string>>
   choices: PartialRecord<LabelName, string[]>
+  "daily-messages": {
+    random: DailyMessageEntry[]
+    dates: Record<string, DailyMessageEntry>
+  }
   scenario: {
     days: string[]
     scenes: typeof SCENE_ATTRS['scene-names']

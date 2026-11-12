@@ -4,7 +4,7 @@ import '@tsukiweb/common/styles/main.scss'
 import '../styles/App.scss'
 import '@tsukiweb/common/graphics/styles/graphics.scss'
 import ExtraShell from "app/layouts/ExtraShell";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import HarvestWind from "app/components/HarvestWind";
 import ConfigScreen from "app/screens/ConfigScreen";
 import DisclaimerScreen from "app/screens/DisclaimerScreen";
@@ -17,6 +17,11 @@ import Window from "app/screens/Window";
 import { SCREEN } from "app/utils/display";
 import DreamsScreen from "app/screens/DreamsScreen";
 import SummerFesScreen from "app/screens/SummerFesScreen";
+import DailyMessageScreen from "app/screens/DailyMessageScreen";
+import { DailyMessage, pickDailyMessage } from "@features/title-menu/utils/daily-message";
+import { imageSrc } from "translation/assets";
+import { waitLanguageLoad } from "translation/lang";
+import { settings } from "engine/settings";
 
 const AnimatedRoutes = () => {
 	const [location] = useLocation()
@@ -29,18 +34,43 @@ const AnimatedRoutes = () => {
 		return entryPath === '/' && !disclaimerSeen
 	})
 
+	const [dailyMessage, setDailyMessage] = useState<DailyMessage | null>(null)
+	const dailyMessageRef = useRef<DailyMessage | null>(null)
+	const [showDailyMessage, setShowDailyMessage] = useState(false)
+	const showIntro = showDisclaimer || showDailyMessage
+
 	useEffect(() => {
-		if (showDisclaimer) {
+		if (showIntro) {
 			document.documentElement.dataset.preloading = 'disclaimer'
 			return
 		}
 
 		delete document.documentElement.dataset.preloading
-	}, [showDisclaimer])
+	}, [showIntro])
+
+	useEffect(() => {
+		if (!showDisclaimer || !settings.dailyMessage) return
+		let cancelled = false
+		waitLanguageLoad().then(() => {
+			if (cancelled) return
+			const message = pickDailyMessage()
+			if (!message) return
+			for (const id of [message.bg, message.fg])
+				new Image().src = imageSrc(id)
+			dailyMessageRef.current = message
+			setDailyMessage(message)
+		})
+		return () => { cancelled = true }
+	}, [])
 
 	const markDisclaimerAsSeen = useCallback(() => {
 		sessionStorage.setItem('app_disclaimer_seen', 'true')
+		setShowDailyMessage(dailyMessageRef.current != null)
 		setShowDisclaimer(false)
+	}, [])
+
+	const closeDailyMessage = useCallback(() => {
+		setShowDailyMessage(false)
 	}, [])
 
 	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES, SCREEN.SUMMER_FES, SCREEN.DREAMS].some(path =>
@@ -48,11 +78,11 @@ const AnimatedRoutes = () => {
 	)
 	const keyPresence = isExtra ? "extra" : pathname
 	const showBackdrop = pathname !== "/window"
-	const titleKey = showDisclaimer ? "title-behind-disclaimer" : "title"
+	const titleKey = showIntro ? "title-behind-disclaimer" : "title"
 
 	return (
 		<LazyMotion features={domAnimation} strict>
-			<HarvestWind active={showBackdrop && !showDisclaimer} />
+			<HarvestWind active={showBackdrop && !showIntro} />
 			<div className="page-backdrop" data-variant={pathname === "/" ? "title" : "default"} aria-hidden />
 			<AnimatePresence mode="wait">
 				<Switch location={pathname} key={keyPresence}>
@@ -92,7 +122,10 @@ const AnimatedRoutes = () => {
 				</Switch>
 			</AnimatePresence>
 			<AnimatePresence>
-				{showDisclaimer && <DisclaimerScreen onAccept={markDisclaimerAsSeen} />}
+				{showDisclaimer && <DisclaimerScreen key="disclaimer" onAccept={markDisclaimerAsSeen} />}
+				{showDailyMessage && dailyMessage &&
+					<DailyMessageScreen key="daily-message" message={dailyMessage} onClose={closeDailyMessage} />
+				}
 			</AnimatePresence>
 		</LazyMotion>
 	)

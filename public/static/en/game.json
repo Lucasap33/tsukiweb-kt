@@ -523,5 +523,1544 @@
       "delay": 21500,
       "bg": "#ffffff"
     }
-  ]
+  ],
+  "daily-messages": {
+    "random": [
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… So-so!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Here and there!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………… 'Mo' or 'to!'"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………… I'm not telling!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………… Relieved!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Disappointment!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Refreshed!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………… Indeed!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Crash!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Bleh!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………… Relaxed!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Smile wide!"
+        ]
+      },
+      {
+        "text": [
+          "Today's horoscope:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Busy!"
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Doujinshi."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……… Who cares if you share it."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Broomstick."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………… Curry bread."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Curry rice."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Heart."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Black cat."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………… A toy switchblade."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………… White ribbon."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………… Glasses."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………… Canned coffee."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Travel bag."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………… Black ribbon."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………… Black knee socks."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………… White turtleneck."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………… Cliff side chest."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………… Spider."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………… Carrot."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………… Carefreeness."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………………… Dog."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Deer."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………… Cheetah."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Tiger."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Cachoosha!"
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Trap field."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………… Plum sandwich."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Maid dress."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Apron."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………… Curry croquette."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Curry dumpling."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Curry udon."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………… Curry ramen."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………… Curry juice."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Chaos."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Snake."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Strawberry."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………… Short haircut."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Mushroom dress."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………… Letter."
+        ]
+      },
+      {
+        "text": [
+          "Today's lucky item:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Moon."
+        ]
+      },
+      {
+        "text": [
+          "The Scenario Director's self-portrait, the",
+          "'Monster Mushroom.'",
+          "This is an old anime character.",
+          "The Director drew it from memory.",
+          "And so it became his self-portrait.",
+          "Did you know that?"
+        ]
+      },
+      {
+        "text": [
+          "Besides 'TYPE-MOON,' the other candidate",
+          "for the circle name was 'Ambushing Knights.'",
+          "It's a relief that one wasn't chosen…"
+        ]
+      },
+      {
+        "text": [
+          "Celebrating the release of Tsukihime.",
+          "The one new item in the Director's room:",
+          " One electric fan.",
+          " The Director was in tears:",
+          "'What an invention!",
+          "And it's not a dream either!'",
+          " Or so he says…"
+        ]
+      },
+      {
+        "text": [
+          "The Art Director tells us his dream:",
+          "'I want to bum around all day drinking tea and reading manga.'"
+        ]
+      },
+      {
+        "text": [
+          "The webmaster says of the Art Director,",
+          "'To him, the world's eight steps of moeness is stone.'"
+        ]
+      },
+      {
+        "text": [
+          "TYPE-MOON's release barbecue:",
+          "The Sound Director, who looks the best, eats the most meat."
+        ]
+      },
+      {
+        "text": [
+          "TYPE-MOON's favorite steak house:",
+          "Saying he's eating the best meat, the webmaster's stomach blew up.",
+          "'Eh! We're not feeding you anymore!'"
+        ]
+      },
+      {
+        "text": [
+          "Anyway, calm down."
+        ]
+      },
+      {
+        "text": [
+          "The Art Director's neighbor:",
+          "Opera singer during both day and night."
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's favorite thing:",
+          "'Meat.'"
+        ]
+      },
+      {
+        "text": [
+          "The Scenario Director's nickname:",
+          "'Lying Adult.'"
+        ]
+      },
+      {
+        "text": [
+          "A thing the Scenario Director likes:",
+          "'Cheese.'"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's saying:",
+          "'Brain cells are going to die.'"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's motto:",
+          "'Don't hold back on enjoying!'"
+        ]
+      },
+      {
+        "text": [
+          "The Scenario Director's motto:",
+          "'Humanity is almighty.'"
+        ]
+      },
+      {
+        "text": [
+          "The Art Director's unsuccessful mail order:",
+          "A maid hug pillow."
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's novel recommendation of the day:",
+          "'The Star is a Grave' by Tani Koushuu"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's novel recommendation of the day:",
+          "'The Door into Summer' by Robert A. Heinlein"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's novel recommendation of the day:",
+          "'To Find Through Death' by Ryuu Keiichirou"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's novel recommendation of the day:",
+          "'Sunstorm' by Arthur C. Clarke"
+        ]
+      },
+      {
+        "text": [
+          "Have you read it?",
+          "　　　　　by the System Manager"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's novel recommendation of the day:",
+          "'The Caves of Steel' by Isaac Asimov"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's novel recommendation of the day:",
+          "'Prelude to Space' by Arthur C. Clarke"
+        ]
+      },
+      {
+        "text": [
+          "The System Manager's novel recommendation of the day:",
+          "'Catchworld' by Chris Boyce"
+        ]
+      },
+      {
+        "text": [
+          "[How to view a rare event]",
+          "Go straight to school without meeting anyone and go to the tea room!"
+        ]
+      },
+      {
+        "text": [
+          "[How to view a rare event]",
+          "What if you make a meal with Hisui in the mansion and walk the hallways during the cultural festival……?"
+        ]
+      },
+      {
+        "text": [
+          "In the encyclopedia, Miyako-chan is in elementary school, but in the game, she's in middle school.",
+          "The correct one is elementary school.",
+          "Her special attack is 'Hell's Tackle!'"
+        ]
+      },
+      {
+        "text": [
+          "Arcueid's name is written A-R-C-U-E-I-D.",
+          "It's merely a coincidence that it resembles 'Dracula.'"
+        ]
+      },
+      {
+        "text": [
+          "Character Personal Data No. 1",
+          "アルクェイド",
+          "Arcueid Brunestud",
+          "　Birthday: December 25th (self-proclaimed)",
+          "　Blood type: unknown",
+          "　Height / Weight: 167cm / 52kg",
+          "　Measurements: B88 W55 H85"
+        ],
+        "fg": "msg/ran_t01"
+      },
+      {
+        "text": [
+          "Character Personal Data No. 2",
+          "シエル",
+          "Ciel",
+          "　Birthday: May 3rd",
+          "　Blood type: 0",
+          "　Height / Weight: 165cm / 52kg",
+          "　Measurements: B85 W56 H88"
+        ],
+        "fg": "msg/ran_t02"
+      },
+      {
+        "text": [
+          "Character Personal Data No. 3",
+          "秋葉",
+          "Tohno Akiha",
+          "　Birthday: September 22nd",
+          "　Blood type: A",
+          "　Height / Weight: 160cm / 45kg",
+          "　Measurements: B73 W57 H79"
+        ],
+        "fg": "msg/ran_t03"
+      },
+      {
+        "text": [
+          "Character Personal Data No. 4",
+          "翡翠",
+          "Hisui",
+          "　Birthday: March 12th",
+          "　Blood type: B",
+          "　Height / Weight: 156cm / 43kg",
+          "　Measurements: B76 W58 H82"
+        ],
+        "fg": "msg/ran_t04"
+      },
+      {
+        "text": [
+          "Character Personal Data No. 5",
+          "琥珀",
+          "Kohaku",
+          "　Birthday: March 12th",
+          "　Blood type: B",
+          "　Height / Weight: 156cm / 43kg",
+          "　Measurements: B78 W58 H80"
+        ],
+        "fg": "msg/ran_t05"
+      },
+      {
+        "text": [
+          "Character Personal Data No. 6",
+          "弓塚さつき",
+          "Yumizuka Satsuki",
+          "　Birthday: August 15th"
+        ],
+        "fg": "msg/ran_t06"
+      },
+      {
+        "text": [
+          "Character Personal Data No. 7",
+          "レン",
+          "Len",
+          "　Birthday: September 9th"
+        ],
+        "fg": "msg/ran_t07"
+      },
+      {
+        "text": [
+          "Bonus Character Personal Data",
+          "ロア",
+          "Michael Roa Valdamjong",
+          "",
+          "ネロ",
+          "Nero Chaos"
+        ]
+      },
+      {
+        "text": [
+          "chobits"
+        ]
+      },
+      {
+        "text": [
+          "Wait a sec!"
+        ]
+      },
+      {
+        "text": [
+          "Dachsund augmentation plan",
+          "　　　～Faster than a bullet～"
+        ]
+      },
+      {
+        "text": [
+          "Dissecting Meat-kun into 17 pieces."
+        ]
+      },
+      {
+        "text": [
+          "Whooo! Stroll!!! Yayaya!"
+        ]
+      },
+      {
+        "text": [
+          "'It's romantic somehow.'"
+        ]
+      },
+      {
+        "text": [
+          "Mushroom-chan punch!"
+        ]
+      },
+      {
+        "text": [
+          "…… Love."
+        ]
+      },
+      {
+        "text": [
+          "Lalalalala--"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There are about 200 of these messages.",
+          "There are also hidden characters.",
+          "So try many times.",
+          "And on certain days, there are special messages."
+        ]
+      },
+      {
+        "text": [
+          "'I'm going to marry Coquelicot--'"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There are about 200 of these messages.",
+          "There are also hidden characters.",
+          "So try many times.",
+          "And on certain days, there are special messages."
+        ]
+      },
+      {
+        "text": [
+          "'I'm not fat……!'"
+        ]
+      },
+      {
+        "text": [
+          "Cat! Cat! Cat!"
+        ]
+      },
+      {
+        "text": [
+          "Yeah, condition down."
+        ]
+      },
+      {
+        "text": [
+          "What I just said was a lie."
+        ]
+      },
+      {
+        "text": [
+          "Hehehe…!"
+        ]
+      },
+      {
+        "text": [
+          "Ah, right. I'm enrolling in the mushroom detective school.",
+          "One, two, three, ooooh!……"
+        ]
+      },
+      {
+        "text": [
+          "Do it first."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There are about 200 of these messages.",
+          "There are also hidden characters.",
+          "So try many times.",
+          "And on certain days, there are special messages."
+        ]
+      },
+      {
+        "text": [
+          "People were crammed into the Art Director's house.",
+          "A man fainted.",
+          "　'So… is the image… done?'",
+          "There's no answer… he looks like a corpse."
+        ]
+      },
+      {
+        "text": [
+          "Whether it be love or morals, duck mongoose looks cool, doesn't it?"
+        ]
+      },
+      {
+        "text": [
+          "Sing, my guitar!"
+        ]
+      },
+      {
+        "text": [
+          "Retirement----"
+        ]
+      },
+      {
+        "text": [
+          "Hmph! Patch! Five hundred million damage!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There are about 200 of these messages.",
+          "There are also hidden characters.",
+          "So try many times.",
+          "And on certain days, there are special messages."
+        ]
+      },
+      {
+        "text": [
+          "Wave goodbye to the repeat loser!"
+        ]
+      },
+      {
+        "text": [
+          "Cake Machinegun Glutton"
+        ]
+      },
+      {
+        "text": [
+          "Sweet potato stuffed with nuts."
+        ]
+      },
+      {
+        "text": [
+          "Lies! I'm going to be a ninja!",
+          "Forget it…"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There are about 200 of these messages.",
+          "There are also hidden characters.",
+          "So try many times.",
+          "And on certain days, there are special messages."
+        ]
+      },
+      {
+        "text": [
+          "New enemy?!",
+          "When I came to, all the money in my wallet had turned into Monopoly money!"
+        ]
+      },
+      {
+        "text": [
+          "Mutated shark… you're pretty strong…"
+        ]
+      },
+      {
+        "text": [
+          "I feel angry for some reason!"
+        ]
+      },
+      {
+        "text": [
+          "To die is to get the substance sucked out."
+        ]
+      },
+      {
+        "text": [
+          "Did you have ramen?"
+        ]
+      },
+      {
+        "text": [
+          "Sleepwalking Series",
+          "'I know your secret!'"
+        ]
+      },
+      {
+        "text": [
+          "Sleepwalking Series",
+          "'But it had already started.'"
+        ]
+      },
+      {
+        "text": [
+          "Sleepwalking Series",
+          "'Eckoeckoazarak.'"
+        ]
+      },
+      {
+        "text": [
+          "Sleepwalking Series",
+          "'You can't win against me.'"
+        ]
+      },
+      {
+        "text": [
+          "Sleepwalking Series",
+          "'Dead End, the love song.'"
+        ]
+      },
+      {
+        "text": [
+          "Sleepwalking Series",
+          "'Now my only joy in life is eating…'"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There are about 200 of these messages.",
+          "There are also hidden characters.",
+          "So try many times.",
+          "And on certain days, there are special messages."
+        ]
+      },
+      {
+        "text": [
+          "In 'Tsukihime 2 ~Imoutohime~' there are 12 little sisters!",
+          "Nii-san will hold your hand, yo!",
+          "Please look forward to it!"
+        ]
+      },
+      {
+        "text": [
+          "In 'Tsukihime 2,' the Tohno mansion turns into a girls' dorm!",
+          "Hijinks with Love, with Hina, with hot springs!",
+          "Look forward to it, really!"
+        ]
+      },
+      {
+        "text": [
+          "If Tsukihime 2 gets made, Enhance is rumored to have a part.",
+          "He looks like the protagonist of Devil M*y Cry. Ah-ha."
+        ]
+      },
+      {
+        "text": [
+          "The Scenario Director, aka 'Lying Adult':",
+          "'The first Dead Apostle Ciel fought was India's Cari du Marche,' the Director said. But the day before he had said that 'there's no such Dead Apostle.' So, chaos ensued.",
+          "Now we don't know what the heck's going on…"
+        ]
+      },
+      {
+        "text": [
+          "The Scenario Director's first H game:",
+          "P*yona P*kona"
+        ]
+      },
+      {
+        "text": [
+          "The webmaster plays S*kura Wars 3.",
+          "A few days later a mysterious letter arrives at the Scenario Director's house.",
+          "'I'm going to marry Coquelicot--!'"
+        ]
+      },
+      {
+        "text": [
+          "The promising Satsuki scenario…",
+          "Rumor has it that it's already completed. Maybe we'll get to see it one day…"
+        ]
+      },
+      {
+        "text": [
+          "The Sound Director used to be a vocalist in college.",
+          "Some day, we might have a theme song with his voice…"
+        ]
+      },
+      {
+        "text": [
+          "The Scenario Director's habit:",
+          "He likes to make life-altering decisions with rock-paper-scissors.",
+          "And then he loses."
+        ]
+      },
+      {
+        "text": [
+          "Again, B46-san found a plethora of typos and spelling mistakes.",
+          "Thank you very much - The Staff"
+        ]
+      },
+      {
+        "text": [
+          "The Art Director took a liking to the theme song of a certain celebrity.",
+          "'Give me a song that makes me feel like my brain is melting,' he asked the webmaster.",
+          "From that day on, every time you phoned him, you could hear the theme song of Sakura Wars 3 in the background."
+        ]
+      },
+      {
+        "text": [
+          "Arihiko, let's go to Maki today.",
+          "'Maki' means 'sword battle.' And supposedly it can also mean 'today will be without misfortune or fraud.'",
+          "The Scenario Director once thought that the latter was the accepted usage of the word."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya - The Scenario Director's recommended scene:",
+          "'Crimson Paper Relations'"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya - The Art Director's favorite character:",
+          "'Tsukihime Souka'"
+        ]
+      },
+      {
+        "text": [
+          "While making Tsukihime, the Art Director's bank account which had two years' worth of savings got emptied.",
+          "Also, the Scenario Director sold ten years' worth of manga and CDs for Tsukihime.",
+          "He complains his otaku essence is now gone along with his merchandise."
+        ]
+      },
+      {
+        "text": [
+          "About the heroines' theme songs that were discussed in 'Gecchan':",
+          "It is said that the Art Director got to choose Hisui's theme song.",
+          "Our sincerest apologies to everyone who thought it didn't fit."
+        ]
+      },
+      {
+        "text": [
+          "About the Tsukihime book 'Plus Period':",
+          "Since its function was emphasized over everything else, a lot of people said that it looks like a textbook. Thinking about it, it indeed looks like one…"
+        ]
+      },
+      {
+        "text": [
+          "Who was the first one to cosplay Hisui?",
+          "A TYPE-MOON's saleswoman.",
+          "Ehem."
+        ]
+      },
+      {
+        "text": [
+          "Many people say that their reason for buying the Tsukihime PLUS-DISK was the saleswoman dressed in a maid's uniform.",
+          "I suppose she was the biggest factor in the sales. (*laugh*)"
+        ]
+      },
+      {
+        "text": [
+          "Originally, Tsukihime was set over the course of one month.",
+          "If we had followed through, maybe we could have achieved the 120 hours that were needed to go through all parts…"
+        ]
+      },
+      {
+        "text": [
+          "Originally, Nero was only planned to be mentioned, and not to actually make an appearance.",
+          "Bow wow panic!"
+        ]
+      },
+      {
+        "text": [
+          "Originally, Ciel-senpai was cute, and the staff all liked her, too.",
+          "Aaah… where did it go wrong… she ended up as such a sober girl… (*cries*)"
+        ]
+      },
+      {
+        "text": [
+          "Originally, Shiki became delinquent after being able to see death…"
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１／Primate Murder",
+          "　Invincible killer. White beast. Gaia's monster that follows only Altrouge.",
+          "　Although not a Dead Apostle, he mimics Altrouge, so he got a taste for human blood.",
+          "　Has absolute authority over whether to kill or let live a person."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　２／The Dark Six",
+          "　The first Dead Apostle. The first system.",
+          "But it hasn't reached hundred percent completion."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　３／Brunestud of the Crimson Moon",
+          "　The Ultimate One."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　４／Zelretch",
+          "　Magic user. Extremely defenseless, but also one of the most righteous persons.",
+          "　Resembles a certain manga's Kujo Jotaro, rumored to have challenged Brunestud of the Crimson Moon because of a simple dislike."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　５／ORT",
+          "　ORT. Lives in a South American village.",
+          "　Has a form similar to a spider."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　６／Rizo-Waal Strout",
+          "　Black Knight Strout. Possesses the magical sword Neardark. One of the top 3.",
+          "　Because of his curse of time, he is thought to be invincible. One of Altrouge's guards.",
+          "　ShiKiller's rival in Tsukihime 2 (*laugh*)",
+          "　No… there is no Tsukihime 2."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　７／Einnashe",
+          "　Used to be a normal Dead Apostle. The current Einnashe is of the second generation."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　８／Fina-Blood Svelten",
+          "　White Knight. Demon of Stratovarius. Has a liking for little boys, so he sucks only male blood.",
+          "　Sponsors a high-class parade, is the captain of a ghost squad. What the heck is that?",
+          "　One of Altrouge's guards."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　９／Altrouge Brunestud",
+          "　Vampire of the Dead Apostles. Mix of True Ancestor and Dead Apostle.",
+          "　Can be called Arcueid's big sister. But her look is that of a 14 year old girl.",
+          "　Usually, she has no special powers, and can't even teleport.",
+          "　But she can, like a magical girl, transform in two stages or something like that."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１０／Nero Chaos",
+          "　Refer to Tsukihime."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１１／Stanrobe Calhin",
+          "　Nickname: 'City Eater.'",
+          "　Big eater. Although destroyed by the church, his essence was enough to destroy everything and everyone related to him.",
+          "　But his annoying qualities could not be matched by any other."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１３／？？？？",
+          "　Only rumored to exist. Tatari (disaster).",
+          "　Tried to make his existence into a phenomenon, but his existence ended."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１４／Van-Fem",
+          "　One of the top Dead Apostles. Has amazing attention to detail, and has a talent at creating large things.",
+          "　Possesses seven magical castles. But one of them fell to the White Knight Blood and his ghost corps. Now both are eyeing each other.",
+          "　Original name Vandehlsteim. A wealthy firm's top. A demon king that resides in light.",
+          "　Seeing a rapid rise in the last few hundred years."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１５／Rita Rozay-en",
+          "　Typical high-class vampire.",
+          "　Inherited her master's property. Does whatever she pleases. But never satisfied. Perhaps a fault of crooked personality?",
+          "　Has a good relationship with Sumire. Thinks that when one dies, the other will probably be the killer. Uh… are they really friends?"
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１６／Gransurg Blackmoa",
+          "　Lord of the Black Wing. Magical existence. Controls the Reality Marble 'Nevermore.'",
+          "　Since he bothers others a lot, he's imprisoned by the church.",
+          "　Used to be a human who researched magic. Now, however, he has the form of a gigantic crow."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１７／Trhvmn Ortenrosse",
+          "　Whitesmith.",
+          "　One of the top Dead Apostles. Doesn't have a special ability - thinks that a vampire doesn't need any, and should just excel at being a vampire.",
+          "　A noble who thinks 'Simple is Best.' But considered to be in the 17th place.",
+          "　Has the largest property out of all the Dead Apostles. One most acquainted with modern technology."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　１８／Enhance",
+          "　Avenger. Killed his master and took his place.",
+          "　Still has a lot of human in him, and so his will is one of the most developed out of the Dead Apostles."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　２０／Merm Solomon",
+          "　Unusually, he hunts vampires, and is in the Burial Agency.",
+          "　Possesses one of the four legendary horses.",
+          "　Although he's a traitor, the others tolerate him.",
+          "　Rumored to be a secret fan of Arcueid."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　２１／Sumire",
+          "　Suma Smire. Lives underwater.",
+          "　Only Dead Apostle to be able to teleport in the air.",
+          "　Transcends the rules of nature. Perhaps a superhuman.",
+          "　A pessimist who does what she feels like, but also one who can enjoy anything.",
+          "　In Tsukihime 2, rumored to be just a simple drunkard older sister who needlessly gets in the way of the murderer."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　２７／Caubac Alcatraz",
+          "　Dead Apostle of the Thousand-Year Lock.",
+          "　A Sorcerer who turned Dead Apostle through research.",
+          "　Invented a treasure chest no one can open, but accidentally trapped himself in there, too.",
+          "　Comedian of the 27 Dead Apostles.",
+          "　But his true abilities… well… he's the comedy director.",
+          "　Acquainted with Zelretch for a long time. Almost a Master Sorcerer."
+        ]
+      },
+      {
+        "text": [
+          "27 Dead Apostle Ancestors Series",
+          "　ＥＸ／Michael Roa Valdamjong",
+          "　Refer to Tsukihime.",
+          "　One who wanted to achieve the ultimate magic."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "The Scenario Director and the Art Director both thought they would fail this time."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "Many parts got cut after the planning stage.",
+          "The biggest would be the Satsuki scenario.",
+          "Next is the characters' H scenes.",
+          "Even though there was a lot of crying about the cuts, we think it turned out clean and tidy. What do you think?"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There was heated debate over whether Akiha should cut her hair in 'A Story for the Evening.'",
+          "Read the story to see the results."
+        ]
+      },
+      {
+        "text": [
+          "Careful! All Ital*ans are Ho*!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "We definitely wanted to do Hisui's and Kohaku's threesome H scene.",
+          "Even though it turned out much smaller than originally planned, we did it!",
+          "It's moe moe~!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "The event CG's were colored by Koyama Hirokazu-san. Please enjoy the art of a master."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "Like last time, the character sprites were colored by the Art Director. He tried his best… 100 pages in three days… (*cries*)"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "This time we received a lot of fan works. Thank you all!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "The side stories, written by the Scenario Director, were made at a pace of about one per day. Tsukihime took on a new face every day!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "The Scenario Director's room didn't have an AC. It was hot!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "The Image movie was produced by [Ti]-san. The movie looks awesome, and he's a nice guy to boot!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "There are more than 100 additional character sprites, but since some are used only once, it doesn't feel like much.",
+          "Damn!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "Tsukihime is nocturnal blue, Kagetsu Tohya is sunset gold. It feels like it would be nice to display the CD covers."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "As for sound, 10 new songs were composed! The Sound Director worked hard!"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya Production Notes",
+          "The System Manager even gave up his main job when there was a ton to do.",
+          "'Uk! Virus-nya?!'"
+        ]
+      },
+      {
+        "text": [
+          "Eternal maiden"
+        ]
+      },
+      {
+        "text": [
+          "To those concerned:",
+          "I know it's confusing, but get Roa and Nero straight."
+        ]
+      },
+      {
+        "text": [
+          "All right! I came to like this person!"
+        ]
+      },
+      {
+        "text": [
+          "But I'm a calculator! The path to victory! I've ensured it!"
+        ]
+      },
+      {
+        "text": [
+          "If I say this, it'll be a losing series.",
+          "The woman in China dress from my hometown wasn't such a person…"
+        ]
+      },
+      {
+        "text": [
+          "This is useless."
+        ]
+      },
+      {
+        "text": [
+          "'I pronounce you guilty!'",
+          "Perhaps one of Enhance's sayings. But actually, the webmaster just stole it from a certain anime."
+        ]
+      },
+      {
+        "text": [
+          "SHIKI-kun, I'll buy you all the coffee you want to drink."
+        ]
+      },
+      {
+        "text": [
+          "Mmm mmmm… 350 grams… I can't eat that… mmm mmm…"
+        ]
+      },
+      {
+        "text": [
+          "That person was no match for me!"
+        ]
+      },
+      {
+        "text": [
+          "It's Ciel, that goes without saying…"
+        ]
+      },
+      {
+        "text": [
+          "You should drink only once you're 20!"
+        ]
+      },
+      {
+        "text": [
+          "Ciel-san, it's India this time."
+        ]
+      },
+      {
+        "text": [
+          "I'll go to sleep soon."
+        ]
+      },
+      {
+        "text": [
+          "Poison Mushroom Sword Skill!",
+          "Lower body sword, vegetable man sword! Many techniques are mingling with each other."
+        ]
+      },
+      {
+        "text": [
+          "Poison Mushroom Boxing.",
+          "Slaughter Vulcan, Dokidoki Genocide, Hyper Tosakill, etc. Idiotic techniques mingling with each other."
+        ]
+      },
+      {
+        "text": [
+          "'Why doesn't Ciel die-nya?'",
+          "'It's India…'"
+        ]
+      }
+    ],
+    "dates": {
+      "1-1": {
+        "text": [
+          "Happy New Year!"
+        ]
+      },
+      "12-25": {
+        "text": [
+          "Merry Christmas and a happy birthday to me!",
+          "I'm expecting presents from everyone!"
+        ],
+        "fg": "msg/ran_t01",
+        "bg": "msg/ran_bg07"
+      },
+      "5-3": {
+        "text": [
+          "My, my. It's my birthday already?",
+          "But my age is still a secret!",
+          "I say that, but even the original author",
+          "forgot…"
+        ],
+        "fg": "msg/ran_t02",
+        "bg": "msg/ran_bg07"
+      },
+      "9-22": {
+        "text": [
+          "It looks like today's my birthday.",
+          "A year went by so quickly.",
+          "Then I'll meet you all again next year!"
+        ],
+        "fg": "msg/ran_t03",
+        "bg": "msg/ran_bg07"
+      },
+      "3-12": {
+        "text": [
+          "They say today's our birthday. I'm glad we",
+          "have made acquaintance. Even though",
+          "Makihisa-san just decided randomly…",
+          "",
+          "Nee-san… You didn't have to mention that…"
+        ],
+        "fg": "msg/ran_t10",
+        "bg": "msg/ran_bg07"
+      },
+      "11-28": {
+        "text": [
+          "Whoooo!",
+          "Mushroom bomb!"
+        ],
+        "fg": "msg/ran_t09",
+        "bg": "msg/ran_bg07"
+      },
+      "8-15": {
+        "text": [
+          "So my birthday exists, too!",
+          "Whooo! I did it!",
+          "Next time I'll be a heroine, too, right,",
+          "Tohno-kun?"
+        ],
+        "fg": "msg/ran_t06",
+        "bg": "msg/ran_bg07"
+      },
+      "9-9": {
+        "text": [
+          "…………………(I was born today.)"
+        ],
+        "fg": "msg/ran_t07",
+        "bg": "msg/ran_bg07"
+      }
+    }
+  }
 }

@@ -16,7 +16,7 @@ const ConfigGameTab = () => {
 	const [showLanguage, setShowLanguage] = useState<boolean>(false)
 	const strings = useStrings()
 	const { conf, update, reset } = useConfig(settings,
-		['textSpeed', 'fixedRatio', 'autoClickDelay', 'nextPageDelay'])
+		['textSpeed', 'fixedRatio', 'autoClickDelay', 'nextPageDelay', 'dailyMessage'])
 	const isFullscreen = useIsFullscreen()
 	
 	const msToS = (ms: number)=>
@@ -97,6 +97,17 @@ const ConfigGameTab = () => {
 					onDecrement={() => adjustDelay('nextPageDelay', -DELAY_STEP)}
 					onIncrement={() => adjustDelay('nextPageDelay', DELAY_STEP)}
 					onChange={e => update('nextPageDelay', parseInt(e.target.value))}
+				/>
+			</ConfigItem>
+
+			<ConfigItem label={strings.config["daily-message"]}>
+				<ConfigButtons
+					currentValue={conf.dailyMessage}
+					onChange={v => update('dailyMessage', v)}
+					btns={[
+						{ label: strings.config.on, value: true },
+						{ label: strings.config.off, value: false },
+					]}
 				/>
 			</ConfigItem>
 

@@ -523,5 +523,1561 @@
       "delay": 21500,
       "bg": "#ffffff"
     }
-  ]
+  ],
+  "daily-messages": {
+    "random": [
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………… Così e così!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Qui e lì!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………… 'Mo' o 'to!'"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………… Non ve lo dico!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………… Sollievo!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Delusione!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………… Rinfrescante!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………… Esatto!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Crash!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Bleh!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………… Relax!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………… Sorriso!"
+        ]
+      },
+      {
+        "text": [
+          "L'oroscopo di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………… Indaffarato!"
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Doujinshi."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "… Non importa se lo condividi."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………… Manico di scopa."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………… Panino al curry."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………… Riso al curry."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Cuoricino."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………… Gatto nero."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………… Coltellino giocattolo."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……… Nastro per capelli bianco."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………… Occhiali."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………… Barattolo di caffé."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………… Borsa da viaggio."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………… Nastro per capelli nero."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………… Calze lunghe nere."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………… Dolcevita bianco."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………… Seno da tavola da surf."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………… Ragno."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………………… Carota."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Spensieratezza."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Cane."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Cervo."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………… Ghepardo."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………………… Tigre."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Cachoosha!"
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………… Campo minato."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………… Sandwich di prugne."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………… Vestito da maid."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………………………………… Grembiule."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "………………………… Croquette di curry."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………… Gnocchi al curry."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………… Udon al curry."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Ramen al curry."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………… Succo di curry."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Caos."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "…………………………………………………… Serpente."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………… Fragola."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………… Capelli corti."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………… Costume da fungo."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………… Lettera."
+        ]
+      },
+      {
+        "text": [
+          "L'oggetto fortunato di oggi:",
+          "………………………………………………………………………………",
+          "………………………………………………………………………………",
+          "……………………………………………………………… Luna."
+        ]
+      },
+      {
+        "text": [
+          "L'autoritratto del Direttore di Scenario, il'Demone Fungo.'",
+          "",
+          "È il personaggio di un vecchio anime.",
+          "Il Direttore lo ha disegnato basandosi sui propri ricordi.",
+          "E così è diventato il suo autoritratto.",
+          "Lo sapevate?"
+        ]
+      },
+      {
+        "text": [
+          "Oltre a 'TYPE-MOON', l'altro candidato",
+          "come nome del circolo era 'Cavalieri in agguato'.",
+          "",
+          "",
+          "",
+          "È un sollievo che non sia stato scelto quello…"
+        ]
+      },
+      {
+        "text": [
+          "Per festeggiare l'uscita di Tsukihime.",
+          "Un nuovo oggetto nell'appartamento del Direttore:",
+          "",
+          " Un ventilatore elettrico.",
+          "",
+          " Il Direttore era in lacrime:",
+          "'Che invenzione!",
+          "E non è nemmeno un sogno!'",
+          " O così ha detto…"
+        ]
+      },
+      {
+        "text": [
+          "Il Direttore Artistico ci ha rivelato il suosogno:",
+          "",
+          "'Voglio passare tutto il giorno in casa, a bere tè e leggere manga.'"
+        ]
+      },
+      {
+        "text": [
+          "Il webmaster, sul Direttore Artistico,",
+          "",
+          "'Per lui, i dieci passi del moe sono tutto.'"
+        ]
+      },
+      {
+        "text": [
+          "Barbecue alla TYPE-MOON per festeggiare:",
+          "Il Direttore del Sonoro, la più bella di tutte, è quella che mangia più carne."
+        ]
+      },
+      {
+        "text": [
+          "La bisteccheria preferita di TYPE-MOON:",
+          "Dicendo che mangia la carne migliore, il webmaster si è sfondato lo stomaco.",
+          "",
+          "",
+          "'Eh! Per te niente più carne!'"
+        ]
+      },
+      {
+        "text": [
+          "Sì, per~ calmati."
+        ]
+      },
+      {
+        "text": [
+          "Il vicino del Direttore Artistico:",
+          "Cantante d'Opera sia di giorno che di notte."
+        ]
+      },
+      {
+        "text": [
+          "Il piatto preferito dell'Amministratore:",
+          "'Carne.'"
+        ]
+      },
+      {
+        "text": [
+          "Il soprannome del Direttore di Scenario:",
+          "'Adulto Bugiardo.'"
+        ]
+      },
+      {
+        "text": [
+          "Un piatto che piace al Direttore di Scenario:",
+          "'Formaggio.'"
+        ]
+      },
+      {
+        "text": [
+          "l'Amministratore dice:",
+          "'I neuroni prima o poi muoiono.'"
+        ]
+      },
+      {
+        "text": [
+          "Il motto dell'Amministratore:",
+          "'Mai trattenersi dal divertirsi!'"
+        ]
+      },
+      {
+        "text": [
+          "Il motto del Direttore di Scenario:",
+          "'L'umanità è onnipotente.'"
+        ]
+      },
+      {
+        "text": [
+          "L'ordine per posta fallito del Direttore Artistico:",
+          "",
+          "Un cuscino a forma di maid."
+        ]
+      },
+      {
+        "text": [
+          "Oggi l'Amministratore",
+          "raccomanda il libro:",
+          "'Le Stelle Sono Tombe' di Tani Koushuu"
+        ]
+      },
+      {
+        "text": [
+          "Oggi l'Amministratore",
+          "raccomanda il libro:",
+          "'La Porta Sull'Estate' di Robert A. Heinlein"
+        ]
+      },
+      {
+        "text": [
+          "Oggi l'Amministratore",
+          "raccomanda il libro:",
+          "'Trovato attraverso la morte' di Ryuu Keiichirou"
+        ]
+      },
+      {
+        "text": [
+          "Oggi l'Amministratore",
+          "raccomanda il libro:",
+          "'L'occhio del sole' dy Arthur C. Clarke"
+        ]
+      },
+      {
+        "text": [
+          "L'avete letto?",
+          "　　　　　l'Amministratore"
+        ]
+      },
+      {
+        "text": [
+          "Oggi l'Amministratore",
+          "raccomanda il libro:",
+          "'Abissi d'acciaio' dy Isaac Asimov"
+        ]
+      },
+      {
+        "text": [
+          "Oggi l'Amministratore",
+          "raccomanda il libro:",
+          "'Preludio allo Spazio' dy Arthur C. Clarke"
+        ]
+      },
+      {
+        "text": [
+          "Oggi l'Amministratore",
+          "raccomanda il libro:",
+          "'Catchworld' dy Chris Boyce"
+        ]
+      },
+      {
+        "text": [
+          "-Come vedere un evento raro-",
+          "Andate dritti a scuola senza incontrare nessuno e andate dritti all'aula del tè!"
+        ]
+      },
+      {
+        "text": [
+          "-Come vedere un evento raro-",
+          "Cosa succede se fate un piatto con Hisui alla villa e poi girate per i corridoi durante il festival della cultura……?"
+        ]
+      },
+      {
+        "text": [
+          "Nell'enciclopedia, Miyako va alle elementari, ma nel gioco va alle medie.",
+          "Quella corretta è l'enciclopedia.",
+          "Il suo attacco speciale è 'Placcaggio Infernale!'"
+        ]
+      },
+      {
+        "text": [
+          "Il nome di Arcueid si scrive A-R-C-U-E-I-D.",
+          "Il fatto che somigli a 'Dracula' è una pura coincidenza.'"
+        ]
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Numero 1",
+          "アルクェイド",
+          "Arcueid Brunestud",
+          "　Compleanno: 25 dicembre (stando a lei)",
+          "　Gruppo sanguigno: sconosciuto",
+          "　Altezza / Peso: 167cm / 52kg",
+          "　Misure: B88 W55 H85"
+        ],
+        "fg": "msg/ran_t01"
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Numero 2",
+          "シエル",
+          "Ciel",
+          "　Compleanno: 3 maggio",
+          "　Gruppo Sanguigno: 0",
+          "　Altezza / Peso: 165cm / 52kg",
+          "　Misure: B85 W56 H88"
+        ],
+        "fg": "msg/ran_t02"
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Numero 3",
+          "秋葉",
+          "Akiha Tohno",
+          "　Compleanno: 22 settembre",
+          "　Gruppo Sanguigno: A",
+          "　Altezza / Peso: 160cm / 45kg",
+          "　Misure: B73 W57 H79"
+        ],
+        "fg": "msg/ran_t03"
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Numero 4",
+          "翡翠",
+          "Hisui",
+          "　Compleanno: 12 marzo",
+          "　Gruppo Sanguigno: B",
+          "　Altezza / Peso: 156cm / 43kg",
+          "　Misure: B76 W58 H82"
+        ],
+        "fg": "msg/ran_t04"
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Numero 5",
+          "琥珀",
+          "Kohaku",
+          "　Compleanno: 12 marzo",
+          "　Gruppo Sanguigno: B",
+          "　Altezza / Peso: 156cm / 43kg",
+          "　Misure: B78 W58 H80"
+        ],
+        "fg": "msg/ran_t05"
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Numero 6",
+          "弓塚さつき",
+          "Satsuki Yumizuka",
+          "　Compleanno: 15 agosto"
+        ],
+        "fg": "msg/ran_t06"
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Numero 7",
+          "レン",
+          "Len",
+          "　Compleanno: 9 settembre"
+        ],
+        "fg": "msg/ran_t07"
+      },
+      {
+        "text": [
+          "Dati sui Personaggi Bonus",
+          "ロア",
+          "Michael Roa Valdamjong",
+          "",
+          "ネロ",
+          "Nero Caos"
+        ]
+      },
+      {
+        "text": [
+          "chobits"
+        ]
+      },
+      {
+        "text": [
+          "Aspettate un secondo!"
+        ]
+      },
+      {
+        "text": [
+          "Progetto per il miglioramento dei Dachshund",
+          "　　　～Più veloci di un proiettile～"
+        ]
+      },
+      {
+        "text": [
+          "Dissezioniamo la bistecchina in 17 pezzi."
+        ]
+      },
+      {
+        "text": [
+          "Wooo! Scivolo!!! Yayaya!"
+        ]
+      },
+      {
+        "text": [
+          "'In qualche modo… è romantico.'"
+        ]
+      },
+      {
+        "text": [
+          "Pugno del fungo!"
+        ]
+      },
+      {
+        "text": [
+          "…… Amore."
+        ]
+      },
+      {
+        "text": [
+          "Lalalalala--"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Ci sono circa 200 messaggi come questo.",
+          "Ci sono anche personaggi nascosti.",
+          "Per cui provate molte volte.",
+          "E in certi giorni compaiono messaggi speciali."
+        ]
+      },
+      {
+        "text": [
+          "'Sposer$ Coquelicot--'"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Ci sono circa 200 messaggi come questo.",
+          "Ci sono anche personaggi nascosti.",
+          "Per cui provate molte volte.",
+          "E in certi giorni compaiono messaggi speciali."
+        ]
+      },
+      {
+        "text": [
+          "'Non sono grassa……!'"
+        ]
+      },
+      {
+        "text": [
+          "Gatto! Gatto! Gatto!"
+        ]
+      },
+      {
+        "text": [
+          "Già, condition down."
+        ]
+      },
+      {
+        "text": [
+          "Ci~ che ho appena detto era una bugia."
+        ]
+      },
+      {
+        "text": [
+          "Hehehe…!"
+        ]
+      },
+      {
+        "text": [
+          "Ah, sì. Voglio iscrivermi alla scuola per detective Fungo.",
+          "Uno, due, tre, ooooh!……"
+        ]
+      },
+      {
+        "text": [
+          "Fallo tu per primo."
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Ci sono circa 200 messaggi come questo.",
+          "Ci sono anche personaggi nascosti.",
+          "Per cui provate molte volte.",
+          "E in certi giorni compaiono messaggi speciali."
+        ]
+      },
+      {
+        "text": [
+          "L'appartamento del Direttore Artistico era pieno di gente.",
+          "Un uomo è svenuto.",
+          "　'Allora… l'immagine… è finita?'",
+          "Nessuna risposta… sembra un cadavere."
+        ]
+      },
+      {
+        "text": [
+          "Che sia per amore o per morale ,le manguste sono fighissime non credete?"
+        ]
+      },
+      {
+        "text": [
+          "Canta, mia chitarra!"
+        ]
+      },
+      {
+        "text": [
+          "Pensione----"
+        ]
+      },
+      {
+        "text": [
+          "Hmf! Patch! Cinque milioni di danno!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Ci sono circa 200 messaggi come questo.",
+          "Ci sono anche personaggi nascosti.",
+          "Per cui provate molte volte.",
+          "E in certi giorni compaiono messaggi speciali."
+        ]
+      },
+      {
+        "text": [
+          "Salutate il perdente che ripete!"
+        ]
+      },
+      {
+        "text": [
+          "Mangiatorte a fuoco rapido"
+        ]
+      },
+      {
+        "text": [
+          "Patata dolce ripiena di noci."
+        ]
+      },
+      {
+        "text": [
+          "Menzogne! Io diventer$ un ninja!",
+          "Lasciamo perdere…"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Ci sono circa 200 messaggi come questo.",
+          "Ci sono anche personaggi nascosti.",
+          "Per cui provate molte volte.",
+          "E in certi giorni compaiono messaggi speciali."
+        ]
+      },
+      {
+        "text": [
+          "Un nuovo nemico?!",
+          "Quando mi sono svegliato tutto il denaro del mio portafoglio era diventato soldi del Monopoli!"
+        ]
+      },
+      {
+        "text": [
+          "Squalo mutante… parecchio forte…"
+        ]
+      },
+      {
+        "text": [
+          "Per qualche motivo sono arrabbiato!"
+        ]
+      },
+      {
+        "text": [
+          "Morire significa che la sostanza ti viene risucchiata fuori."
+        ]
+      },
+      {
+        "text": [
+          "Hai mangiato il ramen?"
+        ]
+      },
+      {
+        "text": [
+          "Serie Sonnambuli",
+          "'Io conosco il tuo segreto!'"
+        ]
+      },
+      {
+        "text": [
+          "Serie Sonnambuli",
+          "'Ormai è già cominciata.'"
+        ]
+      },
+      {
+        "text": [
+          "Serie Sonnambuli",
+          "'Eckoeckoazarak.'"
+        ]
+      },
+      {
+        "text": [
+          "Serie Sonnambuli",
+          "'Non puoi vincere contro di me.'"
+        ]
+      },
+      {
+        "text": [
+          "Serie Sonnambuli",
+          "'Dead End,la canzone dell'amore.'"
+        ]
+      },
+      {
+        "text": [
+          "Serie Sonnambuli",
+          "'Ora la mia sola gioia nella vita è il mangiare…'"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Ci sono circa 200 messaggi come questo.",
+          "Ci sono anche personaggi nascosti.",
+          "Per cui provate molte volte.",
+          "E in certi giorni compaiono messaggi speciali."
+        ]
+      },
+      {
+        "text": [
+          "In 'Tsukihime 2 -Imoutohime-' ci sono 12 sorelline!",
+          "Il tuo Fratellone ti terrà per mano!",
+          "Sarà magnifico!"
+        ]
+      },
+      {
+        "text": [
+          "In 'Tsukihime 2, Villa Tohno diventa un dormitorio femminile!",
+          "Situazioni imbarazzanti e comiche, e anche una bella dose di bagni termali!",
+          "Sarà magnifico, davvero!"
+        ]
+      },
+      {
+        "text": [
+          "Se Tsukihime 2 verrà mai fatto, si dice che comparirà anche Enhance.",
+          "Assomiglia al protagonista di Devil M*y Cry.Ah-ha."
+        ]
+      },
+      {
+        "text": [
+          "Il Direttore di Scenario, ovvero 'Adulto Bugiardo':",
+          "'Il primo Apostolo della Morte che Ciel ha combattuto è stato Kare du Marche, dall'India', così ha detto. Per~ il giorno dopo ha detto che non esisteva nessun Apostolo della Morte con quel nome.' Così siamo precipitati nel caos.",
+          "Adesso non abbiamo idea di cosa stia succedendo…"
+        ]
+      },
+      {
+        "text": [
+          "Il primo gioco H dell'Amministratore:",
+          "P*yona P*kona"
+        ]
+      },
+      {
+        "text": [
+          "Il webmaster gioca a S*kura W*rs 3.",
+          "Un paio di giorni dopo, arriva una misteriosa lettera al Direttore di Scenario",
+          "'Sposer$ Coquelicot--!'"
+        ]
+      },
+      {
+        "text": [
+          "Il promettente scenario di Satsuki…",
+          "Voci dicono che sia già stato completato. forse un giorno ci sarà concesso di leggerlo…"
+        ]
+      },
+      {
+        "text": [
+          "Il Direttore del Sonoro al college era una cantante.",
+          "Magari un giorno potremmo farle cantare una theme song…"
+        ]
+      },
+      {
+        "text": [
+          "Abitudine del Direttore di Scenario:",
+          "Gli piace prendere decisioni importanti giocandosele a sasso, carta, forbice.",
+          "E poi perde."
+        ]
+      },
+      {
+        "text": [
+          "Ancora una volta, il nostro B46 ha trovato un sacco di errori grammaticali e di sintassi.",
+          "Grazie davvero - Lo Staff"
+        ]
+      },
+      {
+        "text": [
+          "Il Direttore Artistico si è innamorato di una theme song cantata da una certa celebrità.",
+          "'Dammi una canzone che mi faccia sentire come se il mio cervello si stesse sciogliendo,' ha chiesto al webmaster.",
+          "Da quel giorno, ogni volta che riceve una telefonata sentiamo tutti la theme song di Sakura Wars 3."
+        ]
+      },
+      {
+        "text": [
+          "Arihiko, oggi andiamo a Maki.",
+          "'Maki' significa 'duello con spade'. E sembra che voglia dire anche 'oggi sarà un giorno senza sfortuna né inganni.'",
+          "Il Direttore di Scenario una volta pensava che il significato comune della parola fosse quello."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya - Il Direttore di Scenario raccomanda la scena:",
+          "'Relazioni di Carta Cremisi'"
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya - Il personaggio preferito delDirettore Artistico:",
+          "'Souka Tsukihime'"
+        ]
+      },
+      {
+        "text": [
+          "Nello sviluppare Tsukihime, il conto in banca del Direttore Artistico, con dentro due anni di risparmi, finì con lo svuotarsi.",
+          "",
+          "E il Direttore di Scenario dovette vendere dieci anni di collezione di manga e CD per completare la novel.",
+          "Piange il fatto che insieme al merchadise se n'è andata anche la sua anima di otaku."
+        ]
+      },
+      {
+        "text": [
+          "Riguardo le image song delle eroine di cui si discute in 'Tè di Luna':",
+          "Voci dicono che quella di Hisui sia stata scelta dal Direttore Artistico.",
+          "Le nostre più sincere scuse a tutti coloro che non l'hanno trovata appropriata."
+        ]
+      },
+      {
+        "text": [
+          "Riguardo il libro di Tsukihime 'Plus Period':",
+          "visto che sopra ogni altra cosa abbiamo enfatizzato la sua funzionalità, a molti è sembrato un libro di testo. A pensarci bene è vero…"
+        ]
+      },
+      {
+        "text": [
+          "Chi è stata la prima cosplayer di Hisui? Una venditrice di TYPE-MOON.",
+          "Ehem."
+        ]
+      },
+      {
+        "text": [
+          "Molti dicono che il loro motivo per comprareil PLUS-DISK è stata la venditrice in costume da maid.",
+          "Suppongo che sia stata l'incentivo maggiore (*ride*)"
+        ]
+      },
+      {
+        "text": [
+          "In origine, Tsukihime era ambientato lungo il corso di un intero mese.",
+          "Se fossimo andati fino in fondo, magari avremmo raggiunto le 120 ore necessarie a inserire tutto…"
+        ]
+      },
+      {
+        "text": [
+          "In origine,Nero doveva solo essere menzionato e non fare un'effettiva comparsa.",
+          "Bow wow panico!"
+        ]
+      },
+      {
+        "text": [
+          "In origine, la senpai Ciel era un personaggio adorabile, e piaceva a tutti nello staff.",
+          "Aaah… dove abbiamo sbagliato… è diventata una ragazza così seriosa… (*piange*)"
+        ]
+      },
+      {
+        "text": [
+          "In origine Shiki avrebbe dovuto diventare unteppista a causa del suo poter vedere la morte…"
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１／Primate Murder",
+          "　Killer invincibile. Bestia bianca. Il mostro di Gaia che segue solo Altrouge",
+          "　Pur non essendo un Apostolo della Morte, imita Altrouge, per cui ha acquisito gusto per il sangue umano.",
+          "　Possiede assoluta autorità sull'uccidere o sul risparmiare una persona."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　２／The Dark Six",
+          "　Il primo Apostolo della Morte. Il primo sistema.",
+          "Per~ non ha ancora raggiunto il cento percento di completamento."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　３／Brunestud della Luna Cremisi",
+          "　L'Essere Perfetto."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　４／Zelretch",
+          "　Stregone. Estremamente vulnerabile eppure uno degli Apostoli più retti.",
+          "　Assomiglia al personaggio di Jotaro Kujo di un certo manga, si dice che abbia sfidatoBrunestud della Luna Cremisi semplicemente perché non gli piaceva."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　５／ORT",
+          "　ORT. Vive in un villaggio del Sudamerica.",
+          "　Ha una forma simile a quella di un ragno."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　６／Rizo-Waal Strout",
+          "　Strout il Cavaliere Nero. Possiede la spada demoniaca Neardark. Tra i tre più potenti.",
+          "　A causa della sua maledizione temporale, si pensa che sia invincibile. È Luogotenentedi Altrouge.",
+          "　Rivale di Shikiller in Tsukihime 2 (*ride*)",
+          "　No… Non esiste nessuno Tsukihime 2."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　７／Einnashe",
+          "　Un tempo era un semplice Apostolo della Morte. L'Einnashe attuale è di seconda generazione."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　８／Fina-Blood Svelten",
+          "　Cavaliere Bianco. Demone di Stratovarius. Preferisce i ragazzini, per cui succhia solo sangue maschile.",
+          "　Organizza parate in grande stile, è capitano di uno squadrone di fantasmi. Cosa diavolo vorrebbe dire?",
+          "　Luogotenente di Altrouge."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　９／Altrouge Brunestud",
+          "　Vampira appartenente agli Apostoli della Morte. Unione di Vero Progenitore e Apostolodella Morte.",
+          "　Pu~ essere considerata la sorella maggioredi Arcueid. Per~ il suo aspetto è quello di una ragazzina di 14 anni.",
+          "　Normalmente, non ha nessun potere speciale,e non sa nemmeno teletrasportarsi.",
+          "　Per~, come una ragazza magica, è in grado di trasformarsi in più stadi, o qualcosa del genere."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１０／Nrvrqsr Caos",
+          "　Fare riferimento a Tsukihime."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１１／Stanrobe Calhin",
+          "　Soprannominato: il Divoratore di Città.'",
+          "　Grande mangiatore. Anche se è stato distrutto dalla Chiesa, la sua essenza è stata sufficiente a distruggere ogni cosa e persona legata a lui.",
+          "　Ma in quanto a qualità fastidiose non aveva pari."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１３／？？？？",
+          "　Si sanno solo voci sulla sua esistenza. Tatari ('Maledizione').",
+          "　Ha cercato di tramutare la propria esistenza in un fenomeno naturale, ma nel farlo è scomparso."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１４／Van-Fem",
+          "　Uno degli Apostoli della Morte più potenti.Ha un'incredibile attenzione per il dettaglio, e talento nel creare grandi edifici.",
+          "　Possiede sette castelli magici. Ma uno di essi è caduto per mano del Cavaliere Bianco Blood e del suo squadrone di fantasmi. Adesso i due sono avversari.",
+          "　Nome Originale, Vandehlsteim. Capo di una ricca compagnia. Un demone che agisce alla luce del sole.",
+          "　È asceso in fretta negli ultimi cento anni."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１５／Rita Rozay-en",
+          "　Tipica vampira nobildonna.",
+          "　Ha ereditato il territorio del proprio padrone. Fa sempre ci~ che vuole. Ma non è mai soddidsfatta. Forse un difetto di personalità?",
+          "　È in buoni rapporti con Sumire. Pensa che se una delle due morirà, probabilmente sarà per mano dell'altra. Uh… questa conta come amicizia?"
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１６／Gransurg Blackmore",
+          "　Signore delle Ali Nere. Entità magica. Controlla il Campo Dimensionale 'Nevermore'.",
+          "　Siccome è sempre stato un fastidio per tutti, è stato imprigionato dalla Chiesa.",
+          "　Un tempo era un umano che studiava la magia. Adesso, per~, ha la forma di un corvogigantesco."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１７／Trhvmn Ortenrosse",
+          "　Signore delle Ali Bianche.",
+          "　Uno degli Apostoli della Morte più potenti.Non possiede abilità speciali - è convinto che un vampiro non ne abbia bisogno, e debba solo eccellere nell'essere vampiro.",
+          "　Un aristocratico che pensa che la semplicità sia la cosa migliore.' Per~ è considerato il diciassettesimo.",
+          "　Ha il territorio più vasto tra tutti gli Apostoli della Morte. È il più avvezzo alla tecnologia moderna."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　１８／Enhance",
+          "　Vendicatore. Ha ucciso il suo padrone e ne ha preso il posto.",
+          "　Possiede ancora molta della propria umanità, per cui la sua forza di volontà tra le più forti tra gli Apostoli della Morte."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　２０／Merem Solomon",
+          "　Cosa insolita, è un cacciatore di vampiri,e lavora per l'Organizzazione Funebre.",
+          "　Possiede uno dei quattro destrieri leggendari.",
+          "　Anche se è un traditore, gli altri lo tollerano.",
+          "　Gira voce che sia un ammiratore segreto diArcueid."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　２１／Sumire",
+          "　Sumire il Demone dell'Acqua. Vive nell'oceano.",
+          "　Il solo Apostolo della Morte capace di teletrasportarsi in aria.",
+          "　Trascende le regole della natura. Forse è superumana.",
+          "　Una cinica che fa solo quello che le va, ma che sa divertirsi con qualsiasi cosa.",
+          "　Gira voce che in Tsukihime 2 sia solo una donna matura alcolizzata che mette i bastoni tra le ruote all'assassino."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　２７／Caubac Alcatraz",
+          "　Apostolo della Morte del Lucchetto Millenario.",
+          "　Un mago che si è trasformato in Apostolo della Morte attraverso la ricerca.",
+          "　Ha inventato un forziere che nessuno pu~ aprire, ma per errore ci si è chiuso dentro anche lui.",
+          " Il giullare dei 27 Progenitori.",
+          "　La sua vera abilità… beh… è dirigere commedie.",
+          "　Conosce Zelretch da molto tempo. È quasi uno Stregone."
+        ]
+      },
+      {
+        "text": [
+          "I 27 Progenitori Degli Apostoli della Morte",
+          "　ＥＸ／Michael Roa Valdamjong",
+          "　Fare riferimento a Tsukihime.",
+          "　Colui che volle raggiungere l'apice della magia."
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Sia il Direttore di Scenario che il Direttore Artistico pensavano che questa volta sarebbe stato un fallimento."
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Dopo la fase di ideazione, molte parti sono state tagliate.",
+          "Il taglio più grande probabilmente è stato quello dello scenario di Satsuki.",
+          "Poi sono state tagliate le sene H dei personaggi.",
+          "Ma anche se sono state sparse molte lacrime per i tagli, pensiamo che il risultato finale sia riuscito piuttosto bene. Voi cosa ne pensate?"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Abbiamo dibattuto in modo acceso se Akiha dovesse tagliarsi i capelli in 'Una Storia per la Sera'.'",
+          "Per sapere il risultato, leggete quella storia."
+        ]
+      },
+      {
+        "text": [
+          "Attenti! Gli Italiani e le Italiane sono tutti dei f*goni!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Volevamo tanto fare la scena H del menage a trois con Hisui e Kohaku.",
+          "E anche se ha finito con l'essere molto più breve di quanto pianificato, ci siamo riusciti!",
+          "È moe moe!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Le immagini evento sono state colorate da Hirozaku Koyama. Apprezzate l'arte di un maestro."
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Come l'ultima volta, gli sprite dei personaggi sono stati colorati dal Direttore Artistico. Ha fatto del suo meglio… 100 pagine in tre giorni… (*piange*)"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Questa volta abbiamo ricevuto un sacco di creazioni dei fan. Grazie a tutti!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Le storie secondarie scritte dal Direttore di Scenario, sono state fatte al ritmo di circa una al giorno. Tsukihime ha preso ognigiorno una nuova faccia!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "L'appartamento del Direttore di Scenario nonaveva condizionatore d'aria. Faceva caldo!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "L'image movie è stato prodotto da Ti. è un filmato bellissimo, e Ti è anche un tipo simpatico!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Ci sono più di 100 character sprite aggiuntivi, ma poiché molti vengono usati un'unica volta, sembrano di meno.",
+          "Dannazione!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Tsukihime è blu notte, Kagetsu Tohya è oro tramonto. Le due copertine una di fianco all'altra sono un bell'accoppiamento"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "Per quanto riguarda l audio, sono stati composti 10 nuovi brani! Il Direttore del Sonoro si è dato molto da fare!"
+        ]
+      },
+      {
+        "text": [
+          "Note di Produzione di Kagetsu Tohya",
+          "L'Amministratore è arrivato a dimettersi dalsuo primo lavoro quando c'è stato un sacco da fare.",
+          "'Uk! Un virus, mya?!'"
+        ]
+      },
+      {
+        "text": [
+          "Eterna fanciulla"
+        ]
+      },
+      {
+        "text": [
+          "Per le persone che se ne preoccupano:",
+          "So che è difficile, ma non confondete Roa e Nero."
+        ]
+      },
+      {
+        "text": [
+          "Bene! Mi sono affezionato a quella persona!"
+        ]
+      },
+      {
+        "text": [
+          "Ma io ho calcolato tutto! La via per la vittoria! È assicurata!"
+        ]
+      },
+      {
+        "text": [
+          "Se lo dico, abbiamo già perso.",
+          "Ma la donna in abiti cinesi che viveva nellamia città non era così…"
+        ]
+      },
+      {
+        "text": [
+          "Che assurdità."
+        ]
+      },
+      {
+        "text": [
+          "'Io ti giudico colpevole!'",
+          "Forse è uno dei detti di Enhance. Per~ in realtà il webmaster lo ha rubato da un certo anime."
+        ]
+      },
+      {
+        "text": [
+          "SHIKI, ti comprer~ tutto il caffè che vuoi."
+        ]
+      },
+      {
+        "text": [
+          "Mmm mmmm… 350 grammi… Non posso mangiarne tanto… mmm mmm…"
+        ]
+      },
+      {
+        "text": [
+          "Non c'è mai stata partita con quello!"
+        ]
+      },
+      {
+        "text": [
+          "È Ciel, naturalmente…"
+        ]
+      },
+      {
+        "text": [
+          "Dovreste bere solo se avete più di 20 anni!"
+        ]
+      },
+      {
+        "text": [
+          "Ciel, questa volta è curry indiano."
+        ]
+      },
+      {
+        "text": [
+          "Tra poco vado a dormire."
+        ]
+      },
+      {
+        "text": [
+          "Mossa con la spada del Fungo velenoso!",
+          "Spada a corpo basso, spada dell'uomo verdura! Molte tecniche si stanno misurando tra loro."
+        ]
+      },
+      {
+        "text": [
+          "Pugilato del Fungo Velenoso.",
+          "Vulcano Massacrante, Genocidio Batticuore, Iper Tosakill, eccetera. Delle tecniche stupide si stanno misurando tra loro."
+        ]
+      },
+      {
+        "text": [
+          "'Come fa Ciel a non morire, mya?'",
+          "'È curry indiano…'"
+        ]
+      }
+    ],
+    "dates": {
+      "1-1": {
+        "text": [
+          "Felice Anno Nuovo!"
+        ]
+      },
+      "12-25": {
+        "text": [
+          "Buon Natale e buon compleanno a me!",
+          "Mi aspetto regali da tutti quanti!"
+        ],
+        "fg": "msg/ran_t01",
+        "bg": "msg/ran_bg07"
+      },
+      "5-3": {
+        "text": [
+          "Oh, cielo. È già il mio compleanno?",
+          "Però la mia età resta un segreto!",
+          "Dico 'segreto',ma in realtà anche l'autore",
+          "se l'è dimenticata…"
+        ],
+        "fg": "msg/ran_t02",
+        "bg": "msg/ran_bg07"
+      },
+      "9-22": {
+        "text": [
+          "Sembra che oggi sia il mio compleanno.",
+          "Come passa in fretta il tempo.",
+          "Allora ci vediamo tutti il prossimo anno!"
+        ],
+        "fg": "msg/ran_t03",
+        "bg": "msg/ran_bg07"
+      },
+      "3-12": {
+        "text": [
+          "Dicono che oggi sia il nostro compleanno. Sono",
+          "felice che siate tutti qui. Anche se",
+          "Fu deciso da Padron Makihisa…",
+          "",
+          "Sorella… Non dovevi dirlo…"
+        ],
+        "fg": "msg/ran_t10",
+        "bg": "msg/ran_bg07"
+      },
+      "11-28": {
+        "text": [
+          "Woooo!",
+          "Bomba Fungo!"
+        ],
+        "fg": "msg/ran_t09",
+        "bg": "msg/ran_bg07"
+      },
+      "8-15": {
+        "text": [
+          "Quindi anche io ho un compleanno!",
+          "Wooo! ce l'ho fatta!",
+          "Significa che la prossima volta sarò",
+          "un'eroina anche io, giusto, Shiki?"
+        ],
+        "fg": "msg/ran_t06",
+        "bg": "msg/ran_bg07"
+      },
+      "9-9": {
+        "text": [
+          "…………………(Io sono nata oggi.)"
+        ],
+        "fg": "msg/ran_t07",
+        "bg": "msg/ran_bg07"
+      }
+    }
+  }
 }

@@ -9,6 +9,7 @@ import { mergeVertical } from '@tsukiweb/common/tools/convert-images/editor.ts'
 import { buildSpritesheets } from '@tsukiweb/common/tools/generate-thumbnails/processor.ts'
 import { main as runLogicScripts } from '../helpers/convert-scripts/processing/logic.ts'
 import { main as runSceneScripts } from '../helpers/convert-scripts/processing/scenes.ts'
+import { main as runDailyMessages } from '../helpers/convert-scripts/processing/daily-messages.ts'
 import type { Scene } from '@tsukiweb/common/tools/generate-thumbnails/processor.ts'
 import {
   FFMPEG_AUDIO_ARGS,
@@ -57,6 +58,8 @@ const ARC_DIRS = [
   'image/tachi',
 ]
 const WORD_IMAGE_FILES = WORD_IMAGE_IDS.map(id => `image/word/${id}.jpg`)
+const MSG_DIR = 'image/msg'
+const MSG_SPRITE_REGEX = /^ran_t\d+\.jpe?g$/i
 
 const arcDir = (paths: Paths) => path.join(paths.workspace, path.basename(paths.arcArchive))
 const nonEmptyDirCheck = (directory: string) => nonEmptyDirectoryCheck(directory, displayPath(directory))
@@ -113,6 +116,21 @@ async function scriptsOutputCheck(paths: Paths): Promise<Check> {
   return combine(checks)
 }
 
+async function prepareMsgImages(source: string, output: string, workspace: string): Promise<void> {
+  if (!(await pathExists(source))) return
+
+  const sprites = path.join(workspace, '_msg_sprites')
+  await ensureEmptyDirInside(workspace, output)
+  await ensureEmptyDirInside(workspace, sprites)
+  for (const file of await fs.readdir(source)) {
+    if (!file.startsWith('ran_')) continue
+    const target = MSG_SPRITE_REGEX.test(file) ? sprites : output
+    await fs.copyFile(path.join(source, file), path.join(target, file))
+  }
+  await applySpriteTransparency(sprites, output)
+  await fs.rm(sprites, { recursive: true })
+}
+
 async function prepareImgFolder(paths: Paths): Promise<void> {
   const source = path.join(arcDir(paths), 'image', 'tachi')
   const tachiOutput = path.join(paths.img, 'tachi')
@@ -133,11 +151,12 @@ async function prepareImgFolder(paths: Paths): Promise<void> {
   await copyDirectory(path.join(arcDir(paths), 'image', 'bg'), path.join(paths.img, 'bg'), paths.workspace)
   await copyDirectory(path.join(arcDir(paths), 'image', 'event'), path.join(paths.img, 'event'), paths.workspace)
   await copyDirectory(path.join(arcDir(paths), 'image', 'word'), path.join(paths.img, 'word'), paths.workspace)
+  await prepareMsgImages(path.join(arcDir(paths), 'image', 'msg'), path.join(paths.img, 'msg'), paths.workspace)
 }
 
 async function extractAssetsAndPrepareImages(paths: Paths): Promise<void> {
   await ensureEmptyDirInside(arcDir(paths), path.join(arcDir(paths), 'image', 'word'))
-  await extractNsa(paths.arcArchive, arcDir(paths), [...ARC_DIRS, ...WORD_IMAGE_FILES])
+  await extractNsa(paths.arcArchive, arcDir(paths), [...ARC_DIRS, MSG_DIR, ...WORD_IMAGE_FILES])
   const nscript = path.join(paths.tools, 'nscript.dat')
   if (await pathExists(nscript)) {
     await extractNscript(nscript, path.join(paths.staticJp, 'sources', 'fullscript-kt_jp.txt'))
@@ -164,6 +183,7 @@ async function runScripts(paths: Paths): Promise<void> {
   await withWorkingDirectory(path.join(paths.tools, 'helpers', 'convert-scripts'), async () => {
     runLogicScripts()
     await runSceneScripts()
+    await runDailyMessages()
   })
 }
 

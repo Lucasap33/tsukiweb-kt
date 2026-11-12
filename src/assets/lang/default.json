@@ -74,6 +74,7 @@
     ],
     "adult-warn": "Prompt to skip H content",
     "fullscreen": "fullscreen",
+    "daily-message": "Daily message",
     "language": "Language",
     "show-locked-content": "Reveal locked content",
     "show-locked-content-help": [
@@ -232,6 +233,10 @@
     "waves": ["./jp/wave/%"]
   },
   "choices": [],
+  "daily-messages": {
+    "random": [],
+    "dates": {}
+  },
 
   "scenario": {
 
