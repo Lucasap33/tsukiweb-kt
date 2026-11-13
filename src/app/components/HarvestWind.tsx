@@ -159,18 +159,28 @@ const createAtlas = (atlasScale: number) => {
 			ctx.clip()
 
 			for (let blade = 0; blade < bladeCount; blade++) {
+				const hasEar = depth > 0 && prng.next() > .8
 				const rootX = offsetX + (blade + prng.next() * .9) * TILE_STRIDE / bladeCount
 				const rootY = offsetY + SPRITE_HEIGHT - 2 - prng.next() * SPRITE_HEIGHT / 3
-				const length = clamp(prng.nextNormal(118, 22), 60, 165)
-				const lean = clamp(prng.nextNormal(.5, .2), .06, .9)
+				const width = (depth == FOREGROUND_DEPTH ? 2.6 : 1.1) + prng.next() * 2.1
+				let length, lean, ctrlXFactor, ctrlYFactor
+				if (hasEar) {
+					length = clamp(prng.nextNormal(94, 18), 48, 132);
+					lean = clamp(prng.nextNormal(.1, .04), .012, .2);
+					ctrlXFactor = (.6 + prng.next() * .2)
+					ctrlYFactor = (.75 + prng.next() * .16)
+				} else {
+					length = clamp(prng.nextNormal(118, 22), 60, 165)
+					lean = clamp(prng.nextNormal(.5, .2), .06, .9)
+					ctrlXFactor = (.18 + prng.next() * .2)
+					ctrlYFactor = (1.02 + prng.next() * .16)
+				}
 				const reach = length * lean
 				const rise = length * clamp(prng.nextNormal(.56, .09), .35, .74)
 				const tipX = rootX + reach
 				const tipY = rootY - rise
-				const ctrlX = rootX + reach * (.18 + prng.next() * .2)
-				const ctrlY = rootY - rise * (1.02 + prng.next() * .16)
-				const width = (depth == FOREGROUND_DEPTH ? 2.6 : 1.1) + prng.next() * 2.1
-				const hasEar = depth > 0 && prng.next() > .8
+				const ctrlX = rootX + reach * ctrlXFactor
+				const ctrlY = rootY - rise * ctrlYFactor
 
 				const gradient = ctx.createLinearGradient(rootX, rootY, tipX, tipY)
 				gradient.addColorStop(0, palette.root)

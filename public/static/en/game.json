@@ -221,6 +221,31 @@
     "s520": [
       "1. Turn towards Arcueid.",
       "2. Run in front of the dump truck."
+    ],
+    "s524": [
+      "1. Expert",
+      "2. Beginner"
+    ],
+    "s525": [
+      "1. Expert",
+      "2. Beginner"
+    ],
+    "s526": [
+      "1. Expert",
+      "2. Beginner"
+    ],
+    "s527": [
+      "1. Well, it's still not over?",
+      "2. Well well, again, it's STILL not over?"
+    ],
+    "s547": [
+      "1. I don't, for some reason.",
+      "2. I do, for some reason."
+    ],
+    "s534": [
+      "1. I want Kohaku.",
+      "2. I want Hisui.",
+      "3. I want both of them."
     ]
   },
   "images": {
