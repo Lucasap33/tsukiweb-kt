@@ -13,6 +13,30 @@ if (%answer_point<0 && %flg_quiz3>0) goto *f136
 if (%answer_point<10) goto *f137
 inc %flg_quiz3
 goto *f136
+*s544_end
+goto *endofplay
+*s545_end
+goto *endofplay
+*s546_end
+goto *endofplay
+*s548_end
+goto *endofplay
+*s549_end
+goto *endofplay
+*s550_end
+goto *endofplay
+*s551_end
+goto *endofplay
+*s552_end
+goto *endofplay
+*s553_end
+goto *endofplay
+*s554_end
+goto *endofplay
+*s555_end
+goto *endofplay
+*s556_end
+goto *endofplay
 *quiz
 mov %answer_point,-1
 rngsel *quiz1,*quiz2,*quiz3
@@ -1166,4 +1190,64 @@ goto *f523
 *f523
 goto *s523
 *s523_end
+goto *endofplay
+*ciel_teacher_1
+goto *s524
+*s524_end
+select *s548,*s549
+*ciel_teacher_2
+goto *s525
+*s525_end
+select *s550,*s551
+*ciel_teacher_3
+goto *s526
+*s526_end
+select *s552,*s553
+*ciel_teacher_4
+goto *s527
+*s527_end
+select *s554,*s555
+*ciel_teacher_5
+goto *s547
+*s547_end
+select *endofplay,*s556
+*yume01
+goto *s528
+*s528_end
+goto *endofplay
+*yume02
+goto *s529
+*s529_end
+goto *endofplay
+*yume03
+goto *s530
+*s530_end
+goto *endofplay
+*yume04
+goto *s531
+*s531_end
+goto *endofplay
+*yume05
+goto *s532
+*s532_end
+goto *endofplay
+*yume06
+goto *s533
+*s533_end
+goto *endofplay
+*yume07
+goto *s534
+*s534_end
+select *s544,*s545,*s546
+*yume08
+goto *s535
+*s535_end
+goto *endofplay
+*yume09
+goto *s536
+*s536_end
+goto *endofplay
+*yume10
+goto *s537
+*s537_end
 goto *endofplay

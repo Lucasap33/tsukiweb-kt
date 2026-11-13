@@ -17,6 +17,9 @@ function isLogicLabel(label: string) {
 	return /^(f|skip)\d+$/.test(label)
 		|| /^twilight_(ep|op(_\d)?)$/.test(label)
 		|| ["quiz"].includes(label)
+		|| /^ciel_teacher_\d?$/.test(label)
+		|| /^yume\d+$/.test(label)
+
 }
 function isSceneLabel(label: string) {
 	return /^se?\d+$/.test(label) || ['openning', 'eclipse'].includes(label) || /^quiz\d(_\d+)?$/.test(label)

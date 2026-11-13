@@ -28,6 +28,8 @@ const redirected_scenes = {
 	f218: null, // replaced by 214
 	twilight_op_2 : "f521", // renamed
 	twilight_op_3 : "f522", // renamed
+	nop: "endofplay",
+	start: "endofplay"
 }
 
 function redirect(token: CommandToken) {
@@ -57,8 +59,8 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 	}
 	if (token instanceof CommandToken) {
 		switch (token.cmd) {
-			case 'br': case 'selgosub': case 'skip': case '!sd':
-				return false// NOTE: 'selgosub' useful 7 times in KT, a solution must be found
+			case 'br': case 'skip': case '!sd': case 'bg':
+				return false
 			case 'mov': case 'add': case 'sub': case 'inc': case 'dec':
 				let varName = processVarName(token.args[0])
 				if (!varName) return false
@@ -73,7 +75,9 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 				return true
 			case 'goto':
 				return redirect(token);
+			case 'selgosub' :
 			case 'select':
+				token.cmd = 'select'
 				token.args = token.args.map(x=>(x).trim())
 				return redirect(token)
 			case '\\' :
@@ -82,6 +86,9 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 				if (token.args[0] != '%msgno' || token.args[1] != '3')
 					throw Error(`Expected arguments "%msgno,3" for "rnd" command`)
 				return true
+			case 'jumpf' :
+			case '~' :
+				return true // only one occurrence in jp yume07
 			default:
 				throw Error(`Unrecognized command ${token.toString()}`)
 		}
@@ -90,7 +97,7 @@ function logic_tokenFixes(token: Token): void|boolean|string {
 }
 function insertSceneEnd(blocks: Map<string, Block>, block: Block) {
 	for (const [token, index] of block) {
-		if (token instanceof CommandToken && token.cmd == 'goto') {
+		if (isCmd(token, 'goto')) {
 			const scene = token.args[0].substring(1) // exclude '*' at the start
 			if (isSceneLabel(scene)) {
 				if (/^quiz\d$/.test(scene)) {
@@ -287,7 +294,24 @@ function getBlockProps(
 						t.args[0] = '*endofplay'
 				})
 				break
-			
+			case 'yume07' :
+				blockFixes.push(b=> {
+					const i = b.findIndex(t=>t instanceof ConditionToken && (t.command as CommandToken).cmd == 'jumpf')
+					if (i >= 0) {
+						const j = b.findIndex(t=>isCmd(t, '~'), i+1)
+						if (j < 0) throw Error(`Expected '~' after jumpf`)
+						b.delete(i, j-i+1)
+					}
+				})
+				break
+			case 'yume01' : case 'yume02' : case 'yume03' : case 'yume04' :
+			case 'yume05' : case 'yume06' : case 'yume06' : case 'yume08' :
+			case 'yume09' : case 'yume10' :
+				blockFixes.push(b=> {
+					const i = b.findIndex(t=>isCmd(t, 'goto'))
+					b.replace(i+1, b.length-i-1, `goto *endofplay`)
+				})
+				break
 			case 'f42' : // -> f43
 			case 'f68' : case 'f69' : case 'f70' : case 'f71' : // -> f248
 			case 'f155' : // -> f156
@@ -299,6 +323,13 @@ function getBlockProps(
 		}
 		if (lang_block_fixes.has(label))
 			blockFixes.push(lang_block_fixes.get(label)!)
+		blockFixes.push((b)=> {
+			// delete all lines after a select
+			const i = b.findIndex(t=>isCmd(t, 'select'));
+			if (i >= 0 && i < b.length-1) {
+				b.delete(i+1, b.length-i-1)
+			}
+		})
 		return { tokenFixes: tokenFixes, blockFixes: blockFixes }
 	} else {
 		return null
@@ -324,6 +355,16 @@ function interBlockFixes(blocks: Map<string, Block>) {
 				inc %flg_quiz${i}
 				goto *f136`)))
 		}
+	}
+	{ // insert block ends for ciel_teacher scenes and yume07 scenes
+		for (const lbl of ['s544', 's545', 's546', 's548', 's549', 's550',
+						   's551', 's552', 's553', 's554', 's555', 's556']) {
+			const blockName = `${lbl}_end`
+			blocks.set(blockName, new Block(blockName, parseScript(`
+				*${blockName}
+				goto *endofplay`)))
+		}
+
 	}
 
 	//sort block again
@@ -414,12 +455,16 @@ function genTree(blocks: Map<string, Block>) {
 				tree.get(child)!.parents.delete(label)
 		}
 	}
-	const root = tree.get('f520')!
-	root.index = 0
+	const roots = ['f520',
+		...[1,2,3,4,5].map(n=>`ciel_teacher_${n}`),
+		...[1,2,3,4,5,6,7,8,9,10].map(n=>`yume${n.toString().padStart(2,'0')}`),
+	].map(lbl=>tree.get(lbl)!)
+	roots.forEach(node=> { node.index = 0 })
+
 
 
 	//5. determine order index, easier for creating contexts when parsing scenes
-	const queue = [root]
+	const queue = [...roots]
 	while (queue.length > 0) {
 		const currentNode = queue.shift()!
 		for (const child of currentNode.children) {
