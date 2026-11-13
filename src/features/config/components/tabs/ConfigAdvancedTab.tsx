@@ -233,21 +233,6 @@ const ConfigAdvancedTab = () => {
 				/>
 			</ConfigItem>
 
-			<ConfigItem
-				label={"Disable progress markers"}
-				helpAction={()=>setModal({show: true, content:
-					<>
-						<h2>{"Disable progress markers"}</h2>
-						{<>
-						<p>Disable flags and lower points that prevent reaching scenes.</p>
-						<p>Flags and points in the history will still be taken into account.</p>
-						</>}
-					</>
-				})}>
-				{flags.map(f=>f)}
-				{Object.entries(points).map(([p,n])=>p)}
-			</ConfigItem>
-
 			<ConfigItem label={strings.config['len-images']}>
 				<input type="file" accept=".nsa" hidden ref={imageInput} onChange={event => {
 					const file = event.currentTarget.files?.[0]

@@ -9,7 +9,9 @@ const SPRITE_HEIGHT = 180
 const TILE_STRIDE = 144
 const MAX_GUSTS = 10
 const MOTE_COUNT = 28
+const FOREGROUND_BLUR = 1.4
 const MOBILE_ANIMATED_ROWS = 3
+const MOBILE_PIXEL_BUDGET = 2_400_000
 const BREATH_AMPL_MEAN = .02
 const BREATH_AMPL_STDEV = .005
 const BREATH_PERIOD_MEAN = 10
@@ -130,14 +132,22 @@ const createAtlas = (atlasScale: number) => {
 	canvas.width = SPRITE_WIDTH * VARIANT_COUNT * atlasScale
 	canvas.height = SPRITE_HEIGHT * DEPTH_COUNT * atlasScale
 
-	const ctx = canvas.getContext("2d")!
-	ctx.setTransform(atlasScale, 0, 0, atlasScale, 0, 0)
-	ctx.lineCap = "round"
-	ctx.lineJoin = "round"
+	const foregroundY = FOREGROUND_DEPTH * SPRITE_HEIGHT
+	const foreground = document.createElement("canvas")
+	foreground.width = canvas.width
+	foreground.height = SPRITE_HEIGHT * atlasScale
+
+	const sharpCtx = canvas.getContext("2d")!
+	const softCtx = foreground.getContext("2d")!
+	sharpCtx.setTransform(atlasScale, 0, 0, atlasScale, 0, 0)
+	softCtx.setTransform(atlasScale, 0, 0, atlasScale, 0, -foregroundY * atlasScale)
 	const prng = new PRNG()
 
 	for (let depth = 0; depth < DEPTH_COUNT; depth++) {
 		const palette = PALETTES[depth]
+		const ctx = depth == FOREGROUND_DEPTH ? softCtx : sharpCtx
+		ctx.lineCap = "round"
+		ctx.lineJoin = "round"
 
 		for (let variant = 0; variant < VARIANT_COUNT; variant++) {
 			const offsetX = variant * SPRITE_WIDTH
@@ -147,8 +157,6 @@ const createAtlas = (atlasScale: number) => {
 			ctx.beginPath()
 			ctx.rect(offsetX, offsetY, SPRITE_WIDTH, SPRITE_HEIGHT)
 			ctx.clip()
-			if (depth == FOREGROUND_DEPTH && "filter" in ctx)
-				ctx.filter = `blur(${1.4 * atlasScale}px)`
 
 			for (let blade = 0; blade < bladeCount; blade++) {
 				const rootX = offsetX + (blade + prng.next() * .9) * TILE_STRIDE / bladeCount
@@ -207,7 +215,14 @@ const createAtlas = (atlasScale: number) => {
 		}
 	}
 
-	ctx.globalAlpha = 1
+	sharpCtx.setTransform(1, 0, 0, 1, 0, 0)
+	sharpCtx.globalAlpha = 1
+	sharpCtx.beginPath()
+	sharpCtx.rect(0, foregroundY * atlasScale, canvas.width, foreground.height)
+	sharpCtx.clip()
+	if ("filter" in sharpCtx)
+		sharpCtx.filter = `blur(${FOREGROUND_BLUR * atlasScale}px)`
+	sharpCtx.drawImage(foreground, 0, foregroundY * atlasScale)
 	atlasCache.set(atlasScale, canvas)
 	return canvas
 }
@@ -232,9 +247,9 @@ const HarvestWind = ({ active, still = false }: Props) => {
 
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 		const mobile = isCoarsePointer()
-		const maxDpr = mobile ? 1 : 2
+		const maxDpr = 2
 		const targetFps = mobile ? 24 : 60
-		const atlasScale = mobile ? 2 : 4
+		const atlasScale = mobile ? 3 : 4
 		const floatersEnabled = !mobile
 		const dimensions = { width: 0, height: 0, horizon: 0, mobile: false }
 		const atlas = createAtlas(atlasScale)
@@ -592,6 +607,8 @@ const HarvestWind = ({ active, still = false }: Props) => {
 		const resize = () => {
 			const rect = container.getBoundingClientRect()
 			dpr = Math.min(window.devicePixelRatio || 1, maxDpr)
+			if (mobile)
+				dpr = Math.max(1, Math.min(dpr, Math.sqrt(MOBILE_PIXEL_BUDGET / (rect.width * rect.height))))
 			dimensions.width = rect.width
 			dimensions.height = rect.height
 			dimensions.horizon = rect.height * HORIZON
