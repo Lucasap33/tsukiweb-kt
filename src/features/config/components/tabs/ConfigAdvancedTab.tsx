@@ -133,7 +133,7 @@ const ConfigAdvancedTab = () => {
 								<div className="comparison-container">
 									<img
 										className="unblurred"
-										src={imageSrc("event/ark_e01", 'src')}
+										src={imageSrc("event/ren_e01", 'src')}
 										alt="Sample image, unblurred"
 										draggable={false}
 									/>
@@ -141,7 +141,7 @@ const ConfigAdvancedTab = () => {
 								<div className="comparison-container">
 									<img
 										className="blurred"
-										src={imageSrc("event/ark_e01", 'src')}
+										src={imageSrc("event/ren_e01", 'src')}
 										alt="Sample image, blurred"
 										draggable={false}
 									/>
@@ -234,13 +234,13 @@ const ConfigAdvancedTab = () => {
 			</ConfigItem>
 
 			<ConfigItem
-				label={"Disable Progress markers"}
+				label={"Disable progress markers"}
 				helpAction={()=>setModal({show: true, content:
 					<>
-						<h2>{"Disable Progress markers"}</h2>
+						<h2>{"Disable progress markers"}</h2>
 						{<>
-						<p>Disable flags and lower points that prevent reaching scenes</p>
-						<p>Flags and points in the history will still be taken into account</p>
+						<p>Disable flags and lower points that prevent reaching scenes.</p>
+						<p>Flags and points in the history will still be taken into account.</p>
 						</>}
 					</>
 				})}>

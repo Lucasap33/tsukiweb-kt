@@ -78,9 +78,15 @@
     "language": "Idioma",
     "show-locked-content": "Reveal locked content",
     "show-locked-content-help": [
-      "Reveals the complete Gallery, Flowchart, Endings, Eclipse, …",
-      "Also fulfills the requirement to access the Far Side.",
+      "Reveals the complete Gallery, Flowchart, …",
       "It can be toggled on and off at any time."
+    ],
+    "smooth-flashes": "Reduce background flashes",
+    "smooth-flashes-low": "Low",
+    "smooth-flashes-high": "High",
+    "smooth-flashes-help": [
+      "Replace instant backgound changes with a fade-in transition.",
+      "The transition lasts 0.08s (%0) or 0.15s (%1)"
     ],
     "game-font": "Game text font",
     "game-font-help": [
