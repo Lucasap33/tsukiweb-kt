@@ -135,7 +135,10 @@
     "quick-save": "Quick Save",
     "local-storage-warning": "Savefiles and settings are stored locally in the web browser, and might get deleted by the browser after a delay of inactivity. Regularly export your data.",
     "local-storage-last-export": "Last full data export date: %0",
-    "progress-discard": "Discard progress ?"
+    "progress-discard": "Discard progress ?",
+    "progress-new": "Start from scratch",
+    "progress-start-hint": "Choose a progression to start a new loop from.",
+    "progress-save-hint": "Choose where to save this loop's progress."
   },
   "game": {
     "skip-viewed": "You have already seen this scene.",

@@ -17,7 +17,7 @@ import TranslationSwitch from "features/title-menu/components/TranslationSwitch"
 import { useStrings } from "translation/lang";
 import { SCREEN } from "app/utils/display";
 import { useScreenAutoNavigate } from "app/hooks";
-import { FULLSAVE_EXT, SAVE_EXT, SCENE_ATTRS } from "app/utils/constants";
+import { EMPTY_PROGRESS, FULLSAVE_EXT, SAVE_EXT, SCENE_ATTRS } from "app/utils/constants";
 import { GameProgress } from "app/utils/types";
 import ModalProgressSelection from "features/save/components/ProgressModal";
 
@@ -116,7 +116,12 @@ const TitleMenu = () => {
 	return (
 		<nav className="menu">
 			<div className='menu-buttons'>
-				<TitleMenuButton audio={audio} onClick={()=>setNewGameSelectShow(true)} nav-auto={1}>
+				<TitleMenuButton audio={audio} onClick={()=> {
+					if (settings.progresses.length == 0)
+						newGame(EMPTY_PROGRESS)
+					else
+						setNewGameSelectShow(true)
+				}} nav-auto={1}>
 					{strings.title.start}
 				</TitleMenuButton>
 				<ModalProgressSelection
