@@ -82,7 +82,7 @@ const AnimatedRoutes = () => {
 
 	return (
 		<LazyMotion features={domAnimation} strict>
-			<HarvestWind active={showBackdrop && !showIntro} />
+			<HarvestWind active={showBackdrop && !showIntro} still={pathname !== "/"} />
 			<div className="page-backdrop" data-variant={pathname === "/" ? "title" : "default"} aria-hidden />
 			<AnimatePresence mode="wait">
 				<Switch location={pathname} key={keyPresence}>

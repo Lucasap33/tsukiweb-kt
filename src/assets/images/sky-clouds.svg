@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" preserveAspectRatio="none">
+	<defs>
+		<filter id="shade" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+			<feTurbulence type="fractalNoise" baseFrequency=".0035 .015" numOctaves="5" seed="11" stitchTiles="stitch"/>
+			<feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2.6 0 0 0 -1.15"/>
+		</filter>
+		<filter id="light" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+			<feTurbulence type="fractalNoise" baseFrequency=".0035 .015" numOctaves="5" seed="11" stitchTiles="stitch"/>
+			<feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  3.6 0 0 0 -1.95"/>
+		</filter>
+		<linearGradient id="shade-color" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#b0441b"/>
+			<stop offset=".55" stop-color="#dc7428"/>
+			<stop offset="1" stop-color="#f8b44c"/>
+		</linearGradient>
+		<linearGradient id="light-color" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#f7b24a"/>
+			<stop offset=".6" stop-color="#ffd56e"/>
+			<stop offset="1" stop-color="#fff0b0"/>
+		</linearGradient>
+		<mask id="shade-mask">
+			<rect width="1600" height="600" filter="url(#shade)"/>
+		</mask>
+		<mask id="light-mask">
+			<rect width="1600" height="600" filter="url(#light)"/>
+		</mask>
+	</defs>
+	<rect width="1600" height="600" fill="url(#shade-color)" mask="url(#shade-mask)" opacity=".65"/>
+	<rect width="1600" height="600" fill="url(#light-color)" mask="url(#light-mask)" opacity=".85"/>
+</svg>
