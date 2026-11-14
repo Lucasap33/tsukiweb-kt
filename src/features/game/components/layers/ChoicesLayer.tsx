@@ -1,36 +1,12 @@
 import { memo, RefObject, useEffect, useRef, useState } from "react"
-import { Bbcode } from "@tsukiweb/common/utils/Bbcode"
 import { ScriptPlayer } from "engine/ScriptPlayer"
-import { Button } from "@tsukiweb/common/ui-core"
+import { ChoicesMenu } from "@tsukiweb/common/choices"
 import { audio } from "engine/audio"
-import * as m from "motion/react-m"
-import { Variants } from "motion/react"
 import { checkIfCondition } from "@tsukiweb/common/script/utils"
 import { Choice, LabelName } from "app/utils/types";
 import { strings } from "translation/lang";
 import { history } from "engine/history"
 import { VarName } from "@tsukiweb/common/script/types";
-
-const container: Variants = {
-	hidden: {},
-	show: {
-		transition: {
-			staggerChildren: 0.1,
-		}
-	}
-}
-
-const item: Variants = {
-	hidden: { opacity: 0, translateY: -10 },
-	show: {
-		opacity: 1,
-		translateY: 0,
-		transition: {
-			duration: 0.2,
-			ease: "easeOut"
-		}
-	}
-}
 
 type SelectionCallback = (choice: Choice)=>void
 
@@ -154,36 +130,17 @@ const ChoicesLayer = ({script, display, navigable}: Props) => {
 			processPrompt.bind(null, setChoices, setText, onSelection))
 	}, [script])
 
-	if (!display || choices.length == 0) return null
-
 	return (
-		<div className="layer" id="layer-choices">
-			<m.div className="choices-container" variants={container} initial="hidden" animate="show">
-				{text.length > 0 &&
-					<m.div className="choice-motion choice-prompt" variants={item}>
-						<span><Bbcode text={text}/></span>
-					</m.div>
-				}
-				{choices.map((choice, i) =>
-					<m.div key={choice.index} variants={item}>
-						<Button
-							disabled={choice.disable ?? false}
-							key={choice.index}
-							variant={null}
-							className="choice-motion choice"
-							onClick={() => onSelection.current?.(choice)}
-							audio={audio}
-							hoverSound="tick"
-							clickSound="impact"
-							//i-0.5 to place cursor on second choice when pressing down
-							{...(navigable && {'nav-y': i-0.5})}
-						>
-							<Bbcode text={choice.str} />
-						</Button>
-					</m.div>
-				)}
-			</m.div>
-		</div>
+		<ChoicesMenu
+			show={display && choices.length > 0}
+			id="layer-choices"
+			className="layer"
+			choices={choices}
+			question={text}
+			onSelect={choice => onSelection.current?.(choice)}
+			navigable={navigable}
+			audio={audio}
+		/>
 	)
 }
 

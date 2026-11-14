@@ -20,6 +20,11 @@
 	--separator: rgb(255 217 106 / 18%);
 	--scrollbar-color: #9f3b1f;
 	--scrollbar-hover: var(--sunset-copper);
+	--choice-glow: rgb(242 166 41 / 65%);
+	--choice-line: linear-gradient(90deg, transparent 0%, var(--sunset-sun) 50%, transparent 100%);
+	--choice-band: rgb(43 13 12 / 74%);
+	--choice-band-active: rgb(197 72 32 / 78%);
+	--choice-text-active: var(--sunset-ivory);
 	--message-container-border: #a44725;
 	--message-container-background: rgb(94 34 20 / 42%);
 	--btn-select-accent: var(--sunset-sun);
