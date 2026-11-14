@@ -79,14 +79,18 @@ export const BADGE_PATHS = {...BADGE_PATHS_BASE,
       -.06.32.44.3.5.05.14.21.33.19.38-.11z`,
     celroom: `M-.6-.45a1.1 1.1 90 10.1.5A.65.65 90 01.5.05
       a1.1 1.1 90 10.1-.5A1.1 1.1 90 00-.6-.45Z`,
-    arkroom: `M-.35-2A2.01 2.01 90 002 .35 2.01 2.01 90 11-.35-2Z`
+    arkroom: `M-.35-2A2.01 2.01 90 002 .35 2.01 2.01 90 11-.35-2Z`,
+    finish: `M-.41-2.11q.41-.59.82 0l.39.57q.15.23.42.31l.66.2q.68.19.25.77
+      l-.42.55q-.17.21-.16.48l.02.7q.01.72-.66.47l-.65-.23q-.26-.09-.51 0
+      l-.66.23q-.67.25-.66-.47l.03-.7q0-.27-.17-.48l-.42-.55q-.43-.58.25-.77
+      l.66-.2q.27-.08.42-.31z`
   } as Record<string, string>,
 }
 
 const GRADIENT_CHARS: PointId[] = ['ark', 'cel', 'his', 'aki', 'ren', 'seo', 'nana']
 
 export const flagPersists = (flag: string) =>
-  flag.length == 1 || flag.startsWith('quiz')
+  flag.length == 1 || flag.startsWith('quiz') || flag == "finish"
 
 export const pointPersists = (point: PointId) =>
   !['ark', 'cel', 'aki', 'seo'].includes(point)

@@ -141,7 +141,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
     }
 
     onProgressSaved() {
-        this._canSave = true
+        this._canSave = false
     }
 
     override isLinePageBreak(line: string, index: number, sceneLines: string[],

@@ -4,7 +4,7 @@ import { SceneShortcut } from "@tsukiweb/common/ui-core"
 import { SceneName } from "app/utils/types";
 import { settings, viewedScene } from "engine/settings";
 import { SCENE_ATTRS } from "app/utils/constants";
-import { FlagBadge } from "@tsukiweb/common/icons/badges";
+import { KtFlagBadge } from "assets/icons/badges";
 
 
 type Help = {
@@ -42,7 +42,7 @@ const helps: Help[] = [
 	},
 	{
 		id: "s527",
-		flag: "8",
+		flag: "finish",
 		images: {
 			bg: "bg/bg_06a",
             r: "tachi/tiel_t04",
@@ -59,8 +59,8 @@ const helps: Help[] = [
     }
 ]
 export const getUnlockedHelps = ()=> settings.unlockEverything ? helps :
-    helps.filter(({flag})=>
-        SCENE_ATTRS["scene-points"].flags[flag].some(lbl=>viewedScene(lbl))
+    helps.slice(1).filter((_, i)=> (i == 0) ||
+        SCENE_ATTRS["scene-points"].flags[helps[i-1].flag]?.some(lbl=>viewedScene(lbl))
     )
 
 const HelpList = () => {
@@ -72,13 +72,13 @@ const HelpList = () => {
 
 	return (
 		<div className="scenes-list">
-			{getUnlockedHelps().map(({ id, flag, images }) =>
+			{getUnlockedHelps().map(({ id, flag, images }, i) =>
 				<SceneShortcut
 					key={id}
 					unlocked={true}
 					attention={!viewedScene(id)}
 					images={(settings.unlockEverything || viewedScene(id)) ? images : {}}
-					title={flag}
+					title={flag ? <KtFlagBadge flag={flag}/> : undefined}
 					onClick={() => play(id)}
 					onKeyDown={e => e.key === "Enter" && play(id)}
 					nav-auto={1}

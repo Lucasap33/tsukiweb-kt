@@ -1,6 +1,7 @@
 import { strings } from "translation/lang";
 import { PointId } from "app/utils/types";
 import FC from "../../../assets/game/flowchart.json"
+import { SCENE_ATTRS } from "app/utils/constants";
 
 export type BadgeEntry = {
   flags?: string[]
@@ -24,11 +25,11 @@ function buildBadgesMap() {
   BADGE_MAP.clear()
   badgeMapLanguageKey = getBadgeMapLanguageKey()
 
-  for (const [char, entries] of Object.entries(FC.badges.points))
+  for (const [char, entries] of Object.entries(SCENE_ATTRS["scene-points"].points))
     for (const [id, value] of Object.entries(entries))
       addBadge(id, { char: char as PointId, value: value as number })
 
-  for (const [flag, ids] of Object.entries(FC.badges.flags))
+  for (const [flag, ids] of Object.entries(SCENE_ATTRS["scene-points"].flags))
     for (const id of ids)
       addBadge(id, { flags: [...(BADGE_MAP.get(id)?.flags ?? []), flag] })
 

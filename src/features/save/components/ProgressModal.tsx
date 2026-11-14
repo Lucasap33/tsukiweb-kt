@@ -19,7 +19,7 @@ type Props = {
 }
 
 const POINTS = ["ren", "nana", "his", "kagi", "kaibyo"] as const
-const FLAGS = [..."12345678ABCDEFGHIJKLMNOPQZ", "quiz1", "quiz2", "quiz3"]
+const FLAGS = [..."12345678ABCDEFGHIJKLMNOPQZ", "quiz1", "quiz2", "quiz3", "finish"]
 
 const LOOP_ARC = <>
 	<path d="M3 13V7A4 4 0 0 1 7 3H33A4 4 0 0 1 37 7V10" fill="none"/>
