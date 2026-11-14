@@ -57,11 +57,11 @@ const Window = () => {
 	useObserver(remountScript, settings, 'language', { skipFirst: true })
 
 	const show: ShowLayers = useMemo(() => {
-		const canSave = script.continueScript
+		const canSave = !script.singleScene
 		return {
 			graphics: true,
 			history: true,
-			flowchart: true,
+			flowchart: !script.extra,
 			save: canSave,
 			load: true,
 			config: true,
@@ -70,7 +70,7 @@ const Window = () => {
 			qLoad: canSave,
 			copyScene: true,
 		}
-	}, [script.currentLabel, script.continueScript])
+	}, [script.currentLabel, script.extra, script.singleScene])
 
 	useScriptManager({script, history, layers, actionsHandler})
 	useGameInputs({rootRef, layers, actionsHandler, show})
@@ -109,7 +109,7 @@ const Window = () => {
 					display={layers.history || layers.flowchart}
 					history={history}
 					layers={layers}
-					continueScript={script.continueScript}
+					singleScene={script.singleScene}
 					show={show}
 					onRewind={remountScript}
 				/>

@@ -43,7 +43,8 @@ const SkipLayer = ({script, history, layers}: Props) => {
 					!viewedScene(label)			||
 					initPage !== 0				||
 					!isScene(label)				||
-					!script.continueScript)
+					script.singleScene			||
+					script.extra)
 					return
 				
 				if (label.startsWith("quiz") && !script.hasFlag(label))

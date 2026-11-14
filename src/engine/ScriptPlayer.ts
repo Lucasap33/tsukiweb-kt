@@ -117,7 +117,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
             this._deathCount = initContext.deathCount
 
         this.addEventListener('finish', ()=> {
-            if (this.continueScript)
+            if (!this.singleScene && !this.extra)
                 this._canSave = true
         })
 
