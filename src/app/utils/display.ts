@@ -7,6 +7,7 @@ export enum SCREEN {
   SUMMER_FES = "/summer-fes",
   SCENES = "/scenes",
   DREAMS = "/dreams",
+  DAILY_MESSAGES = "/daily-messages",
 }
 
 export const displayMode: {

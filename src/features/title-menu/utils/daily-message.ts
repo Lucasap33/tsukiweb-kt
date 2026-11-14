@@ -1,3 +1,4 @@
+import { settings } from "engine/settings"
 import { DailyMessageEntry, strings } from "translation/lang"
 
 const BACKGROUNDS = 6
@@ -7,7 +8,13 @@ const RARE_CHARACTER_RATE = 0.03
 const HISTORY_KEY = "kt_daily_messages"
 const HISTORY_LENGTH = 3
 
-export type DailyMessage = Required<DailyMessageEntry>
+export type DailyMessageId = number | string
+export type DailyMessage = Required<DailyMessageEntry> & { id: DailyMessageId }
+export type DailyMessageItem = {
+	id: DailyMessageId
+	entry: DailyMessageEntry
+	read: boolean
+}
 
 const rnd = (max: number) => Math.floor(Math.random() * max)
 const imageId = (prefix: string, n: number) =>
@@ -34,17 +41,53 @@ function pickRandomIndex(count: number) {
 	return index
 }
 
+function withImages(id: DailyMessageId, entry: DailyMessageEntry): DailyMessage {
+	const bg = imageId('bg', rnd(BACKGROUNDS) + 1)
+	const fg = imageId('t', Math.random() < RARE_CHARACTER_RATE
+		? RARE_CHARACTERS[rnd(RARE_CHARACTERS.length)]
+		: rnd(CHARACTERS) + 1)
+	return { bg, fg, ...entry, id }
+}
+
+function getEntry(id: DailyMessageId): DailyMessageEntry | undefined {
+	const messages = strings["daily-messages"]
+	return typeof id == "number" ? messages?.random?.[id] : messages?.dates?.[id]
+}
+
+export function getDailyMessage(id: DailyMessageId): DailyMessage | null {
+	const entry = getEntry(id)
+	return entry ? withImages(id, entry) : null
+}
+
 export function pickDailyMessage(date = new Date()): DailyMessage | null {
 	const messages = strings["daily-messages"]
 	if (!messages?.random?.length)
 		return null
 
-	const bg = imageId('bg', rnd(BACKGROUNDS) + 1)
-	const fg = imageId('t', Math.random() < RARE_CHARACTER_RATE
-		? RARE_CHARACTERS[rnd(RARE_CHARACTERS.length)]
-		: rnd(CHARACTERS) + 1)
-	const message = messages.dates?.[`${date.getMonth() + 1}-${date.getDate()}`]
-		?? messages.random[pickRandomIndex(messages.random.length)]
+	const dateId = `${date.getMonth() + 1}-${date.getDate()}`
+	return getDailyMessage(messages.dates?.[dateId]
+		? dateId
+		: pickRandomIndex(messages.random.length))
+}
 
-	return { bg, fg, ...message }
+export function markDailyMessageRead(id: DailyMessageId) {
+	if (!settings.readDailyMessages.includes(id))
+		settings.readDailyMessages.push(id)
+}
+
+function dateOrder(id: string) {
+	const [month, day] = id.split('-').map(Number)
+	return month * 100 + day
+}
+
+export function listDailyMessages(): DailyMessageItem[] {
+	const messages = strings["daily-messages"]
+	const isRead = (id: DailyMessageId) =>
+		settings.unlockEverything || settings.readDailyMessages.includes(id)
+	return [
+		...(messages?.random ?? []).map((entry, id) => ({ id, entry, read: isRead(id) })),
+		...Object.entries(messages?.dates ?? {})
+			.sort(([a], [b]) => dateOrder(a) - dateOrder(b))
+			.map(([id, entry]) => ({ id, entry, read: isRead(id) })),
+	]
 }

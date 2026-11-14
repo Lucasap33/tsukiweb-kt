@@ -9,7 +9,7 @@ import { SCREEN, displayMode } from "app/utils/display";
 import { useDefaultNavBack, useNavBackRef } from "@tsukiweb/common/hooks"
 import Ornament from "@assets/images/ornament.webp"
 import PageBackButton from "app/components/PageBackButton"
-import { viewedScene } from "engine/settings";
+import { settings, viewedScene } from "engine/settings";
 import { useFestivalsAccess } from "features/summer-fes/hooks/useFestivalsAccess";
 import { getUnlockedDreams } from "features/dreams/components/DreamsList";
 
@@ -120,6 +120,17 @@ const ExtraMenu = () => {
 					nav-auto={1}>
 					{strings.extra.dreams}
 				</TitleMenuButton>
+				}
+				{(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
+					<TitleMenuButton id="extra-daily-messages"
+						audio={audio}
+						onClick={()=>navigate(SCREEN.DAILY_MESSAGES)}
+						active={currentPage === SCREEN.DAILY_MESSAGES}
+						aria-selected={currentPage === SCREEN.DAILY_MESSAGES}
+						role="tab"
+						nav-auto={1}>
+						{strings.extra["daily-messages"]}
+					</TitleMenuButton>
 				}
 			</div>
 			<div className="back-action">

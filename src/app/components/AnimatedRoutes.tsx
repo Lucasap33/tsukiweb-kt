@@ -18,7 +18,8 @@ import { SCREEN } from "app/utils/display";
 import DreamsScreen from "app/screens/DreamsScreen";
 import SummerFesScreen from "app/screens/SummerFesScreen";
 import DailyMessageScreen from "app/screens/DailyMessageScreen";
-import { DailyMessage, pickDailyMessage } from "@features/title-menu/utils/daily-message";
+import { DailyMessage, markDailyMessageRead, pickDailyMessage } from "@features/title-menu/utils/daily-message";
+import DailyMessagesScreen from "app/screens/DailyMessagesScreen";
 import { imageSrc } from "translation/assets";
 import { waitLanguageLoad } from "translation/lang";
 import { settings } from "engine/settings";
@@ -65,6 +66,8 @@ const AnimatedRoutes = () => {
 
 	const markDisclaimerAsSeen = useCallback(() => {
 		sessionStorage.setItem('app_disclaimer_seen', 'true')
+		if (dailyMessageRef.current)
+			markDailyMessageRead(dailyMessageRef.current.id)
 		setShowDailyMessage(dailyMessageRef.current != null)
 		setShowDisclaimer(false)
 	}, [])
@@ -73,7 +76,7 @@ const AnimatedRoutes = () => {
 		setShowDailyMessage(false)
 	}, [])
 
-	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES, SCREEN.SUMMER_FES, SCREEN.DREAMS].some(path =>
+	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES, SCREEN.SUMMER_FES, SCREEN.DREAMS, SCREEN.DAILY_MESSAGES].some(path =>
 		pathname.startsWith(path)
 	)
 	const keyPresence = isExtra ? "extra" : pathname
@@ -110,6 +113,9 @@ const AnimatedRoutes = () => {
 					</Route>
 					<Route path={SCREEN.DREAMS}>
 						<ExtraShell><DreamsScreen /></ExtraShell>
+					</Route>
+					<Route path={SCREEN.DAILY_MESSAGES}>
+						<ExtraShell><DailyMessagesScreen /></ExtraShell>
 					</Route>
 
 					<Route path={SCREEN.WINDOW}>

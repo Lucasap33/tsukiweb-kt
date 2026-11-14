@@ -16,6 +16,7 @@ class Settings extends SettingsBase {
   trackSource: TrackSourceId = 'tsukibako'
   titleMusic: string = '"*8"'
   dailyMessage: boolean = true
+  readDailyMessages: Array<number|string> = []
 
   eventImages: Array<string> = new Array()
   quiz: Array<number> = []
