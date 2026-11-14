@@ -228,6 +228,10 @@
 				background: linear-gradient(180deg, var(--surface-dark), var(--sunset-brown));
 				border: 1px solid rgba(255, 255, 255, 0.2);
 				.choice {
+					&.selected {
+						text-decoration: underline;
+						color: var(--attention);
+					}
 					$padding: calc(1rem - 4px);
 					position: relative;
 					padding: 8px $padding;

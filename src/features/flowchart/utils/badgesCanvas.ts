@@ -5,7 +5,7 @@ import { FLAG_BACKGROUND, FLAG_CONTENT, POINT_BACKGROUND, POINT_RADIUS, POINT_SI
 import { PointId } from "app/utils/types"
 import { BADGE_PATHS, HOURGLASS, QUIZ_ICON, QUIZ_NUMBER_X, flagPersists, pointPersists } from "../components/badges"
 import { getNodeBadges } from "./badges"
-import { FcNode } from "./flowchart"
+import { FcNode, GameFlowchart } from "./flowchart"
 
 
 type BadgeFill = 'background' | PointId | (string & {})
@@ -17,7 +17,7 @@ type BadgeLayout = { x: number, y: number } & (
 	| { type: 'point', id: string }
 	| { type: 'flag', flag: string }
 	| { type: 'quiz', n: number }
-	| { type: 'select', link: string }
+	| { type: 'select', link: string, n?: number }
 	| { type: 'condition', angle: number, iconX: number, iconY: number,
 		icon: BadgeIcon, fill: BadgeFill, negative: boolean }
 )
@@ -93,7 +93,7 @@ function conditionLayout(node: FcNode, condition: Condition): BadgeLayout {
 }
 
 /** Position and content of the badges of a node, in flowchart coordinates */
-function getBadgesLayout(node: FcNode, isLinkEnabled: (node: FcNode) => boolean): BadgeLayout[] {
+function getBadgesLayout(node: FcNode, flowchart: GameFlowchart): BadgeLayout[] {
 	const badge = getNodeBadges(node.id)
 	if (!badge) return []
 
@@ -114,10 +114,14 @@ function getBadgesLayout(node: FcNode, isLinkEnabled: (node: FcNode) => boolean)
 			? { type: 'quiz', x: flagX, y, n: parseInt(flag.at(-1)!) || 0 }
 			: { type: 'flag', x: flagX, y, flag })
 	})
-	if (select)
-		layouts.push({ type: 'select', x: node.centerX, y: node.bottom, link: isLinkEnabled(node)
-			? `fc-link enabled${node.group ? ` group-${node.group}` : ''}`
-			: "fc-link disabled" })
+	if (select) {
+		const linkEnabled = node.children.some(child => !flowchart.isLinkDisabled(node, child))
+		layouts.push({ type: 'select', x: node.centerX, y: node.bottom,
+			link: linkEnabled ?
+				`fc-link enabled${node.group ? ` group-${node.group}` : ''}`
+				: "fc-link disabled",
+			n: flowchart.getHistoryScene(node.id)?.choice ?? -1 })
+	}
 	if (condition)
 		layouts.push(conditionLayout(node, condition))
 	return layouts
@@ -253,9 +257,11 @@ function drawBadge(ctx: CanvasRenderingContext2D, badge: BadgeLayout, style: Sty
 			break
 		}
 		case 'select':
+			const { n = -1 } = badge
 			ctx.fillStyle = style.stroke(badge.link).color
 			ctx.fill(path2D(BADGE_PATHS.select))
-			drawText(ctx, "?", 0, 1.45, font, style.color("var(--badge-background)"))
+			drawText(ctx, (n >= 0 ? `${n+1}` : "?"), 0, 1.45, font,
+				style.color("var(--badge-background)"))
 			break
 		case 'condition': {
 			const c = COND_UNIT
@@ -318,9 +324,9 @@ function drawHourglass(ctx: CanvasRenderingContext2D, x: number, y: number, visi
 }
 
 /** @param isLinkEnabled whether the links below `node` are drawn as enabled */
-export function createBadgesDrawer(nodes: FcNode[],
-		isLinkEnabled: (node: FcNode) => boolean): FcOverlayDrawer {
-	const badges = nodes.flatMap(node => getBadgesLayout(node, isLinkEnabled))
+export function createBadgesDrawer(flowchart: GameFlowchart, nodes: FcNode[]): FcOverlayDrawer {
+
+	const badges = nodes.flatMap(node => getBadgesLayout(node, flowchart))
 	for (const badge of badges) {
 		if (badge.type == 'regard')
 			getHeadImage(headSrc(badge.char))
