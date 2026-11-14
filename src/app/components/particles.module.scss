@@ -66,6 +66,7 @@
 			inset: 30% 0 0;
 			opacity: .55;
 			transform: scaleY(-1);
+			mask-image: linear-gradient(to top, transparent, #000 40%);
 			animation: clouds-drift-near 260s linear infinite;
 		}
 	}
