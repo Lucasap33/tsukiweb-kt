@@ -23,6 +23,7 @@ import DailyMessagesScreen from "app/screens/DailyMessagesScreen";
 import { imageSrc } from "translation/assets";
 import { waitLanguageLoad } from "translation/lang";
 import { settings } from "engine/settings";
+import HelpScreen from "app/screens/HelpScreen";
 
 const AnimatedRoutes = () => {
 	const [location] = useLocation()
@@ -113,6 +114,9 @@ const AnimatedRoutes = () => {
 					</Route>
 					<Route path={SCREEN.DREAMS}>
 						<ExtraShell><DreamsScreen /></ExtraShell>
+					</Route>
+					<Route path={SCREEN.HELP}>
+						<ExtraShell><HelpScreen /></ExtraShell>
 					</Route>
 					<Route path={SCREEN.DAILY_MESSAGES}>
 						<ExtraShell><DailyMessagesScreen /></ExtraShell>

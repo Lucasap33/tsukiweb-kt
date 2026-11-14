@@ -121,6 +121,17 @@ const ExtraMenu = () => {
 					{strings.extra.dreams}
 				</TitleMenuButton>
 				}
+				{<TitleMenuButton id="extra-help"
+					audio={audio}
+					onClick={()=>navigate(SCREEN.HELP)}
+					active={currentPage === SCREEN.HELP}
+					aria-selected={currentPage === SCREEN.HELP}
+					attention={unlockedDreams.some(({ id }) => !viewedScene(id))}
+					role="tab"
+					nav-auto={1}>
+					{strings.extra.help}
+				</TitleMenuButton>
+				}
 				{(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
 					<TitleMenuButton id="extra-daily-messages"
 						audio={audio}
