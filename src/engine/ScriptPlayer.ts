@@ -78,7 +78,7 @@ function processRngSel(arg: string) {
 //##############################################################################
 
 export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
-                            {nextflow: string, deathCount: number}, History> {
+                            {deathCount: number}, History> {
 
 //#endregion ###################################################################
 //#region                         ATTRS & PROPS
@@ -111,8 +111,6 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
             if (isScene(label) && !settings.completedScenes.includes(label))
                 settings.completedScenes.push(label)
         })
-        if (initContext.nextflow)
-            this._tempVariables.set('$nextflow', initContext.nextflow)
         if (initContext.deathCount)
             this._deathCount = initContext.deathCount
 
@@ -166,8 +164,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
     }
     
     override blockContent() {
-        const nextflow = (this._tempVariables.get('$nextflow') ?? '') as string
-        return { nextflow, deathCount: this._deathCount }
+        return { deathCount: this._deathCount }
     }
 
     override hasFlag(flag: string) {
@@ -183,7 +180,6 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
     static override defaultBlockContext() {
         return  {
             ...ScriptPlayerBase.defaultBlockContext(),
-            nextflow: '',
             deathCount: 0,
         }
     }
@@ -200,7 +196,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
                 this.deleteFlag(m[1])
         } else if ((m = name.match(/^%(\w+)_point$/))) {
             this.setPoints(m[1] as PointId, value as number)
-        } else if (["%answer", "$nextflow", "%2100"].includes(name)) {
+        } else if (["%answer", "%2100"].includes(name)) {
             this._tempVariables.set(name, value)
         } else {
 			throw Error(`Unknown or read-only variable ${name}`)
@@ -218,13 +214,6 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
         } else switch (name as string) {
             case '%answer': return 0 as VarType<T>
             case '%smooth': return settings.smoothFlashes as VarType<T>
-            case '$nextflow':
-                // if for some reason the variable was not save,
-                // check which value should be stored form the history
-                if (this.history.hasScene('s157')) return '*f158' as VarType<T>
-                if (this.history.hasScene('s160')) return '*f161' as VarType<T>
-                if (this.history.hasScene('s173')) return '*f174' as VarType<T>
-                else return 's171' as VarType<T> // no scene for f170
             default : throw Error(`Unknown variable ${name}`)
         }
     }
