@@ -32,7 +32,7 @@ function processVarName(varName: string) {
 		[/^%guest_image/, null], // remove guest images unlocks
 		//["%sceneskip"			, null], // ignore sceneskip tests
 		[/^%pointflg\d{1,3}$/	, null], // special variables used to increase unreset points
-		[/^%yume\d+$/, null], // yume scenes unlock uses veiwed scenes
+		[/^%(fin_)?yume\d+\w*$/, null], // yume scenes unlock uses viewed scenes
 		[/^%([a-z_]+)_point$/	, (m: RegExpMatchArray)=> {
 			switch (m[1]) {
 				case 'ren' : case 'ark'	: case 'gojitsudan' :
@@ -41,7 +41,7 @@ function processVarName(varName: string) {
 				case 'ciel'		: return '%cel_point'
 				case 'nanako'	: return '%nana_point'
 				case 'akiha'	: return '%aki_point'
-				case 'akira'	: return '%seo_point' 
+				case 'akira'	: return '%seo_point'
 				case 'kissa'	: return '%flg_kissa'
 				case 'kashiisyo': return '%flg_kashiisyo'
 				case 'eigakan'	: return '%flg_eigakan'
