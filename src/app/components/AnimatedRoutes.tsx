@@ -77,7 +77,7 @@ const AnimatedRoutes = () => {
 		setShowDailyMessage(false)
 	}, [])
 
-	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES, SCREEN.SUMMER_FES, SCREEN.DREAMS, SCREEN.DAILY_MESSAGES].some(path =>
+	const isExtra = [SCREEN.GALLERY, SCREEN.SCENES, SCREEN.SUMMER_FES, SCREEN.DREAMS, SCREEN.DAILY_MESSAGES, SCREEN.HELP].some(path =>
 		pathname.startsWith(path)
 	)
 	const keyPresence = isExtra ? "extra" : pathname

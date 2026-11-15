@@ -1,5 +1,4 @@
 import { playScene } from "engine/savestates"
-import { useStrings } from "translation/lang"
 import { SceneShortcut } from "@tsukiweb/common/ui-core"
 import { SceneName } from "app/utils/types";
 import { settings, viewedScene } from "engine/settings";
@@ -19,8 +18,8 @@ const helps: Help[] = [
 		flag: "4",
 		images: {
 			bg: "bg/bg_06a",
-            r: "tachi/tiel_t04",
-            l: "tachi/ark_t30"
+			r: "tachi/tiel_t04",
+			l: "tachi/ark_t30"
 		},
 	},
 	{
@@ -28,8 +27,8 @@ const helps: Help[] = [
 		flag: "5",
 		images: {
 			bg: "bg/bg_06a",
-            r: "tachi/tiel_t04",
-            l: "tachi/neko_t01a"
+			r: "tachi/tiel_t04",
+			l: "tachi/neko_t01a"
 		},
 	},
 	{
@@ -37,7 +36,7 @@ const helps: Help[] = [
 		flag: "6",
 		images: {
 			bg: "bg/bg_06a",
-            r: "tachi/tiel_t04"
+			r: "tachi/tiel_t04"
 		},
 	},
 	{
@@ -45,27 +44,25 @@ const helps: Help[] = [
 		flag: "finish",
 		images: {
 			bg: "bg/bg_06a",
-            r: "tachi/tiel_t04",
-            l: "tachi/ark_t31a"
+			r: "tachi/tiel_t04",
+			l: "tachi/ark_t31a"
 		},
 	},
-    {
-        id: "s547",
-        flag: "",
-        images: {
+		{
+			id: "s547",
+			flag: "",
+			images: {
 			bg: "bg/bg_06b",
-            r: "tachi/tiel_t04",
+			r: "tachi/tiel_t04",
 		},
-    }
+	}
 ]
 export const getUnlockedHelps = ()=> settings.unlockEverything ? helps :
-    helps.slice(1).filter((_, i)=> (i == 0) ||
-        SCENE_ATTRS["scene-points"].flags[helps[i-1].flag]?.some(lbl=>viewedScene(lbl))
-    )
+		helps.slice(1).filter((_, i)=> (i == 0) ||
+			SCENE_ATTRS["scene-points"].flags[helps[i-1].flag]?.some(lbl=>viewedScene(lbl))
+		)
 
 const HelpList = () => {
-	const strings = useStrings()
-
 	const play = (id: SceneName)=> {
 		playScene(id, {viewedOnly: false, extra: true})
 	}
@@ -84,9 +81,9 @@ const HelpList = () => {
 					nav-auto={1}
 				/>
 			)}
-            {
-                //TODO chose progress save then display appropriate help
-            }
+			{
+				//TODO chose progress save then display appropriate help
+			}
 		</div>
 	)
 }
