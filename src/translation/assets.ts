@@ -8,6 +8,7 @@ import { closeBB } from "@tsukiweb/common/utils/Bbcode"
 import { AssetsCache } from "@tsukiweb/common/utils/AssetsCache"
 import { assetPath, imageFormat } from "@tsukiweb/common/utils/images"
 import { WORD_IMAGE_IDS } from "@assets/game/word-images"
+import { APP_VERSION } from "../app/utils/constants"
 
 export const assets = new AssetsCache<{
   'audio': AudioBuffer|undefined
@@ -51,7 +52,7 @@ export function scenesDir() {
 }
 
 export function spriteSheetImgPath(file: string) {
-	return `./res/flowchart-spritesheets/${file}.${imageFormat}`
+	return `./res/flowchart-spritesheets/${file}.${imageFormat}?v=${APP_VERSION}`
 }
 
 function audioPath(formats: string|string[], trackName: string) {

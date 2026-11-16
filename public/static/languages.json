@@ -13,6 +13,14 @@
     "fallback": "jp",
     "last-update": "2026-11-12"
   },
+  "es-saki": {
+    "locale": "es-ES",
+    "display-name": "🇪🇸 Español",
+    "authors": "Saki",
+    "dir": "./es-saki",
+    "last-update": "2026-11-16",
+    "fallback": "en-mm"
+  },
   "it-riffour": {
     "locale": "it-IT",
     "display-name": "🇮🇹 Italiano",

@@ -1,0 +1,2108 @@
+{
+  "scripts-dir": "./scenes",
+  "choices": {
+    "s2": [
+      "1. Iré a la escuela.",
+      "2. Permaneceré en la mansión."
+    ],
+    "s3": [
+      "1. Iré al apartamento de Arcueid.",
+      "2. Iré al apartamento de Ciel-senpai.",
+      "3. Iré directo a la escuela.",
+      "4. ¿Quizás, invadiré la casa de Inui?"
+    ],
+    "s4": [
+      "1. Pacíficamente iré a la escuela.",
+      "2. Platicaré un poco más con Arcueid."
+    ],
+    "s5": [
+      "1. ... No debo dejarme llevar.",
+      "2. ... Quiero dejarme llevar."
+    ],
+    "s11": [
+      "1. Ir a la escuela con Akiha.",
+      "2. Ir a la escuela solo."
+    ],
+    "s15": [
+      "1. Pasaré por el Club de la Ceremonia del Té.",
+      "2. Ir directo a clases.",
+      "3. ¿Quizás, iré al patio?"
+    ],
+    "s22": [
+      "1. comer en la cafeteria!",
+      "2. tomar algo de Senpai en la habitación del té!",
+      "3. comer pacíficamente en el patio!"
+    ],
+    "s260": [
+      "1. comer en la cafeteria!",
+      "2. tomar algo de Senpai en la habitación del té!",
+      "3. comer pacificamente en el patio!"
+    ],
+    "s29": [
+      "1. Yo comeré el almuerzo con Akiha.",
+      "2. Yo comeré el almuerzo solo."
+    ],
+    "s39": [
+      "1. No entraré a la clase.",
+      "2. Entraré a la clase."
+    ],
+    "s43": [
+      "1. Pasar por la Habitación de la Ceremonia del Té.",
+      "2. Permanecer en el salón.",
+      "3. Ir directo a casa.",
+      "4. Salir a las calles."
+    ],
+    "s51": [
+      "1. Ir a casa con Akiha.",
+      "2. Ir a casa solo."
+    ],
+    "s53": [
+      "1. Permanecer en mi habitación.",
+      "2. Ir a la habitación de Akiha.",
+      "3. Platicar con Hisui.",
+      "4. Ir a la habitación de Kohaku-san."
+    ],
+    "s56": [
+      "1. ... Olvídalo... Moriré si no actuo precavidamente.",
+      "2. ... Sólo un poco no dolerá, ¿o sí?"
+    ],
+    "s248": [
+      "1. Los casos de asesinato que han estado sucediendo.",
+      "2. Las alucinaciones del fin del mundo.",
+      "3. Algo que estoy olvidando.",
+      "4. La exterminación del gato demonio en el edificio separado.",
+      "5. Dar un paseo en las calles nocturnas.",
+      "6. ... ¿Eh? ¿Otro sueño?"
+    ],
+    "s250": [
+      "1. Debe ser Arcueid.",
+      "2. Será Ciel-senpai.",
+      "3. Posiblemente sea Akiha.",
+      "4. ¿Acaso será Hisui?",
+      "5. Quizás es Kohaku-san.",
+      "6. ... por alguna razón aquella chica pasa por mi mente.",
+      "7. ¿Podrían ser Kohaku-san y Hisui?"
+    ],
+    "s401": [
+      "1. Es sólo otro día.",
+      "2. No, ¡es el día del festival cultural!",
+      "3. Es cierto... ¿el festival deportivo?"
+    ],
+    "s223": [
+      "1. El Abrumador Salón de Té 'Golpe Bajo.'",
+      "2. La Renta de Disfraces y Fotografía 'Marble Phantasm.'",
+      "3. La Misteriosa Sala de Cine 'Planetario.'"
+    ],
+    "s227": [
+      "1. Cuarto piso, salones de primer año.",
+      "2. Tercer piso, salones de segundo año.",
+      "3. Segundo piso, salones de tercer año."
+    ],
+    "s231": [
+      "1. ¡Debo ayudar a la clase!",
+      "2. De todas maneras, por ahora daré un paseo."
+    ],
+    "s91": [
+      "1. Será mejor que descanse en mi habitación.",
+      "2. Iré al bosque Nanaya.",
+      "3. Iré a la habitación de Akiha.",
+      "4. Quizás le ayudaré a Hisui.",
+      "5. Iré a ver a Kohaku-san.",
+      "6. Iré a asolearme al patio.",
+      "7. Iré a tomar el sol en el edificio separado.",
+      "8. Estoy aburrido de la mansión. ¡saldré afuera!"
+    ],
+    "s96": [
+      "1. ¡Aprovechar esta oportunidad!",
+      "2. ¡¿Esta oportunidad será la adecuada[line=4]?!"
+    ],
+    "s505": [
+      "1. ¡Atacar desde la sombra del árbol que cae......!",
+      "2. ¡¿Esta oportunidad será la adecuada[line=4]?!"
+    ],
+    "s507": [
+      "1. ¡...... tomar su cuello......!",
+      "2. ¡¿Esta oportunidad será la adecuada[line=4]?!"
+    ],
+    "s98": [
+      "1. ¡La siesta de Akiha tiene que terminar!",
+      "2. Momento... no es buena idea interrumpir una siesta."
+    ],
+    "s307": [
+      "1. ...... miro la sangre de mi dedo.",
+      "2. ...... niego con la cabeza con inquietud."
+    ],
+    "s113": [
+      "1. Dormir en mi habitación.",
+      "2. Ir a la habitación de Akiha.",
+      "3. Buscar a Hisui.",
+      "4. Ayudar a Kohaku-san.",
+      "5. Ir al edificio separado.",
+      "6. ¿Qué habrá en la habitación de Makihisa?"
+    ],
+    "s118": [
+      "1. ¡Ir por ello!",
+      "2. ¿Quizás no deba hacerlo...?"
+    ],
+    "s140": [
+      "1. ¡Comeré afuera!",
+      "2. Cenar en la mansión es más que suficiente."
+    ],
+    "s145": [
+      "1. El Restaurante Hindú Mesías.",
+      "2. Al Restaurante Móvil Chino Mark II.",
+      "3. Barbacoa en el Dai Teito del pueblo vecino."
+    ],
+    "s194": [
+      "1. El apartamento de Arcueid.",
+      "2. El apartamento de Ciel-senpai.",
+      "3. ... ir al callejón."
+    ],
+    "s197": [
+      "1. ...... Ir a casa silenciosamente.",
+      "2. ...... ¡Revisar alrededor de la cama!",
+      "3. ...... ¿Qué hay acerca del interior del armario?"
+    ],
+    "s202": [
+      "1. Quiero saber acerca del gato.",
+      "2. Quiero preguntar acerca de los recientes incidentes.",
+      "3. Quiero preguntar acerca del día de ayer."
+    ],
+    "s209": [
+      "1. ...... Ir a casa silenciosamente.",
+      "2. ...... Me disculpo y entro.",
+      "3. ...... ¡Revisar el armario de Senpai!"
+    ],
+    "s214": [
+      "1. Respecto al asesino.",
+      "2. Respecto a la escuela.",
+      "3. Respecto a ayer."
+    ],
+    "s156": [
+      "1. Ir al apartamento de Arcueid.",
+      "2. Esperar en la cafetería.",
+      "3. Ir al parque.",
+      "4. Visitar la casa de Arihiko.",
+      "5. Ir al hospital Jinan.",
+      "6. Ir al apartamento de Ciel-senpai."
+    ],
+    "s158": [
+      "1. ¡Eeeht! ¡Lo haré pase lo que pase!",
+      "2. ¡No, necesito calmarme y regresar!"
+    ],
+    "s161": [
+      "1. Despedirse de Akira-chan.",
+      "2. Tener el almuerzo con Akira-chan."
+    ],
+    "s174": [
+      "1. ¡Cierto, debo estudiar para los exámenes!",
+      "2. ¡Muy bien, pospondré el estudio para mañana!"
+    ],
+    "s176": [
+      "1. ...... Me iré sin Senpai......",
+      "2. ...... Si uno bebe el veneno, entonces debe terminárselo."
+    ],
+    "s180": [
+      "1. Regresaré a la mansión.",
+      "2. No, andaré por las calles un poco más."
+    ],
+    "s183": [
+      "1. Ir a la calle principal.",
+      "2. A la intersección."
+    ],
+    "s184": [
+      "1. Ir a la calle principal.",
+      "2. A la intersección."
+    ],
+    "s185": [
+      "1. Ir a la calle principal.",
+      "2. A la intersección."
+    ],
+    "s520": [
+      "1. Voltear en dirección a Arcueid.",
+      "2. Correr delante del camión."
+    ],
+    "s524": [
+      "1. Experto",
+      "2. Principiante"
+    ],
+    "s525": [
+      "1. Experto",
+      "2. Principiante"
+    ],
+    "s526": [
+      "1. Experto",
+      "2. Principiante"
+    ],
+    "s527": [
+      "1. Bueno, ¿esto todavía no termina?",
+      "2. Bueno bueno, otra vez, ¿esto TODAVÍA no termina?"
+    ],
+    "s547": [
+      "1. Por alguna razón, no.",
+      "2. Por alguna razón, sí."
+    ],
+    "s534": [
+      "1. Quiero a Kohaku.",
+      "2. Quiero a Hisui.",
+      "3. Las quiero a ambas."
+    ]
+  },
+  "images": {
+    "word-subtitles": {
+      "ganba_01": "Good luck, Ciel-sensei",
+      "ganba_04": "/end",
+      "sos_01": "NANAKO-CHAN SOS",
+      "ssa_01": "HISUI-CHAN, Inversion Impulse!",
+      "ssc_01": "Dawn",
+      "sss_01": "Drinking. Dreaming Moon"
+    },
+    "words": {
+      "fin": "#ffffff$c`[center][noline][color=black][font=serif]Fin`",
+      "end": "#ffffff$b`[right][noline][color=black][font=serif]END`"
+    },
+    "src": {
+      "tachi/osiete": "./images/%0",
+      "tachi/osiete_b": "./images/%0",
+      "bg/ima_27a": "./images/%0",
+      "bg/ima_27b": "./images/%0"
+    }
+  },
+  "scenario": {
+    "scenes": {
+      "s528": "Good luck, Ciel-sensei",
+      "s529": "A Story for the Evening",
+      "s530": "Crimson Moon",
+      "s531": "Red Demon God",
+      "s532": "Nanako-chan SOS!",
+      "s533": "Imogirisou",
+      "s534": "Flower of Thanatos",
+      "s535": "Hisui-chan, Inversion Inpulse!",
+      "s536": "The Tohno Family Con Game",
+      "s537": "Dawn",
+      "s543": "Drinking, Dreaming Moon"
+    },
+    "dead-end": "Dead end",
+    "osiete": "Ciel's lesson"
+  },
+  "credits": [
+    {
+      "center": [
+        "[center][font=serif]Planning / [left=15]Takeuchi Takashi",
+        "[center][font=serif][hide]Planning / [/][left=15]Nasu Kinoko"
+      ]
+    },
+    {
+      "center": [
+        "",
+        "[right][font=serif]Creator / Scenario Writer / Scenario Programmer /",
+        "[right][font=serif]Nasu Kinoko"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Scenario Programming Assistant/[hide]OKSG",
+        "[right][font=serif]OKSG"
+      ]
+    },
+    {
+      "center": [
+        "",
+        "[right][font=serif]Character Design / Original Artist / CG /",
+        "[right][font=serif]Takeuchi Takashi"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]CG Assistant / [hide]Fumicchi",
+        "[right][font=serif]Fumicchi"
+      ]
+    },
+    {
+      "center": [
+        "[center][font=serif]Background / [left=15]",
+        "[center][font=serif][hide]Background / [/][left=15]Kuki Mamoru",
+        "[center][font=serif][hide]Background / [/][left=15]Takeuchi Takashi"
+      ]
+    },
+    {
+      "top": [
+        "[left][font=serif]Programming / Scenery /",
+        "[center][font=serif]Seibei"
+      ]
+    },
+    {
+      "top": [
+        "[left][font=serif]Composer / Arranger / Sound Effects",
+        "[center][font=serif]KEITA HAGA"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Special Thanks / [left=8/]",
+        "[right][font=serif][left=8]Takahashi Naoki",
+        "[right][font=serif][left=8]B46"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Special Thanks / [left=8/]",
+        "[right][font=serif][left=8]OKSG",
+        "[right][font=serif][left=8]SUBTLE",
+        "[right][font=serif][left=8]Kirihara Kojima",
+        "[right][font=serif][left=8]Hayashi Youko",
+        "[right][font=serif][size=80%](Titles Omitted)"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Playtesters /[left=3/][left=12]Uetsugi Hiroyoshi",
+        "[right][font=serif][left=12]EDF Sakata",
+        "[right][font=serif][left=12]K-1",
+        "[right][font=serif][left=12]Shiten",
+        "[right][font=serif][left=12]Derocchi",
+        "[right][font=serif][left=12]NOCKy"
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Playtesters /[left=3/][left=12]B46",
+        "[right][font=serif][left=12]Mikage",
+        "[right][font=serif][left=12]Yamaguchi Tarou",
+        "[right][font=serif][left=12]Yamazaki Seiji",
+        "",
+        ""
+      ]
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Playtesters /[left=15]",
+        "[right][font=serif]ALL TYPE-MOON STAFF",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "center": "[center][font=serif]Game Director /[left=3/]Nasu Kinoko"
+    },
+    {
+      "center": "[center][font=serif]Production Director /[left=3/]Takeuchi Takashi"
+    },
+    {
+      "center": "[center][font=serif][left=5/]Produced by /[left=3/]TYPE-MOON"
+    },
+    {
+      "center": "[center][font=serif][left=5/]English version /[left=3/]mirror moon",
+      "delay": 4300
+    },
+    {
+      "center": [
+        "[left][font=serif]Programming /[left=1/]chendo",
+        ""
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "",
+        "[center][font=serif][left=12]Translation /[/][left=8]AstCd2",
+        "[center][font=serif][left=12/][left=8]Ryuusoul",
+        "[center][font=serif][left=12/][left=8]TakaJun",
+        "[center][font=serif][left=12/][left=8]tjm"
+      ],
+      "delay": 4300
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Additional Translation /[left=12]",
+        "[right][font=serif][left=8]chendo",
+        "[right][font=serif][left=8]Connor",
+        "[right][font=serif][left=8]Sheep Mafia"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "[center][font=serif][left=10]Editing /[/][left=8]Ryuusoul",
+        "[center][font=serif][left=10/][left=8]TakaJun"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "[center][font=serif][left=10]Proofing /[/][left=8]Fuyutski",
+        "[center][font=serif][left=10/][left=8]Kuritsuchanrin",
+        "[center][font=serif][left=10/][left=8]LrdDimwit"
+      ],
+      "delay": 4300
+    },
+    {
+      "bottom": [
+        "[right][font=serif]Additional Proofing /[/][left=13]",
+        "[right][font=serif][left=10]Byrnedhead",
+        "[right][font=serif][left=10]Einherjar",
+        "[right][font=serif][left=10]EVILONE",
+        "[right][font=serif][left=10]OrganGrinder",
+        "[right][font=serif][left=10]Sheep Mafia",
+        "[right][font=serif][left=10]tjm"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "[center][font=serif][left=12]Image Editing /[/][left=8]Nichigo[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]puKKa[/][left=12/]"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "[center][font=serif][left=20]Non-Ero Editing /",
+        "[center][font=serif][left=10/][left=10]Message"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "[center][font=serif][left=25]Non-Ero Image Editing /",
+        "[center][font=serif][left=15/][left=10]DarkJedi2"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "",
+        "[center][font=serif][left=12]Non-Ero Proofing /[/][left=8]cyanoacry[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]DarkJedi2[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]sebasdoes[/][left=12/]",
+        "[center][font=serif][left=12/][left=8]TareJay[/][left=12/]"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": [
+        "",
+        "[center][font=serif][left=18]Beta Project Management /[/][left=8]chendo",
+        "[center][font=serif][left=18/][left=8]Message",
+        "[center][font=serif][left=18/][left=8]Ryuusoul"
+      ],
+      "delay": 4300
+    },
+    {
+      "top": [
+        "[center][font=serif][left=12]Beta testing /[/][size=80%][left=12]Arturias[/][left=12]Message",
+        "[center][font=serif][left=12/][size=80%][left=12]Choco[/][left=12]Misuzu",
+        "[center][font=serif][left=12/][size=80%][left=12]Connor[/][left=12]MJPByron",
+        "[center][font=serif][left=12/][size=80%][left=12]cyanoacry[/][left=12]NegativeZero",
+        "[center][font=serif][left=12/][size=80%][left=12]DarkJedi2[/][left=12]Omega",
+        "[center][font=serif][left=12/][size=80%][left=12]Drakenavarone[/][left=12]Radical R",
+        "[center][font=serif][left=12/][size=80%][left=12]DrmChsr0[/][left=12]RhoSangJin",
+        "[center][font=serif][left=12/][size=80%][left=12]enthrop[/][left=12]RoyalKnight",
+        "[center][font=serif][left=12/][size=80%][left=12]Gaudeamus[/][left=12]Ryuusoul",
+        "[center][font=serif][left=12/][size=80%][left=12]Heretic Kazuma[/][left=12]sebasdoes",
+        "[center][font=serif][left=12/][size=80%][left=12]koko775[/][left=12]TareJay",
+        "[center][font=serif][left=12/][size=80%][left=12]litghost[/][left=12]TakaJun",
+        "[center][font=serif][left=12/][size=80%][left=12]MHOOO[/][left=12]Velocity7"
+      ],
+      "delay": 8600
+    },
+    {
+      "center": "[center][font=serif]Release Engineering /[left=3/]Message",
+      "delay": 4300
+    },
+    {
+      "top": [
+        "[left][font=serif]Special Thanks /",
+        "",
+        "[center][font=serif][left=40]insani",
+        "[center][font=serif][left=40]Ogapee",
+        "[center][font=serif][left=5/][left=35]for their great work on ONScripter",
+        "",
+        "[center][font=serif][left=40]TheXev",
+        "[center][font=serif][left=5/][left=35]for his preliminary programming groundwork",
+        "",
+        "[center][font=serif][left=40]Kawatori Shinji",
+        "[center][font=serif][left=5/][left=35]for testing the release candidates",
+        "",
+        "[center][font=serif][left=40]Shirakani and the whole alpha test crew"
+      ],
+      "delay": 4300
+    },
+    {
+      "center": "[center][font=serif]Thanks for playing",
+      "delay": 4300
+    },
+    {
+      "bottom": "[right][font=serif][noline][color=black][copy/] 2000 TYPE-MOON All right reserved.",
+      "delay": 21500,
+      "bg": "#ffffff"
+    }
+  ],
+  "daily-messages": {
+    "random": [
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          ".................... ¡Así-así!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "................ ¡Aquí y allá!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "................ '¡Mo' o 'to!'"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "....... ¡No lo estoy diciendo!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "................... ¡Aliviado!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "................. ¡Desilusión!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "................ ¡Refrescante!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "............... ¡Claro que sí!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "...................... ¡Estallido!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "....................... ¡Bleh!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          ".................. ¡Tranquilo!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "............... ¡Gran sonrisa!"
+        ]
+      },
+      {
+        "text": [
+          "El horóscopo de hoy:",
+          "..............................",
+          "..............................",
+          "................... ¡Atareado!"
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................ Doujinshi."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "... A quién le importa si lo compartes."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................... Escoba."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "......................... Pan de curry."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "....................... Arroz al curry."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          ".............................. Corazón."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "........................... Gato negro."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          ".................... Navaja de juguete."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "........................ Listón blanco."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................. Anteojos."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          ".................... Conservas de café."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................... Maleta."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "......................... Listón negro."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............. Largas calcetas negras."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          ".. Suéter blanco con cuello de tortuga."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "..................... Busto de acantilado."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................................ Araña."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................ Zanahoria."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "...................... Despreocupación."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................................ Perro."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................... Venado."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................. Guepardo."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................................ Tigre."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "........................... ¡Cachoosha!"
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "......................... Campo minado."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          ".................. Sándwich de ciruela."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................. Vestido de sirvienta."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................. Delantal."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................... Croquetas de curry."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "........ Bola de masa hervida de curry."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "........................ Udon de curry."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "....................... Ramen de curry."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "........................ Jugo de curry."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................................. Caos."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............................ Serpiente."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................................ Fresa."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............... Corto corte de cabello."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "............ Vestido en forma de hongo."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................................ Carta."
+        ]
+      },
+      {
+        "text": [
+          "El objeto de la suerte de hoy es:",
+          ".......................................",
+          ".......................................",
+          "................................. Luna."
+        ]
+      },
+      {
+        "text": [
+          "El autorretrato del Director de escenario, el 'Monster Mushroom'.",
+          "",
+          "Es un antiguo personaje de anime.",
+          "El Director lo dibujó de memoria.",
+          "Y por eso se convitió en su autorretrato.",
+          "¿No lo sabían?"
+        ]
+      },
+      {
+        "text": [
+          "Además de TYPE-MOON, había otro nombre",
+          "para elegir y este era 'Ambushing Knights'.",
+          "",
+          "",
+          "",
+          "...qué bueno que no lo escogieron..."
+        ]
+      },
+      {
+        "text": [
+          "Celebrando la salida de Tsukihime.",
+          "La única cosa en la habitación del Director:",
+          "",
+          " Un ventilador eléctrico.",
+          "",
+          " El Director estaba en llanto:",
+          "'¡Qué invento!'",
+          "¡Y tampoco es un sueño!",
+          "O al menos eso dice..."
+        ]
+      },
+      {
+        "text": [
+          "El Director de arte nos dijo su sueño:",
+          "",
+          "'No quiero hacer nada en todo el día más que beber té y leer manga.'"
+        ]
+      },
+      {
+        "text": [
+          "El webmaster dice del Director de arte:",
+          "",
+          "'Para él, los 8 pasos del mundo del moe son de piedra.'"
+        ]
+      },
+      {
+        "text": [
+          "Barbacoa por las ventas de TYPE-MOON:",
+          "El Director de sonido, quien busca la mejor, come la mayoría de la carne."
+        ]
+      },
+      {
+        "text": [
+          "El restaurante de carnes favorito de TYPE-MOON:",
+          "Diciendo que estaba comiendo la mejor carne, el estómago del webmaster reventó.",
+          "",
+          "",
+          "¡Eh! ¡No te daremos más de comer!"
+        ]
+      },
+      {
+        "text": [
+          "Como sea, cálmate."
+        ]
+      },
+      {
+        "text": [
+          "El vecino del Director de arte:",
+          "Cantante de ópera de día y noche."
+        ]
+      },
+      {
+        "text": [
+          "La cosa favorita del Administrador del sistema:",
+          "'La carne.'"
+        ]
+      },
+      {
+        "text": [
+          "El sobrenombre del Director de escenario es:",
+          "'Lying Adult.'"
+        ]
+      },
+      {
+        "text": [
+          "Al Director de escenario le encanta:",
+          "'El queso.'"
+        ]
+      },
+      {
+        "text": [
+          "El Administrador del sistema dice:",
+          "'Las neuronas van a morir'"
+        ]
+      },
+      {
+        "text": [
+          "El lema del Administrador del sistema:",
+          "'¡No te limites en disfrutar!'"
+        ]
+      },
+      {
+        "text": [
+          "El lema del Director de escenario:",
+          "'La humanidad es poderosa.'"
+        ]
+      },
+      {
+        "text": [
+          "El pedido por correo sin éxito del Director de arte:",
+          "Una almohada para abrazar en forma de sirvienta."
+        ]
+      },
+      {
+        "text": [
+          "La recomendación de novela del Administrador",
+          "del sistema del día de hoy es:",
+          "'The Star is a Grave' por Tani Koushuu."
+        ]
+      },
+      {
+        "text": [
+          "La recomendación de novela del Administrador",
+          "del sistema del día de hoy es:",
+          "'The Door into Summer' por Robert A. Heinlein."
+        ]
+      },
+      {
+        "text": [
+          "La recomendación de novela del Administrador",
+          "del sistema del día de hoy es:",
+          "'To Find Through Death' por Ryuu Keiichirou."
+        ]
+      },
+      {
+        "text": [
+          "La recomendación de novela del Administrador",
+          "del sistema del día de hoy es:",
+          "'Sunstorm' por Arthur C. Clarke."
+        ]
+      },
+      {
+        "text": [
+          "¿Las has leído?",
+          "　　　　　por el Administrador del sistema."
+        ]
+      },
+      {
+        "text": [
+          "La recomendación de novela del Administrador",
+          "del sistema del día de hoy es:",
+          "'The Caves of Steel' por Isaac Asimov."
+        ]
+      },
+      {
+        "text": [
+          "La recomendación de novela del Administrador",
+          "del sistema del día de hoy es:",
+          "'Prelude to Space' por Arthur C. Clarke."
+        ]
+      },
+      {
+        "text": [
+          "La recomendación de novela del Administrador",
+          "del sistema del día de hoy es:",
+          "'Catchworld' por Chris Boyce."
+        ]
+      },
+      {
+        "text": [
+          "[Cómo ver un evento extrano]",
+          "¡Ve directamente a la escuela sin toparte con nadie y ve al Club de la ceremonia del té!"
+        ]
+      },
+      {
+        "text": [
+          "[Cómo ver un evento extrano]",
+          "¿Qué pasa si haces un almuerzo con Hisui en la mansión y caminas en los pasillos durante el festival cultural......?"
+        ]
+      },
+      {
+        "text": [
+          "En la enciclopedia, Miyako-chan está en primaria, pero en el juego, ella está en la escuela media.",
+          "La correcta es la escuela primaria.",
+          "Su ataque especial es '¡El tacle del infierno!'"
+        ]
+      },
+      {
+        "text": [
+          "El nombre de Arcueid se escribe: A-R-C-U-E-I-D.",
+          "Es mera coincidencia que se asemeje a 'Drácula'."
+        ]
+      },
+      {
+        "text": [
+          "Información personal de personaje No. 1:",
+          "アルクェイド",
+          "Arcueid Brunestud.",
+          "　Cumpleaños: 25 de Diciembre",
+          "　            [auto-proclamado].",
+          "　Tipo de sangre: desconocido.",
+          "　Altura/Peso: 1.67m/52kg.",
+          "　Medidas:88/55/85."
+        ],
+        "fg": "msg/ran_t01_sp"
+      },
+      {
+        "text": [
+          "Información personal de personaje No. 2:",
+          "シエル",
+          "Ciel.",
+          "　Cumpleaños: 3 de Mayo.",
+          "　Tipo de sangre: O.",
+          "　Altura/Peso: 1.65m/52kg.",
+          "　Medidas: 85/56/88."
+        ],
+        "fg": "msg/ran_t02_sp"
+      },
+      {
+        "text": [
+          "Información personal de personaje No. 3:",
+          "秋葉",
+          "Tohno Akiha.",
+          "　Cumpleaños: 22 de Septiembre.",
+          "　Tipo de sangre: A.",
+          "　Altura/Peso: 160m/45kg.",
+          "　Medidas: 73/57/79."
+        ],
+        "fg": "msg/ran_t03_sp"
+      },
+      {
+        "text": [
+          "Información personal de personaje No. 4:",
+          "翡翠",
+          "Hisui.",
+          "　Cumpleaños: 12 de Marzo.",
+          "　Tipo de sangre: B.",
+          "　Altura/Peso: 1.56m/43kg.",
+          "　Medidas: 76/58/82."
+        ],
+        "fg": "msg/ran_t04_sp"
+      },
+      {
+        "text": [
+          "Información personal de personaje No. 5:",
+          "琥珀",
+          "Kohaku.",
+          "　Cumpleaños: 12 de Marzo.",
+          "　Tipo de sangre: B.",
+          "　Altura/Peso: 1.56m/43kg.",
+          "　Medidas: 78/58/80."
+        ],
+        "fg": "msg/ran_t05_sp"
+      },
+      {
+        "text": [
+          "Información personal de personaje No. 6:",
+          "弓塚さつき",
+          "Yumizuka Satsuki.",
+          "　Cumpleaños: 15 de Agosto."
+        ],
+        "fg": "msg/ran_t06_sp"
+      },
+      {
+        "text": [
+          "Información personal de personaje No. 7:",
+          "レン",
+          "Len.",
+          "　Cumpleaños: 9 de Septiembre."
+        ],
+        "fg": "msg/ran_t07_sp"
+      },
+      {
+        "text": [
+          "Bonus información personal de personaje:",
+          "ロア",
+          "Michael Roa Valdamjong",
+          "",
+          "ネロ",
+          "Nero Chaos"
+        ]
+      },
+      {
+        "text": [
+          "chobits"
+        ]
+      },
+      {
+        "text": [
+          "¡Espera un momento!"
+        ]
+      },
+      {
+        "text": [
+          "Ampliación del plan Dachshund",
+          " ～Más rápido que una bala～"
+        ]
+      },
+      {
+        "text": [
+          "Diseccionando a Carne-kun en 17 pedazos."
+        ]
+      },
+      {
+        "text": [
+          "¡Whooo! ¡¡¡Paseo!!! ¡Yayaya!"
+        ]
+      },
+      {
+        "text": [
+          "'Es romántico de alguna manera.'"
+        ]
+      },
+      {
+        "text": [
+          "¡Puño Mushroom-chan!"
+        ]
+      },
+      {
+        "text": [
+          "......amor."
+        ]
+      },
+      {
+        "text": [
+          "Lalalalala--"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hay acerca de 200 de estos mensajes.",
+          "También hay personajes ocultos.",
+          "Así que trata muchas veces.",
+          "Y en ciertos días, hay mensajes especiales."
+        ]
+      },
+      {
+        "text": [
+          "'Me voy a casar con Coquelicot--'"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hay acerca de 200 de estos mensajes.",
+          "También hay personajes ocultos.",
+          "Así que trata muchas veces.",
+          "Y en ciertos días, hay mensajes especiales."
+        ]
+      },
+      {
+        "text": [
+          "'¡No estoy gorda......!'"
+        ]
+      },
+      {
+        "text": [
+          "¡Gato! ¡Gato! ¡Gato!"
+        ]
+      },
+      {
+        "text": [
+          "Sí, condición baja."
+        ]
+      },
+      {
+        "text": [
+          "Lo que acabo de decir es una mentira."
+        ]
+      },
+      {
+        "text": [
+          "¡Hehehe...!"
+        ]
+      },
+      {
+        "text": [
+          "Ah, está bien. Me inscribiré en la Escuela de Dectetives Mushroom.",
+          "Uno, dos, tres, ¡ooooh!......"
+        ]
+      },
+      {
+        "text": [
+          "Hazlo primero."
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hay acerca de 200 de estos mensajes.",
+          "También hay personajes ocultos.",
+          "Así que trata muchas veces.",
+          "Y en ciertos días, hay mensajes especiales."
+        ]
+      },
+      {
+        "text": [
+          "La gente estaba atiborrada en la casa del Director de Arte.",
+          "Un hombre se desmayó.",
+          "　'Entonces... ¿completaste la... imagen?'",
+          "No responde... se ve como un cadáver."
+        ]
+      },
+      {
+        "text": [
+          "Sea por amor o por moral, los patos mangosta se ven geniales, ¿cierto?"
+        ]
+      },
+      {
+        "text": [
+          "¡Canta, mi guitarra!"
+        ]
+      },
+      {
+        "text": [
+          "Jubilación----"
+        ]
+      },
+      {
+        "text": [
+          "¡Hmph! ¡Parche! ¡Cinco millones de puntos de daño!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hay acerca de 200 de estos mensajes.",
+          "También hay personajes ocultos.",
+          "Así que trata muchas veces.",
+          "Y en ciertos días, hay mensajes especiales."
+        ]
+      },
+      {
+        "text": [
+          "¡Dile adiós al perdedor repetido!"
+        ]
+      },
+      {
+        "text": [
+          "Cake Machinegun Glutton"
+        ]
+      },
+      {
+        "text": [
+          "Patatas dulces con nueces"
+        ]
+      },
+      {
+        "text": [
+          "¡Mentira! ¡Yo voy a ser un ninja!",
+          "Olvídalo…"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hay acerca de 200 de estos mensajes.",
+          "También hay personajes ocultos.",
+          "Así que trata muchas veces.",
+          "Y en ciertos días, hay mensajes especiales."
+        ]
+      },
+      {
+        "text": [
+          "¡¿Nuevo enemigo?!",
+          "Cuando me di cuenta, ¡todo el dinero en mi billetera se había convertido en dinero de Monopoly!"
+        ]
+      },
+      {
+        "text": [
+          "Tiburón mutante... eres muy fuerte..."
+        ]
+      },
+      {
+        "text": [
+          "¡Me siento enojado por alguna razón!"
+        ]
+      },
+      {
+        "text": [
+          "Morir es quedarse sin sustancia."
+        ]
+      },
+      {
+        "text": [
+          "¿Tienes ramen?"
+        ]
+      },
+      {
+        "text": [
+          "Serie de los Zonámbulos",
+          "'¡Sé tu secreto!'"
+        ]
+      },
+      {
+        "text": [
+          "Serie de los Zonámbulos",
+          "'Pero si ya comenzó'"
+        ]
+      },
+      {
+        "text": [
+          "Serie de los Zonámbulos",
+          "'Eckoeckoazarak.'"
+        ]
+      },
+      {
+        "text": [
+          "Serie de los Zonámbulos",
+          "'No puedes vencerme.'"
+        ]
+      },
+      {
+        "text": [
+          "Serie de los Zonámbulos",
+          "'Dead End, la canción de amor.'"
+        ]
+      },
+      {
+        "text": [
+          "Serie de los Zonámbulos",
+          "'Ahora mi único placer en la vida es comer…'"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hay acerca de 200 de estos mensajes.",
+          "También hay personajes ocultos.",
+          "Así que trata muchas veces.",
+          "Y en ciertos días, hay mensajes especiales."
+        ]
+      },
+      {
+        "text": [
+          "En 'Tsukihime 2 ~Imoutohime~', ¡hay 12 hermanitas!",
+          "¡Nii-san tomará tu mano!",
+          "¡Por favor espéralo!"
+        ]
+      },
+      {
+        "text": [
+          "En 'Tsukihime 2', ¡la mansión Tohno se convierte en un dormitorio de chicas!",
+          "Cosas sucias con Love, con Hina, ¡con aguas termales!",
+          "¡Por favor espéralo, de verdad!"
+        ]
+      },
+      {
+        "text": [
+          "Si Tsukihime 2 se concreta, se rumora que Enhance podría tener una parte.",
+          "Él luce como el prota de Devil M*y Cry. Ah-ha."
+        ]
+      },
+      {
+        "text": [
+          "El Director de escenario, AKA 'Lying Adult':",
+          "'El primer Apóstol Muerto con el que Ciel peleó fue Cari du Marche, de la India', dijo. Pero el día anterior había dicho que no existía tal Apóstol Muerto. Así que surgió el caos.",
+          "Ahora no sabemos qué diablos está pasando…"
+        ]
+      },
+      {
+        "text": [
+          "El primer eroge del Director de escenario:",
+          "P*yona P*kona."
+        ]
+      },
+      {
+        "text": [
+          "El webmaster juega S*kura W*rs 3.",
+          "Algunos días después una misteriosa carta llega a la casa del Director de escenario.",
+          "'¡Voy a casarme con Coquelicot--!'"
+        ]
+      },
+      {
+        "text": [
+          "El tan prometido escenario de Satsuki…",
+          "Se rumorea que ya ha sido completado. Quizás podamos verlo algún día…"
+        ]
+      },
+      {
+        "text": [
+          "El Director de sonido solía cantar en la escuela.",
+          "Algún día, podríamos tener una canción de Elmo con su voz…"
+        ]
+      },
+      {
+        "text": [
+          "Un hábito del Director de escenario :",
+          "Le gusta tomar decisiones de vida o muerte con piedra, papel o tijeras.",
+          "Y luego pierde."
+        ]
+      },
+      {
+        "text": [
+          "Otra vez, B46-san encontró un plenario de errores gramaticales y ortográficos.",
+          "MUCHAS gracias - el staff"
+        ]
+      },
+      {
+        "text": [
+          "El Director de arte tomó un gusto por un tema de una cierta celebridad.",
+          "'Dame una canción que me haga sentir como si mi cerebro se derritiera,' le pidió al webmaster.",
+          "Desde entonces, cada vez que lo llamas, puedes oír el tema principal de Sakura Wars 3 de fondo."
+        ]
+      },
+      {
+        "text": [
+          "Arihiko, vamos a Maki hoy.",
+          "'Maki' significa 'batalla de espadas'. Y supuestamente también puede significar 'hoy no habrá ni desgracia ni fraude.'",
+          "El Director de escenario una vez pensó que el segundo era el más aceptado uso de la palabra."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya - La escena recomendada del Director de escenario:",
+          "'Relaciones de papel carmesí'."
+        ]
+      },
+      {
+        "text": [
+          "Kagetsu Tohya - El personaje favorito del Director de arte:",
+          "'Tsukihime Souka'."
+        ]
+      },
+      {
+        "text": [
+          "Mientras hacíamos Tsukihime, la cuenta bancaria del Director de arte la cual tenía dos años de ahorros se vació.",
+          "También el Director de escenario vendió diez años en mangas y CDs para realizar Tsukihime.",
+          "Él se queja de que su escencia otaku se fue junto con sus cosas."
+        ]
+      },
+      {
+        "text": [
+          "Sobre los temas de las heroínas discutidos en Gecchan:",
+          "Se dice que el Director de arte escogió el tema de Hisui.",
+          "Nuestras sinceras disculpas a todos aquellos quienes creen que no pega."
+        ]
+      },
+      {
+        "text": [
+          "Acerca del libro de Tsukihime 'Período extra':",
+          "Ya que su función fue enfatizada sobre todo lo demás, un montón de gente dijo que parecía como un libro. Pensándolo bien, sin lugar a dudas se ve como uno…"
+        ]
+      },
+      {
+        "text": [
+          "¿Quién fue el primero en hacer un cosplay de Hisui? Una vendedora de TYPE-MOON.",
+          "Ejem."
+        ]
+      },
+      {
+        "text": [
+          "Muchos dicen que su razón para comprar el PLUS-DISC de Tsukihime fue la vendedora vestida en traje de maid.",
+          "Se supone que ese fue el factor más grande de las ventas."
+        ]
+      },
+      {
+        "text": [
+          "Originalmente, Tsukihime transcurría en el tiempo de un mes.",
+          "Si lo hubiéramos hecho, quizás podríamos haber alcanzado las 120 horas que serían necesarias para pasar por todas las partes…"
+        ]
+      },
+      {
+        "text": [
+          "Originalmente, Nero fue planeado sólo para ser mencionado, y no realmente para aparecer.",
+          "¡Bow wow pánico!"
+        ]
+      },
+      {
+        "text": [
+          "Originalmente, Ciel-senpai era linda, y todo el staff la quería, también.",
+          "Aaah… dónde fallamos… terminó siendo una chica tan sobria… (*llora*)"
+        ]
+      },
+      {
+        "text": [
+          "Originalmente, Shiki se volvía un delicuente tras ser capaz de ver la muerte…\"mov $msgline1,\""
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１／Primate Asesino",
+          "　Invencible. Bestia blanca. Monstruo de Gaia que sólo sigue a Altrouge.",
+          "　A pesar de no ser un Apóstol Muerto, imita a Altrouge, así que adquirió un gusto por la sangre humana.",
+          "　Tiene absoluta autoridad acerca de matar o dejar vivir a una persona."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　２／The Dark Six",
+          "　El primer Apóstol Muerto. El primer sistema.",
+          "Pero no ha alcanzado el 100% de formación."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　３／Brunestud de la Luna Carmesí",
+          "　La más."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　４／Zelretch",
+          "　Usuario mágico. Extremadamente indefenso, pero también una de las personas más correctas.",
+          "　Recuerda a un personaje de cierto manga, Kujo Jotaro, se rumorea que desafió a Brunestud de la Luna Carmesí por un simple disgusto."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　５／ORT",
+          "　ORT. Vive en un pueblo de Sudamérica.",
+          "　Tiene una forma similar a la de una araña."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　６／Rizo-Waal Strout",
+          "　Caballero negro. Posee la espada mágica Neardark. Uno del top 3.",
+          "　Por su maldición del tiempo, se cree que es invencible. Uno de los guardias de Altrouge.",
+          "　Rival de Shikiller en Tsukihime 2, jajaja.",
+          "　No… Tsukihime 2 no existe."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　７／Einnashe",
+          "　Solía ser un Apóstol Muerto normal. El Einnnashe actual pertenece a la segunda generación."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　８／Fina-Blood Svelten",
+          "　Caballero blanco. Demonio de Stratovarius. Tiene preferencia por los ninos, asi que solo chupa sangre masculina.",
+          "　Auspicia un hotel de clase alta, y es els capitán de un escuadrón. ¿Qué rayos es eso?",
+          "　Uno de los guardias de Altrouge."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　９／Altrouge Brunestud",
+          "　Vampira de los Apóstoles Muertos. Mezcla de un Verdadero Ancestro y Apóstol Muerto.",
+          "　Podría considerarse la hermana mayor de Arcueid. Pero su apariencia es la de una niña de 14.",
+          "　En general, no tiene poderes especiales, y ni siquiera puede teletransportarse.",
+          "　Sin embargo puede, como toda chica mágica, transformarse en dos fases o algo así."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１０／Nero Chaos",
+          "　Referencia a Tsukihime."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１１／Stanrobe Calhin",
+          "　Apodo: 'Comeciudades.'",
+          "　Glotón. Aunque fue destruido por la iglesia, su escencia fue suficiente para destruir a todos y a todo lo relacionado con él.",
+          "　Pero sus molestas aptitudes nunca pudieron ser igualadas por nadie."
+        ]
+      },
+      {
+        "text": [
+          " 27 Dead Apostle Ancestors Series",
+          "　１３／？？？？",
+          "　Su existencia sólo es un rumor. Tatari, la maldición.",
+          "　Intento hacer de ella un fenómeno, pero esta se acabó."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１４／Van-Fem",
+          "　Una del top. Tiene una increíble atención a los detalles, y tiene talento en crear grandes cosas.",
+          "　Posee siete caatillos mágicos. Pero uno de ellos cayó en manos del Caballero de Sangre Blanca y su ejército de fantasmas. Ahora ambos se vigilan mutuamente.",
+          "　Su nombre original es Vandehlsteim. Una tremenda prosperidad. Un rey demonio que reside en la luz.",
+          "　Tuvo un rápido crecimiento en los últimos siglos."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１５／Rita Rozay-en",
+          "　Típica vampiro de clase alta.",
+          "　Heredó las propiedades de su maestro. Hace lo que le viene en gana. Pero nunca queda satisfecha. ¿Quizás por culpa de un desorden de personalidad?",
+          "　Tiene una buena relación con Sumire. Cree que cuando uno muere, probablemente el otro haya sido el asesino. Uh… ¿en serio son amigos?"
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１６／Gransurg Blackmoa",
+          "　Amo del Ala Negra. Existencia mágica.Controla la esfera de realidad 'Nunca más.'",
+          "　Ya que molesta a todos los demás en exceso, fue arrestado por la Iglesia.",
+          "　Solía ser un humano que estudiaba la magia. Ahora, sin embargo, tiene la forma de un cuervo gigante."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１７／Trhvmn Ortenrosse",
+          "　Blanco.",
+          "　Otro del top. No tiene habilidades especiales - piensa que los vampiros no necesitan ninguno y que el sólo hecho de serlos es la supremacía.",
+          "　Un noble que piensa 'la simpleza es lo mejor.' Pero considerado en el puesto 17.",
+          "　Tiene las propiedades más extensas de entre todos los Apóstoles Muertos. Alguien muy relacionado con la tecnología moderna."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　１８／Enhance",
+          "　Vengador. Asesinó a su amo y tomó su lugar.",
+          "　Aún tiene un montón de humano en él, y así, su deseo es convertirse en uno de los más desarrollados Apóstoles Muertos."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　２０／Merm Solomon",
+          "　Inusualmente, es un cazador de vampiros, y está en la Agencia de Entierros.",
+          "　Posee uno de los cuatro Caballos Legendarios..",
+          "　A pesar de ser un traidor, los otros lo toleran.",
+          "　Se rumora que es un fan secreto de Arcueid."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　２１／Sumire",
+          "　Suma Smire. Vive bajo el agua.",
+          "　Unico apóstol muerto capaz de teletransportarse en el aire.",
+          "　Trasciende las reglas de la naturaleza. Quizás una super humana.",
+          "　Una pesimista que hace lo que quiere, pero que también puede disfrutar lo que sea.",
+          "　En Tsukihime 2, se rumorea que sólo es una simple hermanita mayor borracha que innecesariamente se pone en el camino de los asesinos."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　２７／Caubac Alcatraz",
+          "　Apóstol muerto del sello de los mil años.",
+          "　Un hechicero que torció el estudio de los Apóstoles Muertos.",
+          "　Inventó un cofre del tesoro que nadie puede abrir, pero accidentalmente él también quedó atrapado dentro.",
+          "　Comediante de los 27 apóstoles muertos.",
+          "　Pero sus verdaderas habilidades… bueno… es un director de comedia.",
+          "　Conocido de Zelretch de hace mucho tiempo. Casi un hechicero maestro."
+        ]
+      },
+      {
+        "text": [
+          "La serie de los 27 Apóstoles Muertos",
+          "　ＥＸ／Michael Roa Valdamjong",
+          "　Referencia a Tsukihime.",
+          "　Aquel que quería alcanzar la magia definitiva."
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "El Director de escenario y el Director de arte, pensaron que fallarían esta vez."
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Muchas partes se quitaron después de la etapa de planificación.",
+          "El más grande sería el escenario de Satsuki.",
+          "Lo siguiente fueron las H-scene de los personajes.",
+          "Aunque hubo muchas lágrimas por los cortes, pensamos que result・limpia y ordenada. ¿Qué piensan?"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hubo un gran debate sobre si Akiha debería cortarse el cabello en 'Una historia para el Atardecer.'",
+          "Lee la historia y ve los resultados."
+        ]
+      },
+      {
+        "text": [
+          "¡Atento! ¡Todas las ital**n*s son c*ndent**!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Definitivamente queríamos hacer una H-scene de tres personas con Hisui y Kohaku.",
+          "A pesar de que resultó mucho menor de lo originalmente previsto, ¡lo hicimos!",
+          "¡Es moe moe~!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Los CGs de evento fueron coloreados por Koyama Hirokazu-san. Por favor deleitate del arte de un experto."
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Como la última vez, los sprites de los personajes fueron coloreados por el Director de arte. Hizo todo lo posible... 100 páginas en tres días (*sollozos*)"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Esta vez recibimos bastantes fanworks. ¡Gracias a todos!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Las historias cortas, escritas por el Director de escenario, fueron elaboradas al ritmo de una por día. ¡Tsukihime tomo una nueva faceta todos los días!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "La habitación del Director de escenario no tenía un AC. ¡Fue caluroso!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "La movie fue producida por [Ti]-san. ¡La movie luce maravillosa, y él es un agradable chico que reclutamos!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Hay acerca de 100 sprites adicionales de los personajes, pero como algunos se utilizan sólo una vez, no se siente que hayan muchos.",
+          " ¡Maldición!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "Tsukihime es un nocturno azul, Kagetsu Tohya es una puesta de sol dorada. Se siente como que sería bueno mostrar los covers del CD."
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "En cuanto a la música, ¡10 nuevas canciones fueron compuestas! ¡El Director de sonido trabajó duro!"
+        ]
+      },
+      {
+        "text": [
+          "Notas de producción de Kagetsu Tohya",
+          "El Administrador del sistema incluso renunció a su trabajo principal cuando había una tonelada que hacer.",
+          "'¡Uk! ¡¿Virus-nya?!'"
+        ]
+      },
+      {
+        "text": [
+          "Eterna doncella"
+        ]
+      },
+      {
+        "text": [
+          "Para los interesados:",
+          "Sé que es confuso, pero consigue a Roa y a Nero en orden."
+        ]
+      },
+      {
+        "text": [
+          "¡De acuerdo! ¡Vine como esta persona!"
+        ]
+      },
+      {
+        "text": [
+          "¡Pero soy un calculador! ¡La ruta para la victoria! ¡La he asegurado!"
+        ]
+      },
+      {
+        "text": [
+          "Si digo esto, esto será una serie no premiada.",
+          "La mujer con ropas chinas de mi pueblo natal no era semejante a una tal persona..."
+        ]
+      },
+      {
+        "text": [
+          "Esto es inútil."
+        ]
+      },
+      {
+        "text": [
+          "'¡Te declaro culpable!'",
+          "Quizás uno de los dichos de Enhance. Pero actualmente, el webmaster sólo lo tomó de un determinado anime."
+        ]
+      },
+      {
+        "text": [
+          "SHIKI-kun, Compraré todo el café que quieras beber."
+        ]
+      },
+      {
+        "text": [
+          "Mmm mmmm... 350 gramos... No puedo comer eso... mmm mmm..."
+        ]
+      },
+      {
+        "text": [
+          "¡Esa persona no era rival para mí!"
+        ]
+      },
+      {
+        "text": [
+          "Es Ciel, y se va sin decir nada..."
+        ]
+      },
+      {
+        "text": [
+          "¡Solo deberías beber cuando cumplas la mayoria de edad!"
+        ]
+      },
+      {
+        "text": [
+          "Ciel-san, es India esta vez."
+        ]
+      },
+      {
+        "text": [
+          "Pronto me iré a dormir."
+        ]
+      },
+      {
+        "text": [
+          "¡Poison Mushroom Sword Skill!",
+          "¡Lower body sword, vegetable man sword! Algunas técnicas son una combinación de unas con otras."
+        ]
+      },
+      {
+        "text": [
+          "Poison Mushroom Boxing.",
+          "Slaughter Vulcan, Dokidoki Genocide, Hyper Tosakill, etc. Ridículas técnicas combinadas unas con otras."
+        ]
+      },
+      {
+        "text": [
+          "'¿Por qué Ciel no muere-nya?'",
+          "'Es India...'"
+        ]
+      }
+    ],
+    "dates": {
+      "1-1": {
+        "text": [
+          "¡Feliz Año Nuevo!"
+        ]
+      },
+      "12-25": {
+        "text": [
+          "¡Merry Christmas y un feliz cumpleaños para mí!",
+          "¡Estoy esperando regalos de todos!"
+        ],
+        "fg": "msg/ran_t01",
+        "bg": "msg/ran_bg07"
+      },
+      "5-3": {
+        "text": [
+          "Ya, ya... ¿ya es mi cumpleaños?",
+          "¡Pero mi edad es todavía un secreto!",
+          "Digo eso, pero incluso el autor original",
+          "lo olvidó..."
+        ],
+        "fg": "msg/ran_t02_sp",
+        "bg": "msg/ran_bg07"
+      },
+      "9-22": {
+        "text": [
+          "Parece que hoy es mi cumpleaños.",
+          "Un año pasa muy rápido.",
+          "¡Entonces nos veremos todos de nuevo el",
+          "próximo año!"
+        ],
+        "fg": "msg/ran_t03_sp",
+        "bg": "msg/ran_bg07"
+      },
+      "3-12": {
+        "text": [
+          "Dicen que hoy es nuestro cumpleaños. Estoy feliz porque",
+          "lo hemos sabido. Incluso aunque",
+          "Makihisa-sama solo lo haya decidido al azar...",
+          "",
+          "Nee-san... no tenias que mencionar eso..."
+        ],
+        "fg": "msg/ran_t10_sp",
+        "bg": "msg/ran_bg07"
+      },
+      "11-28": {
+        "text": [
+          "¡Whoooo!",
+          "¡Bombas Mushroom!"
+        ],
+        "fg": "msg/ran_t09_sp",
+        "bg": "msg/ran_bg07"
+      },
+      "8-15": {
+        "text": [
+          "¡Así que mi cumpleaños también existe!",
+          "¡Whooo! ¡Lo hice!",
+          "La próxima vez, también seré una heroina,",
+          "¿Verdad que sí, Tohno-kun?"
+        ],
+        "fg": "msg/ran_t06_sp",
+        "bg": "msg/ran_bg07"
+      },
+      "9-9": {
+        "text": [
+          ".....................(yo nací en un día como hoy.)"
+        ],
+        "fg": "msg/ran_t07_sp",
+        "bg": "msg/ran_bg07"
+      }
+    }
+  }
+}
