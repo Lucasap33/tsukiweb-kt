@@ -3,17 +3,233 @@
 #summer-fes {
 	overflow-y: auto;
 	scrollbar-gutter: stable;
+	--fes-gap: 12px;
 	padding: var(--page-padding);
 	padding-bottom: 60px;
+	display: flex;
+	flex-direction: column;
+	gap: var(--fes-gap);
 
-	.scenes-list {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+	.fes-cards {
+		flex: 1 1 auto;
+		min-height: 300px;
+		max-height: 580px;
+		display: flex;
+		gap: var(--fes-gap);
 		isolation: isolate;
-		gap: 8px;
+	}
 
-		@media screen and (max-width: 440px) {
-			grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+	.fes-card, .fes-finale {
+		position: relative;
+		overflow: clip;
+		background-color: var(--menu-container);
+		border-radius: 8px;
+		corner-shape: scoop;
+		outline: 1px solid hsl(0deg 0% 100% / 10%);
+
+		@supports not (corner-shape: scoop) {
+			border-radius: 4px;
+		}
+		@media (pointer: coarse) {
+			corner-shape: unset;
+			border-radius: 4px;
+		}
+
+		&:not(.locked) {
+			@include active-shadow;
+		}
+
+		.graphics {
+			position: absolute;
+			inset: 0;
+			filter: brightness(.82) saturate(.9);
+			transition: filter .3s ease-out;
+		}
+		&:hover .graphics, &:focus .graphics {
+			filter: none;
+		}
+
+		.fes-label {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: .7em;
+			padding: 6em 1em 1.5em;
+			text-align: center;
+			line-height: 1.2;
+			background-image: linear-gradient(180deg, transparent, rgb(22 8 7 / 70%) 50%, rgb(22 8 7 / 94%));
+			pointer-events: none;
+
+			&::after {
+				content: "";
+				width: 2.4em;
+				height: 1px;
+				background-image: var(--choice-line);
+				transition: width .3s ease-out;
+			}
+		}
+		&:hover .fes-label::after, &:focus .fes-label::after {
+			width: min(7em, 80%);
+		}
+
+		.fes-name {
+			position: relative;
+			font-size: 1.25em;
+			font-weight: 500;
+			letter-spacing: 1px;
+			text-wrap: balance;
+			color: var(--sunset-ivory);
+			text-shadow: 0 0 8px var(--sunset-brown);
+			transition: color .2s, text-shadow .2s;
+		}
+		&:hover .fes-name, &:focus .fes-name {
+			color: var(--sunset-sun);
+			text-shadow: var(--theme-glow);
+		}
+
+		&.attention .fes-name::after {
+			content: "!";
+			position: relative;
+			display: inline-block;
+			rotate: 23deg;
+			width: 0;
+			line-height: 0;
+			translate: .2em 0;
+			font-size: 1.5em;
+			font-weight: 700;
+			color: var(--attention);
+			text-shadow: none;
+
+			@include hover-scale("fes-attention", 1.2);
+		}
+	}
+
+	.fes-card {
+		flex: 1 1 0;
+		min-width: 0;
+	}
+
+	.fes-finale {
+		flex: none;
+		height: clamp(96px, 18vh, 140px);
+
+		.graphics .bg img {
+			object-position: center 32%;
+		}
+		.fes-label {
+			top: 0;
+			right: auto;
+			max-width: 100%;
+			align-items: flex-start;
+			justify-content: center;
+			padding: 1em 6em 1em 2.2em;
+			text-align: left;
+			background-image: linear-gradient(90deg, rgb(22 8 7 / 80%), rgb(22 8 7 / 50%) 60%, transparent);
+		}
+		.fes-name {
+			font-size: 1.4em;
+		}
+
+		&.locked {
+			outline-style: dashed;
+			outline-color: var(--separator);
+			background-color: rgb(22 8 7 / 45%);
+
+			.fes-label {
+				right: 0;
+				align-items: center;
+				padding-inline: 1em;
+				background-image: none;
+
+				&::after {
+					opacity: .4;
+				}
+			}
+			.fes-name {
+				color: var(--sunset-muted);
+				opacity: .6;
+				letter-spacing: .4em;
+				text-shadow: none;
+			}
+		}
+	}
+
+	@include mobile-landscape {
+		--fes-gap: 8px;
+		padding-bottom: var(--page-padding);
+
+		.fes-cards {
+			min-height: 200px;
+		}
+		.fes-card {
+			.fes-label {
+				gap: .5em;
+				padding: 4em .6em 1.1em;
+			}
+			.fes-name {
+				font-size: 1.05em;
+			}
+		}
+		.fes-finale {
+			height: 76px;
+
+			.fes-label {
+				gap: .5em;
+				padding-block: .6em;
+			}
+
+			.fes-name {
+				font-size: 1.2em;
+			}
+		}
+	}
+
+	@include mobile-portrait {
+		--fes-gap: 10px;
+
+		.fes-cards {
+			flex: none;
+			flex-direction: column;
+			min-height: 0;
+			max-height: none;
+		}
+		.fes-card {
+			flex: none;
+			height: clamp(84px, 12.5vh, 124px);
+
+			.graphics .c {
+				translate: 24% 0;
+
+				img {
+					top: -8%;
+					bottom: auto;
+					height: 300%;
+				}
+			}
+			.fes-label {
+				top: 0;
+				right: auto;
+				width: 62%;
+				align-items: flex-start;
+				justify-content: center;
+				gap: .55em;
+				padding: .6em 1.4em;
+				text-align: left;
+				background-image: linear-gradient(90deg, rgb(22 8 7 / 90%), rgb(22 8 7 / 60%) 55%, transparent);
+			}
+		}
+		.fes-finale {
+			.fes-label {
+				gap: .55em;
+				padding-inline: 1.4em 1em;
+			}
+			.fes-name {
+				font-size: 1.25em;
+			}
 		}
 	}
 }
