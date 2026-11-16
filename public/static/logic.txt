@@ -256,7 +256,7 @@ goto *f43
 *f43
 goto *s43
 *s43_end
-select *f44,*f45,*f46,[%ark_point>=1 || %ciel_point>=1]*f194
+select *f44,*f45,*f46,[%ark_point>=1 || %cel_point>=1]*f194
 *f44
 goto *s44
 *s44_end

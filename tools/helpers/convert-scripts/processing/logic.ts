@@ -133,7 +133,7 @@ function getBlockProps(
 				break
 			case 'f43' : tokenFixes.push(t=> {
 					if (t instanceof CommandToken && t.cmd == 'select')
-						addChoiceCondition(t, "*f194", "%ark_point>=1 || %ciel_point>=1")
+						addChoiceCondition(t, "*f194", "%ark_point>=1 || %cel_point>=1")
 				})
 				break;
 			case 'f63' : tokenFixes.push(t=> {
