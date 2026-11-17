@@ -83,10 +83,11 @@ let newGameStarted = false
 
 export function newGame(base: GameProgress) {
   history.loadSaveState({scenes: [{
-    label: 's520',
+    label: 'f520',
     flags: Array.from(base.flags),
     points: structuredClone(base.points),
     deathCount: base.count,
+    pointScenes: Array.from(base.pointScenes)
   }], pages: []})
   newGameStarted = true
   displayMode.screen = SCREEN.WINDOW

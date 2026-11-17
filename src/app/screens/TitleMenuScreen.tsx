@@ -78,6 +78,7 @@ const TitleMenu = () => {
 			const progress: GameProgress = {
 				flags: Array.from(script.flags).filter(filter),
 				points: Object.fromEntries(script.points.entries().filter(([k,v])=> filter(k))),
+				pointScenes: script.pointScenes,
 				lastSave: Date.now(),
 				count: script.deathCount+1
 			}

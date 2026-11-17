@@ -35,7 +35,7 @@ function processVarName(varName: string) {
 		[/^%(fin_)?yume\d+\w*$/, null], // yume scenes unlock uses viewed scenes
 		[/^%([a-z_]+)_point$/	, (m: RegExpMatchArray)=> {
 			switch (m[1]) {
-				case 'ren' : case 'ark'	: case 'gojitsudan' :
+				case 'ren' : case 'ark'	:
 				case 'kagi': case 'kaibyo': case 'answer': return m[0]
 				case 'hisui'	: return '%his_point'
 				case 'ciel'		: return '%cel_point'
@@ -48,6 +48,7 @@ function processVarName(varName: string) {
 				case 'onemu'	: return '%flg_onemu'
 				case 'syashin'	: return '%flg_syashin'
 				case 'bunka_info': return '%flg_bunka'
+				case 'gojitsudan': return null
 			}
 			throw Error(`regard variable ${m[0]} not recognized`)
 		}],

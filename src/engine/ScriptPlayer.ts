@@ -8,6 +8,7 @@ import { History } from "./history";
 import { extractInstructions } from "@tsukiweb/common/script/utils";
 import { SCENE_ATTRS } from "app/utils/constants";
 import { creditsScript, fetchBlockLines } from "./script-loader"
+import { Scene } from "@tsukiweb/common/tools/generate-thumbnails/processor.js";
 
 //#endregion ###################################################################
 //#region                             TYPES
@@ -78,7 +79,7 @@ function processRngSel(arg: string) {
 //##############################################################################
 
 export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
-                            {deathCount: number}, History> {
+                            {deathCount: number, pointScenes: SceneName[]}, History> {
 
 //#endregion ###################################################################
 //#region                         ATTRS & PROPS
@@ -88,8 +89,9 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     private _tempVariables = new Map<string, string|number>()
-    private _deathCount = 0
+    private _deathCount : number
     private _canSave = false
+    private _pointScenes: Set<SceneName>
 //_______________________public attributes & properties_________________________
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     
@@ -111,8 +113,8 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
             if (isScene(label) && !settings.completedScenes.includes(label))
                 settings.completedScenes.push(label)
         })
-        if (initContext.deathCount)
-            this._deathCount = initContext.deathCount
+        this._deathCount = initContext.deathCount ?? 0
+        this._pointScenes = new Set(initContext.pointScenes ?? [])
 
         this.addEventListener('finish', ()=> {
             if (!this.singleScene && !this.extra)
@@ -139,9 +141,16 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
     get canSaveProgress() {
         return this._canSave
     }
+    get pointScenes(): Array<SceneName> {
+        return Array.from(this._pointScenes)
+    }
 
     onProgressSaved() {
         this._canSave = false
+    }
+    
+    hasPointFromScene(label: SceneName) {
+        return this._pointScenes.has(label)
     }
 
     override isLinePageBreak(line: string, index: number, sceneLines: string[],
@@ -164,15 +173,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
     }
     
     override blockContent() {
-        return { deathCount: this._deathCount }
-    }
-
-    override hasFlag(flag: string) {
-        if (super.hasFlag(flag))
-            return true
-        if (flag.length == 1)
-            return SCENE_ATTRS["scene-points"].flags[flag].some(s=>this.viewedScene(s))
-        return false
+        return { deathCount: this._deathCount, pointScenes: this.pointScenes }
     }
 
     //static override defaultPageContext() { return ScriptPlayerBase.defaultPageContext() }
@@ -181,6 +182,7 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
         return  {
             ...ScriptPlayerBase.defaultBlockContext(),
             deathCount: 0,
+            pointScenes: [],
         }
     }
 
@@ -195,7 +197,17 @@ export class ScriptPlayer extends ScriptPlayerBase<LabelName, PointId, {},
             else
                 this.deleteFlag(m[1])
         } else if ((m = name.match(/^%(\w+)_point$/))) {
-            this.setPoints(m[1] as PointId, value as number)
+            const label = this.history.lastScene.label as SceneName
+            const point = m[1] as PointId
+            const resets = SCENE_ATTRS["scene-points"].reset.includes(point)
+            if (!resets) {
+                if (!this.hasPointFromScene(label)) {
+                    this._pointScenes.add(label)
+                    this.setPoints(point, value as number)
+                }
+            } else {
+                this.setPoints(point, value as number)
+            }
         } else if (["%answer", "%2100"].includes(name)) {
             this._tempVariables.set(name, value)
         } else {

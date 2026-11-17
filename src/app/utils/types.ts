@@ -5,13 +5,14 @@ export type PointId = 'seo' | 'answer' | 'ark' | 'cel' | 'his' | 'aki' | 'kagi'
 
 export type SceneName = `s${number}`
 
-type FBlockName = `f${number}`|`${SceneName}_end`
+type FBlockName = `f${number}`|`${SceneName}_end` | `yume${number}`
 
 export type LabelName = SceneName | FBlockName | 'endofplay'
 
 export type GameProgress = {
   flags: string[]
   points: PartialRecord<PointId, number>
+  pointScenes: SceneName[]
   lastSave: number
   count: number
 }
