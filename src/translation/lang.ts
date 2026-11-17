@@ -1,6 +1,6 @@
 import defaultStrings from "../assets/lang/default.json"
 import { settings } from "../engine/settings"
-import { ImageRedirect, ResolutionId, TextImage, TranslationId, UpdateDateFormat } from "@tsukiweb/common/translation/lang"
+import { ImageRedirect, ResolutionId, TextImage } from "@tsukiweb/common/translation/lang"
 import { PartialRecord } from "@tsukiweb/common/types"
 import { APP_VERSION, SCENE_ATTRS } from "app/utils/constants";
 import { LabelName } from "app/utils/types";
@@ -17,8 +17,6 @@ export type DailyMessageEntry = {
 }
 
 type StringsTypeBase = {
-  id: TranslationId
-  lastUpdate: UpdateDateFormat
   images: {
     "redirect-ids": Record<string, ImageRedirect<`${string}\$${string}`>>
     "redirected-images": Record<string, string|ImageRedirect<string>>

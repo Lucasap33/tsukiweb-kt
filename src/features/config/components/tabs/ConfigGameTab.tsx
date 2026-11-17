@@ -81,7 +81,7 @@ const ConfigGameTab = () => {
 				/>
 			</ConfigItem>
 
-			<ConfigItem label={strings.config["text-speed"].replace('%0',conf.textSpeed)}>
+			<ConfigItem label={strings.config["text-speed"].replace('%0',conf.textSpeed.toString())}>
 				<ConfigRange
 					min={0}
 					max={TEXT_SPEEDS.length-1}

@@ -8,7 +8,6 @@
   "en": {
     "locale": "en-US",
     "display-name": "🇬🇧 English",
-    "authors": "mirror moon",
     "dir": "./en",
     "fallback": "jp",
     "last-update": "2026-11-12"
@@ -16,15 +15,13 @@
   "es-saki": {
     "locale": "es-ES",
     "display-name": "🇪🇸 Español",
-    "authors": "Saki",
     "dir": "./es-saki",
     "last-update": "2026-11-16",
-    "fallback": "en-mm"
+    "fallback": "en"
   },
   "it-riffour": {
     "locale": "it-IT",
     "display-name": "🇮🇹 Italiano",
-    "authors": "Riffour",
     "dir": "./it-riffour",
     "last-update": "2026-11-12",
     "fallback": "en"
@@ -32,7 +29,6 @@
   "pt-seven-nights": {
     "locale": "pt-BR",
     "display-name": "🇧🇷 Português",
-    "authors": "Seven Nights",
     "dir": "./pt-seven-nights",
     "last-update": "2026-11-12",
     "fallback": "en"
