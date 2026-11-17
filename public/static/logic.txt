@@ -333,7 +333,6 @@ goto *f62
 *f61
 goto *s61
 *s61_end
-inc %gojitsudan_point
 goto *f62
 *f62
 goto *s62
@@ -350,7 +349,6 @@ goto *f67
 *f65
 goto *s65
 *s65_end
-inc %gojitsudan_point
 goto *f67
 *f66
 goto *s66
@@ -497,7 +495,6 @@ goto *f231
 *f229
 goto *s229
 *s229_end
-inc %gojitsudan_point
 goto *f231
 *f230
 goto *s230
@@ -1042,7 +1039,6 @@ goto *f164
 goto *s164
 *s164_end
 inc %seo_point
-inc %gojitsudan_point
 goto *f140
 *f165
 goto *s165
