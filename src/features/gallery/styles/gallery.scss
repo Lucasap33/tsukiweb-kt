@@ -6,6 +6,7 @@
 	overflow-y: auto;
 	scrollbar-gutter: stable;
 	padding-top: 2rem;
+	padding-right: var(--extra-bleed);
 	display: flex;
 	flex-direction: column;
 	min-height: 0;

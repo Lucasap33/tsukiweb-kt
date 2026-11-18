@@ -12,7 +12,7 @@ export const EMPTY_PROGRESS: GameProgress = { flags: [], points: {}, pointScenes
 export const APP_INFO = {
   GITHUB_URL: "https://github.com/loicfrance/tsukiweb-kt",
   GITHUB_STARS: "https://img.shields.io/github/stars/loicfrance/tsukiweb-kt",
-  FEEDBACK_URL: "https://forms.gle/MJorV8oNbnKo22469",
+  FEEDBACK_URL: "https://forms.gle/wExp7XAF7d6oW4m89",
   GAME_VNDB: "https://vndb.org/r346"
 }
 

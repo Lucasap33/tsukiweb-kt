@@ -1,17 +1,247 @@
+@use '@tsukiweb/common/ui-core/styles/_mixins.scss' as *;
+
 #help {
-	overflow-y: auto;
-	scrollbar-gutter: stable;
-	padding: var(--page-padding);
-	padding-bottom: 60px;
+	--help-gap: 12px;
+	--ciel-height: 90cqh;
+	--ciel-space: min(var(--ciel-height) * .6, (100cqw - var(--extra-bleed)) * .5);
+	container-type: size;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
+	isolation: isolate;
 
-	.scenes-list {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-		isolation: isolate;
-		gap: 8px;
+	.help-ciel {
+		position: absolute;
+		right: var(--extra-bleed);
+		bottom: 0;
+		z-index: -1;
+		height: var(--ciel-height);
+		translate: 14% 0;
+		pointer-events: none;
+		user-select: none;
+	}
 
-		@media screen and (max-width: 440px) {
-			grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+	.help-scroll {
+		flex: 1;
+		min-height: 0;
+		overflow-y: auto;
+		scrollbar-gutter: stable;
+		display: flex;
+		flex-direction: column;
+		padding: var(--page-padding);
+		padding-top: .4rem;
+		padding-right: calc(var(--ciel-space) + var(--extra-bleed));
+	}
+
+	.help-logo {
+		flex: none;
+		margin: var(--page-padding) 0 0 var(--page-padding);
+		width: clamp(150px, 24cqh, 250px);
+		rotate: -4deg;
+		line-height: 0;
+
+		img {
+			width: 100%;
+			aspect-ratio: 4 / 3;
+			object-fit: contain;
+			pointer-events: none;
+			user-select: none;
+		}
+	}
+
+	.help-list {
+		flex: 1 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: var(--help-gap);
+		max-width: 640px;
+	}
+
+	.help-card {
+		position: relative;
+		flex: 1 1 0;
+		min-height: 84px;
+		max-height: 132px;
+		overflow: clip;
+		background-color: var(--menu-container);
+		border-radius: 8px;
+		corner-shape: scoop;
+		outline: 1px solid hsl(0deg 0% 100% / 10%);
+		@include active-shadow;
+
+		@supports not (corner-shape: scoop) {
+			border-radius: 4px;
+		}
+		@media (pointer: coarse) {
+			corner-shape: unset;
+			border-radius: 4px;
+		}
+
+		.graphics, .help-placeholder {
+			position: absolute;
+			inset: 0;
+		}
+		.graphics {
+			.bg img {
+				object-position: center 65%;
+			}
+			.r img {
+				bottom: -6%;
+				height: 150%;
+			}
+		}
+		.help-placeholder {
+			background-color: rgb(0 0 0 / 40%);
+		}
+
+		.help-flag {
+			position: absolute;
+			top: .55rem;
+			right: .7rem;
+			font-size: 1.7rem;
+			opacity: .85;
+			pointer-events: none;
+			transition: opacity .2s;
+		}
+		&:hover .help-flag, &:focus .help-flag {
+			opacity: 1;
+		}
+
+		.help-label {
+			position: absolute;
+			inset: 0 auto 0 0;
+			width: 65%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			gap: .55em;
+			padding: .6em 1.8em;
+			line-height: 1.2;
+			background-image: linear-gradient(90deg, rgb(22 8 7 / 94%), rgb(22 8 7 / 70%) 50%, transparent);
+			pointer-events: none;
+
+			&::after {
+				content: "";
+				width: 2.4em;
+				height: 1px;
+				background-image: var(--choice-line);
+				transition: width .3s ease-out;
+			}
+		}
+		&:hover .help-label::after, &:focus .help-label::after {
+			width: min(7em, 80%);
+		}
+
+		.help-title {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			min-height: 2.2rem;
+			font-size: 1.25em;
+			font-weight: 500;
+			letter-spacing: 1px;
+			color: var(--sunset-ivory);
+			text-shadow: 0 0 8px var(--sunset-brown);
+			transition: color .2s, text-shadow .2s;
+		}
+		&:hover .help-title, &:focus .help-title {
+			color: var(--sunset-sun);
+			text-shadow: var(--theme-glow);
+		}
+
+		&.attention .help-title::after {
+			content: "!";
+			position: relative;
+			display: inline-block;
+			rotate: 23deg;
+			width: 0;
+			line-height: 0;
+			translate: .3em 0;
+			font-size: 1.5em;
+			font-weight: 700;
+			color: var(--attention);
+			text-shadow: none;
+
+			@include hover-scale("help-attention", 1.2);
+		}
+	}
+
+	@include mobile-landscape {
+		--help-gap: 8px;
+
+		.help-scroll {
+			padding-bottom: var(--page-padding);
+		}
+		.help-logo {
+			width: 120px;
+		}
+		.help-card {
+			min-height: 64px;
+
+			.help-label {
+				gap: .4em;
+				padding-inline: 1.2em;
+			}
+			.help-title {
+				font-size: 1.05em;
+				min-height: 1.8rem;
+			}
+			.help-flag {
+				top: .35rem;
+				font-size: 1.3rem;
+			}
+		}
+	}
+
+	@include mobile-portrait {
+		--help-gap: 10px;
+
+		.help-ciel {
+			position: relative;
+			flex: none;
+			align-self: center;
+			width: min(100%, 420px);
+			height: 30cqh;
+			translate: none;
+			object-fit: cover;
+			object-position: center 6%;
+			filter: drop-shadow(0 0 24px rgb(22 8 7 / 55%));
+			-webkit-mask-image: linear-gradient(180deg, black 55%, transparent);
+			mask-image: linear-gradient(180deg, black 55%, transparent);
+		}
+		.help-scroll {
+			flex: 1;
+			min-height: 0;
+			margin-top: -1.5rem;
+			padding-right: calc(var(--page-padding) + var(--extra-bleed));
+			padding-bottom: 60px;
+			-webkit-mask-image: linear-gradient(180deg, transparent, black .5rem);
+			mask-image: linear-gradient(180deg, transparent, black .5rem);
+		}
+		.help-logo {
+			position: absolute;
+			top: .6rem;
+			left: var(--page-padding);
+			margin: 0;
+			width: 120px;
+			z-index: 1;
+		}
+		.help-list {
+			flex: none;
+			max-width: none;
+		}
+		.help-card {
+			flex: none;
+			height: clamp(84px, 12.5vh, 124px);
+			max-height: none;
+
+			.help-label {
+				width: 70%;
+				padding-inline: 1.4em;
+			}
 		}
 	}
 }

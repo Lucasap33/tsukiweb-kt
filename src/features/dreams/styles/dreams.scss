@@ -2,6 +2,7 @@
 	overflow-y: auto;
 	scrollbar-gutter: stable;
 	padding: var(--page-padding);
+	padding-right: calc(var(--page-padding) + var(--extra-bleed));
 	padding-bottom: 60px;
 
 	.scenes-list {
