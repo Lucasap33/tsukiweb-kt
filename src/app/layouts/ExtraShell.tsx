@@ -3,7 +3,7 @@ import { PropsWithChildren, useEffect } from "react"
 import "../../features/title-menu/styles/extra.scss"
 import { useStrings } from "translation/lang"
 import { useLocation } from "wouter"
-import { PageTitle, TitleMenuButton } from "@tsukiweb/common/ui-core"
+import { PageSwitcher, PageTitle, TitleMenuButton } from "@tsukiweb/common/ui-core"
 import { audio } from "engine/audio"
 import { SCREEN, displayMode } from "app/utils/display";
 import { useDefaultNavBack, useNavBackRef } from "@tsukiweb/common/hooks"
@@ -48,6 +48,13 @@ const ExtraShell = ({ children }: PropsWithChildren) => {
 
 export default ExtraShell
 
+type ExtraPage = {
+	screen: SCREEN
+	id: string
+	label: string
+	attention?: boolean
+}
+
 function back() {
 	displayMode.screen = SCREEN.TITLE
 }
@@ -56,7 +63,7 @@ const ExtraMenu = () => {
 	const [location, navigate] = useLocation()
 	const strings = useStrings()
 	const currentPage = "/" + location.split("/")[1]
-	const { menuOpened, hasUnseenFes } = useFestivalsAccess()
+	const { hasAccess, hasUnseenFes } = useFestivalsAccess()
 	const unlockedDreams = getUnlockedDreams()
 
 	useDefaultNavBack(back)
@@ -73,75 +80,41 @@ const ExtraMenu = () => {
 		}
 	}, [])
 
+	const pages: ExtraPage[] = [
+		{ screen: SCREEN.GALLERY, id: "extra-gallery", label: strings.extra.gallery },
+		{ screen: SCREEN.SCENES, id: "extra-scenes", label: strings.extra.scenes },
+		hasAccess &&
+			{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: hasUnseenFes },
+		unlockedDreams.length > 0 &&
+			{ screen: SCREEN.DREAMS, id: "extra-dreams", label: strings.extra.dreams, attention: unlockedDreams.some(({ id }) => !viewedScene(id)) },
+		{ screen: SCREEN.HELP, id: "extra-help", label: strings.extra.help },
+		(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
+			{ screen: SCREEN.DAILY_MESSAGES, id: "extra-daily-messages", label: strings.extra["daily-messages"] },
+	].filter(page => !!page)
+
 	return (
 		<div className="extra-menu">
 			<PageTitle>
 				{strings.title.extra}
 			</PageTitle>
 			<div className="menus" role="tablist">
-				<TitleMenuButton id="extra-gallery"
-					audio={audio}
-					onClick={()=>navigate(SCREEN.GALLERY)}
-					active={currentPage === SCREEN.GALLERY}
-					aria-selected={currentPage === SCREEN.GALLERY}
-					role="tab"
-					nav-auto={1}>
-					{strings.extra.gallery}
-				</TitleMenuButton>
-				<TitleMenuButton id="extra-scenes"
-					audio={audio}
-					onClick={()=>navigate(SCREEN.SCENES)}
-					active={currentPage === SCREEN.SCENES}
-					aria-selected={currentPage === SCREEN.SCENES}
-					role="tab"
-					nav-auto={1}>
-					{strings.extra.scenes}
-				</TitleMenuButton>
-				{menuOpened &&
-					<TitleMenuButton id="extra-summer-fes"
+				{pages.map(({ screen, id, label, attention }) =>
+					<TitleMenuButton key={id} id={id}
 						audio={audio}
-						onClick={()=>navigate(SCREEN.SUMMER_FES)}
-						active={currentPage === SCREEN.SUMMER_FES}
-						aria-selected={currentPage === SCREEN.SUMMER_FES}
-						attention={hasUnseenFes}
+						onClick={()=>navigate(screen)}
+						active={currentPage === screen}
+						aria-selected={currentPage === screen}
+						attention={attention}
 						role="tab"
 						nav-auto={1}>
-						{strings.extra["summer-fes"]}
+						{label}
 					</TitleMenuButton>
-				}
-				{unlockedDreams.length > 0 &&
-					<TitleMenuButton id="extra-dreams"
-					audio={audio}
-					onClick={()=>navigate(SCREEN.DREAMS)}
-					active={currentPage === SCREEN.DREAMS}
-					aria-selected={currentPage === SCREEN.DREAMS}
-					attention={unlockedDreams.some(({ id }) => !viewedScene(id))}
-					role="tab"
-					nav-auto={1}>
-					{strings.extra.dreams}
-				</TitleMenuButton>
-				}
-				<TitleMenuButton id="extra-help"
-					audio={audio}
-					onClick={()=>navigate(SCREEN.HELP)}
-					active={currentPage === SCREEN.HELP}
-					aria-selected={currentPage === SCREEN.HELP}
-					role="tab"
-					nav-auto={1}>
-					{strings.extra.help}
-				</TitleMenuButton>
-				{(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
-					<TitleMenuButton id="extra-daily-messages"
-						audio={audio}
-						onClick={()=>navigate(SCREEN.DAILY_MESSAGES)}
-						active={currentPage === SCREEN.DAILY_MESSAGES}
-						aria-selected={currentPage === SCREEN.DAILY_MESSAGES}
-						role="tab"
-						nav-auto={1}>
-						{strings.extra["daily-messages"]}
-					</TitleMenuButton>
-				}
+				)}
 			</div>
+			<PageSwitcher className="extra-switcher" audio={audio}
+				pages={pages.map(({ screen, label, attention }) => ({ value: screen, label, attention }))}
+				selected={currentPage}
+				onSelect={navigate} />
 			<div className="back-action">
 				<PageBackButton onClick={()=>navigate(SCREEN.TITLE)} />
 			</div>

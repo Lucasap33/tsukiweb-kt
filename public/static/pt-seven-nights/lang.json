@@ -169,9 +169,14 @@
     "skipped": "Cena ignorada %0."
   },
   "characters": {
+    "aki": "Akiha",
+    "ark": "Arcueid",
+    "cel": "Ciel",
+    "his": "Hisui",
+    "koha": "Kohaku",
+    "seo": "Akira",
     "ren": "Len",
-    "yume": "Dream",
-    "others": "Others"
+    "yume": "Dream"
   },
   "yes": "Sim",
   "no": "Não",
