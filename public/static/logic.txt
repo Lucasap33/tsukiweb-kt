@@ -372,7 +372,7 @@ goto *endofplay
 *f248
 goto *s248
 *s248_end
-select *f72,*f73,*f74,[%kaibyo_point>=2]*f84,[%flg3 && !%flg4]*f85,[%ren_point>=6 && !%flg5]*f250
+select *f72,*f73,*f74,[%kaibyo_point>=2]*f84,[%flg3 && %flg4<1]*f85,[%ren_point>=6 && %flg5<1]*f250
 *f72
 if (%flg5>=1) goto *f77
 if (%flgB>=1) goto *f76
@@ -917,7 +917,7 @@ goto *f202
 *f202
 goto *s202
 *s202_end
-select *f203,[!%flg5]*f205,*f204
+select *f203,[%flg5<1]*f205,*f204
 *f203
 goto *s203
 *s203_end
@@ -960,7 +960,7 @@ goto *f214
 *f214
 goto *s214
 *s214_end
-select [!%flg5]*f215,*f216,*f217
+select [%flg5<1]*f215,*f216,*f217
 *f215
 goto *s215
 *s215_end

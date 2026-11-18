@@ -211,20 +211,20 @@ function getBlockProps(
 				break
 			case 'f202' : tokenFixes.push(t=> {
 					if (t instanceof CommandToken && t.cmd == 'select')
-						addChoiceCondition(t, "*f205", "!%flg5")
+						addChoiceCondition(t, "*f205", "%flg5<1")
 				})
 				break
 			case 'f214': tokenFixes.push(t=> {
 					if (t instanceof CommandToken && t.cmd == 'select') {
-						addChoiceCondition(t, "*f215", "!%flg5")
+						addChoiceCondition(t, "*f215", "%flg5<1")
 					}
 				})
 				break
 			case 'f248' : tokenFixes.push(t=> {
 					if (t instanceof CommandToken && t.cmd == 'select') {
 						addChoiceCondition(t, "*f84", "%kaibyo_point>=2")
-						addChoiceCondition(t, "*f85", "%flg3 && !%flg4")
-						addChoiceCondition(t, "*f250", "%ren_point>=6 && !%flg5")
+						addChoiceCondition(t, "*f85", "%flg3 && %flg4<1")
+						addChoiceCondition(t, "*f250", "%ren_point>=6 && %flg5<1")
 					}
 				})
 				break
