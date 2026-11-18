@@ -5,7 +5,8 @@ import { savesManager, SaveState } from "./savestates"
 import { toast } from "react-toastify"
 import { strings, TrackSourceId } from "translation/lang"
 import { APP_VERSION, FULLSAVE_EXT } from "app/utils/constants"
-import { GameProgress } from "app/utils/types"
+import { progresses } from "./progress";
+import { GameProgress } from "app/utils/types";
 
 const restoreSymbol = Symbol("restore")
 
@@ -20,7 +21,6 @@ class Settings extends SettingsBase {
 
   eventImages: Array<string> = new Array()
   quiz: Array<number> = []
-  progresses: Array<GameProgress> = []
 
   override getDiff() {
     const diff = super.getDiff()
@@ -35,46 +35,12 @@ class Settings extends SettingsBase {
     this.restore(obj)
   }
   protected override restore(diff: JSONObject | PartialJSON): void {
-    // change replaced scenes in completed scenes list
-    const completedScenes = ((diff as Partial<Settings>).completedScenes ?? [])
-    const redirectedScenes = {
-      's23' : null , 's24' : null  , 's47' : 's46' ,
-      's58' : 's57', 's59' : 's57' , 's60' : 's62' ,
-      's61' : 's63', 's203': 's48' , 's342': 's341',
-      's503': 's52', 's538': 's537', 's542': 's539',
-    }
-    for (const [label, replace] of Object.entries(redirectedScenes)) {
-      const i = completedScenes.indexOf(label)
-      if (i >= 0) {
-        completedScenes.splice(i, 1)
-        if (replace)
-          completedScenes.push(replace)
+    if (diff.progresses) {
+      // ONLY FOR BETA : move saved progresses to separate
+      const list = (diff.progresses as GameProgress[])
+      for (const [i, p] of list.entries()) {
+        progresses.add(p, i == list.length-1)
       }
-    }
-
-    // update merged images in eventImages (2026-02-26)
-    const mergedImages: Record<string, string> = {
-      "event/cel_e06a": "event/cel_e06",
-      "event/cel_e06b": "event/cel_e06",
-      "event/koha_h06a": "event/koha_h06",
-      "event/koha_h06b": "event/koha_h06",
-    }
-    const eventImages = (diff as Partial<Settings>).eventImages
-    if (eventImages) {
-      for (let i = 0; i < eventImages.length; i++) {
-        if (mergedImages[eventImages[i]]) {
-          eventImages[i] = mergedImages[eventImages[i]]
-        }
-      }
-      // remove duplicates that may have been created by the merge
-      (diff as Partial<Settings>).eventImages = [...new Set(eventImages)]
-    }
-
-    if ('blurThumbnails' in diff) {
-      this.eroBlur = !!diff.blurThumbnails
-    }
-    if ('warnHScenes' in diff) {
-      this.eroSkip = diff.warnHScenes ? 'ask' : 'no';
     }
 
     super.restore(diff)
@@ -108,6 +74,7 @@ type Savefile = {
   version: string
   settings: PartialJSON<NoMethods<Settings>>,
   saveStates?: SaveState[],
+  progresses: GameProgress[]
 }
 
 export const exportGameData = () => {
@@ -116,6 +83,7 @@ export const exportGameData = () => {
 		version: APP_VERSION,
 		settings: settings.getDiff(),
 		saveStates: savesManager.listSaves(),
+    progresses: progresses.list
 	}
 	const date = new Date()
 	const year = date.getFullYear(), month = date.getMonth()+1,

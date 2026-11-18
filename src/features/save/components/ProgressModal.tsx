@@ -10,7 +10,7 @@ import { MdAddCircleOutline, MdArrowBack, MdCheck, MdClose, MdDeleteOutline, MdP
 import { KtFlagBadge, KtPointBadge } from "assets/icons/badges"
 import { useEventActions } from "@tsukiweb/common/input/eventActions"
 import { savesKeyMap } from "features/game/utils/keybind"
-import { EMPTY_PROGRESS } from "app/utils/constants"
+import { progresses } from "engine/progress";
 
 type Props = {
 	show: boolean
@@ -146,17 +146,14 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 	const strings = useStrings()
 	const [selected, setSelected] = useState<GameProgress|undefined>(undefined)
 
-	const progresses = settings.progresses
+	const progressList = progresses.list
 	const newProgress = progress
-	const sortedProgresses = useMemo(
-		()=> progresses.toSorted((a, b)=> b.lastSave - a.lastSave),
-		[show, progresses.length])
-	const isEmptySelected = selected != undefined && !progresses.includes(selected)
+	const isEmptySelected = selected != undefined && !progressList.includes(selected)
 	const deleteEnabled = show && !progress && selected != undefined && !isEmptySelected
 
 	useEffect(()=> {
 		if (show && !newProgress)
-			setSelected(sortedProgresses[0])
+			setSelected(progressList[0])
 	}, [show])
 
 	const handleDeleteProgress = useCallback(async (progress: GameProgress) => {
@@ -167,9 +164,7 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 			color: "#ab0000"
 		})
 		if (confirmed) {
-			const i = settings.progresses.indexOf(progress)
-			if (i >= 0)
-				settings.progresses.splice(i, 1)
+			progresses.delete(progress)
 			setSelected(undefined)
 		}
 	}, [strings])
@@ -204,7 +199,7 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 				</div>
 
 				<div className="progress-list">
-					{sortedProgresses.map(progress =>
+					{progressList.map(progress =>
 						<ProgressButton key={`${progress.lastSave}-${progress.count}`}
 							progress={progress} newProgress={newProgress}
 							onClick={onClick.bind(undefined, progress)}
@@ -214,7 +209,7 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 
 					<ProgressButton newProgress={newProgress}
 						createLabel={newProgress ? undefined : strings.saves["progress-new"]}
-						onClick={onClick.bind(undefined, EMPTY_PROGRESS)}
+						onClick={onClick.bind(undefined, progresses.getEmpty())}
 						active={isEmptySelected}
 						className={`create${isEmptySelected ? " selected" : ""}${newProgress ? " preview" : ""}`}/>
 				</div>
