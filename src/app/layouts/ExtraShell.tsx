@@ -53,6 +53,7 @@ type ExtraPage = {
 	id: string
 	label: string
 	attention?: boolean
+	locked?: boolean
 }
 
 function back() {
@@ -83,10 +84,8 @@ const ExtraMenu = () => {
 	const pages: ExtraPage[] = [
 		{ screen: SCREEN.GALLERY, id: "extra-gallery", label: strings.extra.gallery },
 		{ screen: SCREEN.SCENES, id: "extra-scenes", label: strings.extra.scenes },
-		hasAccess &&
-			{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: hasUnseenFes },
-		unlockedDreams.length > 0 &&
-			{ screen: SCREEN.DREAMS, id: "extra-dreams", label: strings.extra.dreams, attention: unlockedDreams.some(({ id }) => !viewedScene(id)) },
+		{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: hasAccess && hasUnseenFes, locked: !hasAccess},
+		{ screen: SCREEN.DREAMS, id: "extra-dreams", label: strings.extra.dreams, attention: unlockedDreams.some(({ id }) => !viewedScene(id)), locked: unlockedDreams.length == 0 },
 		{ screen: SCREEN.HELP, id: "extra-help", label: strings.extra.help },
 		(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
 			{ screen: SCREEN.DAILY_MESSAGES, id: "extra-daily-messages", label: strings.extra["daily-messages"] },
@@ -98,13 +97,14 @@ const ExtraMenu = () => {
 				{strings.title.extra}
 			</PageTitle>
 			<div className="menus" role="tablist">
-				{pages.map(({ screen, id, label, attention }) =>
+				{pages.map(({ screen, id, label, attention, locked=false }) =>
 					<TitleMenuButton key={id} id={id}
 						audio={audio}
 						onClick={()=>navigate(screen)}
 						active={currentPage === screen}
 						aria-selected={currentPage === screen}
 						attention={attention}
+						disabled={locked}
 						role="tab"
 						nav-auto={1}>
 						{label}
