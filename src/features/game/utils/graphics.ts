@@ -1,7 +1,7 @@
 import { objectMatch, splitFirst } from "@tsukiweb/common/utils/utils";
 import { settings } from "../../../engine/settings";
 import { assets, imageSrc, wordImage } from "translation/assets";
-import { BG_POSITIONS, Graphics, GraphicsTransition, Quake, Rocket, SPRITES_POSITIONS } from "@tsukiweb/common/graphics";
+import { BG_POSITIONS, Graphics, GraphicsTransition, Quake } from "@tsukiweb/common/graphics";
 import { ScriptPlayer } from "engine/ScriptPlayer";
 import Timer from "@tsukiweb/common/utils/timer";
 import cg from "features/gallery/utils/gallery";
@@ -78,7 +78,6 @@ assets.setProvider('graph', (id: string)=> {
 
 export function processImageCmd(
 						 setTransition: (t: GraphicsTransition|undefined)=>void,
-						 setRocket: (rocket: undefined) => void,
 						 arg: string, cmd: string, script: ScriptPlayer,
 						 onFinish: VoidFunction) {
 	let pos = 'bg', image = '', effect = '',
@@ -120,7 +119,6 @@ export function processImageCmd(
 			}
 			script.graphics = to
 			setTransition(undefined)
-			setRocket(undefined)
 		}
 		onFinish()
 	}
@@ -178,51 +176,6 @@ export function processQuake(
 		default : throw Error(`Unknown quake command ${cmd} ${arg}`)
 	}
 	return { next: _onFinish }
-}
-
-export function processRocket(
-	setRocket: (rocket: Rocket | undefined) => void,
-	arg: string,
-	cmd: string,
-	script: ScriptPlayer,
-	onFinish: VoidFunction
-) {
-	const params: Record<string, string> = {}
-	const parts = arg.split(' ')
-	for (const part of parts) {
-		const [key, value] = part.split('=')
-		params[key] = value
-	}
-
-	const layer = params.layer as Rocket['layer']
-
-	if (!SPRITES_POSITIONS.includes(layer)) {
-		console.error(`Invalid layer for @rocket: ${layer}`)
-		onFinish()
-		return
-	}
-	const wait = (!Object.hasOwn(params, "wait") || params.wait == "true")
-
-	const onAnimationEnd = () => {
-		if (wait) {
-			setRocket(undefined)
-			onFinish()
-		}
-	}
-
-	const rocket: Rocket = {
-		layer: layer,
-		my: parseFloat(params.my || '0'),
-		magnify: parseFloat(params.magnify || '1'),
-		time: parseInt(params.time || '0'),
-		accel: parseInt(params.accel || '1'),
-		opacity: parseInt(params.opacity || '255'),
-		onAnimationEnd
-	}
-
-	setRocket(rocket)
-	if (wait)
-		return { next: onAnimationEnd }
 }
 
 export function processMonocro(color: string, _: string, script: ScriptPlayer) {
