@@ -13,8 +13,8 @@ import { main as runDailyMessages } from '../helpers/convert-scripts/processing/
 import type { Scene } from '@tsukiweb/common/tools/generate-thumbnails/processor.ts'
 import {
   FFMPEG_AUDIO_ARGS,
-  SCRIPT_LANGS,
   WAIFU2X_ARGS,
+  BASE_LANG,
   imagePathsForLanguage,
   thumbConfig,
   x2Config,
@@ -39,6 +39,7 @@ import {
   check,
   combine,
   fileExistsCheck,
+  listScriptLangs as listLangsIn,
   nonEmptyDirectoryCheck,
   stateFailure,
   type Check,
@@ -61,12 +62,13 @@ const WORD_IMAGE_FILES = WORD_IMAGE_IDS.map(id => `image/word/${id}.jpg`)
 const MSG_DIR = 'image/msg'
 const MSG_SPRITE_REGEX = /^ran_t\d+\.jpe?g$/i
 
+const listScriptLangs = (paths: Paths) => listLangsIn(path.dirname(paths.staticJp), BASE_LANG)
 const arcDir = (paths: Paths) => path.join(paths.workspace, path.basename(paths.arcArchive))
 const nonEmptyDirCheck = (directory: string) => nonEmptyDirectoryCheck(directory, displayPath(directory))
 const fileCheck = (file: string) => fileExistsCheck(file, displayPath(file))
 async function imageConversionPaths(paths: Paths): Promise<ImageConversionPaths[]> {
   const images: ImageConversionPaths[] = [paths]
-  for (const lang of SCRIPT_LANGS.slice(1)) {
+  for (const lang of (await listScriptLangs(paths)).slice(1)) {
     const candidate = imagePathsForLanguage(paths, lang)
     if (await directoryHasFiles(candidate.img)) images.push(candidate)
   }
@@ -108,7 +110,7 @@ async function extractedAssetsAndImagesCheck(paths: Paths): Promise<Check> {
 async function scriptsOutputCheck(paths: Paths): Promise<Check> {
   const checks: CheckDetail[] = []
 
-  for (const lang of SCRIPT_LANGS) {
+  for (const lang of await listScriptLangs(paths)) {
     const scenesDir = path.join(paths.staticJp, '..', lang, 'scenes')
     checks.push(await nonEmptyDirCheck(scenesDir))
   }
@@ -162,7 +164,7 @@ async function extractAssetsAndPrepareImages(paths: Paths): Promise<void> {
     await extractNscript(nscript, path.join(paths.staticJp, 'sources', 'fullscript-kt_jp.txt'))
   }
   await prepareImgFolder(paths)
-  for (const lang of SCRIPT_LANGS.slice(1)) {
+  for (const lang of (await listScriptLangs(paths)).slice(1)) {
     const source = path.join(paths.staticJp, '..', lang, 'sources')
     const { img } = imagePathsForLanguage(paths, lang)
     await ensureEmptyDirInside(paths.workspace, img)
