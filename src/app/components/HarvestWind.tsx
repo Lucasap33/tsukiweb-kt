@@ -276,6 +276,7 @@ const HarvestWind = ({ active, still = false }: Props) => {
 		let raf = 0
 		let lastFrame = 0
 		let nextFrameAt = 0
+		let clock = 0
 		let nextGustAt = 0
 		let nextFloaterAt = 0
 		let dpr = 1
@@ -579,13 +580,15 @@ const HarvestWind = ({ active, still = false }: Props) => {
 			ctx.globalAlpha = 1
 		}
 
-		const animate = (now: number) => {
+		const animate = (frameTime: number) => {
 			raf = 0
-			if (!nextFrameAt || now >= nextFrameAt - .5) {
-				const delta = lastFrame ? Math.min(now - lastFrame, 50) : frameDuration
-				lastFrame = now
-				nextFrameAt = nextFrameAt ? nextFrameAt + frameDuration : now + frameDuration
-				if (nextFrameAt <= now) nextFrameAt = now + frameDuration
+			if (!nextFrameAt || frameTime >= nextFrameAt - .5) {
+				const delta = lastFrame ? Math.min(frameTime - lastFrame, 50) : frameDuration
+				lastFrame = frameTime
+				nextFrameAt = nextFrameAt ? nextFrameAt + frameDuration : frameTime + frameDuration
+				if (nextFrameAt <= frameTime) nextFrameAt = frameTime + frameDuration
+				clock += delta
+				const now = clock
 
 				for (let i = gusts.length - 1; i >= 0; i--) {
 					if (now - gusts[i].startedAt >= gusts[i].duration) gusts.splice(i, 1)
@@ -653,10 +656,9 @@ const HarvestWind = ({ active, still = false }: Props) => {
 			createStaticLayer()
 			createMotes()
 			floaters = []
-			const now = performance.now()
-			nextGustAt = now + 2000 + Math.random() * 2200
-			nextFloaterAt = now + 600
-			draw(reducedMotion ? 0 : now)
+			nextGustAt = clock + 2000 + Math.random() * 2200
+			nextFloaterAt = clock + 600
+			draw(reducedMotion ? 0 : clock)
 		}
 
 		const setActive = (value: boolean) => value ? start() : stop()

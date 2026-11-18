@@ -10,7 +10,7 @@
 	@include page-container;
 	container-type: inline-size;
 	display: grid;
-	grid-template-columns: 220px 1fr;
+	grid-template-columns: 230px 1fr;
 	grid-template-areas: "extra-menu extra-content";
 	padding: 0;
 	isolation: isolate;
@@ -55,7 +55,8 @@
 			left: calc((100cqw - 100vw) / 2);
 			right: 0;
 			z-index: -1;
-			background-image: linear-gradient(180deg, rgb(22 8 7 / 36%), transparent);
+			background-image: linear-gradient(90deg, hsl(16.87deg 100% 4% / 55%), transparent);
+			border-right: 1px solid var(--separator);
 		}
 
 		@media (pointer: coarse) {

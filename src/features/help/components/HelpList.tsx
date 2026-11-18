@@ -65,7 +65,7 @@ const HelpList = () => {
 				return (
 					<div
 						key={id}
-						className={classNames("help-card", {attention: !viewedScene(id), bonus: !flag})}
+						className={classNames("help-card", {attention: !viewedScene(id)})}
 						role="button"
 						tabIndex={0}
 						onClick={() => play(id)}

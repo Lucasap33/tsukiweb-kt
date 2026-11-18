@@ -20,7 +20,6 @@ const ConfigModal = ({modal, setModal}: Props) => {
 				{modal.content}
 			</div>
 			<Button
-				variant="elevation"
 				onClick={close}
 				className="close-btn"
 				audio={audio}

@@ -198,24 +198,26 @@ const ModalProgressSelection = ({show, onSelect, progress}: Props) => {
 			onRequestClose={() => { onSelect(undefined) }}
 			className="progress-modal"
 		>
-			<header className="progress-modal-header">
-				{strings.saves[newProgress ? "progress-save-hint" : "progress-start-hint"]}
-			</header>
+			<div className="content">
+				<div className="progress-title">
+					{strings.saves[newProgress ? "progress-save-hint" : "progress-start-hint"]}
+				</div>
 
-			<div className="progresses">
-				{sortedProgresses.map(progress =>
-					<ProgressButton key={`${progress.lastSave}-${progress.count}`}
-						progress={progress} newProgress={newProgress}
-						onClick={onClick.bind(undefined, progress)}
-						active={selected == progress}
-						className={selected == progress ? " selected" : ""}/>
-				)}
+				<div className="progress-list">
+					{sortedProgresses.map(progress =>
+						<ProgressButton key={`${progress.lastSave}-${progress.count}`}
+							progress={progress} newProgress={newProgress}
+							onClick={onClick.bind(undefined, progress)}
+							active={selected == progress}
+							className={selected == progress ? " selected" : ""}/>
+					)}
 
-				<ProgressButton newProgress={newProgress}
-					createLabel={newProgress ? undefined : strings.saves["progress-new"]}
-					onClick={onClick.bind(undefined, EMPTY_PROGRESS)}
-					active={isEmptySelected}
-					className={`create${isEmptySelected ? " selected" : ""}${newProgress ? " preview" : ""}`}/>
+					<ProgressButton newProgress={newProgress}
+						createLabel={newProgress ? undefined : strings.saves["progress-new"]}
+						onClick={onClick.bind(undefined, EMPTY_PROGRESS)}
+						active={isEmptySelected}
+						className={`create${isEmptySelected ? " selected" : ""}${newProgress ? " preview" : ""}`}/>
+				</div>
 			</div>
 
 			<div className="buttons">
