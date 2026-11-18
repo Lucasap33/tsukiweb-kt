@@ -12,7 +12,7 @@ type Dream = {
 	images: Record<string, string>
 }
 
-const dreams: Dream[] = [
+export const dreams: Dream[] = [
 	{ // Ciel−sensei
 		id: "s528",
 		unlock: ["s48"],
