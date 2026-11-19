@@ -274,6 +274,35 @@ function align(block: Block) {
 }
 
 const blockFixes = new Map(Object.entries({
+	s89: (block: Block)=> {
+		let t = block.find(
+			t=>t instanceof TextToken && t.text.includes('Bourdeaux')
+		) as TextToken|undefined
+		if (t) {
+			t.text = t.text.replace("Bourdeaux", "Bordeaux")
+						   .replace("Pouligny", "Puligny")
+		}
+	},
+	s530: (block: Block)=> {
+		processJumps(block)
+		const i = block.findIndex(t=>isCmd(t, "mov", "%2100", "0"))
+		if (i < 0) throw Error(`Expected 'mov %2100,0' in s530`)
+		const j = block.findIndex(t=>isCmd(t, "bg"), i+1)
+		const token = block.at(j) as CommandToken<"bg">
+		block.delete(i, j-i)
+		token.args[1] = "bscroll"
+		token.args[2] = (32*480).toString()
+	},
+	s532: (block: Block)=> {
+		let t = block.find(
+			t=>t instanceof TextToken && t.text.includes('Arihikio')
+		) as TextToken|undefined
+		if (t) t.text = t.text.replace("Arihikio", "Arihiko")
+		t = block.find(
+			t=>t instanceof TextToken && t.text.includes('Ichigo (一子)')
+		) as TextToken|undefined
+		if (t) t.text = t.text.replace("Ichigo (", "Ichiko (")
+	},
 	s533: (block: Block)=> {
 		processJumps(block)
 		const i = block.findIndex(t=>isCmd(t, 'lsp'))
@@ -286,16 +315,6 @@ const blockFixes = new Map(Object.entries({
 		bg.args = ['bg', ...bg.args]
 		// TODO Exceptionally, during bg change, center sprite should remain
 	},
-	s530: (block: Block)=> {
-		processJumps(block)
-		const i = block.findIndex(t=>isCmd(t, "mov", "%2100", "0"))
-		if (i < 0) throw Error(`Expected 'mov %2100,0' in s530`)
-		const j = block.findIndex(t=>isCmd(t, "bg"), i+1)
-		const token = block.at(j) as CommandToken<"bg">
-		block.delete(i, j-i)
-		token.args[1] = "bscroll"
-		token.args[2] = (32*480).toString()
-	}
 }))
 
 function quizFix(block: Block, blocks: Map<string, Block>) {
