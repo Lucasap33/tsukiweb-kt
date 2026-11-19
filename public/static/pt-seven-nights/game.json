@@ -281,9 +281,7 @@
       "s536": "The Tohno Family Con Game",
       "s537": "Dawn",
       "s543": "Drinking, Dreaming Moon"
-    },
-    "dead-end": "Dead end",
-    "osiete": "Ciel's lesson"
+    }
   },
   "credits": [
     {
@@ -392,10 +390,6 @@
     },
     {
       "center": "[center][font=serif][left=5/]Produced by /[left=3/]TYPE-MOON"
-    },
-    {
-      "center": "[center][font=serif][left=5/]English version /[left=3/]mirror moon",
-      "delay": 4300
     },
     {
       "center": [

@@ -32,5 +32,12 @@
     "dir": "./pt-seven-nights",
     "last-update": "2026-11-12",
     "fallback": "en"
+  },
+  "ru": {
+    "locale": "ru-RU",
+    "display-name": "🇷🇺 Русский",
+    "dir": "./ru",
+    "last-update": "2026-11-19",
+    "fallback": "en"
   }
 }

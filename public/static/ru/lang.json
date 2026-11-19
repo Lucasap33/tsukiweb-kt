@@ -1,0 +1,189 @@
+{
+  "translation": {
+    "name": "Kagetsu Tohya Rebuild",
+    "desc": "Патч основан на фанатском переводе, сделанном нашими заморскими коллегами из Lunacy и Beast's Liar.",
+    "url": "https://vk.com/wall-221585675_110",
+    "vndb": "https://vndb.org/r122353"
+  },
+  "disclaimer": [
+    "This is a web version of Kagetsu Tohya, a visual novel published on 2001 by Type-Moon.",
+    "The game contains adult content and is intended for mature audiences only."
+  ],
+  "title": {
+    "start": "New Game",
+    "resume": "Continue",
+    "load": "Load",
+    "config": "Config",
+    "extra": "Extra",
+    "about": {
+      "port": "This is a web version of Kagetsu Tohya, a visual novel published on 2001 by Type-Moon.",
+      "project": "The project is available on %0GitHub%1. Add a star if you like it! Contributions are welcome.",
+      "feedback": "Send your feedback or report a bug %0here%1.",
+      "data": "No data collected, everything is stored in your browser. Manage your data %0here%1."
+    },
+    "install": "Install",
+    "share": "Share",
+    "copied": "Copied to clipboard"
+  },
+  "extra": {
+    "gallery": "Gallery",
+    "scenes": "Flowchart",
+    "summer-fes": "Summer Festivals",
+    "dreams": "Ten Nights of Dreams",
+    "help": "Help",
+    "help-lesson": "Lesson %0",
+    "help-bonus": "Bonus",
+    "daily-messages": "Daily messages"
+  },
+  "config": {
+    "on": "On",
+    "off": "Off",
+    "reset": "Reset",
+    "default": "Default",
+    "tab-game": "Game",
+    "tab-audio": "Audio",
+    "tab-controls": "Controls",
+    "tab-advanced": "Advanced",
+    "volume-master": "General volume",
+    "volume-track": "Music volume",
+    "volume-se": "SFX volume",
+    "volume-title-track": "Title music volume",
+    "volume-system-se": "System SFX volume",
+    "track-source": "Music source",
+    "track-sources": {
+      "original": "Original (2001)",
+      "tsukibako": "Tsuki-Bako (2003)"
+    },
+    "track-source-help": [
+      "[b]Original[/b]: Original soundtrack of the complete game from 2001.",
+      "[b]Tsuki-Bako[/b]: Remixed soundtrack that came with a Tsukihime + PLUS-DISC + Kagetsu Tohya package in 2003."
+    ],
+    "auto-mute": "Mute when leaving the app",
+    "ratio": "Display ratio",
+    "ratio-auto": "Auto",
+    "ratio-4-3": "4:3",
+    "ratio-16-9": "16:9",
+    "text-speed": "Character delay: %0ms",
+    "text-speed-test": "A slight nausea when I open my eyes.",
+    "auto-play-delay-text": "Auto-play text delay: %0s",
+    "auto-play-delay-page": "Auto-play page delay: %0s",
+    "adult-title": "Adult content",
+    "adult-blur": "Blur images",
+    "adult-blur-help": [
+      "Apply a blur effect on the images of the adult scenes."
+    ],
+    "adult-warn": "Ask to skip H content",
+    "fullscreen": "Fullscreen",
+    "daily-message": "Daily message",
+    "language": "Language",
+    "show-locked-content": "Reveal locked content",
+    "show-locked-content-help": [
+      "Reveals the complete Gallery, Flowchart, …",
+      "It can be toggled on and off at any time."
+    ],
+    "smooth-flashes": "Reduce background flashes",
+    "smooth-flashes-low": "Low",
+    "smooth-flashes-high": "High",
+    "smooth-flashes-help": [
+      "Replace instant backgound changes with a fade-in transition.",
+      "The transition lasts 0.08s (%0) or 0.15s (%1)"
+    ],
+    "game-font": "Game text font",
+    "game-font-help": [
+      "The default font is served with the project.",
+      "To select a different font, input its name. It will be loaded from %0 if available, else from your device."
+    ],
+    "display-badges": "Display affection points and flags",
+    "data": "Data storage",
+    "data-export": "Export",
+    "data-import": "Import",
+    "data-erase": "Erase",
+    "data-erase-warning": "This will delete all saves, reset all settings and progress. Are you sure?",
+    "data-erase-confirm": "All data have been deleted. If you leave this website without making any change to the settings and without starting a new game, no data will remain stored on your device",
+    "len-images": "Manage Len's images",
+    "controls": {
+      "next": "Next",
+      "graphics": "Show / hide text",
+      "back": "Back, Show / Hide menu",
+      "bg_move": "Move background image",
+      "auto_play": "Auto-play",
+      "page_nav": "Navigate to next / previous page",
+      "history": "Open History",
+      "flowchart": "Open Flowchart",
+      "load": "Open load panel",
+      "save": "Open save panel",
+      "q_save": "Quick-save",
+      "q_load": "Quick-load",
+      "config": "Open config panel",
+      "_hold": "hold",
+      "_layer-text": "when text is displayed",
+      "_layer-graphics": "in graphics mode",
+      "_layer-menu": "when menu is opened"
+    }
+  },
+  "saves": {
+    "title-load": "Load",
+    "title-save": "Save",
+    "create": "New save",
+    "empty": "No save data found.",
+    "import": "Import a save file?",
+    "export": "Export",
+    "delete": "Delete",
+    "delete-warning": "Вы уверены, что хотите удалить это сохранение?",
+    "overwrite-warning": "Are you sure you want to overwrite this save?",
+    "quick-save": "Quick Save",
+    "local-storage-warning": "Savefiles and settings are stored locally in the web browser, and might get deleted by the browser after a delay of inactivity. Regularly export your data.",
+    "local-storage-last-export": "Last full data export date: %0",
+    "progress-discard": "Discard progress ?",
+    "progress-new": "Start from scratch",
+    "progress-start-hint": "Choose a progression to start a new loop from.",
+    "progress-save-hint": "Choose where to save this loop's progress."
+  },
+  "game": {
+    "skip-viewed": "You have already seen this scene.",
+    "skip-hcontent": "This passage contains adult content.",
+    "skip-prompt": "Do you want to skip it?",
+    "toast-qsave": "Progress has been saved",
+    "toast-qload": "Progress restored",
+    "toast-load-success": "Your data has been loaded",
+    "toast-save-fail": "Could not save progress",
+    "toast-load-fail": "Could not restore progress",
+    "toast-autoplay-stop": "Auto-play stopped"
+  },
+  "menu": {
+    "graphics": "Graphics",
+    "history": "History",
+    "save": "Save",
+    "load": "Load",
+    "config": "Config",
+    "auto-play": "Auto-Play",
+    "ffw": "Fast forward",
+    "title": "Title",
+    "q-save": "Q. save",
+    "q-load": "Q. load",
+    "copy-scene-url": "Share scene"
+  },
+  "history": {
+    "load-warning": "Rewind to this scene? Unsaved progress since this point will be lost",
+    "load": "Load",
+    "skipped": "Skipped scene %0."
+  },
+  "characters": {
+    "aki": "Akiha",
+    "ark": "Arcueid",
+    "cel": "Сиэль",
+    "his": "Хисуи",
+    "koha": "Кохаку",
+    "seo": "Akira",
+    "ren": "Лен",
+    "yume": "Dream"
+  },
+  "yes": "Да",
+  "no": "Нет",
+  "ok": "Ok",
+  "back": "Back",
+  "close": "Close",
+  "later": "Later",
+  "operation-failed": "Operation failed",
+  "operation-successful": "Operation successful"
+}
