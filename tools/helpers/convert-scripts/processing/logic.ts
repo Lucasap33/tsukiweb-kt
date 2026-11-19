@@ -29,7 +29,7 @@ const redirected_scenes = {
 	twilight_op_2 : "f521", // renamed
 	twilight_op_3 : "f522", // renamed
 	nop: "endofplay",
-	start: "endofplay"
+	start: "endofplay",
 }
 
 function redirect(token: CommandToken) {
@@ -307,6 +307,8 @@ function getBlockProps(
 			case 'yume01' : case 'yume02' : case 'yume03' : case 'yume04' :
 			case 'yume05' : case 'yume06' : case 'yume06' : case 'yume08' :
 			case 'yume09' : case 'yume10' :
+			case 'summer_ark' : case 'summer_ciel' : case 'summer_akiha' :
+			case 'summer_hisui' : case 'summer_kohaku' : case 'yoiyumetsuki' :
 				blockFixes.push(b=> {
 					const i = b.findIndex(t=>isCmd(t, 'goto'))
 					b.replace(i+1, b.length-i-1, `goto *endofplay`)
@@ -458,6 +460,8 @@ function genTree(blocks: Map<string, Block>) {
 	const roots = ['f520',
 		...[1,2,3,4,5].map(n=>`ciel_teacher_${n}`),
 		...[1,2,3,4,5,6,7,8,9,10].map(n=>`yume${n.toString().padStart(2,'0')}`),
+		...['ark', 'ciel', 'akiha', 'hisui', 'kohaku'].map(x=>`summer_${x}`),
+		'yoiyumetsuki',
 	].map(lbl=>tree.get(lbl)!)
 	roots.forEach(node=> { node.index = 0 })
 

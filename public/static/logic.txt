@@ -1207,6 +1207,26 @@ select *s554,*s555
 goto *s547
 *s547_end
 select *endofplay,*s556
+*summer_ark
+goto *s538
+*s538_end
+goto *endofplay
+*summer_ciel
+goto *s539
+*s539_end
+goto *endofplay
+*summer_akiha
+goto *s540
+*s540_end
+goto *endofplay
+*summer_hisui
+goto *s541
+*s541_end
+goto *endofplay
+*summer_kohaku
+goto *s542
+*s542_end
+goto *endofplay
 *yume01
 goto *s528
 *s528_end
@@ -1246,4 +1266,8 @@ goto *endofplay
 *yume10
 goto *s537
 *s537_end
+goto *endofplay
+*yoiyumetsuki
+goto *s543
+*s543_end
 goto *endofplay

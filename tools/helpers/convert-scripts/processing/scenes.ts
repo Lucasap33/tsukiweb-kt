@@ -42,6 +42,7 @@ function commandFix(token: Token) {
 				token.args[0] = COLOR_IMAGES.get(token.args[0])!
 			break
 		case 'mov' :
+		case 'inc' :
 			token.args[0] = processVarName(token.args[0])!
 			if (!token.args[0])
 				return false
