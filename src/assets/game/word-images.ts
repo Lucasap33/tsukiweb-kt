@@ -5,4 +5,9 @@ export const WORD_IMAGE_IDS = [
 	'ssa_01',
 	'ssc_01',
 	'sss_01',
+	'moon_01',
+	'moon_02',
+	'moon_03',
+	'moon_04',
+	'moon_05',
 ] as const

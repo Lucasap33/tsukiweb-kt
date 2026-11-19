@@ -285,7 +285,16 @@ const blockFixes = new Map(Object.entries({
 		bg.args = ['bg', ...bg.args]
 		// TODO Exceptionally, during bg change, center sprite should remain
 	},
-	s530: processJumps,
+	s530: (block: Block)=> {
+		processJumps(block)
+		const i = block.findIndex(t=>isCmd(t, "mov", "%2100", "0"))
+		if (i < 0) throw Error(`Expected 'mov %2100,0' in s530`)
+		const j = block.findIndex(t=>isCmd(t, "bg"), i+1)
+		const token = block.at(j) as CommandToken<"bg">
+		block.delete(i, j-i)
+		token.args[1] = "bscroll"
+		token.args[2] = (32*480).toString()
+	}
 }))
 
 function quizFix(block: Block, blocks: Map<string, Block>) {
