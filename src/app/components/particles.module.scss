@@ -32,6 +32,10 @@
 
 	&[data-active="false"] {
 		visibility: hidden;
+
+		&, *, *::before, *::after {
+			animation-play-state: paused !important;
+		}
 	}
 
 	canvas {

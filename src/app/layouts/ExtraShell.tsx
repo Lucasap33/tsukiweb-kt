@@ -84,8 +84,8 @@ const ExtraMenu = () => {
 	const pages: ExtraPage[] = [
 		{ screen: SCREEN.GALLERY, id: "extra-gallery", label: strings.extra.gallery },
 		{ screen: SCREEN.SCENES, id: "extra-scenes", label: strings.extra.scenes },
-		{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: hasAccess && hasUnseenFes, locked: !hasAccess},
 		{ screen: SCREEN.DREAMS, id: "extra-dreams", label: strings.extra.dreams, attention: unlockedDreams.some(({ id }) => !viewedScene(id)), locked: unlockedDreams.length == 0 },
+		{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: hasAccess && hasUnseenFes, locked: !hasAccess},
 		{ screen: SCREEN.HELP, id: "extra-help", label: strings.extra.help },
 		(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
 			{ screen: SCREEN.DAILY_MESSAGES, id: "extra-daily-messages", label: strings.extra["daily-messages"] },
@@ -112,7 +112,7 @@ const ExtraMenu = () => {
 				)}
 			</div>
 			<PageSwitcher className="extra-switcher" audio={audio}
-				pages={pages.map(({ screen, label, attention }) => ({ value: screen, label, attention }))}
+				pages={pages.map(({ screen, label, attention, locked }) => ({ value: screen, label, attention, locked }))}
 				selected={currentPage}
 				onSelect={navigate} />
 			<div className="back-action">
