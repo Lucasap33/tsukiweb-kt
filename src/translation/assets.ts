@@ -83,19 +83,23 @@ export function imageSrc(img: string, res: ResolutionId = "src"): string {
   if (typeof imported === 'string') return imported
 
   const [dir, name] = splitFirst(img, '/')
-  const root = strings.images[res]
   let srcTemplate: string
-
-  if (Object.hasOwn(root, img)) {
-    srcTemplate = root[img as keyof typeof root]
+  if (dir == 'word' && Object.hasOwn(strings.images.words, name!)) {
+    srcTemplate = strings.images.words[name!]
   } else {
-    if (!name)
-      throw Error(`Unimplemented image format ${img}`)
-    if (Object.hasOwn(root, dir)) {
-      const parent = root[dir as keyof typeof root] as any as Record<string, string>
-      srcTemplate = Object.hasOwn(parent, name) ? parent[name as keyof typeof parent] : parent[""]
+    const root = strings.images[res]
+
+    if (Object.hasOwn(root, img)) {
+      srcTemplate = root[img as keyof typeof root]
     } else {
-      srcTemplate = root[""]
+      if (!name)
+        throw Error(`Unimplemented image format ${img}`)
+      if (Object.hasOwn(root, dir)) {
+        const parent = root[dir as keyof typeof root] as any as Record<string, string>
+        srcTemplate = Object.hasOwn(parent, name) ? parent[name as keyof typeof parent] : parent[""]
+      } else {
+        srcTemplate = root[""]
+      }
     }
   }
 

@@ -64,7 +64,7 @@ assets.setProvider('graph', (id: string)=> {
 	const url = imageSrc(id)
 	return {
 		url,
-		value: fetch(url).then(response=> {
+		value: url.startsWith('#') ? url : fetch(url).then(response=> {
 			if (!response.ok)
 				throw Error(`image file ${url} not found: ${response.statusText}`)
 			return url
