@@ -16,7 +16,7 @@ import AppInfo from "features/title-menu/components/AppInfo";
 import TranslationSwitch from "features/title-menu/components/TranslationSwitch";
 import { useStrings } from "translation/lang";
 import { SCREEN } from "app/utils/display";
-import { useScreenAutoNavigate } from "app/hooks";
+import { useExtraAttention, useScreenAutoNavigate } from "app/hooks";
 import { FULLSAVE_EXT, SAVE_EXT, SCENE_ATTRS } from "app/utils/constants";
 import { GameProgress } from "app/utils/types";
 import ModalProgressSelection from "features/save/components/ProgressModal";
@@ -58,6 +58,7 @@ const TitleMenu = () => {
 	const canResume = useRef(savesManager.savesCount > 0 || history.pagesLength > 0)
 	const [newGameSelectShow, setNewGameSelectShow] = useState<boolean>(false)
 	const [progressToSave, setProgressToSave] = useState<GameProgress>()
+	const extraAttention = useExtraAttention().any
 
 	const openLoad = async () => {
 		if (savesManager.savesCount === 0) {
@@ -141,7 +142,7 @@ const TitleMenu = () => {
 					{strings.title.config}
 				</TitleMenuButton>
 
-				<TitleMenuButton audio={audio} onClick={() => navigate(SCREEN.GALLERY)} nav-auto={1}>
+				<TitleMenuButton audio={audio} onClick={() => navigate(SCREEN.GALLERY)} attention={extraAttention} nav-auto={1}>
 					{strings.title.extra}
 				</TitleMenuButton>
 			</div>

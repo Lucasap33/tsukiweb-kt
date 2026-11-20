@@ -6,6 +6,7 @@ import { settings, viewedScene } from "engine/settings";
 import { SCENE_ATTRS } from "app/utils/constants";
 import { KtFlagBadge } from "assets/icons/badges";
 import { useStrings } from "translation/lang";
+import { progresses } from "engine/progress";
 
 
 type Help = {
@@ -43,7 +44,7 @@ const helps: Help[] = [
 ]
 
 export const getUnlockedHelps = ()=> settings.unlockEverything ? helps :
-		helps.filter((_, i)=> (i == 0) ||
+		helps.filter((_, i)=> (i == 0) ? progresses.list.length > 0 :
 			SCENE_ATTRS["scene-points"].flags[helps[i-1].flag]?.some(lbl=>viewedScene(lbl))
 		)
 
