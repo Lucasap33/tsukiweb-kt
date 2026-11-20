@@ -3,41 +3,41 @@
     "locale": "ja-JP",
     "display-name": "🇯🇵 日本語",
     "dir": "./jp",
-    "last-update": "2026-11-12"
+    "last-update": "2026-11-20"
   },
   "en": {
     "locale": "en-US",
     "display-name": "🇬🇧 English",
-    "dir": "./en",
+    "dir": "./en-forte",
     "fallback": "jp",
-    "last-update": "2026-11-12"
+    "last-update": "2026-11-20"
   },
   "es-saki": {
     "locale": "es-ES",
     "display-name": "🇪🇸 Español",
     "dir": "./es-saki",
-    "last-update": "2026-11-16",
-    "fallback": "en"
+    "last-update": "2026-11-20",
+    "fallback": "en-forte"
   },
   "it-riffour": {
     "locale": "it-IT",
     "display-name": "🇮🇹 Italiano",
     "dir": "./it-riffour",
-    "last-update": "2026-11-12",
-    "fallback": "en"
+    "last-update": "2026-11-20",
+    "fallback": "en-forte"
   },
   "pt-seven-nights": {
     "locale": "pt-BR",
     "display-name": "🇧🇷 Português",
     "dir": "./pt-seven-nights",
-    "last-update": "2026-11-12",
-    "fallback": "en"
+    "last-update": "2026-11-20",
+    "fallback": "en-forte"
   },
-  "ru": {
+  "ru-hajnyj-omik-sempaja": {
     "locale": "ru-RU",
     "display-name": "🇷🇺 Русский",
-    "dir": "./ru",
-    "last-update": "2026-11-19",
-    "fallback": "en"
+    "dir": "./ru-hajnyj-omik-sempaja",
+    "last-update": "2026-11-20",
+    "fallback": "en-forte"
   }
 }
