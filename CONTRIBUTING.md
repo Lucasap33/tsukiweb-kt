@@ -1,11 +1,11 @@
 # Port of the original story to React
 
-Find how to start the project on your computer in [README.md](https://github.com/requinDr/tsukiweb-public/blob/main/README.md)  
+Find how to start the project on your computer in [README.md](https://github.com/loicfrance/tsukiweb-kt/blob/main/README.md)  
 We welcome all contributions.
 
 ## Guidelines
 1) Data are stored on the user's device and are not to be collected in any way.
-2) Remake assets are not to be used.
+2) Other games assets are not to be used.
 3) Everything should be done with accessibility in mind.
 4) The GUI should be updated to look and feel more modern.
 5) The game should be fully responsive.
