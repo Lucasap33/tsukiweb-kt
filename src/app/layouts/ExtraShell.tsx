@@ -12,6 +12,7 @@ import PageBackButton from "app/components/PageBackButton"
 import { settings, viewedScene } from "engine/settings";
 import { useFestivalsAccess } from "features/summer-fes/hooks/useFestivalsAccess";
 import { getUnlockedDreams } from "features/dreams/components/DreamsList";
+import { getUnlockedHelps } from "features/help/components/HelpList";
 
 
 const ExtraShell = ({ children }: PropsWithChildren) => {
@@ -66,6 +67,7 @@ const ExtraMenu = () => {
 	const currentPage = "/" + location.split("/")[1]
 	const { hasAccess, hasUnseenFes } = useFestivalsAccess()
 	const unlockedDreams = getUnlockedDreams()
+	const unlockedHelp = getUnlockedHelps()
 
 	useDefaultNavBack(back)
 
@@ -86,7 +88,7 @@ const ExtraMenu = () => {
 		{ screen: SCREEN.SCENES, id: "extra-scenes", label: strings.extra.scenes },
 		{ screen: SCREEN.DREAMS, id: "extra-dreams", label: strings.extra.dreams, attention: unlockedDreams.some(({ id }) => !viewedScene(id)), locked: unlockedDreams.length == 0 },
 		{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: hasAccess && hasUnseenFes, locked: !hasAccess},
-		{ screen: SCREEN.HELP, id: "extra-help", label: strings.extra.help },
+		{ screen: SCREEN.HELP, id: "extra-help", label: strings.extra.help, attention: unlockedHelp.some(({ id })=> !viewedScene(id)) },
 		(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
 			{ screen: SCREEN.DAILY_MESSAGES, id: "extra-daily-messages", label: strings.extra["daily-messages"] },
 	].filter(page => !!page)
