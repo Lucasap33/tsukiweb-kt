@@ -34,7 +34,9 @@
     "help": "Help",
     "help-lesson": "%0時間目",
     "help-bonus": "Bonus",
-    "daily-messages": "今日の一言"
+    "daily-messages": "今日の一言",
+    "daily-messages-random": "Messages",
+    "daily-messages-dates": "Special days"
   },
   "config": {
     "on": "ON",

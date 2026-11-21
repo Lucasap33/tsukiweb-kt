@@ -34,7 +34,9 @@
     "help": "Help",
     "help-lesson": "Lesson %0",
     "help-bonus": "Bonus",
-    "daily-messages": "Daily messages"
+    "daily-messages": "Daily messages",
+    "daily-messages-random": "Messages",
+    "daily-messages-dates": "Special days"
   },
   "config": {
     "on": "On",

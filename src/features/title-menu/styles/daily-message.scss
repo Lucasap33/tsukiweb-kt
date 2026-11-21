@@ -1,31 +1,8 @@
-#daily-message {
-	&.page {
-		position: fixed;
-		inset: 0;
-		z-index: 100;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: #000000;
-		user-select: none;
-		outline: none;
-	}
-
-	canvas.ambient {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-	}
-
-	.stage {
-		position: relative;
-		z-index: 1;
-		width: min(100vw, 100dvh * 4 / 3);
-		height: min(100dvh, 100vw * 3 / 4);
-		container-type: size;
-		overflow: hidden;
-	}
+.daily-stage {
+	position: relative;
+	container-type: size;
+	overflow: hidden;
+	aspect-ratio: 4 / 3;
 
 	img {
 		position: absolute;
@@ -70,8 +47,35 @@
 		}
 	}
 
-	.stage[data-wide] .text {
+	&[data-wide] .text {
 		font-size: calc(4.75cqh * var(--scale, 1));
 		line-height: 1.3;
+	}
+}
+
+#daily-message {
+	&.page {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #000000;
+		user-select: none;
+		outline: none;
+	}
+
+	canvas.ambient {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.daily-stage {
+		z-index: 1;
+		width: min(100vw, 100dvh * 4 / 3);
+		height: min(100dvh, 100vw * 3 / 4);
 	}
 }

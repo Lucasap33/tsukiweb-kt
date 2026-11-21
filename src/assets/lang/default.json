@@ -33,7 +33,9 @@
     "help": "",
     "help-lesson": "",
     "help-bonus": "",
-    "daily-messages": ""
+    "daily-messages": "",
+    "daily-messages-random": "",
+    "daily-messages-dates": ""
   },
   "config": {
     "on": "",
