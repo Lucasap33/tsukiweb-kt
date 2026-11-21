@@ -1175,7 +1175,7 @@
           "　Altura/Peso: 1.67m/52kg.",
           "　Medidas:88/55/85."
         ],
-        "fg": "msg/ran_t01_sp"
+        "fg": "msg/ran_t01"
       },
       {
         "text": [
@@ -1187,7 +1187,7 @@
           "　Altura/Peso: 1.65m/52kg.",
           "　Medidas: 85/56/88."
         ],
-        "fg": "msg/ran_t02_sp"
+        "fg": "msg/ran_t02"
       },
       {
         "text": [
@@ -1199,7 +1199,7 @@
           "　Altura/Peso: 160m/45kg.",
           "　Medidas: 73/57/79."
         ],
-        "fg": "msg/ran_t03_sp"
+        "fg": "msg/ran_t03"
       },
       {
         "text": [
@@ -1211,7 +1211,7 @@
           "　Altura/Peso: 1.56m/43kg.",
           "　Medidas: 76/58/82."
         ],
-        "fg": "msg/ran_t04_sp"
+        "fg": "msg/ran_t04"
       },
       {
         "text": [
@@ -1223,7 +1223,7 @@
           "　Altura/Peso: 1.56m/43kg.",
           "　Medidas: 78/58/80."
         ],
-        "fg": "msg/ran_t05_sp"
+        "fg": "msg/ran_t05"
       },
       {
         "text": [
@@ -1232,7 +1232,7 @@
           "Yumizuka Satsuki.",
           "　Cumpleaños: 15 de Agosto."
         ],
-        "fg": "msg/ran_t06_sp"
+        "fg": "msg/ran_t06"
       },
       {
         "text": [
@@ -1241,7 +1241,7 @@
           "Len.",
           "　Cumpleaños: 9 de Septiembre."
         ],
-        "fg": "msg/ran_t07_sp"
+        "fg": "msg/ran_t07"
       },
       {
         "text": [
@@ -2048,7 +2048,7 @@
           "Digo eso, pero incluso el autor original",
           "lo olvidó..."
         ],
-        "fg": "msg/ran_t02_sp",
+        "fg": "msg/ran_t02",
         "bg": "msg/ran_bg07"
       },
       "9-22": {
@@ -2058,7 +2058,7 @@
           "¡Entonces nos veremos todos de nuevo el",
           "próximo año!"
         ],
-        "fg": "msg/ran_t03_sp",
+        "fg": "msg/ran_t03",
         "bg": "msg/ran_bg07"
       },
       "3-12": {
@@ -2069,7 +2069,7 @@
           "",
           "Nee-san... no tenias que mencionar eso..."
         ],
-        "fg": "msg/ran_t10_sp",
+        "fg": "msg/ran_t10",
         "bg": "msg/ran_bg07"
       },
       "11-28": {
@@ -2077,7 +2077,7 @@
           "¡Whoooo!",
           "¡Bombas Mushroom!"
         ],
-        "fg": "msg/ran_t09_sp",
+        "fg": "msg/ran_t09",
         "bg": "msg/ran_bg07"
       },
       "8-15": {
@@ -2087,14 +2087,14 @@
           "La próxima vez, también seré una heroina,",
           "¿Verdad que sí, Tohno-kun?"
         ],
-        "fg": "msg/ran_t06_sp",
+        "fg": "msg/ran_t06",
         "bg": "msg/ran_bg07"
       },
       "9-9": {
         "text": [
           ".....................(yo nací en un día como hoy.)"
         ],
-        "fg": "msg/ran_t07_sp",
+        "fg": "msg/ran_t07",
         "bg": "msg/ran_bg07"
       }
     }

@@ -24,6 +24,7 @@ function kt_raw_fixes(text) {
             "")
         .replaceAll(/^(?![`;])([ \t]*)(.*@.*)$/gm, "`$1$2") // Add missing ` before text
         .replaceAll(/(image\\[^"\r\n]+)_en\.jpg/g, "$1.jpg") // Remove _en suffix from image names
+        .replaceAll(/(image\\[^"\r\n]+)_sp\.jpg/g, "$1.jpg") // Remove _sp suffix from image names
         .replaceAll('“', '"').replaceAll('”', '"')
         .replace('jump##SKIPPED, try again', 'jumpf')
         .replace(/^ \*Suspiro\* Me siento/m, '` *Suspiro* Me siento')
