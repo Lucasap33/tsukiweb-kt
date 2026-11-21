@@ -171,6 +171,8 @@
   "ok": "",
   "back": "",
   "close": "",
+  "hint-confirm": "",
+  "hint-navigate": "",
   "later": "",
   "operation-failed": "",
   "operation-successful": "",

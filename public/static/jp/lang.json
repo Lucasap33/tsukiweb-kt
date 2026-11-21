@@ -185,6 +185,8 @@
   "ok": "はい",
   "back": "戻る",
   "close": "閉じる",
+  "hint-confirm": "Confirm",
+  "hint-navigate": "Navigate",
   "later": "Later",
   "operation-failed": "Operation failed",
   "operation-successful": "Operation successful"

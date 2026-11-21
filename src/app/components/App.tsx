@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react'
 import { importedImages, releaseImportedImageUrls } from 'engine/imported-images'
 import { Router } from "wouter";
 import AnimatedRoutes from '../../app/components/AnimatedRoutes';
-import { getLocale } from "../../translation/lang";
+import { getLocale, useStrings } from "../../translation/lang";
 import AppEffects from "app/components/AppEffects";
 import { Slide, ToastContainer } from "react-toastify";
 import { CommonProvider } from "@tsukiweb/common/context";
@@ -23,6 +23,7 @@ const LocaleSetter = () => {
 function App() {
 	useObserved(settings, 'eroBlur')
 	const [urls] = useObserved(importedImages, 'urls')
+	const strings = useStrings()
 	const resolveImage = useCallback<typeof imageSrc>((...args) => imageSrc(...args), [urls])
 	useEffect(releaseImportedImageUrls, [urls])
 	
@@ -36,7 +37,12 @@ function App() {
 				cg: {
 					shouldBlur: cg.shouldBlur,
 					shouldFrame: cg.isInGallery,
-				}
+				},
+				hints: {
+					back: strings.back,
+					confirm: strings["hint-confirm"],
+					navigate: strings["hint-navigate"],
+				},
 			}}>
 				<Router base={import.meta.env.BASE_URL}>
 					<AppEffects>

@@ -55,7 +55,10 @@
 		gap: 4px;
 		flex-wrap: wrap;
 		align-items: end;
-
+		.badge {
+			height: 34px;
+			width: auto;
+		}
 	}
 }
 
