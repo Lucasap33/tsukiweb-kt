@@ -16,6 +16,7 @@ type Props = {
 	mode?: 'playthrough' | 'viewer'
 	/** scene centered when opened, if different from the last scene of `history` */
 	currentScene?: LabelName
+	topInset?: number
 }
 
 /** Path from the bottom of a parent to the top of a child */
@@ -54,7 +55,7 @@ function buildItems(nodes: FcNode[], currentNode?: FcNode): FcCanvasItem<FcNode>
 	})
 }
 
-const Flowchart = ({history, onSceneClick, mode = 'viewer', currentScene}: Props) => {
+const Flowchart = ({history, onSceneClick, mode = 'viewer', currentScene, topInset}: Props) => {
 	const strings = useStrings()
 	const flowchart = useMemo(() => new GameFlowchart(history, mode), [history, mode])
 	const nodes = useMemo(() => flowchart.listNodes(), [flowchart])
@@ -80,6 +81,7 @@ const Flowchart = ({history, onSceneClick, mode = 'viewer', currentScene}: Props
 			links={links}
 			bounds={bounds}
 			center={currentNode?.scene ? currentNode : undefined}
+			topInset={topInset}
 			onSelect={onSelect}
 			renderPopover={node => <ScenePopover flowchart={flowchart} node={node} />}
 			drawOverlay={drawBadges}

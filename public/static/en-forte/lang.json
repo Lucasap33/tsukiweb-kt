@@ -4,7 +4,7 @@
     "desc": "Original translation by Lunacy, cleaning up based on Japanese by Forte.",
     "url": "https://www.mediafire.com/file/w2ycdzn3z8trx9h/Kagetsu_Tohya.zip/file",
     "vndb": "https://vndb.org/r84735"
-  }, 
+  },
 
   "disclaimer": [
     "This is a web version of Kagetsu Tohya, a visual novel published on 2001 by Type-Moon.",
@@ -186,6 +186,8 @@
   "ok": "Ok",
   "back": "Back",
   "close": "Close",
+  "hint-confirm": "Confirm",
+  "hint-navigate": "Navigate",
   "later": "Later",
   "operation-failed": "Operation failed",
   "operation-successful": "Operation successful"

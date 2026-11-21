@@ -1,51 +1,17 @@
 import * as m from "motion/react-m"
-import { PropsWithChildren, useEffect } from "react"
+import { AnimatePresence } from "motion/react"
+import { PropsWithChildren, useEffect, useRef } from "react"
 import "../../features/title-menu/styles/extra.scss"
 import { useStrings } from "translation/lang"
 import { useLocation } from "wouter"
-import { PageSwitcher, PageTitle, TitleMenuButton } from "@tsukiweb/common/ui-core"
+import { BackButton, HintsBar, PageHeader, PageSwitcher, PageTitle, TitleMenuButton } from "@tsukiweb/common/ui-core"
 import { audio } from "engine/audio"
 import { SCREEN, displayMode } from "app/utils/display";
 import { useDefaultNavBack, useNavBackRef } from "@tsukiweb/common/hooks"
 import Ornament from "@assets/images/ornament.webp"
-import PageBackButton from "app/components/PageBackButton"
 import { settings } from "engine/settings";
 import { useExtraAttention } from "app/hooks";
 
-
-const ExtraShell = ({ children }: PropsWithChildren) => {
-	const focusCurrentMenuItem = () => {
-		const currentPage = "/" + window.location.pathname.split("/")[1]
-		document.querySelector<HTMLElement>(`#extra-${currentPage.slice(1)}`)?.focus()
-	}
-
-	return (
-		<m.div
-			id="extra"
-			initial={{opacity: 0}}
-			animate={{opacity: 1}}
-			exit={{opacity: 0}}>
-			<img src={Ornament} alt="" className="leftOrnament" />
-			<img src={Ornament} alt="" className="rightOrnament" />
-
-			<m.main
-				className="extra-content"
-				ref={useNavBackRef(focusCurrentMenuItem)}
-				initial={{y: -10, opacity: 0.4}}
-				animate={{y: 0, opacity: 1}}
-				exit={{y: 20, opacity: 0}}
-				transition={{duration: 0.2}}
-				key={window.location.pathname}
-			>
-				{children}
-			</m.main>
-
-			<ExtraMenu />
-		</m.div>
-	)
-}
-
-export default ExtraShell
 
 type ExtraPage = {
 	screen: SCREEN
@@ -59,11 +25,37 @@ function back() {
 	displayMode.screen = SCREEN.TITLE
 }
 
-const ExtraMenu = () => {
+function useExtraPages(): ExtraPage[] {
+	const strings = useStrings()
+	const extra = useExtraAttention()
+	return [
+		{ screen: SCREEN.GALLERY, id: "extra-gallery", label: strings.extra.gallery },
+		{ screen: SCREEN.SCENES, id: "extra-scenes", label: strings.extra.scenes },
+		{ screen: SCREEN.DREAMS, id: "extra-dreams", label: strings.extra.dreams, attention: extra.dreams.attention, locked: extra.dreams.locked },
+		{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: extra.summerFes.attention, locked: extra.summerFes.locked },
+		{ screen: SCREEN.HELP, id: "extra-help", label: strings.extra.help, attention: extra.help.attention, locked: extra.help.locked },
+		(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
+			{ screen: SCREEN.DAILY_MESSAGES, id: "extra-daily-messages", label: strings.extra["daily-messages"] },
+	].filter(page => !!page)
+}
+
+const ExtraShell = ({ children }: PropsWithChildren) => {
 	const [location, navigate] = useLocation()
 	const strings = useStrings()
-	const currentPage = "/" + location.split("/")[1]
-	const extra = useExtraAttention()
+	const pages = useExtraPages()
+	const extraLocation = useRef(location)
+	if (pages.some(({ screen }) => location.startsWith(screen)))
+		extraLocation.current = location
+	const currentPage = "/" + extraLocation.current.split("/")[1]
+
+	const contentBack = () => {
+		if (!document.body.classList.contains("keyboard-navigating"))
+			return back()
+		const currentPage = "/" + window.location.pathname.split("/")[1]
+		document.querySelector<HTMLElement>(`#extra-${currentPage.slice(1)}`)?.focus()
+	}
+
+	const navBackRef = useNavBackRef(contentBack)
 
 	useDefaultNavBack(back)
 
@@ -79,15 +71,48 @@ const ExtraMenu = () => {
 		}
 	}, [])
 
-	const pages: ExtraPage[] = [
-		{ screen: SCREEN.GALLERY, id: "extra-gallery", label: strings.extra.gallery },
-		{ screen: SCREEN.SCENES, id: "extra-scenes", label: strings.extra.scenes },
-		{ screen: SCREEN.DREAMS, id: "extra-dreams", label: strings.extra.dreams, attention: extra.dreams.attention, locked: extra.dreams.locked },
-		{ screen: SCREEN.SUMMER_FES, id: "extra-summer-fes", label: strings.extra["summer-fes"], attention: extra.summerFes.attention, locked: extra.summerFes.locked },
-		{ screen: SCREEN.HELP, id: "extra-help", label: strings.extra.help, attention: extra.help.attention, locked: extra.help.locked },
-		(settings.unlockEverything || settings.readDailyMessages.length > 0) &&
-			{ screen: SCREEN.DAILY_MESSAGES, id: "extra-daily-messages", label: strings.extra["daily-messages"] },
-	].filter(page => !!page)
+	return (
+		<m.div
+			id="extra"
+			initial={{opacity: 0}}
+			animate={{opacity: 1}}
+			exit={{opacity: 0}}>
+			<img src={Ornament} alt="" className="leftOrnament" />
+			<img src={Ornament} alt="" className="rightOrnament" />
+
+			<PageHeader className="extra-header"
+				title={pages.find(({ screen }) => screen === currentPage)?.label ?? strings.title.extra} />
+
+			<AnimatePresence mode="wait" initial={false}>
+				<m.main
+					className="extra-content"
+					ref={navBackRef}
+					initial={{opacity: 0}}
+					animate={{opacity: 1, transition: {duration: 0.22, ease: "easeOut"}}}
+					exit={{opacity: 0, transition: {duration: 0.12, ease: "easeIn"}}}
+					key={extraLocation.current}
+				>
+					{children}
+				</m.main>
+			</AnimatePresence>
+
+			<ExtraMenu pages={pages} currentPage={currentPage} navigate={navigate} />
+
+			<HintsBar className="extra-footer" audio={audio} onBack={()=>navigate(SCREEN.TITLE)} />
+		</m.div>
+	)
+}
+
+export default ExtraShell
+
+type MenuProps = {
+	pages: ExtraPage[]
+	currentPage: string
+	navigate: (screen: string) => void
+}
+
+const ExtraMenu = ({ pages, currentPage, navigate }: MenuProps) => {
+	const strings = useStrings()
 
 	return (
 		<div className="extra-menu">
@@ -114,7 +139,7 @@ const ExtraMenu = () => {
 				selected={currentPage}
 				onSelect={navigate} />
 			<div className="back-action">
-				<PageBackButton onClick={()=>navigate(SCREEN.TITLE)} />
+				<BackButton compact audio={audio} onClick={()=>navigate(SCREEN.TITLE)} nav-auto={1} />
 			</div>
 		</div>
 	)

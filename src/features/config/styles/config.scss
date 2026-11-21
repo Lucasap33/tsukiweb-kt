@@ -301,7 +301,7 @@
 			}
 		}
 	}
-	@media (max-width: 760px) {
+	@include mobile-portrait {
 		section {
 			padding-inline: 0;
 		}

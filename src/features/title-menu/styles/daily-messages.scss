@@ -7,7 +7,7 @@
 	display: grid;
 	grid-template-columns: minmax(0, 1.25fr) minmax(300px, 1fr);
 	gap: 1rem;
-	padding: 2rem 0 0 var(--page-padding);
+	padding: var(--page-padding) 0 0 var(--page-padding);
 
 	.daily-viewer {
 		container-type: size;
@@ -116,7 +116,7 @@
 			cursor: default;
 
 			.daily-label {
-				color: rgb(255 217 106 / 25%);
+				color: rgb(255 243 208 / 45%);
 			}
 		}
 	}
@@ -142,7 +142,7 @@
 		padding-top: var(--page-padding);
 	}
 
-	@media screen and (orientation: portrait) and (max-width: 979px) {
+	@include mobile-portrait {
 		grid-template-columns: minmax(0, 1fr);
 		grid-template-rows: auto minmax(0, 1fr);
 		gap: 1rem;

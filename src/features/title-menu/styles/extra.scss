@@ -10,8 +10,13 @@
 	@include page-container;
 	container-type: inline-size;
 	display: grid;
-	grid-template-columns: 230px 1fr;
-	grid-template-areas: "extra-menu extra-content";
+	grid-template-columns: 12rem 1fr;
+	grid-template-rows: auto minmax(0, 1fr) auto;
+	grid-template-areas:
+		"extra-header extra-header"
+		"extra-menu extra-content"
+		"extra-footer extra-footer";
+	--menu-container: rgb(94 34 20 / 55%);
 	padding: 0;
 	isolation: isolate;
 
@@ -35,10 +40,19 @@
 		transform: rotate(0deg) scale(-1, 1);
 	}
 
-	.page-title {
+	.extra-menu .page-title {
 		margin-top: var(--page-padding);
 		font-size: 2.6rem;
 		white-space: normal;
+	}
+
+	.extra-header {
+		grid-area: extra-header;
+		padding-inline: var(--page-padding);
+	}
+
+	.extra-footer {
+		grid-area: extra-footer;
 	}
 
 	.extra-menu {
@@ -69,7 +83,7 @@
 			flex-direction: column;
 
 			.menu-item {
-				font-size: 1.5em;
+				font-size: 1.3em;
 				font-weight: 500;
 				letter-spacing: 1px;
 				width: fit-content;
@@ -77,12 +91,6 @@
 				text-align: left;
 				padding-left: 1.05em;
 
-				background: none;
-				-webkit-text-fill-color: unset;
-
-				&:not([aria-selected="true"]) {
-					text-shadow: 0 0 8px var(--sunset-brown);
-				}
 				&:hover, &:focus-visible, .keyboard-navigating &:focus {
 					transform: none;
 				}
@@ -116,9 +124,11 @@
 				}
 			}
 		}
+		.page-title, .back-action {
+			display: none;
+		}
 		.back-action {
-			padding: .5rem;
-			padding-bottom: 1.5rem;
+			padding: .3rem var(--page-padding) calc(.3rem + var(--safe-area-max-inset-bottom));
 		}
 	}
 
@@ -131,12 +141,16 @@
 		display: grid;
 	}
 
-	@media screen and (orientation: portrait) and (max-width: 979px) {
+	@include mobile-portrait {
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr min-content;
 		grid-template-areas:
 			"extra-content"
 			"extra-menu";
+
+		.extra-header, .extra-footer {
+			display: none;
+		}
 
 		.extra-menu {
 			display: grid;
@@ -151,17 +165,13 @@
 			&::before {
 				display: none;
 			}
-			.page-title, .menus {
+			.menus {
 				display: none;
 			}
 			.back-action {
+				display: flex;
 				grid-area: 1 / 1;
 				padding: 0;
-				white-space: nowrap;
-
-				.menu-item {
-					font-size: 1rem;
-				}
 			}
 			.extra-switcher {
 				display: flex;
@@ -176,10 +186,22 @@
 
 	@include mobile-landscape {
 		grid-template-columns: minmax(160px, min-content) 1fr;
+		grid-template-rows: minmax(0, 1fr);
+		grid-template-areas: "extra-menu extra-content";
+
+		.extra-header, .extra-footer {
+			display: none;
+		}
 		.extra-menu {
 			font-size: .8em;
 			min-height: 0;
 
+			.page-title {
+				display: block;
+			}
+			.back-action {
+				display: flex;
+			}
 			.page-title {
 				contain: inline-size;
 				width: auto;
