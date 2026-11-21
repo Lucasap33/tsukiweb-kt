@@ -186,8 +186,8 @@
   "ok": "Aceptar",
   "back": "Atrás",
   "close": "Cerrar",
-  "hint-confirm": "Confirm",
-  "hint-navigate": "Navigate",
+  "hint-confirm": "Confirmar",
+  "hint-navigate": "Navegar",
   "later": "Más tarde",
   "operation-failed": "Operación fallida",
   "operation-successful": "Operación exitosa"
