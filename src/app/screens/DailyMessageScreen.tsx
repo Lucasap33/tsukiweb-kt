@@ -25,7 +25,7 @@ const MessageLine = ({ line }: { line: string }) => {
 	if (leader) {
 		return (
 			<p className="leader">
-				<span className="dots" aria-hidden>{"…".repeat(60)}</span>
+				<span className="dots" aria-hidden>{". ".repeat(150)}</span>
 				{leader[2] && <span>{leader[2]}</span>}
 			</p>
 		)

@@ -61,7 +61,11 @@
 			.dots {
 				flex: 1;
 				min-width: 0;
+				height: 1lh;
 				overflow: hidden;
+				white-space: normal;
+				text-align: justify;
+				word-spacing: -0.15em;
 			}
 		}
 	}
