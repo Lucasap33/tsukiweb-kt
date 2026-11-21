@@ -3,7 +3,7 @@
   "choices": {
     "s2": [
       "1. Ir para escola.",
-      "2. Ficar na mansｬo."
+      "2. Ficar na mansão."
     ],
     "s3": [
       "1. Para o apartamento da Arcueid.",
@@ -12,42 +12,42 @@
       "4. Talvez eu invada a casa dos Inui?"
     ],
     "s4": [
-      "1. Pacｨficamente ir para a escola.",
+      "1. Pacíficamente ir para a escola.",
       "2. Conversar com a Arcueid mais um pouco."
     ],
     "s5": [
-      "1. | Eu nｬo posso ser tentado.",
-      "2. | Nｬo, eu quero ser tentado."
+      "1. … Eu não posso ser tentado.",
+      "2. … Não, eu quero ser tentado."
     ],
     "s11": [
       "1. Ir para a escola com Akiha.",
       "2. Ir para a escola sozinho."
     ],
     "s15": [
-      "1. Vou parar pela Sala do Clube da Cerimｷnia do Chｧ.",
+      "1. Vou parar pela Sala do Clube da Cerimônia do Chá.",
       "2. Vou direto para a classe.",
-      "3. Talvez eu passe pelo pｧtio?"
+      "3. Talvez eu passe pelo pátio?"
     ],
     "s22": [
       "1. Comer na lanchonete!",
-      "2. Roubar um pouco da Senpai na sala do chｧ!",
-      "3. Comer pacｨficamente no pｧtio!"
+      "2. Roubar um pouco da Senpai na sala do chá!",
+      "3. Comer pacíficamente no pátio!"
     ],
     "s260": [
       "1. Comer na lanchonete!",
-      "2. Roubar um pouco da Senpai na sala do chｧ!",
-      "3. Comer pacｨficamente no pｧtio!"
+      "2. Roubar um pouco da Senpai na sala do chá!",
+      "3. Comer pacíficamente no pátio!"
     ],
     "s29": [
-      "1. Vou almoｯar com a Akiha.",
-      "2. Vou almoｯar sozinho."
+      "1. Vou almoçar com a Akiha.",
+      "2. Vou almoçar sozinho."
     ],
     "s39": [
       "1. Vou matar aula.",
-      "2. Nｬo, eu devo ir para a aula diligentemente."
+      "2. Não, eu devo ir para a aula diligentemente."
     ],
     "s43": [
-      "1. Passar pela sala do chｧ.",
+      "1. Passar pela sala do chá.",
       "2. Ficar na classe.",
       "3. Ir direto para casa.",
       "4. Sair para a rua."
@@ -63,35 +63,35 @@
       "4. Visitar o quarto da Kohaku-san."
     ],
     "s56": [
-      "1. | Deixa pra lｧ| Eu vou acabar morrendo se eu agir apressadamente.",
-      "2. | Sｫ um pouco nｬo vai machucar, nｪ?"
+      "1. … Deixa pra lá… Eu vou acabar morrendo se eu agir apressadamente.",
+      "2. … Só um pouco não vai machucar, né?"
     ],
     "s248": [
       "1. Os assassinatos que tem acontecido.",
-      "2. As alucinaｯｦes do fim do mundo.",
+      "2. As alucinações do fim do mundo.",
       "3. Algo que eu estou esquecendo.",
-      "4. Exterminaｯｬo do gato demonｨaco na edｨcula.",
+      "4. Exterminação do gato demoníaco na edícula.",
       "5. Dando uma volta pelas ruas noturnas.",
-      "6. | Eh? Outro sonho?"
+      "6. … Eh? Outro sonho?"
     ],
     "s250": [
       "1. Deve ser a Arcueid.",
       "2. Pode ser a Ciel-senpai.",
-      "3. Akiha ｪ uma possibilidade.",
+      "3. Akiha é uma possibilidade.",
       "4. Talvez seja a Hisui.",
       "5. Talvez a Kohaku-san.",
-      "6. | Por algum motivo aquela crianｯa aparece na minha cabeｯa.",
+      "6. … Por algum motivo aquela criança aparece na minha cabeça.",
       "7. Que tal tanto a Kohaku-san quanto a Hisui?"
     ],
     "s401": [
-      "1. ｴ sｫ mais um dia.",
-      "2. Nｬo, ｪ o dia do festival cultural!",
-      "3. Era o| Festival atlｪtico?"
+      "1. É só mais um dia.",
+      "2. Não, é o dia do festival cultural!",
+      "3. Era o… Festival atlético?"
     ],
     "s223": [
-      "1. Casa de chｧ 'Chute Baixo'.",
+      "1. Casa de chá 'Chute Baixo'.",
       "2. Aluguel de Fantasias e Fotos 'Marble Phantasm'.",
-      "3. Misterioso Cinema 'Planetｧrio'."
+      "3. Misterioso Cinema 'Planetário'."
     ],
     "s227": [
       "1. Quarto andar, classe do primeiro ano.",
@@ -108,60 +108,60 @@
       "3. Vou para o quarto da Akiha.",
       "4. Talvez eu ajude a Hisui.",
       "5. Vou visitar a Kohaku-san.",
-      "6. Vou tomar sol no pｧtio.",
-      "7. Vou tomar sol na edｨcula.",
-      "8. Cansei da mansｬo. Vou sair!"
+      "6. Vou tomar sol no pátio.",
+      "7. Vou tomar sol na edícula.",
+      "8. Cansei da mansão. Vou sair!"
     ],
     "s96": [
       "1. Aceitar essa chance!",
-      "2. Essa chance ｪ boa o suficiente[line=4]!?"
+      "2. Essa chance é boa o suficiente[line=4]!?"
     ],
     "s505": [
-      "1. Atacar da sombra da ｧrvore caｨda||!",
-      "2. Essa chance ｪ boa o suficiente[line=4]!?"
+      "1. Atacar da sombra da árvore caída……!",
+      "2. Essa chance é boa o suficiente[line=4]!?"
     ],
     "s507": [
-      "1. || O pescoｯo||!",
-      "2. Essa chance ｪ boa o suficiente[line=4]!?"
+      "1. …… O pescoço……!",
+      "2. Essa chance é boa o suficiente[line=4]!?"
     ],
     "s98": [
       "1. A soneca da Akiha tem que acabar!",
-      "2. || Nｬo, espera| Atrapalhar uma soneca nｬo ｪ bom."
+      "2. …… Não, espera… Atrapalhar uma soneca não é bom."
     ],
     "s307": [
-      "1. || Eu encaro o sangue no meu dedo.",
-      "2. || Eu balanｯo minha cabeｯa incerto."
+      "1. …… Eu encaro o sangue no meu dedo.",
+      "2. …… Eu balanço minha cabeça incerto."
     ],
     "s113": [
       "1. Dormir no meu quarto.",
       "2. Visitar o quarto da Akiha.",
       "3. Encontrar a Hisui.",
       "4. Ajudar a Kohaku-san.",
-      "5. Ir para a edｨcula.",
+      "5. Ir para a edícula.",
       "6. O que tem no quarto do Makihisa?"
     ],
     "s118": [
       "1. Vou com tudo!",
-      "2. Talvez seja melhor nｬo|?"
+      "2. Talvez seja melhor não…?"
     ],
     "s140": [
       "1. Eu vou sair para comer!",
-      "2. Jantar na mansｬo ｪ mais que o suficiente."
+      "2. Jantar na mansão é mais que o suficiente."
     ],
     "s145": [
       "1. O restaurante indiano Messian.",
-      "2. O food truck chinｮs Mark II.",
+      "2. O food truck chinês Mark II.",
       "3. Churrasco no Dai Teito na cidade do lado."
     ],
     "s194": [
       "1. Casa da Arcueid.",
       "2. Casa da Ciel-senpai.",
-      "3. | O beco de trｧs."
+      "3. … O beco de trás."
     ],
     "s197": [
-      "1. || Ir para casa quieto.",
-      "2. || Procurar ao redor da cama!",
-      "3. || E dentro do armｧrio?"
+      "1. …… Ir para casa quieto.",
+      "2. …… Procurar ao redor da cama!",
+      "3. …… E dentro do armário?"
     ],
     "s202": [
       "1. Eu quero ouvir sobre o gato.",
@@ -169,14 +169,14 @@
       "3. Eu quero ouvir sobre ontem."
     ],
     "s209": [
-      "1. || Ir para casa quieto.",
-      "2. || Me sentir a vontade.",
-      "3. || Procurar no armｧrio da Senpai!"
+      "1. …… Ir para casa quieto.",
+      "2. …… Me sentir a vontade.",
+      "3. …… Procurar no armário da Senpai!"
     ],
     "s214": [
-      "1. ｴ sobre o assassino.",
-      "2. ｴ sobre a escola.",
-      "3. ｴ sobre ontem."
+      "1. É sobre o assassino.",
+      "2. É sobre a escola.",
+      "3. É sobre ontem."
     ],
     "s156": [
       "1. Ir para casa da Arcueid.",
@@ -188,39 +188,39 @@
     ],
     "s158": [
       "1. Eeeht! venha o que vier!",
-      "2. Nｬo, eu preciso me acalmar e recuar!"
+      "2. Não, eu preciso me acalmar e recuar!"
     ],
     "s161": [
       "1. Se despedir da Akira-chan.",
-      "2. Almoｯar com a Akira-chan."
+      "2. Almoçar com a Akira-chan."
     ],
     "s174": [
       "1. Certo, eu preciso estudar para algumas provas!",
-      "2. Tudo bem, eu vou procrastinar estudar atｪ amanhｬ!"
+      "2. Tudo bem, eu vou procrastinar estudar até amanhã!"
     ],
     "s176": [
-      "1. || Fugir sem a Senpai||",
-      "2. || Se vocｮ dｧ um gole em veneno, vocｮ deve engolir atｪ o fim."
+      "1. …… Fugir sem a Senpai……",
+      "2. …… Se você dá um gole em veneno, você deve engolir até o fim."
     ],
     "s180": [
-      "1. Vou retornar a mansｬo.",
-      "2. Nｬo, vou ficar mais um pouco na rua."
+      "1. Vou retornar a mansão.",
+      "2. Não, vou ficar mais um pouco na rua."
     ],
     "s183": [
       "1. Para a rua principal.",
-      "2. Para a interseｯｬo."
+      "2. Para a interseção."
     ],
     "s184": [
       "1. Para a rua principal.",
-      "2. Para a interseｯｬo."
+      "2. Para a interseção."
     ],
     "s185": [
       "1. Para a rua principal.",
-      "2. Para a interseｯｬo."
+      "2. Para a interseção."
     ],
     "s520": [
       "1. Virar para a Arcueid.",
-      "2. Correr para a frente do caminhｬo caｯamba."
+      "2. Correr para a frente do caminhão caçamba."
     ],
     "s524": [
       "1. Expert",
@@ -235,11 +235,11 @@
       "2. Iniciante"
     ],
     "s527": [
-      "1. Err, ainda nｬo acabou?",
-      "2. Err, bem, novamente, AINDA nｬo acabou?"
+      "1. Err, ainda não acabou?",
+      "2. Err, bem, novamente, AINDA não acabou?"
     ],
     "s547": [
-      "1. Eu nｬo, por algum motivo.",
+      "1. Eu não, por algum motivo.",
       "2. Eu sim, por algum motivo."
     ],
     "s534": [

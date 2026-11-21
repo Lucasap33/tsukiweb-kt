@@ -1,4 +1,11 @@
 
+const CHAR_SWAPS = {
+    'ｦ': 'õ', 'ｧ': 'á', 'ｨ': 'í', 'ｩ': 'ú', 'ｪ': 'é', 'ｫ': 'ó', 'ｬ': 'ã',
+    'ｭ': 'â', 'ｮ': 'ê', 'ｯ': 'ç', 'ｰ': 'Ç', 'ｱ': 'Á', 'ｲ': 'Í', 'ｳ': 'Ú',
+    'ｴ': 'É', 'ｵ': 'Ó', 'ｷ': 'ô', 'ｸ': 'Ô', 'ｹ': 'Ã', 'ｻ': 'Ê', 'ｼ': 'à', 'ｽ': 'À',
+    '|': '…',
+}
+
 /**
  * Make changes to the raw script of the game, before the conversion.
  * @param {string} text complete script text
@@ -16,6 +23,7 @@ function kt_raw_fixes(text) {
         .replaceAll(/(image\\[^"\r\n]+)_en\.jpg/g, "$1.jpg") // Remove _en suffix from image names
         .replaceAll(/(image\\[^"\r\n]+)_pt\.jpg/g, "$1.jpg") // Remove _pt suffix from image names
         .replaceAll('“', '"').replaceAll('”', '"')
+        .replaceAll(/[ｦ-ｽ|]/g, c => CHAR_SWAPS[c] ?? c)
     return text;
 }
 
@@ -47,26 +55,8 @@ const eroskip_pages = {
     s546: [[5, 69]],
 }
 
-const HALF_WIDTH_KANA = {
-    'ｦ': 'õ', 'ｧ': 'á', 'ｨ': 'í', 'ｩ': 'ú', 'ｪ': 'é', 'ｫ': 'ó', 'ｬ': 'ã',
-    'ｭ': 'â', 'ｮ': 'ê', 'ｯ': 'ç', 'ｰ': 'Ç', 'ｱ': 'Á', 'ｲ': 'Í', 'ｳ': 'Ú',
-    'ｴ': 'É', 'ｵ': 'Ó', 'ｷ': 'ô', 'ｹ': 'Ã', 'ｻ': 'Ê', 'ｼ': 'à', 'ｽ': 'À',
-}
-
-/**
- * Make changes to a line of a daily message.
- * @param {string} line text line of a daily message
- * @returns {string} the changed line
- */
-function kt_daily_message_fixes(line) {
-    return line
-        .replaceAll(/[ｦ-ｽ]/g, c => HALF_WIDTH_KANA[c] ?? c)
-        .replaceAll('|', '…')
-}
-
 export {
     kt_raw_fixes,
-    kt_daily_message_fixes,
     block_fixes,
     eroskip_pages,
 }
